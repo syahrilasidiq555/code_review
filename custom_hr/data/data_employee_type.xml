@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="employee_type_employee" model="hr.employee.type">
+            <field name="name">Employee</field>
+        </record>
+
+        <record id="employee_type_student" model="hr.employee.type">
+            <field name="name">Student</field>
+        </record>
+
+        <record id="employee_type_trainee" model="hr.employee.type">
+            <field name="name">Trainee</field>
+        </record>
+
+        <record id="employee_type_contractor" model="hr.employee.type">
+            <field name="name">Contractor</field>
+        </record>
+
+        <record id="employee_type_freelancer" model="hr.employee.type">
+            <field name="name">Freelancer</field>
+        </record>
+    </data>
+</odoo>

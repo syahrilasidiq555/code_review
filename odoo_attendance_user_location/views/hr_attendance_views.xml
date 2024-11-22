@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- HR attendance tree view-->
+    <record id="view_attendance_tree" model="ir.ui.view">
+        <field name="name">
+            hr.attendance.view.tree.inherit.odoo.attendance.user.location
+        </field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.view_attendance_tree"/>
+        <field name="arch" type="xml">
+            <tree position="attributes">
+                <attribute name="edit">0</attribute>
+                <attribute name="editable">top</attribute>
+            </tree>
+
+            <field name="check_out" position="after">
+                <field name="checkin_location" widget="url" readonly="1" force_save="1"/>
+                <field name="checkout_location" widget="url" readonly="1" force_save="1"/>
+                <field name="checkin_latitude" invisible="1"/>
+                <field name="checkout_latitude" invisible="1"/>
+                <field name="checkin_longitude" invisible="1"/>
+                <field name="checkout_longitude" invisible="1"/>
+            </field>
+        </field>
+    </record>
+    <!-- HR attendance form view-->
+    <record id="hr_attendance_view_form" model="ir.ui.view">
+        <field name="name">
+            hr.attendance.view.form.inherit.odoo.attendance.user.location
+        </field>
+        <field name="model">hr.attendance</field>
+        <field name="inherit_id" ref="hr_attendance.hr_attendance_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//form/sheet/group" position="after">
+                <group name="checkin" string="Check In" attrs="{'invisible':[('checkin_address','=',False)]}">
+                    <field name="checkin_address" class="" readonly="1" force_save="1"/>
+                    <field name="checkin_latitude" class="oe_inline" readonly="1" force_save="1"/>
+                    <field name="checkin_longitude" class="oe_inline" readonly="1" force_save="1"/>
+                    <field name="checkin_location" widget="url" class="" readonly="1" force_save="1"/>
+
+                    <field name="image_checkin" filename="image_checkin_filename" readonly="1" force_save="1"/>
+                    <field name="image_checkin_filename" invisible="1" />
+                    <field name='image_checkin_view' widget="image"/>
+
+                </group>
+                <group name="checkout" string="Check Out" attrs="{'invisible':[('checkout_address','=',False)]}">
+                    <field name="checkout_address" class="" readonly="1" force_save="1"/>
+                    <field name="checkout_latitude" class="oe_inline" readonly="1" force_save="1"/>
+                    <field name="checkout_longitude" class="oe_inline" readonly="1" force_save="1"/>
+                    <field name="checkout_location" widget="url" class="" readonly="1" force_save="1"/>
+                </group>
+            </xpath>
+        </field>
+    </record>
+</odoo>

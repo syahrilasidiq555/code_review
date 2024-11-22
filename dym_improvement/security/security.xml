@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Group Rule -->
+        <!-- Rule for Employee : Employee hanya bisa melihat pic dirinya sendiri dan bawahannya) -->
+        <record id="dym_improvement_rule_user" model="ir.rule">
+            <field name="name">Improvement : User can See themself and Approve Their child_ids</field>
+            <field name="model_id" ref="dym_improvement.model_dym_improvement" />
+            <field name="domain_force">['|',('create_uid','=',user.id),'|',('pic.id','=',user.employee_id.id),('pic.parent_id.id','=',user.employee_id.id)]</field>
+            <field name="groups" eval="[(4,ref('hr.group_hr_user'))]" />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="True" />
+            <field name="perm_unlink" eval="True" />
+            <field name="perm_create" eval="True" />
+        </record>
+
+        <record id="dym_improvement_rule_admin" model="ir.rule">
+            <field name="name">Improvement : User can See all datas</field>
+            <field name="model_id" ref="dym_improvement.model_dym_improvement" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('suggestion_system.group_suggestion_system_pic_improvement'))]" />
+            <field name="perm_read" eval="True" />
+            <field name="perm_write" eval="True" />
+            <field name="perm_unlink" eval="True" />
+            <field name="perm_create" eval="True" />
+        </record>
+
+        
+    </data>
+</odoo>

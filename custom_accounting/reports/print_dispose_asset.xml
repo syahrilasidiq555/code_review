@@ -1,0 +1,200 @@
+<odoo>
+    <data>
+        <template id="custom_accounting.dispose_print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <!-- <t t-call="custom_accounting.dispose_layout_header"/> -->
+            <t t-raw="0"/>
+            <t t-call="custom_accounting.dispose_layout_footer"/>
+        </template>
+
+        <template id="custom_accounting.dispose_layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:14px">
+                <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <template id="custom_accounting.dispose_print">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_accounting.dispose_print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <div class="row" name="header_faktur" style="font-size:14px">
+                                        <div class="col-12 text-center" style="margin-top:0px;font-size:14px;line-height:14pt">
+                                            <h3><b>BERITA ACARA KEHILANGAN</b></h3>
+                                            <br/>
+                                            <br/>
+                                            <br/>
+                                        </div>
+                                    </div>   
+                                </div>
+
+                                <div class="col-12 text-left">
+                                    <b>BERITA ACARA KEHILANGAN</b> ini dibuat pada hari ini:<br/>
+                                    <style>
+                                        .borderless td, .borderless th, .borderless tr {
+                                            border: none;
+                                        }
+                                    </style>
+                                    <table class="table borderless">
+                                        <col style="width:20%"/>
+                                        <col style="width:5%"/>
+                                        <col style="width:75%"/>
+                                        <tbody>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Hari</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-esc="datetime.datetime(o.dispose_date.year, o.dispose_date.month, o.dispose_date.day).strftime('%A')"/></th>
+                                            </tr>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Tanggal</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-esc="datetime.datetime(o.dispose_date.year, o.dispose_date.month, o.dispose_date.day).strftime('%d %B %Y')"/></th>
+                                            </tr>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Bertempat di</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-field="company.name"/></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <br/>
+
+                                    Oleh saya:<br/>
+                                    <table class="table borderless">
+                                        <col style="width:20%"/>
+                                        <col style="width:5%"/>
+                                        <col style="width:75%"/>
+                                        <tbody>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Nama</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-field="o.employee_id.name"/></th>
+                                            </tr>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Jabatan</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-field="o.employee_id.job_id.name"/></th>
+                                            </tr>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Department/Divisi</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-field="o.employee_id.department_id.name"/></th>
+                                            </tr>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">NIP</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-field="o.employee_id.barcode"/></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <br/>
+
+                                    Dengan ini menyatakan bahwa Saya telah kehilangan barang milik perusahaan yang dipercayakan kepada Saya sebagai berikut:<br/>
+                                    <table class="table borderless">
+                                        <col style="width:20%"/>
+                                        <col style="width:5%"/>
+                                        <col style="width:75%"/>
+                                        <tbody>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Jenis Barang</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-field="o.name"/></th>
+                                            </tr>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Merek/Tipe</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-field="o.merek_id.name"/></th>
+                                            </tr>
+                                            <tr class="table borderless" style="line-height: 6pt">
+                                                <th class="text-left">Nomor Asset</th>
+                                                <th class="text-left">:</th>
+                                                <th class="text-left"><span t-field="o.code_name"/></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <br/>
+
+                                    Adapun kronologi kehilangan Barang tersebut adalah sebagai berikut:<br/>
+                                    <table class="table borderless">
+                                        <tbody>
+                                            <tr class="table borderless">
+                                                <th><span t-field="o.kronologi"/></th>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <br/>
+
+                                    Demikian Berita Acara ini saya buat dengan sebenar-benarnya.<br/>
+                                    Jakarta, <span t-esc="datetime.datetime(o.dispose_date.year, o.dispose_date.month, o.dispose_date.day).strftime('%d %B %Y')"/>
+                                </div>
+
+                                <div class="clearfix">
+                                    <table style="width:100%; border:0!important;">
+                                        <tr style="background-color:transparent;">
+                                            <td width="50%" style="border-top:none!important; border-right:0!important;">
+                                                <center>
+                                                    <p>
+                                                        <b>Yang Menyatakan,</b><br/>
+                                                        <br/>
+                                                        <br/>
+                                                        <br/>
+                                                        <br/>
+                                                        <b><span t-field="o.employee_id.name"/></b>                              
+                                                    </p>
+                                                </center>
+                                            </td>
+
+                                            <td width="50%" style="border-top:none!important; border-right:0!important">
+                                                <center>
+                                                    <p>
+                                                        <p class="" style="font-size:100%; display: block; margin-left: auto; margin-right: auto; width: 50%; text-align: center;">Mengetahui, </p>
+                                                        <t t-if="o.approver_sign">
+                                                            <img t-att-src="'data:image/png;base64,%s' % to_text(o.approver_sign)" style="width:250px; margin-left:0px!important "/>
+                                                        </t>
+                                                        <p class="font-weight-bold" style="font-size:100%; margin-bottom:10px; display: block; margin-left: auto; margin-right: auto; width: 70%; text-align: center;">
+                                                            <t t-esc="o.approve_user_id.partner_id.name"/>
+                                                        </p>
+                                                    </p>
+                                                </center>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

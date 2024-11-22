@@ -1,0 +1,124 @@
+{% extends './layouts/dashboard.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<style>
+    .bg-video {
+        user-select: none;
+        pointer-events: none;
+
+        width: -webkit-fill-available;
+        max-width: 851px;
+        height: -webkit-fill-available;
+        max-height: 480px;
+
+        margin: auto;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<main x-init="$store.dashboardStore" x-cloak>
+    <!-- <button type="submit" class="btn btn-primary" @click="$store.dashboardStore.getDatas()">test</button> -->
+    <div class="row" style="min-height: 750px;">
+        <div class="col-md-6" style="border: 3px solid white; padding: 10px;">
+            <div class="table-responsive">
+                <table class="table" width="100%" cellspacing="0">
+                    <thead class="thead-light">
+                        <tr>
+                            <th class="text-center table_head">Nama Alm.</th>
+                            <th class="text-center table_head">Ruangan</th>
+                            <th class="text-center table_head">Kegiatan</th>
+                            <th class="text-center table_head">Tujuan</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <template x-for="(data, index) in $store.dashboardStore.datas">
+                            <tr>
+                                <td class="text-center" style="max-width: 250px;"><span x-text="data['jenazah']"></span></td>
+                                <td class="text-center "><div class="btn btn-primary btn-sm"><span x-text="data['ruangan']"></span></div></td>
+                                <td class="text-center "><div class="btn btn-warning btn-sm"><span x-text="data['kegiatan']"></div></td>
+                                <td class="text-center" style="max-width: 300px;"><span x-text="data['tujuan']"></td>
+                            </tr>
+                        </template>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-md-6" style="border: 3px solid white; padding: 10px; display: flex; justify-content: center; align-content: center;" >
+            <iframe 
+                class="bg-video"
+                width="854" height="480"
+                src="https://www.youtube-nocookie.com/embed/vxd9AqZ-7eo?vq=hd720p&si=kCOjf5nesOLX1QLw&amp;controls=0&rel=0&autoplay=1&mute=1&loop=1&playlist=vxd9AqZ-7eo"
+                title="Rumah Duka Carolus" 
+                frameborder="0" 
+                allow="autoplay" 
+                allowfullscreen></iframe>
+        </div>
+    </div>
+    
+</main>
+
+<script>
+    // function myFunction() {
+    //     console.log("Hello World!");
+    // }
+    // setInterval(Alpine.store('dashboardStore').getDatas(), 5000);
+
+    document.addEventListener('alpine:init', async () => {
+        Alpine.store('dashboardStore', {
+            offset : 0,
+            datas : [],
+            async getDatas(refetch=false){
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "jsonrpc": "2.0",
+                        "params": {
+                            "offset":this.offset,
+                            "limit": 10
+                        }
+                    })
+                };
+
+                try {
+                    const fetchResponse = await fetch(`/api/rdc/get/data_acara`, settings);
+                    const data = await fetchResponse.json();
+                    // console.log(data)
+                    if (data.result.status == 'success') {
+                        this.datas = data.result.datas
+                        this.offset = this.offset + 10
+                        // console.log(this.datas)
+                        
+                        return data.result.datas
+                        // return
+                    } else if(data.result.status == 'failed' && refetch == false) {
+                        // this.datas = []
+                        this.offset = 0
+                        this.getDatas(refetch=true)
+                    }
+                    
+                } catch (e) {
+                    return e;
+                }
+            },
+            async init(){
+                this.getDatas()
+                setInterval(() => {
+                    this.datas = this.getDatas();
+                }, 10000);
+
+            }
+        });
+    })
+</script>
+
+{% endblock %}

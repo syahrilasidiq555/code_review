@@ -1,0 +1,375 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="customer_form_website_tree_view">
+            <field name="name">customer_form_website_tree_view</field>
+            <field name="model">customer.form.website</field>
+            <field name="arch" type="xml">
+                <tree string="" >
+                    <field name="name" />
+                    <field name="customer_id" />
+                    <field name="jenazah_id" />
+                    <field name="date" />
+                    <field name="status" widget="badge" decoration-success="status == 'sudah_diisi'" decoration-info="status == 'belum_diisi'" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="customer_form_website_search_view" model="ir.ui.view">
+            <field name="name">customer_form_website_search_view</field>
+            <field name="model">customer.form.website</field>
+            <field name="arch" type="xml">
+                <search string="Search data...">
+                    <field name="name" />
+                    <field name="customer_id" />
+                    <field name="jenazah_id" />
+                    <field name="status" />
+                    <!-- <filter string="State Draft" name="state_draft" domain="[('state','=','draft')]"/>
+                    <filter string="State Confirm" name="state_confirm" domain="[('state','=','confirm')]"/>
+                    <filter string="State Approved" name="state_approved" domain="[('state','=','approved')]"/>
+                    <filter string="State Done" name="state_done" domain="[('state','=','done')]"/>
+                    <filter string="State Cancel" name="state_cancel" domain="[('state','=','cancel')]"/> -->
+                    <filter name='today' string="Hari Ini" 
+                        domain="[('date', '&gt;=', datetime.datetime.now().strftime('%Y-%m-%d 00:00:00')),
+                                ('date', '&lt;=',datetime.datetime.now().strftime('%Y-%m-%d 23:59:59'))]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="customer_form_website_form_view" model="ir.ui.view">
+            <field name="name">customer_form_website_form_view</field>
+            <field name="model">customer.form.website</field>
+            <field name="arch" type="xml">
+                <form duplicate='false' >
+                    <header>
+                        <button name="action_create_so_with_pack"
+                            string="Buat Sales dengan Paket" 
+                            type="object"
+                            attrs="{'invisible':['|',('status','=','belum_diisi'),('sale_order_id','!=',False)]}"/>
+
+                        <button name="action_create_so"
+                            string="Buat Sales tanpa Paket" 
+                            type="object"
+                            attrs="{'invisible':['|',('status','=','belum_diisi'),('sale_order_id','!=',False)]}"/>
+                        
+                        <!-- <button name="action_create_vendor_bills"
+                            string="Create Bills" 
+                            type="object"
+                            attrs="{'invisible':[('bill_ids_count','>=','1')]}"/>
+                        
+                        
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approved,done" attrs="{'invisible':[('state','in',('cancel'))]}"/>
+                        <field name="state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':[('state','!=','cancel')]}"/> -->
+
+                        <field name="status" widget="statusbar" statusbar_visible="belum_diisi,sudah_diisi" />
+
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <field name="sale_order_id" invisible="1" />
+                            <button type="object" name="action_view_so" class="oe_stat_button" icon="fa-file-text-o"
+                                attrs="{'invisible' :[('sale_order_id','=',False)]}">
+                                <span class="o_stat_text" >Sale Order</span>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'invisible': [('name', '=', '')]}" readonly="1"/>
+                            </h1>
+                        </div>
+
+                        <group string="" name="detail">                            
+                            <group>
+                                <field name="sale_order_id_state" invisible="1" />
+                                <field name="token" readonly="1" force_save="1" invisible="1"/>
+                                <!-- <field name="url_form" widget="CopyClipboardChar" options="{'string': 'Copy Link'}" attrs="{'invisible':['|',('status','=','sudah_diisi'),('token','=',False)]}"/> -->
+                                <field name="customer_id" 
+                                    widget="res_partner_many2one" 
+                                    context="{'only_name':True}"
+                                    options='{"always_reload": True}'
+                                    readonly="1"
+                                    force_save="1"/>
+                                
+                                <field name="customer2_id" 
+                                    widget="res_partner_many2one" 
+                                    context="{'only_name':True}" 
+                                    options='{"always_reload": True}'
+                                    readonly="1"
+                                    force_save="1"
+                                    attrs="{'invisible':[('customer2_id','=',False)]}"/>
+
+                                <field name="jenazah_id" 
+                                    widget="res_partner_many2one" 
+                                    context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" 
+                                    options='{"always_reload": True}'
+                                    readonly="1"
+                                    force_save="1"/>
+
+                            </group>
+                            <group>
+                                <field name="date"/>
+                                <field name="company_id" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="information" string="Informasi">
+                                <group name="information">
+                                    <group name="penanggungjawab" string="Penanggung Jawab">
+                                        <field name="penanggungjawab_name" />
+                                        <field name="penanggungjawab_no_ktp" placeholder="contoh : 3217069121223312" attrs="{'required':[('penanggungjawab_name','!=',False)]}"/>
+                                        <field name="penanggungjawab_no_npwp" placeholder="contoh : 081785542123321"/>
+                                        <field name="penanggungjawab_l10n_id_pkp" />
+                                        <field name="penanggungjawab_phone" placeholder="contoh : 085722912331" attrs="{'required':[('penanggungjawab_name','!=',False)]}"/>
+                                        <span class="o_form_label o_td_label" name="address_name">
+                                            <b>Alamat</b>
+                                        </span>
+                                        <div class="o_address_format">
+                                            <field name="penanggungjawab_street" placeholder="Jalan..." class="o_address_street" attrs="{'required':[('penanggungjawab_name','!=',False)]}"/>
+                                            <field name="penanggungjawab_city" placeholder="Kota" class="o_address_city" attrs="{'required':[('penanggungjawab_name','!=',False)]}"/>
+                                            <field name="penanggungjawab_state_id" class="o_address_state" placeholder="Provinsi" options="{'no_open': True, 'no_quick_create': True, 'no_create': True}" context="{'country_id': penanggungjawab_country_id, 'default_country_id': penanggungjawab_country_id, 'zip': penanggungjawab_zip}" attrs="{'required':[('penanggungjawab_name','!=',False)]}"/>
+                                            <field name="penanggungjawab_zip" placeholder="Kode Pos" class="o_address_zip"/>
+                                            <field name="penanggungjawab_country_id" placeholder="Negara" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{'required':[('penanggungjawab_name','!=',False)]}"/>
+                                        </div>
+                                    </group>
+                                    <group name="almarhum" string="Almarhum">
+                                        <!-- <field name="almarhum_name" /> -->
+                                        <label for="almarhum_name"/>
+                                        <div class="oe_inline">
+                                            <field name="almarhum_name" style="max-width:300px;"/>
+                                            <field name="almarhum_usia" nolabel="1" style="margin-left:30px; margin-right:10px;" />
+                                            <b>Tahun</b>
+                                        </div>
+                                        <field name="almarhum_kewarganegaraan" attrs="{'required':[('almarhum_name','!=',False)]}" />
+                                        <field name="almarhum_kategori_usia" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                        <field name="almarhum_no_passport" 
+                                            attrs="{'required':[('almarhum_kewarganegaraan','=','WNA'),('almarhum_kategori_usia','=','dewasa')],'invisible':[('almarhum_kewarganegaraan','!=','WNA')]}" />
+                                        <field name="almarhum_no_ktp" 
+                                            attrs="{'required':[('almarhum_kewarganegaraan','=','WNI'),('almarhum_kategori_usia','=','dewasa')],'invisible':[('almarhum_kewarganegaraan','!=','WNI')]}"/>
+                                        <field name="almarhum_jenis_kelamin" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                        <field name="almarhum_agama" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                        <field name="almarhum_tanggal_lahir" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                        <field name="almarhum_tanggal_kematian" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                        <field name="almarhum_tanggal_kedatangan" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                        <span class="o_form_label o_td_label" name="address_name">
+                                            <b>Alamat</b>
+                                        </span>
+                                        <div class="o_address_format">
+                                            <field name="almarhum_street" placeholder="Jalan..." class="o_address_street" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                            <field name="almarhum_city" placeholder="Kota" class="o_address_city" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                            <field name="almarhum_state_id" class="o_address_state" placeholder="Provinsi" options="{'no_open': True, 'no_quick_create': True, 'no_create': True}" context="{'country_id': almarhum_country_id, 'default_country_id': almarhum_country_id, 'zip': almarhum_zip}" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                            <field name="almarhum_zip" placeholder="Kode Pos" class="o_address_zip"/>
+                                            <field name="almarhum_country_id" placeholder="Negara" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                        </div>
+                                        
+                                        <!-- <field name="almarhum_is_transit" widget="boolean_toggle" attrs="{'required':[('almarhum_name','!=',False)]}"/> -->
+                                        <field name="almarhum_hospital_id" options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True, 'no_open_edit': True}" 
+                                            attrs="{'required':[('almarhum_name','!=',False)]}"/>
+                                        <field name="almarhum_tujuan" attrs="{'required':[('almarhum_name','!=',False)]}"/>
+
+                                        <!-- transit -->
+                                        <field name="almarhum_tanggal_keluar" attrs="{'invisible':[('almarhum_tujuan','!=','transit')]}" />
+                                        
+                                        <!-- kremasi -->
+                                        <field name="almarhum_tujuan_kremasi" attrs="{'invisible':[('almarhum_tujuan','!=','kremasi')]}"/>
+                                        <field name="almarhum_jadwal_kremasi" attrs="{'invisible':[('almarhum_tujuan','!=','kremasi')]}"/>
+                                        <field name="almarhum_jadwal_transportasi" attrs="{'invisible':['|',('almarhum_tujuan','!=','kremasi'),('almarhum_tujuan_kremasi','not in',['larung','simpan_larung'])]}"/>
+                                        <field name="almarhum_tujuan_larung" attrs="{'invisible':['|',('almarhum_tujuan','!=','kremasi'),('almarhum_tujuan_kremasi','not in',['larung','simpan_larung'])]}"/>
+                                        <label for="almarhum_larung_vendor_id" attrs="{'invisible':['|',('almarhum_tujuan','!=','kremasi'),('almarhum_tujuan_kremasi','not in',['larung','simpan_larung'])]}"/>
+                                        <div class="oe_inline" attrs="{'invisible':['|',('almarhum_tujuan','!=','kremasi'),('almarhum_tujuan_kremasi','not in',['larung','simpan_larung'])]}">
+                                            <field name="almarhum_larung_vendor_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" readonly="1" force_save="1"/>
+                                            <button name="action_add_vendor_larung"
+                                                string="Pilih Vendor" 
+                                                type="object"
+                                                class="btn-primary"
+                                                style="padding:2px; margin-left:20px;"
+                                                attrs="{'invisible':[('sale_order_id','!=',False),('sale_order_id_state','!=','draft')]}" />
+                                        </div>
+                                        <field name="almarhum_tujuan_simpan" attrs="{'invisible':['|',('almarhum_tujuan','!=','kremasi'),('almarhum_tujuan_kremasi','not in',['disimpan','simpan_larung'])]}"/>
+
+
+                                        <!-- pemakaman -->
+                                        <field name="almarhum_jenis_transportasi" attrs="{'invisible':[('almarhum_tujuan_kremasi','!=','pemakaman'),('almarhum_tujuan','not in',['pemakaman','transit','luar kota','internasional','rumah'])]}" />
+                                        
+                                        <label for="almarhum_transportasi_id" attrs="{'invisible':[('almarhum_jenis_transportasi','!=','RDC')]}"/>
+                                        <div class="oe_inline" attrs="{'invisible':[('almarhum_jenis_transportasi','!=','RDC')]}">
+                                            <field name="almarhum_transportasi_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" readonly="1" force_save="1"/>
+                                            <button name="action_add_transportasi"
+                                                string="Pilih Transportasi" 
+                                                type="object"
+                                                class="btn-primary"
+                                                style="padding:2px; margin-left:20px;"
+                                                attrs="{'invisible':[('sale_order_id','!=',False),('sale_order_id_state','!=','draft')]}"/>
+                                        </div>
+                                        
+                                        <field name="almarhum_transportasi" attrs="{'invisible':['|',('almarhum_jenis_transportasi','=',False),('almarhum_jenis_transportasi','=','RDC')]}"/>
+                                        <field name="almarhum_tanggal_pemakaman" attrs="{'invisible':[('almarhum_tujuan','!=','pemakaman')]}"/>
+                                        <field name="almarhum_tujuan_pemakaman" attrs="{'invisible':[('almarhum_tujuan','!=','pemakaman'),('almarhum_tujuan_kremasi','!=','pemakaman')]}"/>
+                                        
+                                        <field name="almarhum_jabodetabek_pemakaman_id" attrs="{'invisible':[('almarhum_tujuan_pemakaman','!=','jabodetabek')]}"/>
+                                        <field name="almarhum_luar_jabodetabek_pemakaman_id" attrs="{'invisible':[('almarhum_tujuan_pemakaman','not in',['luar jabodetabek','internasional'])]}"/>
+
+                                        <!-- columbarium -->
+                                        <field name="almarhum_type_columbarium" attrs="{'invisible':[('almarhum_tujuan','!=','columbarium')]}"/>
+                                        <field name="almarhum_asal_abu" attrs="{'invisible':[('almarhum_tujuan','!=','columbarium')]}"/>
+                                        <!-- <field name="show_columbarium_id" invisible="1" />
+                                        <field name="columbarium_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" attrs="{'invisible':[('show_columbarium_id','!=',True)]}" /> -->
+
+                                        <!-- rumah -->
+                                        <field name="almarhum_alamat_disemayamkan" attrs="{'invisible':[('almarhum_tujuan','!=','rumah')]}"/>
+
+                                        <!-- luar kota -->
+                                        <field name="almarhum_kota_tujuan" attrs="{'invisible':[('almarhum_tujuan','!=','luar kota')]}"/>
+                                        
+                                        <!-- internasional -->
+                                        <field name="almarhum_negara_tujuan_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}"
+                                            attrs="{'invisible':[('almarhum_tujuan','!=','internasional')]}"/>
+
+
+                                    </group>
+                                </group>
+                                <group name="information2" attrs="{'invisible':[('almarhum_tujuan','!=','columbarium')]}" >
+                                    <group name="penanggungjawab2" string="Penanggung Jawab 2">
+                                        <field name="penanggungjawab2_name"  attrs="{'required':[('almarhum_tujuan','=','columbarium')]}"/>
+                                        <field name="penanggungjawab2_no_ktp" placeholder="contoh : 3217069121223312" attrs="{'required':[('almarhum_tujuan','=','columbarium')]}"/>
+                                        <field name="penanggungjawab2_no_npwp" placeholder="contoh : 081785542123321"/>
+                                        <field name="penanggungjawab2_phone" placeholder="contoh : 085722912331" attrs="{'required':[('almarhum_tujuan','=','columbarium')]}"/>
+                                        <span class="o_form_label o_td_label" name="address_name">
+                                            <b>Alamat</b>
+                                        </span>
+                                        <div class="o_address_format">
+                                            <field name="penanggungjawab2_street" placeholder="Jalan..." class="o_address_street" attrs="{'required':[('almarhum_tujuan','=','columbarium')]}"/>
+                                            <field name="penanggungjawab2_city" placeholder="Kota" class="o_address_city"  attrs="{'required':[('almarhum_tujuan','=','columbarium')]}"/>
+                                            <field name="penanggungjawab2_state_id" class="o_address_state" placeholder="Provinsi" options="{'no_open': True, 'no_quick_create': True, 'no_create': True}" context="{'country_id': penanggungjawab2_country_id, 'default_country_id': penanggungjawab2_country_id, 'zip': penanggungjawab2_zip}"  attrs="{'required':[('almarhum_tujuan','=','columbarium')]}"/>
+                                            <field name="penanggungjawab2_zip" placeholder="Kode Pos" class="o_address_zip" />
+                                            <field name="penanggungjawab2_country_id" placeholder="Negara" class="o_address_country" options="{&quot;no_open&quot;: True, &quot;no_create&quot;: True}"  attrs="{'required':[('almarhum_tujuan','=','columbarium')]}"/>
+                                        </div>
+                                    </group>
+                                    <group>
+                                        
+                                    </group>
+                                </group>
+                            </page>
+                            <page name="detail_information" string="Informasi Lanjutan">
+                                <group name="detail_information_parent">
+                                    <group name="detail_information_left">
+                                        <field name="almarhum_penyakit" />
+                                        <!-- <field name="almarhum_asal" /> -->
+                                        <field name="almarhum_pelayanan" />
+                                        <field name="almarhum_no_pol_kendaraan" />
+                                    </group>
+                                    <group name="detail_information_right">
+                                        <!-- <field name="almarhum_ruangan_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" />
+                                        <field name="almarhum_paket_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" />
+                                        <field name="almarhum_peti_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" /> -->
+                                        <field name="almarhum_tanggal_terima_abu" />
+                                        <field name="almarhum_jadwal_ibadah" />
+                                        <field name="almarhum_nama_pemuka_agama" />
+                                        <field name="almarhum_paroki" />
+                                        <field name="almarhum_tanggal_keberangkatan" />
+                                        <field name="almarhum_keterangan" />
+                                    </group>
+                                </group>
+                                
+                            </page>
+                            <page name="attachment" string="Attachment">
+                                <!-- <field name="file_attachments" editable="bottom" readonly="1" force_save="1">
+                                    <tree editable="bottom" create="false" edit="false" delete="false">
+                                        <field name="name" />
+                                        <field name="datas" />
+                                    </tree>
+                                </field> -->
+                                <!-- <field name="file_attachments" widget="many2many_binary" /> -->
+                                <!-- document -->
+                                <group name="attachment">
+                                    <field name="almarhum_surat_kematian" filename="almarhum_surat_kematian_filename"/>
+                                    <field name="almarhum_surat_kematian_filename" invisible="1"/>
+                                    <field name="almarhum_kartu_keluarga" filename="almarhum_kartu_keluarga_filename"/>
+                                    <field name="almarhum_kartu_keluarga_filename" invisible="1" />
+                                    <field name="almarhum_surat_keterangan_kremasi" filename="almarhum_surat_keterangan_kremasi_filename"/>
+                                    <field name="almarhum_surat_keterangan_kremasi_filename" invisible="1" />
+                                    <field name="almarhum_rekam_medis" filename="almarhum_rekam_medis_filename"/>
+                                    <field name="almarhum_rekam_medis_filename" invisible="1" />
+                                    <field name="almarhum_izin_angkut" filename="almarhum_izin_angkut_filename"/>
+                                    <field name="almarhum_izin_angkut_filename" invisible="1" />
+                                    <field name="almarhum_sertifikat_formalin" filename="almarhum_sertifikat_formalin_filename"/>
+                                    <field name="almarhum_sertifikat_formalin_filename" invisible="1" />
+                                    <field name="almarhum_izin_tahan_jenazah" filename="almarhum_izin_tahan_jenazah_filename"/>
+                                    <field name="almarhum_izin_tahan_jenazah_filename" invisible="1" />
+                                    <field name="almarhum_surat_berita_acara_kremasi" filename="almarhum_surat_berita_acara_kremasi_filename"/>
+                                    <field name="almarhum_surat_berita_acara_kremasi_filename" invisible="1" />
+                                    <field name="almarhum_surat_permohonan_pengawetan_jenazah" filename="almarhum_surat_permohonan_pengawetan_jenazah_filename"/>
+                                    <field name="almarhum_surat_permohonan_pengawetan_jenazah_filename" invisible="1" />
+                                    <field name="almarhum_ktp_almarhum" filename="almarhum_ktp_almarhum_filename"/>
+                                    <field name="almarhum_ktp_almarhum_filename" invisible="1" />
+                                    <field name="almarhum_ktp_penanggungjawab" filename="almarhum_ktp_penanggungjawab_filename"/>
+                                    <field name="almarhum_ktp_penanggungjawab_filename" invisible="1" />
+                                    <field name="almarhum_ktp_pemberi_kuasa" filename="almarhum_ktp_pemberi_kuasa_filename"/>
+                                    <field name="almarhum_ktp_pemberi_kuasa_filename" invisible="1" />
+                                </group>
+                            </page>
+                            <page string="Other Info">
+                                <group string="Audit Trail">
+                                    <group>
+                                        <field name="create_uid" readonly="1" force_save="1"/>
+                                        <field name="create_date" readonly="1" force_save="1"/>
+                                        <field name="write_uid" readonly="1" force_save="1"/>
+                                        <field name="write_date" readonly="1" force_save="1"/>
+                                    </group>
+                                    <group>
+                                        <!-- <field name="confirm_uid" readonly="1" force_save="1"/>
+                                        <field name="confirm_date" readonly="1" force_save="1"/>
+                                        <field name="approved_uid" readonly="1" force_save="1"/>
+                                        <field name="approved_date" readonly="1" force_save="1"/> -->
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="chatter-container" style="background-color: white; min-height:100px;">
+                        <div class="oe_chatter" style="width:auto!important;">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids"/>	
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="customer_form_website_action">
+            <field name="name">Customer Form</field>
+            <field name="res_model">customer.form.website</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{
+                'search_default_today': 1,
+            }</field>
+        </record>
+        
+
+        <menuitem
+            id="rdc_custom_module_menu"
+            name="RDC"
+            sequence="26" 
+            web_icon="custom_web_rdc,static/description/menu_icon.png"/>
+
+        <menuitem
+            id="customer_form_website_menu"
+            name="Customer Form"
+            action="customer_form_website_action"
+            parent="rdc_custom_module_menu"
+            sequence="2" />        
+
+        <!-- menu report -->
+        <!-- <menuitem
+            id="rdc_module_report_menu"
+            name="Reporting"
+            parent="rdc_custom_module_menu"
+            sequence="1000" />         -->
+
+    </data>
+</odoo>

@@ -1,0 +1,1 @@
+from . import generate_attendance_wizard

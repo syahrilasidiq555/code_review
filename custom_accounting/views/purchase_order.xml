@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+            <field name="partner_ref" position="after">   
+                <field name="loa_type"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"
+                    attrs="{'readonly':['|',('state','!=','draft'),('cost_sheet_id','!=',False)], 'required':[('cost_sheet_id','=',False)]}"
+                    force_save="1"/>
+            </field>
+
+            <page name="purchase_delivery_invoice" position="after">
+                <page name="approval_information" string="Approval Information" attrs="{'invisible':[('loa_type','=',False)]}">
+                    <group>
+                        <field name="next_approve_user_id"/>
+                        <field name="is_user_approve_now" invisible="1"/>
+                        <field name="is_amount" />
+                        <field name="from_amount" />
+                        <field name="to_amount" />
+                    </group>
+                    <field name="approval_info_ids" readonly="1" force_save="1">
+                        <tree>
+                            <field name="sequence" optional="hide"/>
+                            <field name="loa_id" optional="hide"/>
+                            <field name="model_id" optional="hide"/>
+                            <field name="trx_id" invisible="1"/>
+                            <field name="description"/>
+                            <field name="user_id"/>
+                            <field name="job_id"/>
+                            <field name="is_approve"/>
+                            <field name="approve_user_id"/>
+                            <field name="approve_date"/>
+                            <field name="approver_sign" invisible="1"/>
+                        </tree>
+                    </field>
+                </page>
+            </page>
+            
+            <xpath expr="//button[@name='button_approve']" position="replace">
+                <button name="button_approve" type="object" string="Approve Order" class="oe_highlight" 
+                    attrs="{'invisible':[('is_user_approve_now','=',False)]}" data-hotkey="z"/>
+                <!-- groups="purchase.group_purchase_manager" states="to approve" -->
+            </xpath>
+
+            <xpath expr="//button[@name='button_confirm'][1]" position="attributes">
+                <attribute name="string">Request Approval</attribute>
+            </xpath>
+            
+            <xpath expr="//field[@name='partner_id']" position="attributes">
+                <attribute name="context">{'res_partner_search_mode': 'supplier', 'show_vat': True, 'default_is_vendor': True}</attribute>
+            </xpath>
+            
+        </field>
+    </record>
+
+</odoo>

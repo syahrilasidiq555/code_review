@@ -1,0 +1,46 @@
+{% extends 'layouts/main_background.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+
+{% block css_assets %}
+<link rel="stylesheet" href="/custom_website_portal_new/static/css/web.assets_frontend.min.css">
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="o_home_menu m-auto w-100">
+    <div class="o_home_menu_scrollable">
+        <div class="o_apps">
+            {% for menu in menus %}
+                <a class="o_app o_menuitem" href="{{menu.url}}">
+                    <div class="o_app_icon" style="background-image: url({{menu.icon_url}});"></div>
+                    <div class="o_caption">{{menu.name}}</div>
+                </a>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- KANBAN -->
+    <!-- REMOVE CRUD-->
+    <record id="view_dms_directory_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">view_dms_directory_kanban_remove_crud</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dms_directory_kanban_create" model="ir.ui.view">
+        <field name="name">view_dms_directory_kanban_create</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_directories_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_directory_kanban_access" model="ir.ui.view">
+        <field name="name">view_dms_directory_kanban_access</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='col-6 border-left mk_directory_kanban_actions']" position="replace">
+                <div class="col-6 border-left mk_directory_kanban_actions">
+                    <h6 class="dropdown-header">
+                        Actions
+                    </h6>
+                    <a role="menuitem" type="open" class="dropdown-item" groups="custom_access_right.group_submenu_directories_access_read">
+                        <i class="fa fa-external-link"/>
+                        Open
+                    </a>
+                    <a role="menuitem" type="edit" class="dropdown-item" groups="custom_access_right.group_submenu_directories_access_update">
+                        <i class="fa fa-pencil-square-o"/>
+                        Edit
+                    </a>
+                    <a role="menuitem" type="delete" class="dropdown-item" groups="custom_access_right.group_submenu_directories_access_delete">
+                        <i class="fa fa-trash-o"/>
+                        Delete
+                    </a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- TREE -->
+    <!-- REMOVE CRUD-->
+    <record id="view_dms_directory_tree_remove_crud" model="ir.ui.view">
+        <field name="name">view_dms_directory_tree_remove_crud</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dms_directory_tree_create" model="ir.ui.view">
+        <field name="name">view_dms_directory_tree_create</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_directories_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_directory_tree_delete" model="ir.ui.view">
+        <field name="name">view_dms_directory_tree_delete</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_directories_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="view_dms_directory_form_remove_crud" model="ir.ui.view">
+        <field name="name">view_dms_directory_form_remove_crud</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="duplicate">false</attribute>
+                <attribute name="edit">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dms_directory_form_create" model="ir.ui.view">
+        <field name="name">view_dms_directory_form_create</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_directories_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+                <attribute name="duplicate">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_directory_form_edit" model="ir.ui.view">
+        <field name="name">view_dms_directory_form_edit</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_directories_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_directory_form_delete" model="ir.ui.view">
+        <field name="name">view_dms_directory_form_delete</field>
+        <field name="model">dms.directory</field>
+        <field name="inherit_id" ref="dms.view_dms_directory_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_directories_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- OTHER ACCESS -->
+    <!-- ACCESS SHARE -->
+    <record id="dms.wizard_dms_directory_share_action" model="ir.actions.act_window">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_directoriess_access_share'))]" />
+    </record>
+<!-- END OF OTHER ACCESS -->
+
+<!-- MENU ITEM -->
+    <record id="dms.menu_dms_directory" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_directories_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

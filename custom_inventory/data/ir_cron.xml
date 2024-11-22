@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rdc_hit_low_stock_notify" model="ir.cron">
+        <field name="name">RDC : Check Low Stok and Notify</field>
+        <field name="model_id" ref="product.model_product_template"/>
+        <field name="code">model.send_low_stock_via_email()</field>
+        <field name="active" eval="True"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+
+    <!-- channel -->
+    <record id="channel_low_stock" model="mail.channel">
+        <field name="name">Low Stock Notification</field>
+        <field name="channel_type">channel</field>
+        <field name="public">private</field>
+        <field name="channel_partner_ids" eval="[(4,3)]" /> <!-- 3 = administrator -->
+    </record>
+</odoo>

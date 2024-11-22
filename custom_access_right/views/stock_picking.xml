@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ACCESS BUTTON -->
+        <record id="picking_view_picking_form_access_btn" model="ir.ui.view">
+            <field name="name">picking_view_picking_form_access_btn</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_confirm']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_action_confirm</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_set_quantities_to_reservation']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_action_set_quantities_to_reservation</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_button_validate</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_validate'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_button_validate</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='do_unreserve']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_do_unreserve</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_scrap']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_button_scrap</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_toggle_is_locked'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_action_toggle_is_locked</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_toggle_is_locked'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_action_toggle_is_locked</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_picking_button_action_cancel</attribute>
+                </xpath>  
+            
+            </field>
+        </record>
+
+
+        <!-- REMOVE CRUD in FORM-->
+        <record id="picking_view_picking_form_remove_crud" model="ir.ui.view">
+            <field name="name">picking_view_picking_form_remove_crud</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <record id="stock_picking_vpicktree_remove_crud" model="ir.ui.view">
+            <field name="name">stock_picking_vpicktree_remove_crud</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in Kanban-->
+        <record id="stock_picking_kanban_remove_crud" model="ir.ui.view">
+            <field name="name">stock_picking_kanban_remove_crud</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.stock_picking_kanban"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+
+        <!-- IN FORM VIEW -->
+        <record id="view_stock_picking_form_create" model="ir.ui.view">
+            <field name="name">view_stock_picking_form_create</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_transfer_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_stock_picking_form_edit" model="ir.ui.view">
+            <field name="name">view_stock_picking_form_edit</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_transfer_update'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_stock_picking_form_delete" model="ir.ui.view">
+            <field name="name">view_stock_picking_form_delete</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.view_picking_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_transfer_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- IN TREE VIEW -->
+        <record id="view_stock_picking_tree_create" model="ir.ui.view">
+            <field name="name">view_stock_picking_tree_create</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_transfer_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_stock_picking_tree_delete" model="ir.ui.view">
+            <field name="name">view_stock_picking_tree_delete</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.vpicktree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_transfer_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- IN KANBAN VIEW -->
+        <record id="view_stock_picking_kanban_create" model="ir.ui.view">
+            <field name="name">view_stock_picking_kanban_create</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.stock_picking_kanban"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_transfer_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_stock_picking_kanban_delete" model="ir.ui.view">
+            <field name="name">view_stock_picking_kanban_delete</field>
+            <field name="model">stock.picking</field>
+            <field name="inherit_id" ref="stock.stock_picking_kanban"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_transfer_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>	
+
+    </data>
+</odoo>

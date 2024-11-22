@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ACCESS BUTTON-->
+        <record id="account_payment_requisition_form_access_btn" model="ir.ui.view">
+            <field name="name">account_payment_requisition_form_access_btn</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_form"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//button[@name='button_confirm']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_req_button_button_confirm</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_set_draft']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_req_button_button_set_draft</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_req_button_button_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_approve']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_req_button_button_approve_pr</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_refuse']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_req_button_button_refuse_pr</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="account_payment_requisition_tree_inherit_approval_access_btn" model="ir.ui.view">
+            <field name="name">account_payment_requisition_tree_inherit_approval_access_btn</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_tree_inherit_approval"/>
+            <field name="arch" type="xml">
+                
+                <xpath expr="//button[@name='button_user_approve']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_req_button_button_approve_pra</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in FORM-->
+        <record id="account_payment_requisition_form_remove_crud" model="ir.ui.view">
+            <field name="name">account_payment_requisition_form_remove_crud</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_form"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <record id="account_payment_requisition_tree_remove_crud" model="ir.ui.view">
+            <field name="name">account_payment_requisition_tree_remove_crud</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_tree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW CREATE and EDIT in FORM-->
+        <record id="account_payment_requisition_form_create_edit_view" model="ir.ui.view">
+            <field name="name">account_payment_requisition_form_create_edit_view</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_req_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="account_payment_requisition_form_edit_view" model="ir.ui.view">
+            <field name="name">account_payment_requisition_form_edit_view</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_req_button_button_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW CREATE and EDIT in tree-->
+        <record id="account_payment_requisition_tree_create_edit_view" model="ir.ui.view">
+            <field name="name">account_payment_requisition_tree_create_edit_view</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_req_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW delete in FORM-->
+        <record id="account_payment_requisition_form_delete_view" model="ir.ui.view">
+            <field name="name">account_payment_requisition_form_delete_view</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_req_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW delete in tree-->
+        <record id="account_payment_requisition_tree_delete_view" model="ir.ui.view">
+            <field name="name">account_payment_requisition_tree_delete_view</field>
+            <field name="model">account.payment.requisition</field>
+            <field name="inherit_id" ref="custom_accounting.account_payment_requisition_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_req_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

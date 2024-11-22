@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Purchase Order Pembelian -->
+        <record model="ir.module.category" id="module_category_purchase_order_pembelian">
+            <field name="name">Pembelian / Order / (Permintaan Penawaran, Order Semayam, Order Pembelian)</field>
+            <field name="sequence">4000</field>
+        </record>
+        <record id="group_submenu_purchase_rfq" model="res.groups">
+            <field name="name">Access Read Permintaan Penawaran</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_purchase_order_semayam" model="res.groups">
+            <field name="name">Access Read Order Semayam</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_purchase_order_pembelian" model="res.groups">
+            <field name="name">Access Read Order Pembelian</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_purchase_button_button_create_edit" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_purchase_button_button_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_purchase_button_action_send_whatsapp" model="res.groups">
+            <field name="name">Button Kirim Pesan WhatsApp Semayam</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_purchase_button_action_view_picking" model="res.groups">
+            <field name="name">Button Terima Produk</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_purchase_button_print_quotation" model="res.groups">
+            <field name="name">Button Cetak PPw</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_purchase_button_button_confirm" model="res.groups">
+            <field name="name">Button Konfirmasi / Request Approval</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_purchase_button_action_create_invoice" model="res.groups">
+            <field name="name">Button Buat Tagihan</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_purchase_button_button_draft" model="res.groups">
+            <field name="name">Button Reset to Draft</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">11</field>
+        </record>
+        <record id="group_purchase_button_button_cancel" model="res.groups">
+            <field name="name">Button Batal</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">12</field>
+        </record>
+        <record id="group_purchase_button_button_done" model="res.groups">
+            <field name="name">Button Kunci</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">13</field>
+        </record>
+        <record id="group_purchase_button_button_unlock" model="res.groups">
+            <field name="name">Button Buka Kunci</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">14</field>
+        </record>
+        <record id="group_purchase_button_kirim_email" model="res.groups">
+            <field name="name">Button Kirim Sebagai Email</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">15</field>
+        </record>
+        <record id="group_purchase_action_view_cost_sheet" model="res.groups">
+            <field name="name">View Cost Sheet</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">16</field>
+        </record>
+        <record id="group_purchase_action_view_invoice" model="res.groups">
+            <field name="name">View Invoice</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">17</field>
+        </record>
+        <record id="group_purchase_action_view_picking" model="res.groups">
+            <field name="name">View Penerimaan Barang</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">18</field>
+        </record>
+        <record id="group_purchase_view_amount" model="res.groups">
+            <field name="name">View All Amount</field>
+            <field name="category_id" ref="module_category_purchase_order_pembelian" />
+            <field name="sequence">19</field>
+        </record>
+
+        <!-- Purchase Master -->
+        <record model="ir.module.category" id="module_category_purchase_pemasok">
+            <field name="name">Pembelian / Master Menu</field>
+            <field name="sequence">4001</field>
+        </record>
+        <record id="group_submenu_purchase_order_pemasok" model="res.groups">
+            <field name="name">Access Read Pemasok</field>
+            <field name="category_id" ref="module_category_purchase_pemasok" />
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_purchase_produk" model="res.groups">
+            <field name="name">Access Read Produk</field>
+            <field name="category_id" ref="module_category_purchase_pemasok" />
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_purchase_varian_produk" model="res.groups">
+            <field name="name">Access Read Varian Produk</field>
+            <field name="category_id" ref="module_category_purchase_pemasok" />
+            <field name="sequence">3</field>
+        </record>
+
+        <!-- Purchase Laporan -->
+        <record model="ir.module.category" id="module_category_purchase_report">
+            <field name="name">Pembelian / Laporan</field>
+            <field name="sequence">4002</field>
+        </record>
+        <record id="group_submenu_purchase_report" model="res.groups">
+            <field name="name">Access Read Dashboard</field>
+            <field name="category_id" ref="module_category_purchase_report" />
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_purchase_laporan_pembelian" model="res.groups">
+            <field name="name">Access Read Pembelian</field>
+            <field name="category_id" ref="module_category_purchase_report" />
+            <field name="sequence">2</field>
+        </record>
+
+        <!-- Purchase Configuration -->
+        <record model="ir.module.category" id="module_category_purchase_configuration">
+            <field name="name">Pembelian / Konfigurasi</field>
+            <field name="sequence">4003</field>
+        </record>
+        <record id="group_submenu_purchase_config" model="res.groups">
+            <field name="name">Access Configuration</field>
+            <field name="category_id" ref="module_category_purchase_configuration" />
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_purchase_configuration_list_harga_pemasok" model="res.groups">
+            <field name="name">Access Daftar Harga Pemasok</field>
+            <field name="category_id" ref="module_category_purchase_configuration" />
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_purchase_configuration_attribut_product" model="res.groups">
+            <field name="name">Access Attribut Produk</field>
+            <field name="category_id" ref="module_category_purchase_configuration" />
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_purchase_configuration_kategori_produk" model="res.groups">
+            <field name="name">Access Kategori Produk</field>
+            <field name="category_id" ref="module_category_purchase_configuration" />
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_purchase_configuration_kategori_satuan" model="res.groups">
+            <field name="name">Access Kategori Satuan Ukuran</field>
+            <field name="category_id" ref="module_category_purchase_configuration" />
+            <field name="sequence">5</field>
+        </record>
+        
+    </data>
+</odoo>

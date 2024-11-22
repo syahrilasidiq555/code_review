@@ -1,0 +1,54 @@
+.o_home_menu_background {
+    background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #230744, #56deff);
+    background-size: cover;
+}
+
+
+.o_main_navbar {
+    background-color: #5a7b87;
+    // background-color: #2e346b;
+    border-bottom: 1px solid #3f3752;
+    display: grid;
+    height: 46px;
+    gap: 0px 0px;
+    grid-template-areas: "apps brand sections systray";
+    grid-template-columns: minmax(46px, max-content) max-content minmax(46px, 1fr) fit-content(100%);
+    grid-template-rows: 46px;
+    min-width: min-content;
+}
+
+
+// .o_main_navbar {background-color: #5a7b87 !important;border-bottom: 0px;}
+.o_main_navbar .show .dropdown-toggle {background-color: #5a7b87;}
+.o_main_navbar > ul > li > a:hover, .o_main_navbar 
+        > ul > li > label:hover {background-color: #4a666f;}
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar 
+        > button:hover, .o_main_navbar 
+        > button:focus {background-color: #4a666f;color: inherit;}
+.o_main_navbar > a:hover, .o_main_navbar > a:focus, .o_main_navbar 
+        > button:hover, .o_main_navbar 
+        > button:focus {background-color: #4a666f;color: inherit;}   
+
+
+
+// scroll
+/* width */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 10px;
+}
+    
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #888; 
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #555; 
+}

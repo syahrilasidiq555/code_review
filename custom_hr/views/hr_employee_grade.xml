@@ -1,0 +1,20 @@
+<odoo>
+
+    <record id="hr_job_grade_view_tree" model="ir.ui.view">
+        <field name="name">hr_job_grade_view_tree</field>
+        <field name="model">hr.job.grade</field>
+        <field name="arch" type="xml">
+            <tree string="Job Grade" default_order="create_date desc" editable="bottom">
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="hr_job_grade_action">
+        <field name="name">Job Grade</field>
+        <field name="res_model">hr.job.grade</field>
+        <field name="view_mode">tree</field>
+    </record>
+    
+</odoo>

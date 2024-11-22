@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="cron_auto_send_reminder_non_moved_pipeline" model="ir.default">
+            <field name="field_id" ref="purchase_request.field_product_template__purchase_request" />
+            <field name="json_value">true</field>
+        </record>
+    </data>
+</odoo>

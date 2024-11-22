@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Konfigurasi Modul -->
+        <menuitem
+            id="all_module_configuration_menu"
+            name="Konfigurasi Modul"
+            parent="base.menu_administration"
+            sequence="100" />        
+
+        <!-- Kalender -->
+        <menuitem
+            id="calendar_module_menu"
+            name="Kalender"
+            parent="all_module_configuration_menu"
+            sequence="5" />
+        
+        <menuitem
+            id="calendar_module_pengingat_menu"
+            name="Pengingat"
+            parent="calendar_module_menu"
+            action="calendar.action_calendar_alarm"
+            sequence="5" />
+
+        <!-- Kontak -->
+        <menuitem
+            id="contact_module_menu"
+            name="Kontak"
+            parent="all_module_configuration_menu"
+            sequence="10" />
+        
+        <menuitem
+            id="contact_module_tanda_kontak_menu"
+            name="Tanda Kontak"
+            parent="contact_module_menu"
+            action="base.action_partner_category_form"
+            sequence="1" />
+            
+        <menuitem
+            id="contact_module_judul_kontak_menu"
+            name="Judul Kontak"
+            parent="contact_module_menu"
+            action="base.action_partner_title_contact"
+            sequence="3" />
+        <menuitem
+            id="contact_module_industri_kontak_menu"
+            name="Industri"
+            parent="contact_module_menu"
+            action="base.res_partner_industry_action"
+            sequence="4" />
+
+        <!-- <menuitem
+            id="contact_module_lokalisasi_menu"
+            name="Lokalisasi"
+            parent="contact_module_menu"
+            sequence="5" />
+
+        
+        <menuitem
+            id="contact_module_rekening_bank_menu"
+            name="Rekening Bank"
+            parent="contact_module_menu"
+            action="base.action_partner_category_form"
+            sequence="6" /> -->
+
+    </data>
+</odoo>

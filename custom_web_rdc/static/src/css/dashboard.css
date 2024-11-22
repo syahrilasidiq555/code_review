@@ -1,0 +1,79 @@
+
+html, body {
+    /* IE 10-11 didn't like using min-height */
+    height: 100%;
+    margin: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+
+    font-family: "Krub", sans-serif;
+    color: #1a2537;
+    font-family: "Montserrat", "Roboto", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    font-size: 1rem;
+    font-weight: 400;
+    letter-spacing: .01em;
+    line-height: 1.6;
+}
+
+a {
+    text-decoration: none;
+    /* color: #49b5e7; */
+}
+
+a:hover {
+    color: #76c7ed;
+    /* text-decoration: none; */
+}
+
+.header {
+    /* padding: 20px; */
+    padding-bottom: 10px;
+
+    /* background-color: #3e7598;   */
+    color: white;
+    text-align: center;
+}
+.logo {
+    font-size: 30px;
+    margin: 0;
+    padding: 0;
+    line-height: 1;
+    font-weight: 600;
+    letter-spacing: 1px;
+    font-family: "Poppins", sans-serif;
+}
+
+.logo img {
+    max-height: 80px;
+}
+
+.content {
+    flex: 1 0 auto; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+    padding: 20px;
+
+    /* background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff); */
+    background:linear-gradient(0deg, rgba(0, 7, 100, 0.300), rgba(0, 7, 100, 0.300)), url(https://disk.mediaindonesia.com/thumbs/1800x1200/news/2022/05/2dee2414000d3cdc3e4a66e469756316.jpg);
+
+    /* min-height: 100%; */
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    /* overflow: auto; */
+}
+
+.table_head {
+    background-color: #2f60b2!important;
+    color: white!important;
+}
+
+.footer {
+    flex-shrink: 0; /* Prevent Chrome, Opera, and Safari from letting these items shrink to smaller than their content's default minimum size. */
+    padding: 10px;
+
+    background-color: #2F60B2;  
+    color: white;
+    text-align: center;
+}

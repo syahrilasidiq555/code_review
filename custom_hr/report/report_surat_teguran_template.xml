@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_teguran_attendance_template">
+            <style type="text/css">
+                .tag_container {
+                    margin: auto;
+                    margin-bottom: 50px;
+                    border: 1px solid black;
+                }
+                
+                .no_border {
+                    border: 0px !important;
+                }
+                
+                .margin_bottom {
+                    margin-bottom: 5px !important;
+                    margin-top: 5px !important;
+                }
+                
+                .border_top {
+                    border-top: 1px solid black !important;
+                }
+                
+                .border_bottom {
+                    border: 1px solid black !important;
+                }
+                                
+                .page,
+                .header,
+                .footer,
+                .table {
+                    font-size: 10px !important;
+                }
+
+                .hr {
+                    border-top: 1px solid black !important;
+                }
+
+                .text_up{
+                    text-transform: uppercase;
+                }
+
+                .text_bold{
+                    font-weight: bold;
+                }
+
+                .text_head{
+                    font-size: 14px;
+                }
+
+                .table_titikdua{
+                    text-align:center;
+                    width:20px;
+                }
+
+                .table_margintop{
+                    margin-top: 20px !important;
+                }
+                
+                table, th, td {
+                    border:0 !important;
+                }
+
+                .td_center {
+                    text-align: center;
+                }
+
+            </style>
+            <t t-call="web.html_container">
+                <t t-set="numpage" t-value="0"/>
+                <t t-set="totpage" t-value="len(docs)"/>    
+                <t t-foreach="docs" t-as="o">
+                    <td t-call="web.custom_layout">
+                    <t t-set="numpage" t-value="numpage+1"/>
+                    <t t-if="o and 'company_id' in o"><t t-set="company" t-value="o.company_id"></t></t>
+                    <t t-if="not o or not 'company_id' in o"><t t-set="company" t-value="res_company"></t></t>
+                    <div class="page">
+                       <!-- <img src="https://www.daya-motor.com/wp-content/uploads/2018/12/daya-logo.png" class="rounded float-left" alt="daya-motor.com" style="width:100px;height:50px;"/> -->
+                        <div class="row"></div>
+                        
+                        <hr style="border: 1px solid black;"/>
+
+                        <div class="page">
+                            <div class="col-xs-12">
+                                <p class="font-weight-bold text-center" style="font-size:120%;"><u>SURAT TEGURAN TERTULIS ABSENSI</u></p>
+                                <h3><p class="font-weight-bold text-center" style="font-size:120%;"><t t-esc="o.name"/></p></h3>
+                            </div>
+                        </div>
+
+                        <div class="page">
+                            <div class="col-xs-12">
+                                <div class="col-xs-12 padding_ap">
+                                    
+                                    <table class="table table-sm">
+                                        <tbody>
+                                            <tr>
+                                                <td colspan="3">Berdasarkan data absensi, karyawan dengan data sebagai berikut :</td>
+                                            </tr>
+                                            <tr>
+                                                <td >Nama</td>
+                                                <td >:</td>
+                                                <td ><t t-esc="o.employee_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td >NIK</td>
+                                                <td >:</td>
+                                                <td ><t t-esc="o.employee_id.barcode"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td >Department / Cabang</td>
+                                                <td >:</td>
+                                                <td ><t t-esc="o.department_id.name"/></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3" style="padding-top:20px;">Telah melakukan kesalahan terkait absensi, dengan informasi sebagai berikut :</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">- <b><t t-esc="o.reason"/></b></td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">Berdasarkan informasi tersebut di atas, kami sampaikan teguran tertulis kepada Saudara untuk tidak melakukan lagi kesalahan terkait absensi tersebut.</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">Perlu diketahui bahwa ini merupakan teguran tertulis yang apabila kesalahan yang dilakukan kembali maka akan mendapatkan surat peringatan <b>TINGKAT PERTAMA</b>.</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">Berjanji akan memenuhi semua ketentuan absensi berdasarkan Peraturan-Peraturan dan  Instruksi-Instruksi yang dikeluarkan oleh perusahaan.</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">Bandung, . . . . . . . . .</td>
+                                            </tr>
+                                            <tr>
+                                                <td colspan="3">
+                                                    <table class="table table-sm" style="width:100%">
+                                                        <tbody>
+                                                            <tr>
+                                                                <td class="td_center">Yang bersangkutan</td>
+                                                                <td class="td_center">Atasan Ybs</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="td_center" style="padding:40px 0px 40px 0px"></td>
+                                                                <td class="td_center" style="padding:40px 0px 40px 0px"></td>
+                                                            </tr>
+                                                            <tr>
+                                                                <td class="td_center">( .................................... )</td>
+                                                                <td class="td_center">( .................................... )</td>
+                                                            </tr>
+                                                            <!-- <tr>
+                                                                <td >Nama</td>
+                                                                <td >:</td>
+                                                                <td ><t t-esc="o.employee_id.name"/></td>
+                                                            </tr> -->
+                                                            
+                                                        </tbody>
+                                                    </table>
+                                                
+                                                </td>
+                                            </tr>
+                                            </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    </td>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

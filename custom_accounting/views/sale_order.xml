@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="rental_order_primary_form_view_accounting_inherit" model="ir.ui.view">
+        <field name="name">rental_order_primary_form_view_accounting_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+        <field eval="1" name="priority"/>
+        <field name="arch" type="xml">
+            <!-- <xpath expr="//button[@name='action_quotation_send'][1]" position="before">
+                <button name="action_bayar_columnbarium" string="Pembayaran Columbarium"
+                        type="object" data-hotkey="w" class="btn-primary"
+                        attrs="{'invisible':['|',('state','!=','sale'),('payment_id','!=',False)]}"/>
+                <button name="action_create_invoice_columnbarium" string="Invoice Columbarium"
+                        type="object" data-hotkey="w" class="btn-primary"
+                        attrs="{'invisible':[('payment_id','=',False)]}"
+                        confirm="Apakah Anda yakin akan membuat Invoice Columbarium ?"/>
+                <button name="action_recon_hutang_titipo" string="Reconcile"
+                        type="object" data-hotkey="w" class="btn-primary"
+                        attrs="{'invisible':[('payment_id','=',False)]}" 
+                        confirm="Apakah Anda yakin akan melakukan Reconcile Transaksi Columbarium ?"
+                        groups="base.group_no_one"/>
+            </xpath> -->
+
+            <!-- <xpath expr="//page[@name='other_information']" position="before">
+                <page name="columbarium_info" string="Info Columbarium">
+                    <group string="Info Pembayaran dan Upgrade">
+                        <field name="payment_id"/>
+                        <field name="payment_id" invisible="1"/>
+                    </group>
+                </page>
+            </xpath> -->
+
+            <button name="preview_sale_order" position="before">
+                <!-- <button type="object" name="action_view_columnbarium_payment" class="oe_stat_button" icon="fa-money" 
+                    attrs="{'invisible':[('payment_id','=',False)]}">
+                    <span class="o_stat_text">Pembayaran Columbarium</span>
+                </button> -->
+                <!-- <button type="object" name="action_view_columnbarium_move" class="oe_stat_button" icon="fa-book" 
+                    attrs="{'invisible':[('payment_id','=',False)]}">
+                    <span class="o_stat_text">Columbarium Entry</span>
+                </button> -->
+            </button>
+            
+            <xpath expr="//notebook/page[@name='order_lines']/field/tree/field[@name='price_subtotal']" position="after">
+                <field name="is_columbarium" invisible="1"/>
+                <field name="sale_columnbarium_upgrade_id" invisible="1"/>
+                <!-- <button name="button_upgrade_columbarium" string="Columbarium"
+                        type="object" class="btn-info" icon="fa-arrow-up"
+                        attrs="{'invisible':['|',('sale_columnbarium_upgrade_id','!=',False),('is_columbarium','=',False)]}"/> -->
+                <!-- <button name="button_to_sale_upgrade" string="Sale Upgrade"
+                        type="object" class="oe_stat_button" icon="fa-external-link"
+                        attrs="{'invisible':[('sale_columnbarium_upgrade_id','=',False)]}"/> -->
+
+                <field name="is_columbarium_upgraded" invisible="1" />
+                <field name="columbarium_upgrade_parent_id" invisible="1" />
+                <button name="button_upgrade_columbarium" string="Columbarium"
+                        type="object" class="btn-info" icon="fa-arrow-up"
+                        attrs="{'invisible':['|','|',('parent_id','!=',False),'|',('parent_id','=',True),('is_columbarium_upgraded','=',True),('is_columbarium','=',False)]}"/>
+            </xpath>
+
+        </field>
+    </record>
+</odoo>

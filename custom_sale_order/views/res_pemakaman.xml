@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="res_pemakaman_tree_view">
+            <field name="name">res_pemakaman_tree_view</field>
+            <field name="model">res.pemakaman</field>
+            <field name="arch" type="xml">
+                <tree string="" >
+                    <field name="name" />
+                    <field name="daerah" />
+                    <field name="wilayah_id" />
+                    <field name="wilayah" invisible="1"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="res_pemakaman_search_view" model="ir.ui.view">
+            <field name="name">res_pemakaman_search_view</field>
+            <field name="model">res.pemakaman</field>
+            <field name="arch" type="xml">
+                <search string="Search data...">
+                    <field name="name" />
+                    <field name="daerah" />
+                    <field name="wilayah_id" />
+                    <group expand="0" string="Group By">
+                        <filter string="Daerah" name="group_by_daerah" context="{'group_by': 'daerah'}"/>
+                    </group>
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="res_pemakaman_form_view" model="ir.ui.view">
+            <field name="name">res_pemakaman_form_view</field>
+            <field name="model">res.pemakaman</field>
+            <field name="arch" type="xml">
+                <form string="Cost Sheet" duplicate='false'>
+                    <header>
+                    </header>
+                    <sheet>
+                        <!-- <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_view_so" class="oe_stat_button" icon="fa-file-text-o" attrs="{'invisible':[('sale_order_id','=',False)]}">
+                                <span class="o_stat_text" >Sale</span>
+                            </button>
+                        </div> -->
+                        <!-- <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'invisible': [('name', '=', '')]}" readonly="1"/>
+                            </h1>
+                        </div> -->
+
+                        <group string="" name="detail">                            
+                            <group name="left">
+                                <field name="name" />
+                                <field name="daerah" />
+                                <field name="wilayah_id" />
+                                <field name="wilayah" invisible="1"/>
+                            </group>
+                            <group name="right">
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Other Info">
+                                <group string="Audit Trail">
+                                    <group>
+                                        <field name="create_uid" readonly="1" force_save="1"/>
+                                        <field name="create_date" readonly="1" force_save="1"/>
+                                        
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" force_save="1"/>
+                                        <field name="write_date" readonly="1" force_save="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="chatter-container" style="background-color: white; min-height:100px;">
+                        <div class="oe_chatter" style="width:auto!important;">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids"/>	
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="res_pemakaman_action">
+            <field name="name">Pemakaman</field>
+            <field name="res_model">res.pemakaman</field>
+            <field name="view_mode">tree,form</field>
+            <field name="context">{'search_default_group_by_daerah': 1}</field>
+        </record>
+
+        <menuitem
+            id="res_pemakaman_menu"
+            name="Pemakaman"
+            action="res_pemakaman_action"
+            parent="sale.menu_sale_config"
+            sequence="21" />        
+
+    </data>
+</odoo>

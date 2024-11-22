@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="suggestion_system_tree_view_remove_crud" model="ir.ui.view">
+        <field name="name">suggestion_system_tree_view_remove_crud</field>
+        <field name="model">suggestion.system</field>
+        <field name="inherit_id" ref="suggestion_system.suggestion_system_tree_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="suggestion_system_tree_view_create" model="ir.ui.view">
+        <field name="name">suggestion_system_tree_view_create</field>
+        <field name="model">suggestion.system</field>
+        <field name="inherit_id" ref="suggestion_system.suggestion_system_tree_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_suggestion_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="suggestion_system_tree_view_delete" model="ir.ui.view">
+        <field name="name">suggestion_system_tree_view_delete</field>
+        <field name="model">suggestion.system</field>
+        <field name="inherit_id" ref="suggestion_system.suggestion_system_tree_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_suggestion_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="suggestion_system_form_view_remove_crud" model="ir.ui.view">
+        <field name="name">suggestion_system_form_view_remove_crud</field>
+        <field name="model">suggestion.system</field>
+        <field name="inherit_id" ref="suggestion_system.suggestion_system_form_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="suggestion_system_form_view_create" model="ir.ui.view">
+        <field name="name">suggestion_system_form_view_create</field>
+        <field name="model">suggestion.system</field>
+        <field name="inherit_id" ref="suggestion_system.suggestion_system_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_suggestion_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="suggestion_system_form_view_update" model="ir.ui.view">
+        <field name="name">suggestion_system_form_view_update</field>
+        <field name="model">suggestion.system</field>
+        <field name="inherit_id" ref="suggestion_system.suggestion_system_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_suggestion_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="suggestion_system_form_view_delete" model="ir.ui.view">
+        <field name="name">suggestion_system_form_view_delete</field>
+        <field name="model">suggestion.system</field>
+        <field name="inherit_id" ref="suggestion_system.suggestion_system_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_suggestion_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- MENU ITEM -->
+    <record id="suggestion_system.suggestion_system_sub_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_suggestion_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

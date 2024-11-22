@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="choose_partner_wizard_view" model="ir.ui.view">
+            <field name="name">choose_partner_wizard_view</field>
+            <field name="model">choose.partner.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Choose Vendor">
+                    <h3>
+                        <field name="cost_sheet_id" nolabel="1" readonly="True"/>
+                    </h3>
+                    
+                    <group name="choose_vendor" string="Detail Vendor">
+                        <field name="company_id"/>
+                        <field name="vendor_ids" widget="many2many_tags" invisible="1" />
+                        <field name="vendor_id_domain" invisible="1" />
+                        <field name="vendor_id" domain="vendor_id_domain" context="{'res_partner_search_mode': 'supplier', 'show_vat': True}" options="{'no_quick_create':True, 'no_create_edit':True, 'no_open':True, 'no_create':True}"/>
+                        <!-- <field name="vendor_id" domain="[('id','in',vendor_ids)]" options="{'no_quick_create':True, 'no_create_edit':True, 'no_open':True, 'no_create':True}"/> -->
+                        <field name="reason" placeholder="vendor ini tidak bisa menyediakan barang yang diminta."/>
+                    </group>                    
+                    
+                    <field name="cost_sheet_line_id" invisible="1"/>
+
+                    <footer>
+                        <button name="action_choose" type="object" string="Confirm Vendor" class="oe_highlight" confirm="Are you sure want to choose vendor ?"/>
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

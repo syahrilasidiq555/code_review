@@ -1,0 +1,130 @@
+<odoo>
+    <data>
+        <!-- form view-->
+        <record id="hr_contract_form_inherit_inhrit" model="ir.ui.view">
+            <field name="name">hr_contract_form_inherit_inhrit</field>
+            <field name="model">hr.contract</field>
+            <field name="inherit_id" ref="om_hr_payroll.hr_contract_form_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='employee_id']" position="attributes">
+                    <attribute name="options" >{'no_create':True,'no_open':True,'no_edit':True}</attribute>
+                </xpath>
+
+                <xpath expr="//group[@name='allowances']" position="replace">
+                    <group string="Allowance and other" name="allowances">
+                        <!-- <label for="hra"/>
+                        <div class="o_row">
+                            <field name="hra" nolabel="1"/>
+                            <span>/ month</span>
+                        </div>
+                        <label for="da"/>
+                        <div class="o_row">
+                            <field name="da" nolabel="1"/>
+                            <span>/ month</span>
+                        </div> -->
+                        <label for="travel_allowance"/>
+                        <div class="o_row">
+
+                            <field name="travel_allowance" nolabel="1"/>
+                            <span>/ day</span>
+                        </div>
+                        <label for="uang_transportasi_staff"/>
+                        <div class="o_row">
+
+                            <field name="uang_transportasi_staff" nolabel="1"/>
+                            <span>/ day</span>
+                        </div>
+                        <label for="meal_allowance"/>
+                        <div class="o_row">
+
+                            <field name="meal_allowance" nolabel="1"/>
+                            <span>/ day</span>
+                        </div>
+                        <label for="premi_masa_kerja_staff"/>
+                        <div class="o_row">
+
+                            <field name="premi_masa_kerja_staff" nolabel="1"/>
+                            <span>/ day</span>
+                        </div>
+                        <label for="insentif_kehadiran"/>
+                        <div class="o_row">
+
+                            <field name="insentif_kehadiran" nolabel="1"/>
+                            <span>/ day</span>
+                        </div>
+                        <label for="tunjangan_tdk_tetap"/>
+                        <div class="o_row">
+
+                            <field name="tunjangan_tdk_tetap" nolabel="1"/>
+                            <span>/ month</span>
+                        </div>
+                        <label for="premi_kebijakan"/>
+                        <div class="o_row">
+
+                            <field name="premi_kebijakan" nolabel="1"/>
+                            <span>/ day</span>
+                        </div>
+                        <!-- <label for="medical_allowance"/>
+                        <div class="o_row">
+
+                            <field name="medical_allowance" nolabel="1"/>
+                            <span>/ day</span>
+                        </div> -->
+                        <label for="other_allowance"/>
+                        <div class="o_row">
+
+                            <field name="other_allowance" nolabel="1"/>
+                            <span>/ day</span>
+                        </div>
+                    </group>
+                </xpath>
+
+                <xpath expr="//field[@name='contract_type_id']" position="replace">
+                    <field name="umk_id" options="{'no_create':True,'no_edit':True}"/>
+                </xpath>
+
+                <xpath expr="//label[@for='wage']" position="replace">
+                    <field name="salary_type" />
+                    <label for="wage_id" attrs="{'invisible':[('salary_type','!=','master')]}"/>
+                    <div class="o_row" name="wage_id" attrs="{'invisible':[('salary_type','!=','master')]}">
+                        <field name="wage_id" nolabel="1" force_save="1" 
+                            options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}"
+                            attrs="{'required':[('salary_type','=','master')]}"/>
+                        <span>/ month</span>
+                    </div>
+
+                    <label for="wage" attrs="{'invisible':[('salary_type','!=','manual')]}"/>
+                </xpath>
+
+                <xpath expr="//div[@name='wage']" position="replace">
+                    <div class="o_row" name="wage" attrs="{'invisible':[('salary_type','!=','manual')]}">
+                        <field name="wage" nolabel="1" force_save="1"
+                            attrs="{'readonly':[('id','>',0)]}"/>
+                        <span>/ month</span>
+                        <button string="Update Amount" class="btn btn-link" type="object" name="action_update_salary_amount" />
+                    </div>
+                </xpath>
+
+                <xpath expr="//page[@name='information']" position="after">
+                    <page name="wage_history" string="Salary History"
+                        attrs="{'invisible':[('salary_type','!=','manual')]}">
+                        <field name="wage_history_ids" >
+                            <tree string="" editable="bottom" create="false" edit="true" delete="true" order="applied_date desc">
+                                <field name="wage" readonly="1" force_save="1"/>
+                                <field name="applied_date" />
+                            </tree>
+                            <form string="">
+                                <group name="name" >
+                                    <field name="wage" readonly="1" force_save="1"/>
+                                    <field name="applied_date" />
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                </xpath>
+
+            </field>
+        </record>
+
+    </data>
+</odoo>

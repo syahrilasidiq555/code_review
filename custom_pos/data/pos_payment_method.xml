@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="pos_payment_paylater" model="pos.payment.method">
+            <field name="name">Bayar Nanti (Semayam)</field>
+            <field name="split_transactions" eval="True" />
+        </record>
+    </data>
+</odoo>

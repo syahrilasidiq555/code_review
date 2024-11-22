@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- TREE -->
+        <record id="performance_appraisal_job_classification_tree_view" model="ir.ui.view">
+            <field name="name">performance_appraisal_job_classification_tree_view</field>
+            <field name="model">performance.appraisal.job.classification</field>
+            <field name="arch" type="xml">
+                <tree >
+                    <field name="form_id"/>
+                    <field name="job_ids" widget="many2many_tags"/>
+                </tree>
+            </field>
+        </record>
+
+        <!-- FORM -->
+        <record id="performance_appraisal_job_classification_form_view" model="ir.ui.view">
+            <field name="name">performance_appraisal_job_classification_form_view</field>
+            <field name="model">performance.appraisal.job.classification</field>
+            <field name="arch" type="xml">
+                <form>
+                    <header>
+                    </header> 
+                    <sheet>
+                        <group name="head">
+                            <field name="form_id" options="{'no_create':True, 'no_quick_create':True, 'no_edit':True, 'no_open':True}" readonly="1" force_save="1"/>
+                            <field name="job_ids" widget="many2many_tags" options="{'no_create':True, 'no_quick_create':True, 'no_edit':True, 'no_open':True}"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+
+        
+        <record model="ir.actions.act_window" id="performance_appraisal_job_classification_action_window">
+            <field name="name">Performance Appraisal Job Classification</field>
+            <field name="res_model">performance.appraisal.job.classification</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- config menu -->
+        <menuitem id="dym_performance_appraisal_config" 
+            name="Configuration" 
+            sequence="100" 
+            parent="dym_performance_appraisal_menu" />
+
+        <menuitem 
+            id="dym_performance_appraisal_job_classification" 
+            name="Form Job Classification" 
+            sequence="2" 
+            parent="dym_performance_appraisal_config" 
+            action="performance_appraisal_job_classification_action_window" />
+    </data>
+</odoo>

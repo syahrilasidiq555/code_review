@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem
+            id="cash_advance_root_menu"
+            name="Cash Advance"
+            sequence="61" 
+            web_icon="custom_cash_advance,static/description/menu_icon.png"/>
+    </data>
+</odoo>

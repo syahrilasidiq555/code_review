@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<odoo>
+	<report 
+		id="report_performance_atasan1_done"
+		string="Report Performance Atasan 1 Sampai Done"
+		model="report.performance.atasan1.done.wizard"
+		report_type="xlsx"
+		name="dym_performance_appraisal.report_atasan1_done_xls"
+		file="report_performance_atasan1_done"
+		attachment_use="False"/>
+	<report 
+		id="report_performance_belum_employee"
+		string="Report Performance Belum Sampai Employee Answered"
+		model="report.performance.belum.employee.wizard"
+		report_type="xlsx"
+		name="dym_performance_appraisal.report_belum_employee_xls"
+		file="report_performance_belum_employee"
+		attachment_use="False"/>
+	<report 
+		id="report_performance_employee_atasan1"
+		string="Report Performance Employee Sampai Atasan 1"
+		model="report.performance.employee.atasan1.wizard"
+		report_type="xlsx"
+		name="dym_performance_appraisal.report_employee_atasan1_xls"
+		file="report_performance_employee_atasan1"
+		attachment_use="False"/>
+
+</odoo>

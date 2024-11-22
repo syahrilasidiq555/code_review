@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Time Off / My Time Off -->
+        <record model="ir.module.category" id="module_timeoff_category_mytimeoff">
+            <field name="name">Time Off / My Time Off</field>
+            <field name="sequence">550</field>
+        </record>        
+        <record id="group_submenu_mytimeoff_access_dashboard" model="res.groups">
+            <field name="name">Access Dashboard</field>
+            <field name="category_id" ref="module_timeoff_category_mytimeoff"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_mytimeoff_access_mytimeoff" model="res.groups">
+            <field name="name">Access My Time Off</field>
+            <field name="category_id" ref="module_timeoff_category_mytimeoff"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_mytimeoff_access_myallocation" model="res.groups">
+            <field name="name">Access My Allocation</field>
+            <field name="category_id" ref="module_timeoff_category_mytimeoff"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_mytimeoff_access_overview" model="res.groups">
+            <field name="name">Access Overview</field>
+            <field name="category_id" ref="module_timeoff_category_mytimeoff"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Time Off / Approvals / Time Off -->
+        <record model="ir.module.category" id="module_timeoff_category_timeoff">
+            <field name="name">Time Off / Approvals / Time Off</field>
+            <field name="sequence">551</field>
+        </record>      
+        <record id="group_submenu_timeoff_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_timeoff_category_timeoff"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_timeoff_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_timeoff_category_timeoff"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_timeoff_access_update" model="res.groups">
+            <field name="name">Access Update</field>
+            <field name="category_id" ref="module_timeoff_category_timeoff"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_timeoff_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_timeoff_category_timeoff"/>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Time Off / Approvals / Allocations -->
+        <record model="ir.module.category" id="module_timeoffcategory_allocations">
+            <field name="name">Time Off / Approvals / Allocations</field>
+            <field name="sequence">552</field>
+        </record>      
+        <record id="group_submenu_allocations_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_timeoffcategory_allocations"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_allocations_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_timeoffcategory_allocations"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_allocations_access_update" model="res.groups">
+            <field name="name">Access Update</field>
+            <field name="category_id" ref="module_timeoffcategory_allocations"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_allocations_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_timeoffcategory_allocations"/>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Time Off / Reporting -->
+        <record model="ir.module.category" id="module_timeoff_category_reporting">
+            <field name="name">Time Off / Reporting</field>
+            <field name="sequence">553</field>
+        </record>      
+        <record id="group_submenu_reporting_access_employee" model="res.groups">
+            <field name="name">Access By Employee</field>
+            <field name="category_id" ref="module_timeoff_category_reporting"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_reporting_access_type" model="res.groups">
+            <field name="name">Access By Type</field>
+            <field name="category_id" ref="module_timeoff_category_reporting"/>
+            <field name="sequence">2</field>
+        </record>
+
+        <!-- Time Off / Configuration -->
+        <record model="ir.module.category" id="module_timeoff_category_config">
+            <field name="name">Time Off / Reporting</field>
+            <field name="sequence">554</field>
+        </record>      
+        <record id="group_submenu_config_access_types" model="res.groups">
+            <field name="name">Access Time Off Types</field>
+            <field name="category_id" ref="module_timeoff_category_config"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_config_access_acrual" model="res.groups">
+            <field name="name">Access Acrual Plans</field>
+            <field name="category_id" ref="module_timeoff_category_config"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_config_access_public" model="res.groups">
+            <field name="name">Access Public Holidays</field>
+            <field name="category_id" ref="module_timeoff_category_config"/>
+            <field name="sequence">3</field>
+        </record>
+        
+    </data>
+</odoo>

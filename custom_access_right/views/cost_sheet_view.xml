@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- COST SHEET -->
+    <!-- REMOVE CRUD in FORM-->
+    <record id="cost_sheet_form_view_remove_crud" model="ir.ui.view">
+        <field name="name">cost_sheet_form_view_remove_crud</field>
+        <field name="model">cost.sheet</field>
+        <field name="inherit_id" ref="custom_sale_order.cost_sheet_form_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- REMOVE CRUD in TREE-->
+    <record id="cost_sheet_tree_view_remove_crud" model="ir.ui.view">
+        <field name="name">cost_sheet_tree_view_remove_crud</field>
+        <field name="model">cost.sheet</field>
+        <field name="inherit_id" ref="custom_sale_order.cost_sheet_tree_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- BUTTON -->
+    <record id="cost_sheet_form_view_group_view" model="ir.ui.view">
+        <field name="name">cost_sheet_form_view_group_view</field>
+        <field name="model">cost.sheet</field>
+        <field name="inherit_id" ref="custom_sale_order.cost_sheet_form_view"/>
+        <field name="arch" type="xml">
+            <!-- HANYA BISA VIEW AMOUNT DI GROUP TERTENTU -->
+
+            <!-- BUTTON CONFIRM -->
+            <button name="action_confirm" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_confirm</attribute>
+            </button>
+            <!-- BUTTON APPROVE -->
+            <button name="action_approve" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_approve</attribute>
+            </button>
+            <!-- BUTTON REJECT -->
+            <button name="action_reject" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_reject</attribute>
+            </button>
+            <!-- BUTTON CANCEL -->
+            <button name="action_cancel" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_cancel</attribute>
+            </button>
+            <!-- BUTTON DRAFT -->
+            <button name="action_draft" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_draft</attribute>
+            </button>
+            <!-- BUTTON CREATE PO AND BILLS -->
+            <button name="action_create_po_and_bills" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_create_po_and_bills</attribute>
+            </button>
+            <!-- BUTTON VIEW SALES ORDER -->
+            <button name="action_view_so" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_view_so</attribute>
+            </button>
+            <!-- BUTTON VIEW RENTAL SCHEDULE -->
+            <button name="action_view_rental_schedule" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_view_rental_schedule</attribute>
+            </button>
+            <!-- BUTTON VIEW BILLS -->
+            <button name="action_view_bills" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_view_bills</attribute>
+            </button>
+            <!-- BUTTON VIEW PURCHASE -->
+            <button name="action_view_po_list" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_button_action_view_po_list</attribute>
+            </button>
+
+            <!-- group view amount -->
+            <!-- amount total -->
+            <xpath expr="//page[@name='cost_sheet_line']/group/group[@name='amount']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+
+            <!-- amount in cost_sheet_line tree -->
+            <xpath expr="//field[@name='cost_sheet_line']/tree/field[@name='budget_cost_unit']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/tree/field[@name='actual_sales_unit']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/tree/field[@name='budget_cost']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/tree/field[@name='actual_sales']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/tree/field[@name='actual_budget']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/tree/field[@name='budget_margin']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/tree/field[@name='budget_percentage']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+
+            <!-- amount in cost_sheet_line form -->
+            <xpath expr="//field[@name='cost_sheet_line']/form/sheet/group[@name='head']/group/field[@name='budget_margin']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/form/sheet/group[@name='head']/group/field[@name='budget_percentage']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='cost_sheet_line']/form/sheet/group[@name='detail']/group[@name='purchase']/field[@name='budget_cost_unit']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/form/sheet/group[@name='detail']/group[@name='purchase']/field[@name='budget_cost']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/form/sheet/group[@name='detail']/group[@name='purchase']/field[@name='actual_budget']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/form/sheet/group[@name='detail']/group[@name='sale']/field[@name='actual_sales_unit']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='cost_sheet_line']/form/sheet/group[@name='detail']/group[@name='sale']/field[@name='actual_sales']" position="attributes">
+                <attribute name="groups">custom_access_right.group_cs_view_amount</attribute>
+            </xpath>
+
+            
+            
+        </field>
+    </record>
+
+
+
+    <!-- IN FORM -->
+    <record id="cost_sheet_form_view_edit_view" model="ir.ui.view">
+        <field name="name">cost_sheet_form_view_edit_view</field>
+        <field name="model">cost.sheet</field>
+        <field name="inherit_id" ref="custom_sale_order.cost_sheet_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_cost_sheet_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="cost_sheet_form_view_delete_view" model="ir.ui.view">
+        <field name="name">cost_sheet_form_view_delete_view</field>
+        <field name="model">cost.sheet</field>
+        <field name="inherit_id" ref="custom_sale_order.cost_sheet_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_cost_sheet_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN TREE VIEW -->
+    <record id="cost_sheet_tree_view_delete_view" model="ir.ui.view">
+        <field name="name">cost_sheet_tree_view_delete_view</field>
+        <field name="model">cost.sheet</field>
+        <field name="inherit_id" ref="custom_sale_order.cost_sheet_tree_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_cost_sheet_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- MENU ITEM -->
+    <record id="custom_sale_order.cost_sheet_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_rdc_cost_sheet_read'))]" />
+    </record>
+
+
+</odoo>

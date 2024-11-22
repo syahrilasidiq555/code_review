@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- TREE -->
+    <record id="view_perjalanan_dinas_tree" model="ir.ui.view">
+        <field name="name">view_perjalanan_dinas_tree</field>
+        <field name="model">dym.perjalanan.dinas</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Perjalanan Dinas">
+                <field name="name" />
+                <field name="employee_id"/>
+                <field name="barcode" />
+                <field name="department_id" />
+                <field name="job_id" />
+                <field name="tgl_berangkat" />
+                <field name="tgl_kembali" />
+                <field name="step_approval" />
+                <field name="pengajuan_state" optional="show" />
+                <field name="closing_state" optional="show" />
+            </tree>
+        </field>
+    </record>
+
+    <!-- SEARCH -->
+    <record id="view_perjalanan_dinas_search" model="ir.ui.view">
+        <field name="name">view_perjalanan_dinas_search</field>
+        <field name="model">dym.perjalanan.dinas</field>
+        <field name="arch" type="xml">
+            <search string="Search Perjalanan Dinas">
+                <field name="name" />
+                <field name="employee_id" />
+                <field name="department_id" />
+                <field name="job_id" />
+                <field name="step_approval" />
+                <!-- <filter string="Step Pengajuan" name="perjalanan_dinas_step_pengajuan" domain="[('step_approval','=','pengajuan')]"/>
+                <filter string="Step Closing" name="perjalanan_dinas_step_closing" domain="[('step_approval','=','closing')]"/> -->
+            </search>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+    <record id="view_dym_perjalanan_dinas_form" model="ir.ui.view">
+        <field name="name">view_dym_perjalanan_dinas_form</field>
+        <field name="model">dym.perjalanan.dinas</field>
+        <field name="arch" type="xml">
+            <form string="Perjalanan Dinas Form" copy="false">
+                <header>
+                    <!-- <button string="Confirm" type="object" states="draft" name="action_rfa" class="oe_highlight" confirm="Apakah anda yakin?"/>
+                    <button string="Manager Approve" type="object" states="rfa" name="action_approve_manager" class="oe_highlight" confirm="Apakah anda yakin akan melakukan Approve Perjalanan Dinas?"/>
+                    <button string="PIC Approve" type="object" states="approve1" name="action_approve" class="oe_highlight" confirm="Apakah anda yakin akan melakukan Approve Perjalanan Dinas Ke Lokasi Anda?" groups="dym_perjalanan_dinas.pd_pic_branch"/>
+                    <button string="Refuse" type="object" states="approve1" name="action_refuse" confirm="Apakah anda yakin?" groups="dym_perjalanan_dinas.pd_pic_branch"/>
+                    
+                    <button string="Refuse" type="object" states="rfa" name="action_refuse" confirm="Apakah anda yakin?"/>
+                    <button string="Cancel" type="object" states="rfa" name="action_cancel" confirm="Apakah anda yakin?"/> -->
+                    <!-- <button string="set Draft" type="object" name="action_draft" confirm="State dari data ini akan diubah menjadi DRAFT, apakah anda yakin??"/> -->
+                    
+                    <field name="step_approval" widget="statusbar" statusbar_visible="pengajuan,closing" attrs="{'invisible':[('step_approval','in',['done','cancel'])]}"/>
+                    <field name="step_approval_done" widget="statusbar" statusbar_visible="done" attrs="{'invisible':[('step_approval','!=','done')]}"/>
+                    <field name="step_approval_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':[('step_approval','!=','cancel')]}"/>
+                    
+                </header>
+                <header>
+                    <button string="RFA" type="object" name="action_pengajuan_rfa" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','!=','draft')]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_pengajuan_rfa"/>
+                    
+                    <button string="Approve Manager" type="object" name="action_pengajuan_approve1" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','!=','rfa')]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_pengajuan_approve1"/>
+                    
+                    <button string="Approve HRD" type="object" name="action_pengajuan_approve2" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','!=','approve1')]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_pengajuan_approve2"/>
+                    
+                    <button string="Approve Direksi" type="object" name="action_pengajuan_approve3" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','!=','approve2')]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_pengajuan_approve3"/>
+
+                    <!-- revise -->
+                    <button string="Revise" type="object" name="action_pengajuan_revise" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','in',['draft','cancel','reject'])]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_pengajuan_revise"/>
+
+                    <!-- reject -->
+                    <button string="Reject" type="object" name="action_pengajuan_reject" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','in',['draft','cancel','reject'])]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_pengajuan_reject"/>
+
+                    <!-- set to draft -->
+                    <button string="Set to Draft" type="object" name="action_pengajuan_set_draft" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','not in',['reject','cancel'])]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_pengajuan_set_draft"/>
+
+                    <field name="pengajuan_state" widget="statusbar" statusbar_visible="draft,rfa,approve1,approve2,approve3" attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','in',['refuse','cancel','reject'])]}"/>
+                    <field name="pengajuan_state_refuse" widget="statusbar" statusbar_visible="refuse" attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','!=','refuse')]}"/>
+                    <field name="pengajuan_state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','!=','cancel')]}"/>
+                    <field name="pengajuan_state_reject" widget="statusbar" statusbar_visible="reject" attrs="{'invisible':['|',('step_approval','!=','pengajuan'),('pengajuan_state','!=','reject')]}"/>
+                </header>
+                <header>                    
+                    <field name="is_need_pic_sales_validate" invisible="1" />
+                    <button string="RFA" type="object" name="action_closing_rfa" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','closing'), ('closing_state','!=','draft')]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_closing_rfa"/>
+
+                    <button string="PIC Validate" type="object" name="action_closing_approve0" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','closing'), ('is_need_pic_sales_validate','!=',True)]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_closing_approve0"/>
+                    
+                    <button string="Approve Manager" type="object" name="action_closing_approve1" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','closing'), '|', ('closing_state','not in',['rfa','approve0']), ('is_need_pic_sales_validate','=',True)]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_closing_approve1"/>
+                    
+                    <button string="Approve HR" type="object" name="action_closing_approve2" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','closing'), ('closing_state','!=','approve1')]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_closing_approve2"/>
+
+                    <button string="F&amp;A validate" type="object" name="action_closing_approve3" class="oe_highlight" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','closing'), ('closing_state','!=','approve2')]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_closing_approve3"/>
+                    
+                    <!-- revise -->
+                    <button string="Revise" type="object" name="action_closing_revise" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','closing'),('closing_state','in',['draft','cancel','reject'])]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_closing_revise"/>
+
+                    <!-- set to draft -->
+                    <button string="Set to Draft" type="object" name="action_closing_set_draft" confirm="Apakah anda yakin?"
+                        attrs="{'invisible':['|',('step_approval','!=','closing'),('closing_state','not in',['reject','cancel'])]}"
+                        groups="dym_perjalanan_dinas.pd_button_action_closing_set_draft"/>
+                    
+                    <field name="closing_state" widget="statusbar" statusbar_visible="draft,rfa,approve1,approve2,approve3" attrs="{'invisible':['|',('step_approval','!=','closing'),('closing_state','in',['refuse','cancel','reject'])]}"/>
+                    <field name="closing_state_refuse" widget="statusbar" statusbar_visible="refuse" attrs="{'invisible':['|',('step_approval','!=','closing'),('closing_state','!=','refuse')]}"/>
+                    <field name="closing_state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':['|',('step_approval','!=','closing'),('closing_state','!=','cancel')]}"/>
+                    <field name="closing_state_reject" widget="statusbar" statusbar_visible="reject" attrs="{'invisible':['|',('step_approval','!=','closing'),('closing_state','!=','reject')]}"/>
+                </header>
+                
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="name" string="Perjalanan Dinas/"/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group name="head">
+                        <group name="left" >
+                            <field name="employee_id" attrs="{'readonly':[('id','&gt;',0)]}" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="barcode" />
+                            <field name="department_id"/>
+                            <field name="is_sales_marketing" readonly="1" force_save="1" attrs="{'invisible':[('is_sales_marketing','!=',True)]}" />
+                            <field name="job_id"/>
+                            <field name="job_grade_id" />
+                            <field name="employee_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"
+                                domain="[('id','!=',employee_id)]"
+                                attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                            <br/><br/>
+
+                            <!-- khusus human resource -->
+                            <field name="pic_sales_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" 
+                                attrs="{'invisible':[('is_sales_marketing','!=',True)]}"
+                                groups="dym_perjalanan_dinas.pd_human_resource"/>
+                            <field name="manager_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" 
+                                groups="dym_perjalanan_dinas.pd_human_resource"/>
+                            <field name="hr_responsible_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" 
+                                groups="dym_perjalanan_dinas.pd_human_resource"/>
+                            <field name="direksi_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" 
+                                groups="dym_perjalanan_dinas.pd_human_resource"/>
+                            <field name="pic_fa_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" 
+                                groups="dym_perjalanan_dinas.pd_human_resource"/>
+                        </group>
+                        <group name="right">
+                            <field name="tujuan" 
+                                attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                            <field name="kota_tujuan" 
+                                attrs="{'invisible':[('tujuan','=','wonogiri')], 'required':[('tujuan','!=','wonogiri')], 'readonly':[('pengajuan_state','!=','draft')]}"/>
+                            
+                            <label for="jangka_waktu" />
+                            <div>
+                                <field name="jangka_waktu" class="oe_inline" style="margin-right:20px;" />
+                                <b class="oe_inline" style="margin-left:0px; margin-right:10px;">Hari</b>
+                            </div>
+                            <field name="tgl_berangkat" 
+                                attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                            <field name="tgl_kembali" 
+                                attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                            <field name="description_perjalanan" 
+                                attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                        </group>
+                    </group>
+
+                    
+                    
+                    
+                    <notebook>
+                        <page name="rincian" string="Rincian">
+                            <b>Rincian Transportasi</b>
+                            <field name="rincian_transportasi_ids" attrs="{'readonly':[('closing_state','!=','draft'),('pengajuan_state','!=','draft')]}" >
+                                <tree editable="bottom">
+                                    <field name="step_approval" invisible="1" />
+                                    <field name="pengajuan_state" invisible="1" />
+                                    <field name="closing_state" invisible="1" />
+                                    <field name="rincian" style="width: 350px;" 
+                                        attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                                    <field name="budget" sum="sum_budget"
+                                        attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                                    <field name="realisasi" sum="sum_realisasi" 
+                                        attrs="{'readonly':[('closing_state','!=','draft')]}"/>
+                                    <field name="ref" />
+                                    <field name="lebih" sum="sum_lebih" />
+                                    <field name="kurang" sum="sum_kurang" />
+                                    <field name="dinas_file" widget="many2many_binary" 
+                                        attrs="{'invisible':['|',('closing_state','!=','draft'),('step_approval','in',['pengajuan','done'])], 'readonly':[('closing_state','!=','draft')]}"/>
+                                    <field name="dinas_file_rel" 
+                                        attrs="{'column_invisible':['|',('parent.closing_state','=','draft'),('parent.step_approval','=','pengajuan')]}"/>
+                                </tree>
+                                <form string="" create="0" edit="0" delete="0">
+                                    <sheet>
+                                        <group>
+                                            <field name="rincian" />
+                                            <field name="budget" sum="sum_budget"/>
+                                            <field name="realisasi" sum="sum_realisasi" />
+                                            <field name="ref" />
+                                            <field name="lebih" sum="sum_lebih" />
+                                            <field name="kurang" sum="sum_kurang" />
+                                            <field name="dinas_file" widget="many2many_binary"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+
+                            <b>Rincian Akomodasi</b>
+                            <field name="rincian_akomodasi_ids" attrs="{'readonly':[('closing_state','!=','draft'),('pengajuan_state','!=','draft')]}" >
+                                <tree editable="bottom">
+                                    <field name="step_approval" invisible="1" />
+                                    <field name="pengajuan_state" invisible="1" />
+                                    <field name="closing_state" invisible="1" />
+                                    <field name="rincian" style="width: 350px;" 
+                                        attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                                    <field name="budget" sum="sum_budget"
+                                        attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                                    <field name="realisasi" sum="sum_realisasi" 
+                                        attrs="{'readonly':[('closing_state','!=','draft')]}"/>
+                                    <field name="ref" />
+                                    <field name="lebih" sum="sum_lebih" />
+                                    <field name="kurang" sum="sum_kurang" />
+                                    <field name="dinas_file" widget="many2many_binary" 
+                                        attrs="{'invisible':['|',('closing_state','!=','draft'),('step_approval','in',['pengajuan','done'])], 'readonly':[('closing_state','!=','draft')]}"/>
+                                    <field name="dinas_file_rel" 
+                                        attrs="{'column_invisible':['|',('parent.closing_state','=','draft'),('parent.step_approval','=','pengajuan')]}"/>
+                                </tree>
+                                <form string="" create="0" edit="0" delete="0">
+                                    <sheet>
+                                        <group>
+                                            <field name="rincian" />
+                                            <field name="budget" sum="sum_budget"/>
+                                            <field name="realisasi" sum="sum_realisasi" />
+                                            <field name="ref" />
+                                            <field name="lebih" sum="sum_lebih" />
+                                            <field name="kurang" sum="sum_kurang" />
+                                            <field name="dinas_file" widget="many2many_binary"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field>
+
+                            <b>Rincian Lain-lain</b>
+                            <field name="rincian_lain_ids" attrs="{'readonly':[('closing_state','!=','draft'),('pengajuan_state','!=','draft')]}" >
+                                <tree editable="bottom">
+                                    <field name="step_approval" invisible="1" />
+                                    <field name="pengajuan_state" invisible="1" />
+                                    <field name="closing_state" invisible="1" />
+                                    <field name="rincian" style="width: 350px;" 
+                                        attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                                    <field name="budget" sum="sum_budget"
+                                        attrs="{'readonly':[('pengajuan_state','!=','draft')]}"/>
+                                    <field name="realisasi" sum="sum_realisasi" 
+                                        attrs="{'readonly':[('closing_state','!=','draft')]}"/>
+                                    <field name="ref" />
+                                    <field name="lebih" sum="sum_lebih" />
+                                    <field name="kurang" sum="sum_kurang" />
+                                    <field name="dinas_file" widget="many2many_binary" 
+                                        attrs="{'invisible':['|',('closing_state','!=','draft'),('step_approval','in',['pengajuan','done'])], 'readonly':[('closing_state','!=','draft')]}"/>
+                                    <field name="dinas_file_rel" 
+                                        attrs="{'column_invisible':['|',('parent.closing_state','=','draft'),('parent.step_approval','=','pengajuan')]}"/>
+                                </tree>
+                                <form string="" create="0" edit="0" delete="0">
+                                    <sheet>
+                                        <group>
+                                            <field name="rincian" />
+                                            <field name="budget" sum="sum_budget"/>
+                                            <field name="realisasi" sum="sum_realisasi" />
+                                            <field name="ref" />
+                                            <field name="lebih" sum="sum_lebih" />
+                                            <field name="kurang" sum="sum_kurang" />
+                                            <field name="dinas_file" widget="many2many_binary"/>
+                                        </group>
+                                    </sheet>
+                                </form>
+                            </field> 
+                            <!-- <group class="oe_subtotal_footer oe_right">
+                                <div class="oe_subtotal_footer_separator oe_inline" style="border-top: none;">
+                                    <label for="grand_total_lebih"/>
+                                </div>
+                                <field name="grand_total_lebih" nolabel="1" class="oe_subtotal_footer_separator" style="border-top: none;"/>
+                                <div class="oe_subtotal_footer_separator oe_inline" style="border-top: none;">
+                                    <label for="grand_total_kurang"/>
+                                </div>
+                                <field name="grand_total_kurang" nolabel="1" class="oe_subtotal_footer_separator" style="border-top: none;"/>
+                            </group> -->
+
+                            <group name="note_group" col="6" class="mt-2 mt-md-0">
+                                <group colspan="4">
+                                    <field name="note" class="oe-bordered-editor" nolabel="1" placeholder="Note"/>
+                                </group>
+                                <group class="oe_subtotal_footer oe_right" colspan="2" >
+                                    <div class="oe_subtotal_footer_separator oe_inline" style="border-top: none;">
+                                        <label for="grand_total_lebih"/>
+                                    </div>
+                                    <field name="grand_total_lebih" nolabel="1" class="oe_subtotal_footer_separator" style="border-top: none;"/>
+                                    <div class="oe_subtotal_footer_separator oe_inline" style="border-top: none;">
+                                        <label for="grand_total_kurang"/>
+                                    </div>
+                                    <field name="grand_total_kurang" nolabel="1" class="oe_subtotal_footer_separator" style="border-top: none;"/>
+                                </group>
+                                <div class="oe_clear"/>
+                            </group>
+
+                        </page>
+                        <page name="timeoff_attendance" string="Timeoff and Attendance">
+                            <group string="Attendances of Employees">
+                                <field name="attendance_ids" nolabel="1" widget="one2many_list">
+                                    <tree string="" editable="bottom" create="false" edit="false" delete="false" order="employee_id, check_in">
+                                        <field name="employee_id" widget="many2one_avatar_employee" />
+                                        <field name="check_in" />
+                                        <field name="check_out" />
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Timeoffs of Employees">
+                                <field name="timeoff_ids" nolabel="1" widget="one2many_list">
+                                    <tree string="" editable="bottom" create="false" edit="false" delete="false" order="employee_id, date_from">
+                                        <field name="employee_id" widget="many2one_avatar_employee" />
+                                        <field name="date_to" />
+                                        <field name="date_from" />
+                                        <field name="duration_display" string="Duration"/>
+                                        <field name="state" widget="badge" decoration-info="state == 'draft'" decoration-warning="state in ('confirm','validate1')" decoration-success="state == 'validate'"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Approval and Audit Trail">
+                            <group string="Approval">
+                                <field name="approval_ids" nolabel="1" widget="one2many_list" readonly="1" force_save="1">
+                                    <tree string="" editable="bottom" create="false" edit="false" delete="false">
+                                        <field name="step_approval"/>
+                                        <field name="state" />
+                                        <field name="reason"/>
+                                        <field name="pelaksana_id"/>
+                                        <field name="department_id" />
+                                        <field name="job_id" />
+                                        <field name="tanggal"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Audit Trail">
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids"/>	
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    
+    
+    <record id="action_menu_perjalanan_dinas" model="ir.actions.act_window">
+        <field name="name">Perjalanan Dinas Karyawan</field>
+        <field name="res_model">dym.perjalanan.dinas</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Tambah perjalanan Dinas
+            </p><p>
+            With just a quick glance on the Odoo screen, you
+            can easily find all the information you need.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_perjalanan_dinas"
+        name="Perjalanan Dinas"
+        action="action_menu_perjalanan_dinas"
+        parent="hr.menu_hr_root"
+        sequence="4"/>
+</odoo>

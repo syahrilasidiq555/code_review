@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Meeting Booth / Meeting Booth -->
+        <record model="ir.module.category" id="module_booth_category_booth">
+            <field name="name">Meeting Booth / Meeting Booth</field>
+            <field name="sequence">512</field>
+        </record>
+        <record id="group_submenu_booth_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_booth_category_booth"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_booth_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_booth_category_booth"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_booth_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_booth_category_booth"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_booth_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_booth_category_booth"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Meeting Booth / Meeting Booth -->
+        <record model="ir.module.category" id="module_booth_category_master_booth">
+            <field name="name">Meeting Booth / Master Meeting Booth</field>
+            <field name="sequence">513</field>
+        </record>
+        <record id="group_submenu_master_booth_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_booth_category_master_booth"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_master_booth_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_booth_category_master_booth"/>
+            <field name="sequence">2</field>
+        </record>
+        <!-- <record id="group_submenu_master_booth_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_booth_category_master_booth"/>            
+            <field name="sequence">3</field>
+        </record> -->
+        <record id="group_submenu_master_booth_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_booth_category_master_booth"/>            
+            <field name="sequence">4</field>
+        </record>
+    </data>
+</odoo>

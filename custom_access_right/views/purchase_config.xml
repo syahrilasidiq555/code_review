@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <record id="purchase.menu_purchase_config" model="ir.ui.menu">
+        <field name="groups_id" eval="False" />
+    </record>
+    <record id="purchase.menu_product_pricelist_action2_purchase" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_purchase_configuration_list_harga_pemasok'))]" />
+    </record>
+    <record id="purchase.menu_product_attribute_action" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_purchase_configuration_attribut_product'))]" />
+    </record>
+    <record id="purchase.menu_product_category_config_purchase" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_purchase_configuration_kategori_produk'))]" />
+    </record>
+    <record id="purchase.menu_purchase_uom_categ_form_action" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_purchase_configuration_kategori_satuan'))]" />
+    </record>
+    <record id="purchase.menu_purchase_general_settings" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_config'))]" />
+    </record>
+</odoo>

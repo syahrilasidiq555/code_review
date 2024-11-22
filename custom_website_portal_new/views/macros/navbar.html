@@ -1,0 +1,60 @@
+{% macro navbar(username) -%}
+    <nav class="navbar navbar-expand-lg shadow-sm">
+        <div class="container" >
+            <a class="navbar-brand" href="#">
+                <img src="/web/image/website/1/logo/PT.%20Dwidasa%20Samsara%20Indonesia?unique=7b17cfe"
+                    class="img img-fluid" alt="PT. Dwidasa Samsara Indonesia" loading="lazy" style="height: 40px;">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
+                data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                aria-label="Toggle navigation">
+                <!-- <span class="navbar-toggler-icon"></span> -->
+                <i class="fa fa-bars"></i>
+            </button>
+            <div class="collapse navbar-collapse bg-white" id="navbarSupportedContent">
+
+                <ul class="navbar-nav w-100 me-auto mb-2 mb-lg-0">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="/">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/portals">Employee</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/contactus">Contact Us</a>
+                    </li>
+                    <li class="nav-item dropdown ml-lg-auto">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{username}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/my/home">My Account</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/web/session/logout?redirect=/">Logout</a></li>
+                        </ul>
+                    </li>
+
+                </ul>
+                <!-- <form class="d-flex" role="search">
+                    <div class="dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                            aria-expanded="false">
+                            {{username}}
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="/my/home">My Account</a></li>
+                            <li>
+                                <hr class="dropdown-divider">
+                            </li>
+                            <li><a class="dropdown-item" href="/web/session/logout?redirect=/">Logout</a></li>
+                        </ul>
+                    </div>
+
+                </form> -->
+            </div>
+        </div>
+    </nav>
+{%- endmacro %}

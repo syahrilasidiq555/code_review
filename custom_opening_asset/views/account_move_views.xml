@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_move_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="open_correction_id"
+                            class="oe_stat_button"
+                            icon="fa-check"
+                            type="object"
+                            attrs="{'invisible': ['|', '|', ('move_type', '!=', 'entry'), ('id', '=', False), ('correction_id', '=', False)]}"
+                            string="Correction">
+                    </button>
+                </xpath>
+                <xpath expr="//field[@name='ref']" position="after">
+                    <field name="correction_id" invisible="1"/>
+                </xpath>
+                <xpath expr="//notebook" position="inside">
+                    <page string="Opening Assets" attrs="{'invisible': [('opening_asset_ids', '=', [])]}" groups="base.group_no_one">
+                        <field name="opening_asset_ids" mode="tree" readonly="1">
+                            <tree>
+                                <field name="name"/>
+                                <field name="first_depreciation_date"/>
+                                <field name="original_value"/>
+                                <field name="value_residual"/>
+                                <field name="amount_opening" sum="Total Amount Opening"/>
+                                <field name="state" optional="hide"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

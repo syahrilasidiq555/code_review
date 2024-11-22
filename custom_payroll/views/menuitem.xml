@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_hr_export_payslip"
+              name="Export Payslip"
+              action="action_view_export_payslip"
+              parent="om_hr_payroll.menu_payroll_employee"
+              sequence="7"/>
+</odoo>

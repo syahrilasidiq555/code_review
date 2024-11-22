@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="resume_line_view_form_inherit" model="ir.ui.view">
+        <field name="name">resume_line_view_form_inherit</field>
+        <field name="model">hr.resume.line</field>
+        <field name="inherit_id" ref="hr_skills.resume_line_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='description']" position="before">
+                <group name="other_information" string="Other Information">
+                    <group>
+                        <field name="company_address"/>
+                        <field name="boss_name"/>
+                        <field name="first_position"/>
+                        <field name="last_Position"/>
+                        <field name="desc_position"/>
+                    </group>
+                    <group>
+                        <field name="leave_reason"/>
+                        <field name="verklaring"/>
+                        <field name='verklaring_file' widget='many2many_binary'/>
+                        <field name="last_salary"/>
+                    </group>
+                </group>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="view_employee_form_skill_inherit" model="ir.ui.view">
+        <field name="name">view_employee_form_skill_inherit</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr_skills.hr_employee_view_form"/>
+        <field name="arch" type="xml"> -->
+            <!-- INHERITED FROM HR SKILLS -->
+            <!-- <xpath expr="//page[@name='public']//div[1]//div[1]//field[@name='resume_line_ids']//tree" position="inside">
+                <field name="company_address"/>
+                <field name="boss_name"/>
+                <field name="first_position"/>
+                <field name="last_Position"/>
+                <field name="desc_position"/>
+                <field name="leave_reason"/>
+                <field name="verklaring"/>
+                <field name="verklaring_file"/>
+                <field name="last_salary"/>
+            </xpath>
+        </field>
+    </record> -->
+</odoo>

@@ -1,0 +1,333 @@
+{% extends 'layouts/main_background.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> -->
+<style>
+    [x-cloak] {
+        display: none !important
+    }
+    
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        min-height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* overflow: auto; */
+    }
+</style>
+{% endblock %}
+
+{% block js_assets %}
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> -->
+
+<!-- my custom alpine js script -->
+<script defer src="/custom_website_portal_new/static/js/timeoffFormCreateEdit.js"></script>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="pt-lg-3 px-lg-5 pt-md-2 px-md-4 p-2" x-init="$store.timeoffStore" x-cloak>
+    {{breadcrumb(paths = [{'href':'/portals/home','name':'Home'},{'href':'/portals/time-off_approve','name':'Time Off Approve'}], active = title)}}
+    <div class="card shadow">
+        <form id="timeoffForm" enctype="multipart/form-data" x-on:submit="event.preventDefault();">
+            <div class="card-header py-3 d-flex justify-content-between">
+                <input type="hidden" name="active_id" 
+                    x-model="$store.timeoffStore.active_id"
+                    x-init="$store.timeoffStore.active_id = '{{timeoff.id}}'">
+                <div>
+                    {% if timeoff.state in ['draft','confirm'] %}
+                    <div class="btn btn-secondary" @click="$store.timeoffStore.action_edit()"
+                        x-show="!$store.timeoffStore.editForm && $store.timeoffStore.showButtonEdit">Edit</div>
+                    <button type="submit" class="btn btn-primary" @click="$store.timeoffStore.editData()"
+                        x-show="$store.timeoffStore.editForm">Submit</button>
+                    <div class="btn btn-secondary" @click="$store.timeoffStore.action_cancel()"
+                        x-show="$store.timeoffStore.editForm">Cancel</div>
+
+
+                    <div class="btn btn-success" x-show="!$store.timeoffStore.editForm"
+                        @click="$store.timeoffStore.action_approve()">Approve</div>
+                    <button id="rejectAction"
+                        name="rejectAction" type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#timeoffReasonModal">
+                        Reject
+                    </button>
+                    {% endif %}
+                </div>
+                {% if timeoff.state in ['draft'] %}
+                <p class="btn btn-primary align-self-start"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                    Draft</p>
+                {% elif timeoff.state in ['confirm'] %}
+                <p class="btn btn-warning align-self-start"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                    To Approved</p>
+                {% elif timeoff.state in ['validate1'] %}
+                <p class="btn btn-info align-self-start"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                    Second Approval</p>
+                {% elif timeoff.state in ['validate'] %}
+                <p class="btn btn-success align-self-start"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                    Approved</p>
+                {% elif timeoff.state in ['refuse'] %}
+                <p class="btn btn-danger align-self-start"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                    Refused</p>
+                {% endif %}
+
+            </div>
+            <div class="card-body">
+                <div class="row align-items-start">
+                    <!-- ALERT -->
+                    <div class="row mb-3" x-show="$store.timeoffStore.alert.show" x-transition>
+                        <div :class="$store.timeoffStore.alert.class"
+                            class="alert d-flex align-items-center">
+                            <div>
+                                <span x-text="$store.timeoffStore.alert.message"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="holiday_status_id" class="form-label fw-bold">Time Off Type</label>
+                            <select id="holiday_status_id" name="holiday_status_id" class="form-select" 
+                                x-model="$store.timeoffStore.timeoff.holiday_status_id"
+                                disabled
+                                x-init="$store.timeoffStore.timeoff.holiday_status_id = {{timeoff.holiday_status_id.id}}">
+                                <option  value='0' selected enabled>Select Time Off Type here..</option>
+                                {% for time_off_type in list_time_off_type.records %}
+                                <option value="{{time_off_type.id}}">{{time_off_type.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6 text-right align-items-end mt-3">
+                            <p class="btn btn-info align-self-start"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                                Remaining Leaves {{timeoff.employee_id.remaining_leaves|int}} Days
+                            </p>
+
+                            {% if timeoff.holiday_status_id.support_document %}
+                            <button id="listDocuments"
+                                name="listDocuments" type="button" class="btn btn-primary float-end" 
+                                data-bs-toggle="modal" data-bs-target="#documentModal"
+                                style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                                <span x-text="$store.timeoffStore.attachments.length + $store.timeoffStore.newAttachments.length"></span> Documents
+                            </button>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="request_date_from" class="form-label fw-bold">Start Date</label>
+                            <input type="date" class="form-control" id="request_date_from" name="request_date_from"
+                                x-model="$store.timeoffStore.timeoff.request_date_from"
+                                :disabled="!$store.timeoffStore.editForm"
+                                x-init="$store.timeoffStore.timeoff.request_date_from = '{{timeoff.request_date_from}}'"/>
+                        </div>
+
+                        {% if timeoff.holiday_status_id.request_unit == 'half_day' %}
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="request_date_from_period" class="form-label fw-bold" >Duration</label>
+                            <select id="request_date_from_period" name="request_date_from_period" class="form-select" 
+                                x-model="$store.timeoffStore.timeoff.request_date_from_period"
+                                :disabled="!$store.timeoffStore.editForm"
+                                x-init="$store.timeoffStore.timeoff.request_date_from_period = '{{timeoff.request_date_from_period}}'">
+                                <option value="0" selected enabled>Select Duration here..</option>
+                                <option value="am">08:00 - 12:00</option>
+                                <option value="pm">13:00 - 17:00</option>
+                            </select>
+                        </div>
+                        {% endif %}
+
+                        {% if timeoff.holiday_status_id.request_unit != 'half_day' %}
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="request_date_to" class="form-label fw-bold">End Date</label>
+                            <input type="date" class="form-control" id="request_date_to" name="request_date_to"
+                                x-model="$store.timeoffStore.timeoff.request_date_to"
+                                :disabled="!$store.timeoffStore.editForm"
+                                x-init="$store.timeoffStore.timeoff.request_date_to = '{{timeoff.request_date_to}}'"/>
+                        </div>
+                        {% endif %}
+                    </div>
+
+                    <div class="row mb-3">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="approver_id" class="form-label fw-bold">Approver</label>
+                            <select id="approver_id" name="approver_id" class="form-select" 
+                                x-model="$store.timeoffStore.timeoff.approver_id"
+                                :disabled="!$store.timeoffStore.editForm"
+                                x-init="$store.timeoffStore.timeoff.approver_id = {{timeoff.approver_id.id}}">
+                                <option  value='0' selected enabled>Select Approver here..</option>
+                                {% for approver in list_approver.records %}
+                                <option value="{{approver.id}}">{{approver.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="pm_leader_id" class="form-label fw-bold">PM / Leader</label>
+                            <select id="pm_leader_id" name="pm_leader_id" class="form-select" 
+                                x-model="$store.timeoffStore.timeoff.pm_leader_id"
+                                :disabled="!$store.timeoffStore.editForm"
+                                x-init="$store.timeoffStore.timeoff.pm_leader_id = {{timeoff.pm_leader_id.id}}">
+                                <option  value='0' selected enabled>Select PM / Leader here..</option>
+                                {% for pm_leader in list_pm_leader.records %}
+                                <option value="{{pm_leader.id}}">{{pm_leader.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-12 align-items-end mb-3">
+                            <label for="name" class="form-label fw-bold">Description</label>
+                            <textarea row="3" name="name" id="name" class="form-control" 
+                                x-model="$store.timeoffStore.timeoff.name"
+                                :disabled="!$store.timeoffStore.editForm"
+                                x-init="$store.timeoffStore.timeoff.name = `{{timeoff.name}}`"></textarea>
+                        </div>
+                    </div>
+
+                    {% if timeoff.reject_reason != False %}
+                    <div class="row">
+                        <div class="form-group col-md-12 align-items-end mb-3">
+                            <label for="reject_reason" class="form-label fw-bold">Reject Reason</label>
+                            <textarea row="3" name="reject_reason" id="reject_reason" class="form-control" 
+                                x-model="$store.timeoffStore.timeoff.reject_reason"
+                                :disabled="!$store.timeoffStore.editForm"
+                                x-init="$store.timeoffStore.timeoff.reject_reason = `{{timeoff.reject_reason}}`"></textarea>
+                        </div>
+                    </div>
+                    {% endif %}
+
+                    <input type="number" class="form-control" id="employee_id" name="employee_id"
+                                x-model="$store.timeoffStore.timeoff.employee_id"
+                                :disabled="!$store.timeoffStore.editForm"
+                                hidden
+                                x-init="$store.timeoffStore.timeoff.employee_id = {{timeoff.employee_id.id}}"/>
+
+                    <input id="documents" 
+                                name="documents" 
+                                data-edit="all" 
+                                type="file" 
+                                multiple="true" 
+                                class="d-none"
+                                @change="$store.timeoffStore.changeAttachment(event)">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- REJECT REASON MODAL -->
+    <form id="timeoffFormReject" enctype="multipart/form-data" x-on:submit="event.preventDefault();">
+        <div class="modal fade" id="timeoffReasonModal" data-bs-backdrop="static" tabindex="-1"
+            aria-labelledby="reasonModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+                <div class="modal-content ">
+                    <div class="card-header">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="m-0 font-weight-bold text-primary">Reject Reason</h6>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="row">
+                            <div class="form-group col-md-12 align-items-end mb-3">
+                                <textarea row="3" name="reject_reason" id="reject_reason" class="form-control" 
+                                    x-model="$store.timeoffStore.timeoff.reject_reason"></textarea>
+                            </div>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button id="rejectButton" type="submit" class="btn btn-primary"
+                                @click="$store.timeoffStore.action_reject()">Reject</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+
+    <!-- DOCUMENT MODAL -->
+    <div class="modal fade" id="documentModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="documentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content ">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Documents</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="card-body" x-data="$store.timeoffStore.attachments = {{timeoff_attachments}}" style="overflow-y: auto;">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="documentTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template x-for="attachment in $store.timeoffStore.attachments" :key="attachment.id">
+                                    <tr>
+                                        <td x-text="attachment.name"></td>
+                                        <td x-text="$store.timeoffStore.formatBytes(attachment.file_size)"></td>
+                                        <td>
+                                            <a :href="attachment.website_url" target="_blank" class="btn btn-sm btn-primary">View</a>
+                                            <!-- {% if timeoff.state in ['draft','confirm'] %}
+                                                <button class="btn btn-sm btn-danger"
+                                                    @click="$store.timeoffStore.deleteAttachment(attachment.id)"
+                                                    x-show="$store.timeoffStore.editForm">Delete</button>
+                                            {% endif %} -->
+                                            
+                                        </td>
+                                    </tr>
+                                </template>
+                                <template x-for="attachment in $store.timeoffStore.newAttachments" :key="attachment.name">
+                                    <tr>
+                                        <td x-text="attachment.name" style="color:#4e73df"></td>
+                                        <td x-text="attachment.size" style="color:#4e73df"></td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <!-- <button id="addDocumentFiles" type="button" class="btn btn-primary"
+                        @click="document.getElementById('documents').click()"
+                        x-show="$store.timeoffStore.editForm">Add Files</button> -->
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="update_amount_wizard_form_view" model="ir.ui.view">
+            <field name="name">update_amount_wizard_form_view</field>
+            <field name="model">update.amount.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <!-- <field name="incentive_id" invisible="1"/> -->
+                    <field name="data_id" invisible="1"/>
+                    <field name="model_name" invisible="1"/>
+                    <field name="function_name" invisible="1"/>
+                    <field name="function_parameter" invisible="1"/>
+                    <group name="head">
+                        <field name="umk_amount" />
+                        <field name="applied_date" />
+                    </group>
+                    <footer>
+                        <button name="btn_continue"  type="object" string="Confirm" class="oe_highlight" confirm="apakah anda yakin?"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

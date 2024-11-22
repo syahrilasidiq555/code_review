@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="dym_improvement_mail_notification" model="mail.template">
+            <field name="name">Improvement Approval Notification</field>
+            <field name="model_id" ref="dym_improvement.model_dym_improvement"/>
+            <field name="subject">Improvement Approval Notification</field>
+            <!-- <field name="email_from">"${object.company_id.name}" &lt;sa@de.com&gt;</field> -->
+            <field name="email_from">de@sa.com</field>
+            <field name="email_to">${ctx['email_to']|safe}</field>
+            <!-- <field name="email_to">syahrilasidiq555@gmail.com</field> -->
+            <field name="body_html" type="html">
+                <table border="0" cellpadding="0" cellspacing="0" style="padding-top: 16px; background-color: #F1F1F1; font-family:Verdana, Arial,sans-serif; color: #454748; width: 100%; border-collapse:separate;"><tr><td align="center">
+                <table border="0" cellpadding="0" cellspacing="0" width="590" style="padding: 16px; background-color: white; color: #454748; border-collapse:separate;">
+                <tbody>
+                    <!-- % set context = ctx['context'] -->
+                    <!-- HEADER -->
+                    <tr>
+                        <td align="center" style="min-width: 590px;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                <tr><td valign="middle">
+                                    <span style="font-size: 20px; font-weight: bold;">
+                                        Improvement Approval Notification
+                                    </span>
+                                </td></tr>
+                                <tr><td colspan="2" style="text-align:center;">
+                                    <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                </td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- CONTENT -->
+                    <tr>
+                        <td align="center" style="min-width: 590px;">
+                            <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: white; padding: 0px 8px 0px 8px; border-collapse:separate;">
+                                % set context = ctx['context']
+                                <tr><td valign="top" style="font-size: 13px;">
+                                    <div>
+                                        <!-- Dear Bapak/Ibu ${context.get('manager')},<br/><br/> -->
+                                        Dear Bapak/Ibu ${context.get('pic_name')} (${context.get('pic_dep')}),<br/><br/>
+                                        Reminder Untuk Follow Up Improvement agar lanjut ke tahap berikutnya.<br/><br/>
+                                        <table>
+                                            <tr>
+                                                <td>Improvement</td>
+                                                <td>:</td>
+                                                <td>${context.get('improvement_name')}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Jenis Improvement</td>
+                                                <td>:</td>
+                                                <td>${context.get('jenis_improvement')}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Step Improvement</td>
+                                                <td>:</td>
+                                                <td>${context.get('step_improvement')}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Description</td>
+                                                <td>:</td>
+                                                <td>${context.get('desc')}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>Status</td>
+                                                <td>:</td>
+                                                <td>${context.get('status')}</td>
+                                            </tr>
+                                            <tr>
+                                                <td>URL</td>
+                                                <td>:</td>
+                                                <td>
+                                                    <a href="${context.get('url')}"
+                                                    style="background-color: #002440; padding: 6px 12px 6px 12px; text-decoration: none; color: #fff; border-radius: 5px; font-size:13px;">
+                                                    View URL
+                                                    </a>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                        <br/>
+                                        <!-- email manager : ${context.get('email_manager')}<br/><br/> -->
+                                        <!-- manager name : ${context.get('manager_name')}<br/><br/> -->
+                                        Regard's<br/><br/>
+                                        Administrator<br/>
+                                    </div>
+                                </td></tr>
+                                <tr><td style="text-align:center;">
+                                    <hr width="100%" style="background-color:rgb(204,204,204);border:medium none;clear:both;display:block;font-size:0px;min-height:1px;line-height:0; margin: 16px 0px 16px 0px;"/>
+                                </td></tr>
+                            </table>
+                        </td>
+                    </tr>
+                    <!-- FOOTER -->
+
+                </tbody>
+                </table>
+                </td></tr>
+                <!-- POWERED BY -->
+                <tr><td align="center" style="min-width: 590px;">
+                    <table border="0" cellpadding="0" cellspacing="0" width="590" style="min-width: 590px; background-color: #F1F1F1; color: #454748; padding: 8px; border-collapse:separate;">
+                        <tr><td style="text-align: center; font-size: 13px;">
+                            Powered by <a target="_blank" href="https://www.odoo.com?utm_source=db&amp;utm_medium=auth" style="color: #875A7B;">Odoo</a>
+                        </td></tr>
+                    </table>
+                </td></tr>
+                </table>
+            </field>
+            <field name="lang">${ctx['lang']|safe}</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="user_signature" eval="False"/>
+        </record>
+
+    </data>
+</odoo>

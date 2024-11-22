@@ -1,0 +1,378 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- <record id="level_of_approval_search" model="ir.ui.view">
+            <field name="name">level_of_approval_search</field>
+            <field name="model">level.approval</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="level_of_approval_search">
+                    <field name="display_name"/>
+                    <field name="name"/>
+                    <field name="model_id"/>
+                    <field name="create_date"/>
+                    <field name="write_uid"/>
+
+                    <filter string="Models" name="group_by_model" context="{'group_by':'model_id'}"/>
+                </search>
+            </field>
+        </record> -->
+
+        <!-- UNTUK TEST TAMPILAN -->
+        <record id="analisa_keuangan_id_1" model="analisa.keuangan">
+            <field name="rasio_hutang">50</field>
+            <field name="rasio_hutang_pendekatan_modal">50</field>
+            <field name="rasio_lancar">50</field>
+            <field name="rasio_kas">50</field>
+            <field name="rasio_cepat">50</field>
+            <field name="rasio_perputaran_persediaan">50</field>
+            <field name="rasio_perputaran_piutang">50</field>
+            <field name="rasio_perputaran_aktiva_tetap">50</field>
+            <field name="rasio_perputaran_total_aktiva">50</field>
+            <field name="rasio_margin_laba_kotor">50</field>
+            <field name="rasio_margin_laba_bersih">50</field>
+            <field name="rasio_margin_laba_operasi">50</field>
+            <field name="return_on_investment">50</field>
+            <field name="return_on_assets">50</field>
+        </record>
+
+        <record model="ir.ui.view" id="analisa_keuangan_bar">
+            <field name="name">analisa_keuangan_bar</field>
+            <field name="model">analisa.keuangan</field>
+            <field name="arch" type="xml">
+                <graph type="bar">
+                    <field name="rasio_hutang" type="measure"/>
+                    <field name="rasio_hutang_pendekatan_modal" type="measure"/>
+                    <field name="rasio_lancar" type="measure"/>
+                    <field name="rasio_kas"/>
+                    <field name="rasio_cepat"/>
+                    <field name="rasio_perputaran_persediaan"/>
+                    <field name="rasio_perputaran_piutang"/>
+                    <field name="rasio_perputaran_aktiva_tetap"/>
+                    <field name="rasio_perputaran_total_aktiva"/>
+                    <field name="rasio_margin_laba_kotor"/>
+                    <field name="rasio_margin_laba_bersih"/>
+                    <field name="rasio_margin_laba_operasi"/>
+                    <field name="return_on_investment"/>
+                    <field name="return_on_assets"/>
+                </graph>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="analisa_keuangan_tree">
+            <field name="name">analisa_keuangan_tree</field>
+            <field name="model">analisa.keuangan</field>
+            <field name="arch" type="xml">
+                <tree create='false' edit='false'>
+                    <field name="rasio_hutang"/>
+                    <field name="rasio_hutang_pendekatan_modal"/>
+                    <field name="rasio_lancar"/>
+                    <field name="rasio_kas"/>
+                    <field name="rasio_cepat"/>
+                    <field name="rasio_perputaran_persediaan"/>
+                    <field name="rasio_perputaran_piutang"/>
+                    <field name="rasio_perputaran_aktiva_tetap"/>
+                    <field name="rasio_perputaran_total_aktiva"/>
+                    <field name="rasio_margin_laba_kotor"/>
+                    <field name="rasio_margin_laba_bersih"/>
+                    <field name="rasio_margin_laba_operasi"/>
+                    <field name="return_on_investment"/>
+                    <field name="return_on_assets"/>
+
+                    <field name="create_date"/>
+                    <field name="write_uid"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.ui.view" id="dashboard_analisa_keuangan_form">
+            <field name="name">dashboard_analisa_keuangan_form</field>
+            <field name="model">analisa.keuangan</field>
+            <field name="arch" type="xml">
+                <form create='false' edit='false' delete='false'>
+                    <!-- <div class="oe_title">
+                        <h1><field name="name" nolabel="1" readonly='1'/></h1>
+                    </div> -->
+
+                    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.8.0/Chart.bundle.js"/>
+                    <section class="dashboard_main_section" id="main_section_manager">
+                        <div class="crm_dash_cards row">
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow exp_revenue">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_hutang"><field name="rasio_hutang" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Hutang
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_hutang_pendekatan_modal"><field name="rasio_hutang_pendekatan_modal" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Hutang Pendekatan Modal
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_lancar"><field name="rasio_lancar" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Lancar
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_kas"><field name="rasio_kas" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Kas
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_cepat"><field name="rasio_cepat" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Cepat
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_perputaran_persediaan"><field name="rasio_perputaran_persediaan" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Perputaran Persediaan
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_perputaran_piutang"><field name="rasio_perputaran_piutang" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Perputaran Piutang
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_perputaran_aktiva_tetap"><field name="rasio_perputaran_aktiva_tetap" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Perputaran Aktiva Tetap
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_perputaran_total_aktiva"><field name="rasio_perputaran_total_aktiva" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Perputaran Total Aktiva
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_margin_laba_kotor"><field name="rasio_margin_laba_kotor" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Margin Laba Kotor
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_margin_laba_bersih"><field name="rasio_margin_laba_bersih" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Margin Laba Bersih
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="rasio_margin_laba_operasi"><field name="rasio_margin_laba_operasi" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Rasio Margin Laba Operasi
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="return_on_investment"><field name="return_on_investment" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Return On Investment
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-sm-12 col-md-3">
+                                <div class="dashboard-card card-shadow revenue_card revenue_card">
+                                    <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                        <i class="fa fa-money text-mauve"></i>
+                                    </div>
+                                    <div class="dashboard-card__details">
+                                        <h3>
+                                            <span>
+                                                <div id="return_on_assets"><field name="return_on_assets" widget="statinfo" nolabel="1" class="mr4"/><span> %</span></div>
+                                            </span>
+                                        </h3>
+                                        <div style="font-size: 14px">
+                                            Return On Assets
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </section>
+
+                </form>
+            </field>
+        </record>
+
+        <record id="action_analisa_keuangan" model="ir.actions.act_window">
+            <field name="name">Analisa Keuangan</field>
+            <field name="type">ir.actions.act_window</field>
+            <field name="res_model">analisa.keuangan</field>
+            <field name="view_mode">form</field>
+            <field name="res_id">1</field>
+            <!-- <field name="context">{'search_default_group_by_model': 1}</field> -->
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Analisa Keuangan
+              </p><p>
+                Odoo helps you easily track all activities related to a Analisa Keuangan.
+              </p>
+            </field>
+        </record>
+
+    </data>
+</odoo>

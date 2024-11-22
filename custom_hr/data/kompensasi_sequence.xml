@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_kompensasi_pkwt" model="ir.sequence">
+            <field name="name">Kompensasi PKWT</field>
+            <field name="code">kompensasi.pkwt.number</field>
+            <field name="prefix">PKWT/%(y)s%(range_month)s/</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+            <field name="use_date_range">true</field>
+        </record>
+
+        <record id="seq_pdm" model="ir.sequence">
+            <field name="name">FPSK (Promosi / Demosi / Mutasi)</field>
+            <field name="code">hr.promosi.demosi.mutasi.number</field>
+            <!-- <field name="prefix">PKWT/%(y)s%(range_month)s/</field> -->
+            <field name="suffix">(PDM_TYPE)/HRD/%(month)s/%(y)s</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+            <field name="use_date_range">false</field>
+        </record>
+
+        <record id="seq_terminasi" model="ir.sequence">
+            <field name="name">Pengajuan Terminasi Karyawan</field>
+            <field name="code">hr.terminasi.number</field>
+            <!-- <field name="prefix">PKWT/%(y)s%(range_month)s/</field> -->
+            <field name="suffix">/TK/HR/%(month)s/%(y)s</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+            <field name="use_date_range">false</field>
+        </record>
+
+        <record id="seq_verklaring_terminasi" model="ir.sequence">
+            <field name="name">Verklaring Terminasi Karyawan</field>
+            <field name="code">hr.verklaring.terminasi.number</field>
+            <!-- <field name="prefix">PKWT/%(y)s%(range_month)s/</field> -->
+            <field name="suffix">/VERKLARING/HR/%(month)s/%(y)s</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+            <field name="use_date_range">false</field>
+        </record>
+
+        <record id="seq_employee_barcode" model="ir.sequence">
+            <field name="name">NIK Karyawan</field>
+            <field name="code">hr.employee.nik.number</field>
+            <field name="suffix"></field>
+            <field name="padding">3</field>
+            <field name="implementation">no_gap</field>
+            <field name="use_date_range">false</field>
+        </record>
+
+    </data>
+</odoo>

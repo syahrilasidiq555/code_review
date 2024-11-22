@@ -1,0 +1,286 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PENAWARAN  -->
+    <!-- REMOVE CRUD in TREE-->
+    <record id="purchase_order_kpis_tree_inherit_remove_crud" model="ir.ui.view">
+        <field name="name">purchase_order_kpis_tree_remove_crud</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN TREE VIEW -->
+    <record id="purchase_order_kpis_tree_inherit_delete" model="ir.ui.view">
+        <field name="name">purchase_order_kpis_tree_inherit_delete</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_purchase_button_button_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- MENU ITEM -->
+    <record id="purchase.menu_purchase_rfq" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_rfq'))]" />
+    </record>
+
+    <!-- =============================================== -->
+
+    <!-- ORDER -->
+    <!-- REMOVE CRUD IN Tree -->
+    <record id="purchase_order_view_tree_inherit_remove_crud" model="ir.ui.view">
+        <field name="name">purchase_order_view_tree_inherit_remove_crud</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!-- REMOVE CRUD in FORM-->
+    <record id="purchase_order_form_remove_crud" model="ir.ui.view">
+        <field name="name">purchase_order_form_remove_crud</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <!-- <attribute name="create">false</attribute> -->
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!-- REMOVE CRUD in Kanban-->
+    <record id="view_purchase_order_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">view_purchase_order_kanban_remove_crud</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <!-- <attribute name="create">false</attribute> -->
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN FORM VIEW -->
+    <record id="purchase_order_form_create_edit_view" model="ir.ui.view">
+        <field name="name">purchase_order_form_create_edit_view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_purchase_button_button_create_edit'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">                    
+                <attribute name="edit">true</attribute>
+                <!-- <attribute name="create">true</attribute> -->
+            </xpath>
+        </field>
+    </record>
+    <record id="purchase_order_form_delete_view" model="ir.ui.view">
+        <field name="name">purchase_order_form_delete_view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_purchase_button_button_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">                    
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN TREE VIEW -->
+    <record id="purchase_order_view_tree_delete_view" model="ir.ui.view">
+        <field name="name">purchase_order_view_tree_delete_view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_purchase_button_button_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+
+    <!-- IN KANBAN VIEW -->
+    <record id="view_purchase_order_kanban_delete_view" model="ir.ui.view">
+        <field name="name">view_purchase_order_kanban_delete_view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_purchase_button_button_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">                    
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- MENU ITEM -->
+    <record id="purchase.menu_purchase_form_action" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_order_pembelian'))]" />
+    </record>
+    <record id="custom_sale_order.purchase_cost_sheet_action_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_order_semayam'))]" />
+    </record>
+
+    <!-- Tree View -->
+    <record model="ir.ui.view" id="purchase_order_kpis_tree_inherit">
+        <field name="name">purchase_order_kpis_tree_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <!-- HANYA BISA VIEW AMOUNT DI GROUP TERTENTU -->
+            <field name="amount_untaxed" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_view_amount</attribute>
+            </field>
+            <field name="amount_total" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_view_amount</attribute>
+            </field>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="purchase_order_view_tree_inherit">
+        <field name="name">purchase_order_view_tree_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+            <!-- HANYA BISA VIEW AMOUNT DI GROUP TERTENTU -->
+            <field name="amount_untaxed" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_view_amount</attribute>
+            </field>
+            <field name="amount_total" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_view_amount</attribute>
+            </field>
+        </field>
+    </record>
+
+    <!-- form view -->
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_view_picking']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_action_view_picking</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='button_confirm'][1]" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_button_confirm</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_confirm'][2]" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_button_confirm</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_create_invoice'][1]" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_action_create_invoice</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_create_invoice'][2]" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_action_create_invoice</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='print_quotation']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_print_quotation</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='button_draft']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_button_draft</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='button_cancel']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_button_cancel</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='button_done']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_button_done</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='button_unlock']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_button_unlock</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_view_cost_sheet']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_action_view_cost_sheet</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_view_invoice']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_action_view_invoice</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_view_picking'][@class='oe_stat_button']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_action_view_picking</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='action_rfq_send'][1]" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_kirim_email</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_rfq_send'][2]" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_kirim_email</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_rfq_send'][3]" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_kirim_email</attribute>
+            </xpath>
+
+            <!-- HANYA BISA VIEW AMOUNT DI GROUP TERTENTU -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_view_amount</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='order_line']/tree/field[@name='taxes_id']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_view_amount</attribute>
+            </xpath>
+            <xpath expr="//field[@name='order_line']/tree/field[@name='price_subtotal']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_view_amount</attribute>
+            </xpath>
+
+            <xpath expr="//field[@name='tax_totals_json']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_view_amount</attribute>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <record id="purchase_order_form_inherit2" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit2</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="custom_whatsapp_integration.purchase_order_form_inherit_whatsapp"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_send_whatsapp']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_action_send_whatsapp</attribute>
+            </xpath>
+            <!-- <xpath expr="//button[@name='action_send_whatsapp_penawaran']" position="attributes">
+                <attribute name="groups">custom_access_right.group_purchase_button_action_send_whatsapp_penawaran</attribute>
+            </xpath> -->
+            
+        </field>
+    </record>
+
+    <!-- VIEW CREATE and EDIT in kanban-->
+    <record id="view_purchase_order_kanban_create_edit_view" model="ir.ui.view">
+        <field name="name">view_purchase_order_kanban_create_edit_view</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_purchase_button_button_create_edit'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">                    
+                <attribute name="edit">true</attribute>
+                <!-- <attribute name="create">true</attribute> -->
+            </xpath>
+        </field>
+    </record>
+</odoo>

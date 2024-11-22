@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- TREE -->
+        <record id="product_product_tree_view_inherit" model="ir.ui.view">
+            <field name="name">product_product_tree_view_inherit</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <field name="active" position="after">
+                    <field name="qty_in_rent" optional="show" string="Jumlah dirental" />
+                    <field name="occupied_ids" invisible="1"/>
+                    <field name="rental_status" optional="show"/>
+                    <field name="pickup_date" optional="show"/>
+                    <field name="return_date" optional="show"/>
+                    <field name="order_id" optional="hide"/>
+                    <field name="partner_id" optional="show" string="Penyewa" />
+                </field>
+            </field>
+        </record>
+
+        <!-- FORM -->
+        <record id="product_template_form_view_inherit_form" model="ir.ui.view">
+            <field name="name">product_template_form_view_inherit_form</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='sales']" position="inside">
+                    <group name="sol" string="Sale Order Line" >
+                        <field name="uneditable_price_so" />
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

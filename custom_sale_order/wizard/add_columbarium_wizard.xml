@@ -1,0 +1,30 @@
+<odoo>
+    <data>
+        <record id='add_columbarium_wizard_view_form' model='ir.ui.view'>
+            <field name="name">add_columbarium_wizard_view_form</field>
+            <field name="model">add.columbarium.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="sale_order_id" readonly="1" force_save="1" />
+                        <field name="currency_id" invisible="1" />
+                        <field name="product_columbarium_id" context="{'columbarium_search':True}" options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True, 'no_open': True}" />
+                        <label for="pickup_date" string="Tanggal"/>
+                        <div class="o_row" style="min-width: 300px!important;">
+                            <field name="pickup_date" widget="daterange" options="{'related_end_date': 'return_date'}" />
+                            <span> to </span>
+                            <field name="return_date" widget="daterange" options="{'related_start_date': 'pickup_date'}" />
+                        </div>
+                        <field name="list_price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                    <footer>
+                        <button name="action_add" class="btn-primary" type="object" string="Konfirmasi"/>
+                        <button string="Batal" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

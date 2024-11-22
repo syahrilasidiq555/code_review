@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Surveys / Questions / Questions -->
+        <record model="ir.module.category" id="module_surveys_category_questions">
+            <field name="name">Surveys / Questions / Questions</field>
+            <field name="sequence">520</field>
+        </record>
+        <record id="group_submenu_questions_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_surveys_category_questions"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_questions_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_surveys_category_questions"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_questions_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_surveys_category_questions"/>            
+            <field name="sequence">3</field>
+        </record>
+
+        <!-- Surveys / Questions / Suggested Values -->
+        <record model="ir.module.category" id="module_surveys_category_suggested_values">
+            <field name="name">Surveys / Questions / Suggested Values</field>
+            <field name="sequence">521</field>
+        </record>
+        <record id="group_submenu_suggested_values_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_surveys_category_suggested_values"/>            
+            <field name="sequence">1</field>
+        </record>
+        <!-- <record id="group_submenu_suggested_values_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_surveys_category_suggested_values"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_suggested_values_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_surveys_category_suggested_values"/>            
+            <field name="sequence">3</field>
+        </record> -->
+        <record id="group_submenu_suggested_values_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_surveys_category_suggested_values"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Surveys / Participations / Participations -->
+        <record model="ir.module.category" id="module_surveys_category_participations">
+            <field name="name">Surveys / Participations / Participations</field>
+            <field name="sequence">522</field>
+        </record>
+        <record id="group_submenu_participations_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_surveys_category_participations"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_participations_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_surveys_category_participations"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_participations_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_surveys_category_participations"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_participations_access_button_resend" model="res.groups">
+            <field name="name">Access Button Resend Invitation</field>
+            <field name="category_id" ref="module_surveys_category_participations"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_submenu_participations_access_button_print" model="res.groups">
+            <field name="name">Access Button Print</field>
+            <field name="category_id" ref="module_surveys_category_participations"/>            
+            <field name="sequence">5</field>
+        </record>
+
+        <!-- Surveys / Participations / Detailed Answer -->
+        <record model="ir.module.category" id="module_surveys_category_detailed_answer">
+            <field name="name">Surveys / Participations / Detailed Answer</field>
+            <field name="sequence">523</field>
+        </record>
+        <record id="group_submenu_detailed_answer_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_surveys_category_detailed_answer"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_detailed_answer_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_surveys_category_detailed_answer"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_detailed_answer_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_surveys_category_detailed_answer"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Surveys / Export Report -->
+        <record model="ir.module.category" id="module_surveys_category_export_report">
+            <field name="name">Surveys / Export Report</field>
+            <field name="sequence">524</field>
+        </record>
+        <record id="group_submenu_export_report_access_detail" model="res.groups">
+            <field name="name">Access Report Survey Detail</field>
+            <field name="category_id" ref="module_surveys_category_export_report"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_export_report_access_summary" model="res.groups">
+            <field name="name">Access Report Survey Summary</field>
+            <field name="category_id" ref="module_surveys_category_export_report"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_export_report_access_survey" model="res.groups">
+            <field name="name">Access Report Survey</field>
+            <field name="category_id" ref="module_surveys_category_export_report"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_export_report_access_external" model="res.groups">
+            <field name="name">Access Report Survey Detail External</field>
+            <field name="category_id" ref="module_surveys_category_export_report"/>            
+            <field name="sequence">4</field>
+        </record>
+    </data>
+</odoo>

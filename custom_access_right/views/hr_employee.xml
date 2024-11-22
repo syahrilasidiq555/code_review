@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- REMOVE OPEN IN MANY2ONE -->
+    <record id="view_employee_form_button_opt" model="ir.ui.view">
+        <field name="name">view_employee_form_button_opt</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='department_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+            </xpath> 
+            <xpath expr="//field[@name='resource_calendar_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+            </xpath> 
+            <xpath expr="//field[@name='user_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+            </xpath> 
+            <xpath expr="//field[@name='job_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+            </xpath> 
+            <xpath expr="//field[@name='contract_id']" position="attributes">
+                <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+            </xpath> 
+
+            <xpath expr="//button[@name='action_open_contract_history']" position="attributes">
+                <attribute name="groups">custom_access_right.group_mst_emp_contract_read</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(hr.plan_wizard_action)d']" position="attributes">
+                <attribute name="groups">custom_access_right.group_mst_employee_hr_plan</attribute>
+            </xpath> 
+            <xpath expr="//button[@name='generate_random_barcode']" position="attributes">
+                <attribute name="groups">custom_access_right.group_mst_employee_generate_barcode</attribute>
+            </xpath> 
+        </field>
+    </record>
+
+
+    <!-- REMOVE CRUD in FORM-->
+    <record id="view_employee_form_remove_crud" model="ir.ui.view">
+        <field name="name">view_employee_form_remove_crud</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- REMOVE CRUD in TREE-->
+    <record id="view_employee_tree_view_remove_crud" model="ir.ui.view">
+        <field name="name">view_employee_tree_view_remove_crud</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="multi_edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- REMOVE CRUD in KANBAN-->
+    <record id="view_employee_kanban_view_remove_crud" model="ir.ui.view">
+        <field name="name">view_employee_kanban_view_remove_crud</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    
+
+    <!-- IN FORM -->
+    <record id="view_employee_form_create_view" model="ir.ui.view">
+        <field name="name">view_employee_form_create_view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_mst_employee_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_employee_form_edit_view" model="ir.ui.view">
+        <field name="name">view_employee_form_edit_view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_mst_employee_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_employee_form_delete_view" model="ir.ui.view">
+        <field name="name">view_employee_form_delete_view</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_mst_employee_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN TREE VIEW -->
+    <record id="view_employee_tree_create_tree" model="ir.ui.view">
+        <field name="name">view_employee_tree_create_tree</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_mst_employee_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_employee_tree_delete_tree" model="ir.ui.view">
+        <field name="name">view_employee_tree_delete_tree</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.view_employee_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_mst_employee_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN KANBAN VIEW -->
+    <record id="view_employee_kanban_create_kanban" model="ir.ui.view">
+        <field name="name">view_employee_kanban_create_kanban</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_mst_employee_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_employee_kanban_delete_kanban" model="ir.ui.view">
+        <field name="name">view_employee_kanban_delete_kanban</field>
+        <field name="model">hr.employee</field>
+        <field name="inherit_id" ref="hr.hr_kanban_view_employees"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_mst_employee_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- MENU ITEM -->
+    <!-- Karyawan / Karyawan / Karyawan -->
+    <record id="hr.menu_hr_employee_user" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_mst_employee_read'))]" />
+    </record>
+
+    <!-- Karyawan / Karyawan / Kontrak -->
+    <record id="hr_contract.hr_menu_contract_history" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_mst_emp_contract_read'))]" />
+    </record>
+
+
+    <!-- Karyawan / Konfigurasi / Pengaturan -->
+    <record id="hr.hr_menu_configuration" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_emp_conf_read'))]" />
+    </record>
+
+    <!-- Karyawan / Konfigurasi / Posisi Kerja -->
+    <record id="hr.menu_view_hr_job" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_emp_job_read'))]" />
+    </record>
+
+    <!-- Karyawan / Konfigurasi / Label -->
+    <record id="hr.menu_view_employee_category_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_emp_label_read'))]" />
+    </record>
+
+    <!-- Karyawan / Konfigurasi / Department -->
+    <record id="hr.menu_hr_department_tree" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_emp_mst_department_read'))]" />
+    </record>
+
+    <!-- Karyawan / Konfigurasi / Lokasi Kerja -->
+    <record id="hr.menu_hr_work_location_tree" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_emp_work_location_read'))]" />
+    </record>
+
+    <!-- Karyawan / Konfigurasi / Alasan Resign -->
+    <record id="hr.menu_hr_departure_reason_tree" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_emp_resign_reason_read'))]" />
+    </record>
+
+    <!-- Karyawan / Konfigurasi / Planning Types -->
+    <record id="hr.menu_config_plan_types" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_emp_planning_type_read'))]" />
+    </record>
+
+    <!-- Karyawan / Konfigurasi / Rencana -->
+    <record id="hr.menu_config_plan_plan" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_emp_planning_read'))]" />
+    </record>
+
+</odoo>

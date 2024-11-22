@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_revise_wizard,access_revise_wizard,model_revise_wizard,,1,1,1,1
+access_sign_wizard,access_sign_wizard,model_sign_wizard,,1,1,1,1
+access_report_sale_invoice,access_report_sale_invoice,model_report_sale_invoice,,1,1,1,1
+

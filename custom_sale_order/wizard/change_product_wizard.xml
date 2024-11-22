@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="change_product_wizard_view" model="ir.ui.view">
+            <field name="name">change_product_wizard_view</field>
+            <field name="model">change.product.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Choose Vendor">
+                    <h3>
+                        <field name="so_id" nolabel="1" readonly="True"/>
+                    </h3>
+                    <field name="currency_id" invisible="1" />
+                    <group name="choose_product">
+                        <group name="product_before" string="Sebelum">
+                            <field name="so_line_id" invisible="1"/>
+                            <field name="is_rental" invisible="1" />
+                            <field name="current_product_id" options="{'no_quick_create':True, 'no_create_edit':True, 'no_open':True, 'no_create':True}"/>
+                            <field name="current_product_uom_qty" string="Quantity"/>
+                            <field name="current_price_unit" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="current_categ_id" invisible="0" />
+                            <label for="pickup_date" string="Tanggal" attrs="{'invisible':[('is_rental','!=',True)]}"/>
+                            <div class="o_row" attrs="{'invisible':[('is_rental','!=',True)]}">
+                                <field name="pickup_date" widget="daterange" options="{'related_end_date': 'return_date'}"/>
+                                <span> to </span>
+                                <field name="return_date" widget="daterange" options="{'related_start_date': 'pickup_date'}"/>
+                            </div>
+                            <field name="columbarium_day_used" invisible="not context.get('upgrade_columbarium',False)"/>
+                            <field name="columbarium_revenue_used" invisible="not context.get('upgrade_columbarium',False)" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="columbarium_revenue_residual" invisible="not context.get('upgrade_columbarium',False)" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <group name="product_after" string="sesudah">
+                            <field name="company_id" invisible="1"/>
+                                <field name="product_id"  options="{'no_quick_create':True, 'no_create_edit':True, 'no_open':True, 'no_create':True}"/>
+                                <field name="qty" readonly="1" force_save="1"/>
+                                <field name="list_price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <field name="subtotal_new" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                <label for="pickup_date_new" string="Tanggal" attrs="{'invisible':[('is_rental','!=',True)]}"/>
+                                <div class="o_row" attrs="{'invisible':[('is_rental','!=',True)]}">
+                                    <field name="pickup_date_new" widget="daterange" options="{'related_end_date': 'return_date_new'}" attrs="{'required':[('is_rental','=',True)]}"/>
+                                    <span> to </span>
+                                    <field name="return_date_new" widget="daterange" options="{'related_start_date': 'pickup_date_new'}" attrs="{'required':[('is_rental','=',True)]}"/>
+                                </div>
+                        </group>
+                    </group>                    
+                    <group name="difference" string="Selisih">
+                        <field name="amount_difference" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+
+
+                    <footer>
+                        <button name="action_choose" type="object" invisible="context.get('upgrade_columbarium',False)" string="Ubah Produk" class="oe_highlight" confirm="Apakah anda yakin ingin merubah produk ini?"/>
+                        <button name="action_choose" type="object" invisible="not context.get('upgrade_columbarium',False)" string="Upgrade Columbarium" class="oe_highlight" confirm="Proses Upgrade tidak bisa dikembalikan lagi saat sale order sudah dikonfirmasi, apakah anda yakin?"/>
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,17 @@
+<odoo>
+    <data>
+        <!-- BUTTON PRINT NYA -->
+        <report
+                id="print_parking_voucher_so"
+                string="Voucher Parkir"
+                model="sale.order"
+                report_type="qweb-pdf"
+                name="custom_sale_order.parking_voucher_template_multiple"
+                file="custom_sale_order.parking_voucher_template_multiple"
+                paperformat="custom_sale_order.paperformat_a6"
+                menu="True"
+                print_report_name="'Parking Voucher - %s' % (object.name)"
+        />
+
+    </data>
+</odoo>

@@ -1,0 +1,332 @@
+<odoo>
+    <data>
+        <template id="custom_purchase.purchase_request_print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="custom_purchase.purchase_request_layout_header"/>
+            <t t-raw="0"/>
+            <t t-call="custom_purchase.purchase_request_layout_footer"/>
+        </template>
+
+        <template id="custom_purchase.purchase_request_layout_header">
+            <div class="header">
+                <div class="row" name="header_faktur" style="font-size:14px"> 
+                    <div class="col-4">
+                        <img t-att-src="image_data_uri(company.logo)" style="width:130px; display: block; margin-left: auto; margin-right: auto;"/>
+                    </div>
+                    <div class="col-8" style="margin-top:0px;font-size:14px">
+                        <h3><b><span t-field="company.name"/></b></h3>
+                        <t t-if="company.street != False">
+                            <span t-field="company.street"/>
+                        </t>
+                        <t t-if="company.phone != False">
+                            <br><b>Telp </b>: <span t-field="company.phone"/></br>
+                        </t>
+                        <t t-if="company.mobile != False">
+                            <br><b>WA </b> : <span t-field="company.mobile"/></br>
+                        </t>
+                        <t t-if="company.email != False">
+                            <br><b>Email </b> : <span t-field="company.email"/></br>
+                        </t>
+                        <!-- <br><b>No </b> : <span t-field="o.name"/></br> -->
+                    </div>
+                </div>   
+                <hr style="height:3px;border-width:0;color:black;background-color:black"/>
+            </div>
+        </template>
+
+        <template id="custom_purchase.purchase_request_layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:14px">
+                <!-- <div class="last-page"> -->
+                    <table class="table table-sm" style="margin:100px auto; width:90%; border:0px;">
+                        <tr style="background-color:transparent;">
+                            <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Dibuat oleh</b><br/>
+                                    <b>Tanggal:</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )
+                                    <br/>Pemohon
+                                </p>
+                            </td>
+                            <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Diketahui oleh</b><br/>
+                                    <b>Tanggal:</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )
+                                    <br/>Ka. Bid. Terkait
+                                </p>
+                            </td>
+                            <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Disetujui oleh</b><br/>
+                                    <b>Tanggal:</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )
+                                    <br/>Ka. Bid. SDMU
+                                </p>
+                            </td>
+                            <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Disetujui oleh</b><br/>
+                                    <b>Tanggal:</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )
+                                    <br/>Ka. Bid. Keu
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                    <!-- <div class="row" style="font-size:16px;line-height: 13pt">
+                        <div class="col-3 ">
+                            <p>
+                                <b>Dibuat oleh</b><br/>
+                                <b>Tanggal:</b><br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                ( .......................... )
+                                <br/>Pemohon
+                            </p>
+                        </div>
+                        <div class="col-3 text-left">
+                            <p>
+                                <b>Diketahui oleh</b><br/>
+                                <b>Tanggal:</b><br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                ( .......................... )
+                                <br/>Ka. Bid. Terkait
+                            </p>
+                        </div>
+                        <div class="col-3 text-left">
+                            <p>
+                                <b>Disetujui oleh</b><br/>
+                                <b>Tanggal:</b><br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                ( .......................... )
+                                <br/>Ka. Bid. SDMU
+                            </p>
+                        </div>
+                        <div class="col-3 text-left">
+                            <p>
+                                <b>Disetujui oleh</b><br/>
+                                <b>Tanggal:</b><br/>
+                                <br/>
+                                <br/>
+                                <br/>
+                                ( .......................... )
+                                <br/>Ka. Bid. Keu
+                            </p>
+                        </div>
+                    </div> -->
+                <!-- </div>  -->
+                <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <!-- REQUEST PEMBELIAN -->
+        <template id="custom_purchase.purchase_request_print">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_purchase.purchase_request_print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class=""><u>SURAT PERMINTAAN PEMBELIAN</u></h5>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>
+                                                Kepada Yth : <br/>
+                                                <b>Bagian Pembelian</b>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-right">
+                                                No : <span t-field="o.name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <table class="table"> -->
+                                    <table class="table">
+                                        <!-- <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                            }
+                                        </style>  -->
+                                        <thead>
+                                            <tr class="border-black o_total" style="line-height: 5pt">
+                                                <th class="text-center">No.</th>
+                                                <th class="text-left">Deskripsi Barang</th>
+                                                <th class="text-left">Satuan</th>
+                                                <th class="text-right">Sisa</th>
+                                                <th class="text-right">Pengeluaran Barang</th>
+                                                <th class="text-right">Estimasi Harga</th>
+                                                <th class="text-right">Total</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                            }
+                                        </style>  -->
+                                        <tbody>
+                                            <tr t-foreach='o.line_ids' t-as='line' class='table ' style="line-height: 0pt">
+                                                <td class="text-center"><span t-esc="line_index + 1"/></td>
+                                                <td class="text-left"><t t-esc="line.product_id.name"/></td>
+                                                <td class="text-left"><t t-esc="line.product_uom_id.name"/></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.product_qty - line.purchased_qty))" /></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.purchased_qty))" /></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.estimated_cost / line.product_qty))" /></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.estimated_cost))" /></td>
+                                            </tr>
+                                            <tr class='table ' style="line-height: 0pt">
+                                                <td class="text-center"></td>
+                                                <td class="text-left">TOTAL</td>
+                                                <td class="text-left"></td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(o.estimated_cost))" /></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <!-- REQUEST BARANG -->
+        <template id="custom_purchase.product_request_print">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_purchase.purchase_request_print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class=""><u>SURAT PERMINTAAN BARANG</u></h5>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <p>
+                                                Kepada Yth : <br/>
+                                                <b>Bagian Pembelian</b>
+                                            </p>
+                                        </div>
+                                        <div class="col-6">
+                                            <div class="text-right">
+                                                No : <span t-field="o.name"/>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <!-- <table class="table"> -->
+                                    <table class="table">
+                                        <!-- <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                            }
+                                        </style>  -->
+                                        <thead>
+                                            <tr class="border-black o_total" style="line-height: 5pt">
+                                                <th class="text-center">No.</th>
+                                                <th class="text-left">Deskripsi Barang</th>
+                                                <th class="text-left">Satuan</th>
+                                                <th class="text-right">Sisa</th>
+                                                <th class="text-right">Pengeluaran Barang</th>
+                                                <!-- <th class="text-right">Estimasi Harga</th>
+                                                <th class="text-right">Total</th> -->
+                                            </tr>
+                                        </thead>
+                                        <!-- <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                            }
+                                        </style>  -->
+                                        <tbody>
+                                            <tr t-foreach='o.line_ids' t-as='line' class='table ' style="line-height: 0pt">
+                                                <td class="text-center"><span t-esc="line_index + 1"/></td>
+                                                <td class="text-left"><t t-esc="line.product_id.name"/></td>
+                                                <td class="text-left"><t t-esc="line.product_uom_id.name"/></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.product_qty - sum(line.stock_move_line_id.move_line_ids.mapped('qty_done')) ))" /></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(sum(line.stock_move_line_id.move_line_ids.mapped('qty_done')) ))" /></td>
+                                                <!-- <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.estimated_cost / line.product_qty))" /></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.estimated_cost))" /></td> -->
+                                            </tr>
+                                            <!-- <tr class='table ' style="line-height: 0pt">
+                                                <td class="text-center"></td>
+                                                <td class="text-left">TOTAL</td>
+                                                <td class="text-left"></td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(o.estimated_cost))" /></td>
+                                            </tr> -->
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

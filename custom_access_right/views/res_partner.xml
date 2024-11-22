@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- KONTAK -->
+    <!-- REMOVE CRUD in FORM-->
+    <record id="view_partner_form_remove_crud" model="ir.ui.view">
+        <field name="name">view_partner_form_remove_crud</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!-- REMOVE CRUD in TREE-->
+    <record id="view_partner_tree_remove_crud" model="ir.ui.view">
+        <field name="name">view_partner_tree_remove_crud</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    <!-- REMOVE CRUD in KANBAN-->
+    <record id="res_partner_kanban_view_remove_crud" model="ir.ui.view">
+        <field name="name">res_partner_kanban_view_remove_crud</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN FORM VIEW -->
+    <record id="view_partner_form_create" model="ir.ui.view">
+        <field name="name">view_partner_form_create</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_kontak_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_partner_form_edit" model="ir.ui.view">
+        <field name="name">view_partner_form_edit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_kontak_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_partner_form_delete" model="ir.ui.view">
+        <field name="name">view_partner_form_delete</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_kontak_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN TREE VIEW -->
+    <record id="view_partner_tree_create" model="ir.ui.view">
+        <field name="name">view_partner_tree_create</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_kontak_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_partner_tree_delete" model="ir.ui.view">
+        <field name="name">view_partner_tree_delete</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_kontak_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN KANBAN VIEW -->
+    <record id="res_partner_kanban_view_create" model="ir.ui.view">
+        <field name="name">res_partner_kanban_view_create</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_kontak_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="res_partner_kanban_view_delete" model="ir.ui.view">
+        <field name="name">res_partner_kanban_view_delete</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.res_partner_kanban_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_kontak_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>	
+    <!-- END OF KONTAK -->
+
+    <!-- MENU ITEM -->
+    <record id="contacts.res_partner_menu_contacts" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_read'))]" />
+    </record>
+    <record id="contacts.menu_partner_category_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_configuration_tag'))]" />
+    </record>
+    <record id="contacts.menu_partner_title_contact" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_configuration_title'))]" />
+    </record>
+    <record id="contacts.res_partner_industry_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_configuration_industry'))]" />
+    </record>
+    <record id="contacts.menu_country_partner" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_configuration_country'))]" />
+    </record>
+    <record id="contacts.menu_country_state_partner" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_configuration_propinsi'))]" />
+    </record>
+    <record id="contacts.menu_country_group" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_configuration_benua'))]" />
+    </record>
+    <record id="contacts.menu_action_res_bank_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_configuration_bank'))]" />
+    </record>
+    <record id="contacts.menu_action_res_partner_bank_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_kontak_configuration_rekening_bank'))]" />
+    </record>
+</odoo>

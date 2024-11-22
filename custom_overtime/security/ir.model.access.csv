@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_big_overtime,access_big_overtime,custom_overtime.model_big_overtime,,1,1,1,1
+access_big_overtime_kolektif,access_big_overtime_kolektif,custom_overtime.model_big_overtime_kolektif,,1,1,1,1
+access_big_overtime_hour_detail,access_big_overtime_hour_detail,custom_overtime.model_big_overtime_hour_detail,,1,1,1,1
+access_big_overtime_approval_line,access_big_overtime_approval_line,custom_overtime.model_big_overtime_approval_line,,1,1,1,1

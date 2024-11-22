@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="pos_sale.SaleOrderList" t-inherit-mode="extension" owl="1">
+        <xpath expr="//div[@class='col salesman']" position="replace">
+            <div class="col salesman">Kasir</div>
+        </xpath>
+    </t>
+
+</templates>

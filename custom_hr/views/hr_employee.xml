@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_employee_form_inherit" model="ir.ui.view">
+            <field name="name">view.employee.form.inherit</field>
+            <field name="model">hr.employee</field>
+            <field name="inherit_id" ref="hr.view_employee_form"/>
+            <field name="arch" type="xml">
+
+                <!-- MAIN INFORMATION -->
+                <!-- <xpath expr="//field[@name='department_id']" position="before">
+                    <field name="section"/>
+                </xpath> -->
+                <xpath expr="//field[@name='department_id']" position="after">
+                    <field name="section" domain="[('parent_id','=',department_id)]" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                    <field name="job_id"/>
+                    <field name="job_grade_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                </xpath>
+
+                <!-- CITIZEN -->
+                <xpath expr="//field[@name='country_of_birth']" position="after">
+                    <field name="religion"/>
+                    <field name="other_religion" attrs="{'invisible':[('religion','!=','others')]}"/>
+                </xpath>
+
+                <!-- DEPENDANT -->
+                <xpath expr="//field[@name='children']" position="after">
+                    <field name="employee_family_ids">
+                        <tree>
+                            <field name="name"/>
+                            <field name="family_status"/>
+                        </tree>
+                    </field>
+                </xpath>
+
+                <!-- PTIVATE CONTACT -->
+                <xpath expr="//div[@name='div_km_home_work']" position="after">
+                    <label for="sim_type" string="SIM"/>
+                    <div>
+                        <field name="sim_type" class="oe_inline" style="width:30%%"/>
+                        <field name="sim_number" style="width:80%%; margin-left:12px;"/>
+                    </div>
+                    <field name="blood_type"/>
+                </xpath>
+                <xpath expr="//field[@name='private_email']" position="before">
+                    <field name="home_ktp"/>
+                    <field name="home_domisili"/>
+                    <field name="bank_id"/>
+                    <field name="bank_account_number"/>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']//group[1]" position="inside">
+                    <group string="Other Information">
+                        <field name="iq"/>
+                        <field name="disc"/>
+
+                        <label for="tax_state" string="Tax State"/>
+                        <div class="w-100">
+                            <div class="o_row">
+                                <field name="tax_state" />
+                                <field name="tax_state2"/>
+                            </div>
+                        </div>
+                    </group>
+                </xpath>
+
+                <!-- SCHEDULE -->
+                <xpath expr="//page[@name='public']//div[@id='o_work_employee_container']//div[@id='o_work_employee_main']//group[4]" position="inside">
+                    <field name="working_days"/>
+                </xpath>
+
+                <!-- Facility & Benefit -->
+                <xpath expr="//page[@name='hr_settings']" position="before">
+                    <page name="facility_benefit" string="Facility &amp; Benefit">
+                        <group>
+                            <group name="facility" string="Facility">
+                                <field name="facility"/>
+                                <field name="other_facility"/>
+                            </group>
+                            <group name="benefit" string="Benefit">
+                                <field name="bpjs_kesehatan"/>
+                                <field name="bpjs_ketenagakerjaan"/>
+                            </group>
+                        </group>
+                    </page>
+                    
+                </xpath>
+
+                <!-- PAYROLL -->
+                <xpath expr="//group[@name='payroll_group']" position="inside">
+                    <field name="payroll_code"/>
+                </xpath>
+
+                <!-- STATUS -->
+                <!-- <xpath expr="//field[@name='user_id']" position="before">
+                    <label for="current_start_date" string="Current Contract Date"/>
+                    <div class="w-100">
+                        <div class="o_row">
+                            <field name="current_start_date" widget="daterange" options='{"related_end_date": "current_end_date"}'/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                            <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow"/>
+                            <field name="current_end_date" widget="daterange" options='{"related_start_date": "current_start_date"}'/>
+                        </div>
+                    </div>
+                    <field name="type_id"/>
+                    <field name="contract_type_id"/>
+                </xpath> -->
+                <xpath expr="//group[@name='active_group']" position="replace">
+                    <group name="active_group" string="Status">
+                        <field name="employee_type" invisible="1"/>
+                        <field name="join_date"/>
+                        <field name="employee_type_id" options="{'no_create': True, 'no_create_edit': True, 'no_open': True}"/>
+                        <label for="current_start_date" string="Current Contract Date"/>
+                        <div class="w-100">
+                            <div class="o_row">
+                                <field name="current_start_date" widget="daterange" options='{"related_end_date": "current_end_date"}'/>
+                                <i class="fa fa-long-arrow-right mx-2 oe_edit_only" aria-label="Arrow icon" title="Arrow"/>
+                                <i class="fa fa-long-arrow-right mx-2 oe_read_only" aria-label="Arrow icon" title="Arrow"/>
+                                <field name="current_end_date" widget="daterange" options='{"related_start_date": "current_start_date"}'/>
+                            </div>
+                        </div>
+                        <field name="type_id"/>
+                        <field name="contract_type_id"/>
+                        <field name="user_id" string="Related User" domain="[('share', '=', False)]"/>
+                        <field name="end_date"/>
+                    </group>
+                </xpath>
+                
+
+                <!-- Attendance -->
+                <xpath expr="//field[@name='pin']" position="before">
+                    <field name="attendance_exception"/>
+                    <field name="attendance_mode"/>
+                </xpath>
+                <xpath expr="//field[@name='pin']" position="after">
+                    <field name="fingerprint_id"/>
+                    <field name="hl" widget="radio" options="{'horizontal': true}"/>
+                </xpath>
+                <xpath expr="//group[@name='identification_group']" position="attributes">
+                    <attribute name="string">Attendance</attribute>
+                </xpath>
+
+                <!-- Education -->
+                <xpath expr="//field[@name='certificate']" position="replace">
+                    <field name="certificate" invisible="1"/>
+                    <field name="education_level"/>
+                    <field name="ijazah"/>
+                </xpath>
+                <xpath expr="//page[@name='personal_information']//group[1]" position="inside">
+                    <group name="other_education" string="Other Education">
+                        <field name="other_education_level"/>
+                        <field name="other_ijazah"/>
+                        <!-- <field name='other_ijazah' widget='many2many_binary' nolabel="1"/> -->
+                    </group>
+                </xpath>
+                
+                
+            </field>
+        </record>
+
+        <!-- EMPLYOEE FAMILY -->
+        <record id="hr_employee_family_view_form" model="ir.ui.view">
+            <field name="name">hr_employee_family.view.form</field>
+            <field name="model">hr.employee.family</field>
+            <field name="arch" type="xml">
+                <form string="Employee Family">
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="employee_id" readonly="1" force_save="1"/>
+                                <field name="name"/>
+                                <field name="family_status"/>
+                            </group>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

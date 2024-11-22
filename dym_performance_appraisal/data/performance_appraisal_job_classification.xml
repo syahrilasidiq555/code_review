@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="form_a_job_classification" model="performance.appraisal.job.classification">
+            <field name="form_id" ref="dym_performance_appraisal.model_dym_performance_appraisal_form_a"/>
+        </record>
+        <record id="form_b_job_classification" model="performance.appraisal.job.classification">
+            <field name="form_id" ref="dym_performance_appraisal.model_dym_performance_appraisal_form_b"/>
+        </record>
+    </data>
+</odoo>

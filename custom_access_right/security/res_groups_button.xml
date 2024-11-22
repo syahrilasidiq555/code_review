@@ -1,0 +1,708 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_custom_button_cs">
+            <field name="name">Access Button, Cost Sheet</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+
+        <!-- MODEL COST SHEET -->
+        <!-- action_confirm -->
+        <record id="group_cs_button_action_confirm" model="res.groups">
+            <field name="name">Button Confirm</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_approve -->
+        <record id="group_cs_button_action_approve" model="res.groups">
+            <field name="name">Button Approve</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_reject -->
+        <record id="group_cs_button_action_reject" model="res.groups">
+            <field name="name">Button Reject</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_cancel -->
+        <record id="group_cs_button_action_cancel" model="res.groups">
+            <field name="name">Button Cancel</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_draft -->
+        <record id="group_cs_button_action_draft" model="res.groups">
+            <field name="name">Button Draft</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_create_po_and_bills -->
+        <record id="group_cs_button_action_create_po_and_bills" model="res.groups">
+            <field name="name">Button Create PO and Bills</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_view_so -->
+        <record id="group_cs_button_action_view_so" model="res.groups">
+            <field name="name">Button View Sales Order</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_view_rental_schedule -->
+        <record id="group_cs_button_action_view_rental_schedule" model="res.groups">
+            <field name="name">Button View Rental Schedule</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_view_bills -->
+        <record id="group_cs_button_action_view_bills" model="res.groups">
+            <field name="name">Button View Bills</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+        <!-- action_view_po_list -->
+        <record id="group_cs_button_action_view_po_list" model="res.groups">
+            <field name="name">Button View Purchase Order</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+
+        <!-- INVOICE -->
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_invoice_button">
+            <field name="name">Access Button, Accounting > Invoice / Bills / Jurnal Entri</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+
+        <!-- action approve over due invoice -->
+        <!-- <record id="group_approve_invoice_overdue" model="res.groups">
+            <field name="name">Invoice : Approve Invoice Overdue</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+        
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- action_post -->
+        <!-- <record id="group_am_button_action_post" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Rekam/Konfirmasi Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- action_post -->
+        <!-- <record id="group_am_button_action_post_discount" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Rekam/Konfirmasi record dengan diskon</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_am_button_action_post')) ]"/>
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- action_register_payment -->
+        <!-- <record id="group_am_button_action_register_payment" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Buat Pembayaran Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- %(action_view_account_move_reversal)d -->
+        <!-- action_view_account_move_reversal -->
+        <!-- <record id="group_am_button_action_view_account_move_reversal" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Balikkan Entri Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- action_reverse -->
+        <!-- <record id="group_am_button_action_reverse" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Tambahkan Catatan Kredit Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- button_cancel -->
+        <!-- <record id="group_am_button_button_cancel" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Batal Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- button_cancel_posted_moves -->
+        <!-- <record id="group_am_button_button_cancel_posted_moves" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Minta Pembatalan EDI Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- button_abandon_cancel_posted_posted_moves -->
+        <!-- <record id="group_am_button_button_abandon_cancel_posted_posted_moves" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Batalkan Pembatalan EDI Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- button_draft -->
+        <!-- <record id="group_am_button_button_draft" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Reset ke Rancangan Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- reset_efaktur -->
+        <!-- <record id="group_am_button_reset_efaktur" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Reset E-Faktur Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Invoice / Bills / Jurnal Entri -->
+        <!-- button_set_checked -->
+        <!-- <record id="group_am_button_button_set_checked" model="res.groups">
+            <field name="name">Invoice / Bills / Jurnal Entri : Tetapkan Sebagai Diperiksa Button</field>
+            <field name="category_id" ref="module_category_invoice_button" />
+        </record> -->
+
+
+
+
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_asset_button">
+            <field name="name">Access Button, Accounting > Akuntansi > Asset/Aktiva</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+
+        <!-- action approve asset dispose -->
+        <!-- <record id="group_approve_asset_dispose" model="res.groups">
+            <field name="name">Asset/Aktiva : Approve Dispose Asset Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+        <!-- <record id="group_approve_asset_change_location" model="res.groups">
+            <field name="name">Asset/Aktiva : Approve Change Location Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- validate -->
+        <!-- <record id="group_asset_button_validate" model="res.groups">
+            <field name="name">Asset/Aktiva : Konfirmasi Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- compute_depreciation_board -->
+        <!-- <record id="group_asset_button_compute_depreciation_board" model="res.groups">
+            <field name="name">Asset/Aktiva : Hitung Penyusutan Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- action_set_to_close -->
+        <!-- <record id="group_asset_button_action_set_to_close" model="res.groups">
+            <field name="name">Asset/Aktiva : Jual atau Buang Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- action_wizard_move_location -->
+        <!-- <record id="group_asset_button_action_wizard_move_location" model="res.groups">
+            <field name="name">Asset/Aktiva : Move Location Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- set_to_draft -->
+        <!-- <record id="group_asset_button_set_to_draft" model="res.groups">
+            <field name="name">Asset/Aktiva : Set ke Rancangan Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- set_to_running -->
+        <!-- <record id="group_asset_button_set_to_running" model="res.groups">
+            <field name="name">Asset/Aktiva : Tetapkan menjadi Running Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- action_asset_pause -->
+        <!-- <record id="group_asset_button_action_asset_pause" model="res.groups">
+            <field name="name">Asset/Aktiva : Pause Depreciation Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- resume_after_pause -->
+        <!-- <record id="group_asset_button_resume_after_pause" model="res.groups">
+            <field name="name">Asset/Aktiva : Lanjutkan Depresiasi Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- action_asset_modify -->
+        <!-- <record id="group_asset_button_action_asset_modify" model="res.groups">
+            <field name="name">Asset/Aktiva : Penyusutan Bulanan Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+        <!-- MODEL Accounting > Akuntansi > Asset/Aktiva -->
+        <!-- action_save_model -->
+        <!-- <record id="group_asset_button_action_save_model" model="res.groups">
+            <field name="name">Asset/Aktiva : Save Category Button</field>
+            <field name="category_id" ref="module_category_asset_button" />
+        </record> -->
+
+
+
+
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_custom_button_pp">
+            <field name="name">Access Button, Permintaan Penawaran</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+        
+        <!-- MODEL Permintaan Penawaran -->
+        <!-- button_draft -->
+        <!-- <record id="group_pp_button_button_draft" model="res.groups">
+            <field name="name">Permintaan Penawaran : Reset Button</field>
+            <field name="category_id" ref="module_category_custom_button_pp" />
+        </record> -->
+
+        <!-- MODEL Permintaan Penawaran -->
+        <!-- button_to_approve -->
+        <!-- <record id="group_pp_button_button_to_approve" model="res.groups">
+            <field name="name">Permintaan Penawaran : Request Approval Button</field>
+            <field name="category_id" ref="module_category_custom_button_pp" />
+        </record> -->
+
+        <!-- MODEL Permintaan Penawaran -->
+        <!-- button_approved -->
+        <!-- <record id="group_pp_button_button_approved" model="res.groups">
+            <field name="name">Permintaan Penawaran : Approve Button</field>
+            <field name="category_id" ref="module_category_custom_button_pp" />
+        </record> -->
+
+        <!-- MODEL Permintaan Penawaran -->
+        <!-- action_purchase_request_line_make_purchase_order -->
+        <!-- <record id="group_pp_button_action_purchase_request_line_make_purchase_order" model="res.groups">
+            <field name="name">Permintaan Penawaran : Create RFQ Button</field>
+            <field name="category_id" ref="module_category_custom_button_pp" />
+        </record> -->
+
+        <!-- MODEL Permintaan Penawaran -->
+        <!-- button_done -->
+        <!-- <record id="group_pp_button_button_done" model="res.groups">
+            <field name="name">Permintaan Penawaran : Done Button</field>
+            <field name="category_id" ref="module_category_custom_button_pp" />
+        </record> -->
+
+        <!-- MODEL Permintaan Penawaran -->
+        <!-- button_rejected -->
+        <!-- <record id="group_pp_button_button_rejected" model="res.groups">
+            <field name="name">Permintaan Penawaran : Reject Button</field>
+            <field name="category_id" ref="module_category_custom_button_pp" />
+        </record> -->
+
+
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_custom_button_sale">
+            <field name="name">Access Button, Sale / Rental</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+        
+        <!-- MODEL Sale / Rental -->
+        <!-- open_pickup -->
+        <record id="group_sale_button_open_pickup" model="res.groups">
+            <field name="name">Button OCCUPIED</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record>
+        
+        <!-- MODEL Sale / Rental -->
+        <!-- open_return -->
+        <record id="group_sale_button_open_return" model="res.groups">
+            <field name="name">Button PENGEMBALIAN</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record>
+        
+        <!-- MODEL Sale / Rental -->
+        <!-- action_bayar_columnbarium -->
+        <!-- <record id="group_sale_button_action_bayar_columnbarium" model="res.groups">
+            <field name="name">Button Pembayaran Columbarium</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record> -->
+
+        <!-- MODEL Sale / Rental -->
+        <!-- action_create_invoice_columnbarium -->
+        <!-- <record id="group_sale_button_action_create_invoice_columnbarium" model="res.groups">
+            <field name="name">Button Invoice Columbarium</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record> -->
+
+        <!-- MODEL Sale / Rental -->
+        <!-- action_recon_hutang_titipo -->
+        <!-- <record id="group_sale_button_action_recon_hutang_titipo" model="res.groups">
+            <field name="name">Button Reconcile</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record> -->
+
+        <!-- MODEL Sale / Rental -->
+        <!-- action_confirm -->
+        <record id="group_sale_button_action_confirm" model="res.groups">
+            <field name="name">Button Konfirmasi</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record>
+
+        <!-- MODEL Sale / Rental -->
+        <!-- action_cancel -->
+        <record id="group_sale_button_action_cancel" model="res.groups">
+            <field name="name">Button Batal</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record>
+
+        <!-- MODEL Sale / Rental -->
+        <!-- action_draft -->
+        <record id="group_sale_button_action_draft" model="res.groups">
+            <field name="name">Button Tetapkan jadi Penawaran</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record>
+
+        <!-- MODEL Sale / Rental -->
+        <!-- action_refresh_qty -->
+        <record id="group_sale_button_action_refresh_qty" model="res.groups">
+            <field name="name">Button Refresh Stock</field>
+            <field name="category_id" ref="custom_access_right.module_category_sales_order" />
+        </record>
+
+
+
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_custom_button_po">
+            <field name="name">Access Button, Pembelian</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+        
+        <!-- MODEL Pembelian -->
+        <!-- action_send_whatsapp -->
+        <!-- <record id="group_purchase_button_action_send_whatsapp" model="res.groups">
+            <field name="name">Pembelian : Kirim Pesan WhatsApp Semayam Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- action_send_whatsapp_penawaran -->
+        <!-- <record id="group_purchase_button_action_send_whatsapp_penawaran" model="res.groups">
+            <field name="name">Pembelian : Kirim Pesan WhatsApp Quotation Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- action_view_picking -->
+        <!-- <record id="group_purchase_button_action_view_picking" model="res.groups">
+            <field name="name">Pembelian : Terima Produk Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- print_quotation -->
+        <!-- <record id="group_purchase_button_print_quotation" model="res.groups">
+            <field name="name">Pembelian : Cetak PPw Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- button_confirm -->
+        <!-- <record id="group_purchase_button_button_confirm" model="res.groups">
+            <field name="name">Pembelian : Konfirmasi / Request Approval Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- action_create_invoice -->
+        <!-- <record id="group_purchase_button_action_create_invoice" model="res.groups">
+            <field name="name">Pembelian : Buat Tagihan Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- button_draft -->
+        <!-- <record id="group_purchase_button_button_draft" model="res.groups">
+            <field name="name">Pembelian : Set ke Rancangan Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- button_cancel -->
+        <!-- <record id="group_purchase_button_button_cancel" model="res.groups">
+            <field name="name">Pembelian : Batal Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- button_done -->
+        <!-- <record id="group_purchase_button_button_done" model="res.groups">
+            <field name="name">Pembelian : Kunci Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+        <!-- MODEL Pembelian -->
+        <!-- button_unlock -->
+        <!-- <record id="group_purchase_button_button_unlock" model="res.groups">
+            <field name="name">Pembelian : Buka Kunci Button</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+
+        <!-- MODEL Pembelian -->
+        <!-- action_view_cost_sheet -->
+        <!-- <record id="group_purchase_action_view_cost_sheet" model="res.groups">
+            <field name="name">Pembelian : Lihat Cost Sheet</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+        <!-- MODEL Pembelian -->
+        <!-- action_view_invoice -->
+        <!-- <record id="group_purchase_action_view_invoice" model="res.groups">
+            <field name="name">Pembelian : Lihat Invoice</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+        <!-- MODEL Pembelian -->
+        <!-- action_view_picking -->
+        <!-- <record id="group_purchase_action_view_picking" model="res.groups">
+            <field name="name">Pembelian : Lihat Penerimaan Barang</field>
+            <field name="category_id" ref="module_category_custom_button_po" />
+        </record> -->
+
+
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_custom_button_product">
+            <field name="name">Access Button, Master Produk</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+        
+        <!-- MODEL Master Produk -->
+        <!-- update_quantity_on_hand -->
+        <record id="group_product_button_action_update_quantity_on_hand" model="res.groups">
+            <field name="name">Button Update Kuantitas Button</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+        <!-- MODEL Master Produk -->
+        <!-- action_product_replenish -->
+        <record id="group_product_button_action_product_replenish" model="res.groups">
+            <field name="name">Button Replenis Button</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+        <!-- MODEL Master Produk -->
+        <!-- open_pricelist_rules -->
+        <record id="group_product_button_open_pricelist_rules" model="res.groups">
+            <field name="name">Button Lihat Extra Prices</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+        <!-- MODEL Master Produk -->
+        <!-- action_open_quants -->
+        <record id="group_product_button_action_open_quants" model="res.groups">
+            <field name="name">Button Lihat Stok Tersedia</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+        <!-- MODEL Master Produk -->
+        <!-- action_product_tmpl_forecast_report -->
+        <record id="group_product_button_action_product_tmpl_forecast_report" model="res.groups">
+            <field name="name">Button Lihat Stok Perkiraan</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+        <!-- MODEL Master Produk -->
+        <!-- action_view_stock_move_lines -->
+        <record id="group_product_button_action_view_stock_move_lines" model="res.groups">
+            <field name="name">Button Lihat Pergerakan Stok</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+        <!-- MODEL Master Produk -->
+        <!-- action_view_rentals -->
+        <record id="group_product_button_action_view_rentals" model="res.groups">
+            <field name="name">Button Lihat Rental</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+        <!-- MODEL Master Produk -->
+        <!-- action_view_po -->
+        <record id="group_product_button_action_view_po" model="res.groups">
+            <field name="name">Button Lihat Purchase Order</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+        <!-- MODEL Master Produk -->
+        <!-- action_view_sales -->
+        <record id="group_product_button_action_view_sales" model="res.groups">
+            <field name="name">Button Lihat Sale Order</field>
+            <field name="category_id" ref="custom_access_right.module_category_product_template_varian" />
+        </record>
+
+
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_custom_button_picking">
+            <field name="name">Access Button, Transfer Stock</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+        
+        <!-- MODEL Transfer Stock -->
+        <!-- action_confirm -->
+        <record id="group_picking_button_action_confirm" model="res.groups">
+            <field name="name">Button Tandai sebagai Todo</field>
+            <field name="category_id" ref="custom_access_right.module_category_inv_transfer" />
+        </record>
+
+        <!-- MODEL Transfer Stock -->
+        <!-- action_set_quantities_to_reservation -->
+        <record id="group_picking_button_action_set_quantities_to_reservation" model="res.groups">
+            <field name="name">Button Tetapkan Kuantitas</field>
+            <field name="category_id" ref="custom_access_right.module_category_inv_transfer" />
+        </record>
+        
+        <!-- MODEL Transfer Stock -->
+        <!-- button_validate -->
+        <record id="group_picking_button_button_validate" model="res.groups">
+            <field name="name">Button Validasi</field>
+            <field name="category_id" ref="custom_access_right.module_category_inv_transfer" />
+        </record>
+        
+        <!-- MODEL Transfer Stock -->
+        <!-- do_unreserve -->
+        <record id="group_picking_button_do_unreserve" model="res.groups">
+            <field name="name">Button Batalkan Reservasi</field>
+            <field name="category_id" ref="custom_access_right.module_category_inv_transfer" />
+        </record>
+        
+        <!-- MODEL Transfer Stock -->
+        <!-- button_scrap -->
+        <record id="group_picking_button_button_scrap" model="res.groups">
+            <field name="name">Button Pembuangan</field>
+            <field name="category_id" ref="custom_access_right.module_category_inv_transfer" />
+        </record>
+        
+        <!-- MODEL Transfer Stock -->
+        <!-- action_toggle_is_locked -->
+        <record id="group_picking_button_action_toggle_is_locked" model="res.groups">
+            <field name="name">Button Kunci</field>
+            <field name="category_id" ref="custom_access_right.module_category_inv_transfer" />
+        </record>
+        
+        <!-- MODEL Transfer Stock -->
+        <!-- action_cancel -->
+        <record id="group_picking_button_action_cancel" model="res.groups">
+            <field name="name">Button Batal</field>
+            <field name="category_id" ref="custom_access_right.module_category_inv_transfer" />
+        </record>
+
+
+
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_custom_button_payment">
+            <field name="name">Access Button, Accounting > Pelanggan/Pemasok > Pembayaran</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- action_to_approve -->
+        <!-- <record id="group_payment_button_action_to_approve" model="res.groups">
+            <field name="name">Pembayaran : Request Approval Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- action_post -->
+        <!-- <record id="group_payment_button_action_post" model="res.groups">
+            <field name="name">Pembayaran : Konfirmasi Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- action_draft -->
+        <!-- <record id="group_payment_button_action_draft" model="res.groups">
+            <field name="name">Pembayaran : Reset To Draft Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- action_cancel -->
+        <!-- <record id="group_payment_button_action_cancel" model="res.groups">
+            <field name="name">Pembayaran : Batal Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- mark_as_sent -->
+        <!-- <record id="group_payment_button_mark_as_sent" model="res.groups">
+            <field name="name">Pembayaran : Tandai sebagai Terkirim Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- unmark_as_sent -->
+        <!-- <record id="group_payment_button_unmark_as_sent" model="res.groups">
+            <field name="name">Pembayaran : Unmark as Sent Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- button_open_invoices -->
+        <!-- <record id="group_payment_button_button_open_invoices" model="res.groups">
+            <field name="name">Pembayaran : Lihat Faktur</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+        
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- button_open_bills -->
+        <!-- <record id="group_payment_button_button_open_bills" model="res.groups">
+            <field name="name">Pembayaran : Lihat Bill</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+        
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- button_open_statements -->
+        <!-- <record id="group_payment_button_button_open_statements" model="res.groups">
+            <field name="name">Pembayaran : Lihat Laporan</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+        
+        <!-- MODEL Accounting > Pelanggan/Pemasok > Pembayaran -->
+        <!-- button_open_journal_entry -->
+        <!-- <record id="group_payment_button_button_open_journal_entry" model="res.groups">
+            <field name="name">Pembayaran : Lihat Entri Jurnal</field>
+            <field name="category_id" ref="module_category_custom_button_payment" />
+        </record> -->
+
+
+
+        <!-- Group Label for View -->
+        <!-- <record model="ir.module.category" id="module_category_custom_button_payment_requisition">
+            <field name="name">Access Button, Accounting > Pemasok > Payment Requisition</field>
+            <field name="description">Group for view button inside a views</field>
+            <field name="sequence">32</field>
+        </record> -->
+
+        <!-- MODEL Accounting > Pemasok > Payment Requisition -->
+        <!-- button_confirm -->
+        <!-- <record id="group_payment_req_button_button_confirm" model="res.groups">
+            <field name="name">Payment Requisition : Confirm Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment_requisition" />
+        </record> -->
+        
+        <!-- MODEL Accounting > Pemasok > Payment Requisition -->
+        <!-- button_set_draft -->
+        <!-- <record id="group_payment_req_button_button_set_draft" model="res.groups">
+            <field name="name">Payment Requisition : Reset to Draft Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment_requisition" />
+        </record> -->
+        
+        <!-- MODEL Accounting > Pemasok > Payment Requisition -->
+        <!-- button_cancel -->
+        <!-- <record id="group_payment_req_button_button_cancel" model="res.groups">
+            <field name="name">Payment Requisition : Cancel Button</field>
+            <field name="category_id" ref="module_category_custom_button_payment_requisition" />
+        </record> -->
+        
+
+    </data>
+</odoo>

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dym_improvement_report_dep_view_form" model="ir.ui.view">
+        <field name="name">Report QCC QCP PPS</field>
+        <field name="model">report.improvement.dep</field>
+        <field name="arch" type="xml">
+            <form string="Report QCC QCP PPS">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="jenis_improvement"/>
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Department">
+                        <field name="department_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="print_report" string="Export" type="object" class="oe_highlight"/>
+                    Or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="dym_improvement_report_dep_wizard_action" model="ir.actions.act_window">
+        <field name="name">Improvement Report Wizard Action</field>
+        <field name="res_model">report.improvement.dep</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem id="report_improvement_dep" 
+        name="Report QCC, QCP, PPS, dll.. NQI" 
+        parent="suggestion_system.suggestion_system_report"
+        sequence="22" 
+        action="dym_improvement_report_dep_wizard_action"/>
+
+    <report 
+		id="report_improvement_dep_xlsx"
+		string="Report QCC, QCP, PPS 2"
+		model="report.improvement.dep"
+		report_type="xlsx"
+		name="dym_improvement.report_improvement_dep"
+		file="report_improvement"
+		attachment_use="False"/>
+</odoo>

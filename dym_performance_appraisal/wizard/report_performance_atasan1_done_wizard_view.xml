@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_performance_atasan1_done_wizard_view_form" model="ir.ui.view">
+        <field name="name">Report Performance Appraisal Atasan 1 - Done</field>
+        <field name="model">report.performance.atasan1.done.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Performance Appraisal Atasan 1 - Done">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <!-- <label for="start_date" string="Date"/> -->
+		   				<!-- <div>
+		   					<field name="start_date" class="oe_inline"/> - <field name="end_date" class="oe_inline"/>
+		   				</div> -->
+                        <field name="periode"/>
+                        <field name="tipe_report"/> 
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Department">
+                        <field name="department_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="print_report" string="Export" type="object" class="oe_highlight"/>
+                    Or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="report_performance_atasan1_done_action" model="ir.actions.act_window">
+        <field name="name">Report Performance Appraisal Atasan 1 - Done</field>
+        <field name="res_model">report.performance.atasan1.done.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="report_performance_appraisal_menu" name="Report" parent="dym_performance_appraisal.dym_performance_appraisal_menu"
+        sequence="4" groups="dym_performance_appraisal.group_performance_appraisal_form_a_administrator,dym_performance_appraisal.group_performance_appraisal_form_b_administrator"/>
+    <menuitem id="report_performance_appraisal_wizard_atasan1_done" name="Report Performance Atasan 1 - Posted" parent="report_performance_appraisal_menu"
+        sequence="3" action="report_performance_atasan1_done_action" />
+</odoo>

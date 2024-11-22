@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- Pendapatan Columbarium -->
+    <data noupdate="1">
+        <!-- SEQUENCE PENANGGUHAN PENDAPATAN COLUMBARIUM -->
+        <record id="sequence_pend_columbarium" model="ir.sequence">
+            <field name="name">Penangguhan Pendapatan Columbarium</field>
+            <field name="implementation">no_gap</field>
+            <field name="prefix">PPC/%(range_year)s/%(range_month)s/</field>
+            <field name="padding" eval="3"/>
+        </record>
+
+        <!-- JURNAL PENANGGUHAN PENDAPATAN COLUMBARIUM -->
+        <record id="journal_pendapatan_columbarium" model="account.journal">
+            <field name="name">Penangguhan Pendapatan Columbarium</field>
+            <field name="type">general</field>
+            <field name="sequence_id" ref="sequence_pend_columbarium" />
+            <field name="code">PPC</field>
+            <field name="company_id" ref="base.main_company" />
+        </record>
+
+        <!-- MODEL ASSET PENANGGUHAN PENDAPATAN COLUMBARIUM -->
+        <!-- <record id="model_asset_pendapatan_columbarium" model="account.journal">
+            <field name="name">Penangguhan Pendapatan Columbarium</field>
+            <field name="asset_type">sale</field>
+            <field name="state">model</field>
+            <field name="account_depreciation_id" ref="journal_pendapatan_columbarium" />
+            <field name="account_depreciation_expense_id" ref="journal_pendapatan_columbarium" />
+            <field name="journal_id" ref="journal_pendapatan_columbarium" />
+        </record> -->
+    </data>
+</odoo>

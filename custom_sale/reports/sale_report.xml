@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- TREE -->
+    <record id="sale_report_view_tree_inherit" model="ir.ui.view">
+        <field name="name">sale_report_view_tree_inherit</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.sale_report_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="expand">True</attribute>
+            </xpath>
+            <field name="date" position="attributes">
+                <attribute name="optional">show</attribute>
+            </field>
+            <field name="product_id" position="after">
+                <field name="product_desc" optional="show" />
+            </field>
+            <field name="price_subtotal" position="before">
+                <field name="product_qty" optional="show" />
+            </field>
+            <field name="partner_id" position="after">
+                <field name="project_id" optional="show"/>
+            </field>
+        </field>
+    </record>
+
+    <!-- SEARCH -->
+    <record id="view_order_product_search_inherit" model="ir.ui.view">
+        <field name="name">view_order_product_search_inherit</field>
+        <field name="model">sale.report</field>
+        <field name="inherit_id" ref="sale.view_order_product_search"/>
+        <field name="arch" type="xml">
+            <filter name="group_by_date_day" position="after">
+                <filter string="Order Date" name="group_by_date_month" context="{'group_by':'date:month'}" invisible="not context.get('sale_report_view_hide_date')"/>
+            </filter>
+            <filter name="Sales" position="attributes">
+                <attribute name="domain">[('state','not in',('draft_quot','to approve','draft', 'cancel', 'sent'))]</attribute>
+            </filter>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record id="sale.action_order_report_all" model="ir.actions.act_window">
+        <field name="view_mode">tree,graph,pivot</field>
+        <field name="context">{
+            'search_default_Sales': 1,
+            'group_by_no_leaf': 1,
+            'group_by': [],
+            'search_default_filter_order_date': 1,
+            'search_default_group_by_date_month': 1,
+        }</field>
+
+        
+    </record>
+
+</odoo>

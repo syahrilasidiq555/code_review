@@ -1,0 +1,298 @@
+<odoo>
+    <data>
+        <template id="custom_accounting.invoice_rdc_print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="custom_accounting.invoice_rdc_layout_header"/>
+            <t t-raw="0"/>
+            <t t-call="custom_accounting.invoice_rdc_layout_footer"/>
+        </template>
+
+        <template id="custom_accounting.invoice_rdc_layout_header">
+            <div class="header">
+                <div class="row" name="header_faktur" style="font-size:14px"> 
+                    <div class="col-4">
+                        <img t-att-src="image_data_uri(company.logo)" style="width:130px; display: block; margin-left: auto; margin-right: auto;"/>
+                    </div>
+                    <div class="col-8" style="margin-top:0px;font-size:14px">
+                        <h3><b><span t-field="company.name"/></b></h3>
+                        <t t-if="company.street != False">
+                            <span t-field="company.street"/>
+                        </t>
+                        <t t-if="company.phone != False">
+                            <br><b>Telp </b>: <span t-field="company.phone"/></br>
+                        </t>
+                        <t t-if="company.mobile != False">
+                            <br><b>WA </b> : <span t-field="company.mobile"/></br>
+                        </t>
+                        <t t-if="company.email != False">
+                            <br><b>Email </b> : <span t-field="company.email"/></br>
+                        </t>
+                        <!-- <br><b>No </b> : <span t-field="o.name"/></br> -->
+                    </div>
+                </div>   
+                <hr style="height:3px;border-width:0;color:black;background-color:black"/>
+            </div>
+        </template>
+
+        <template id="custom_accounting.invoice_rdc_layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:14px">
+                <!-- <table class="table table-sm" style="margin:100px auto; width:90%; border:0px;">
+                    <style>
+                        .borderless td, .borderless th {
+                            border: none;
+                            padding-left:0;
+                            padding-right:0;
+                        }
+                    </style>
+                    <tr class="borderless" style="line-height: 5pt">
+                        <td style="width:25%; padding: 0 40px;">
+                        </td>
+                        <td style="width:25%; padding: 0 40px;">
+                        </td>
+                        <td style="width:25%; padding: 0 40px;">
+                            <div>
+                                <br/><p><span t-field="o.company_id.city"/>, <span t-esc="datetime.datetime(o.date.year, o.date.month, o.date.day).strftime('%d %b %Y')"/></p>
+                                <p>Kasir Pelayanan</p>
+                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                <p>( <span t-field="o.create_uid.partner_id.name"/> )</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table> -->
+                <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <template id="custom_accounting.invoice_rdc_print">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_accounting.invoice_rdc_print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">INVOICE</h5>
+                                    </div>
+                                    <table class="table">
+                                        <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                                padding-top: 0px;
+                                                padding-bottom: 0px;
+                                            }
+                                        </style>
+                                        <tbody class='borderless'>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;">Nomor Registrasi</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <td class="text-left"><span t-field="o.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;">Nama Jenazah</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <td class="text-left"><span t-field="o.partner_id.name" /></td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;">Usia</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <t t-if="o.so_id.almarhum_usia">
+                                                    <td class="text-left"><span t-field="o.so_id.almarhum_usia" /> Tahun</td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;">Agama</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <t t-if="o.so_id.almarhum_agama">
+                                                    <td class="text-left"><span t-field="o.so_id.almarhum_agama" /></td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;">Tanggal Meninggal</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <t t-if="o.partner_id.tanggal_kematian">
+                                                    <td class="text-left"><span t-esc="datetime.datetime(o.partner_id.tanggal_kematian.year, o.partner_id.tanggal_kematian.month, o.partner_id.tanggal_kematian.day).strftime('%d %b %Y')"/></td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;"><b>Asal Jenazah</b></td>
+                                                <!-- <td class="text-center" style="width:50px!important;">:</td> -->
+                                                <!-- <td class="text-left">Asal Jenazah </td> -->
+                                                <!-- <td class="text-left"><span t-esc="datetime.datetime(o.date.year, o.date.month, o.date.day).strftime('%d %b %Y')"/></td> -->
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;">Dari Luar RSSC</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <t t-if="o.so_id.almarhum_asal">
+                                                    <td class="text-left"><span t-field="o.so_id.almarhum_asal" /></td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;">Penanggung Jawab</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <t t-if="o.penanggungjawab_id">
+                                                    <td class="text-left"><span t-field="o.penanggungjawab_id.name" /></td>
+                                                </t>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:230px!important;">No Telp Penanggung Jawab</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <t t-if="o.penanggungjawab_id">
+                                                    <td class="text-left">
+                                                        <t t-if="o.penanggungjawab_id.mobile and not o.penanggungjawab_id.phone">
+                                                            <span t-field="o.penanggungjawab_id.mobile"/>
+                                                        </t>
+                                                        <t t-if="o.penanggungjawab_id.phone and not o.penanggungjawab_id.mobile">
+                                                            <span t-field="o.penanggungjawab_id.phone"/>
+                                                        </t>
+                                                        <t t-if="o.penanggungjawab_id.phone and o.penanggungjawab_id.mobile">
+                                                            <span t-field="o.penanggungjawab_id.phone"/> / <span t-field="o.penanggungjawab_id.mobile"/>
+                                                        </t>
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                        </tbody>
+                                        
+                                    </table>
+
+                                    <p class="text-left" style="font-size:18px"><b>RINCIAN TAGIHAN</b></p> 
+
+                                    <table class="table">
+                                        <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                                padding-top: 0px;
+                                                padding-bottom: 0px;
+                                            }
+                                        </style>
+                                        <tbody>
+                                            <tr t-foreach='o.invoice_line_ids' t-as='line' class='table borderless' style="height:10pt; max-height:50pt;">
+                                                <td class="text-left" style="width:650px!important;">- <span t-field="line.product_id.display_name"/></td>
+
+                                                <t t-if="line.product_id.rent_ok == True">
+                                                    <td class="text-left" style="width:650px!important;"><span t-field="line.name" /></td>
+                                                </t>
+                                                <t t-if="line.product_id.rent_ok != True">
+                                                    <td class="text-left" style="width:650px!important;"></td>
+                                                </t>
+
+                                                <td class="text-left" style="width:150px!important;"><span t-field="line.quantity" /> <span t-field="line.product_uom_id.name" /></td>
+
+                                                <t t-if="line.price_subtotal != 0">
+                                                    <td class="text-center" style="width:50px!important;">
+                                                        <t t-esc="o.currency_id.symbol"/>
+                                                    </td>
+                                                    <td class="text-right" style="width:350px!important;">
+                                                        <span t-esc="'{0:,.0f}'.format(float(line.price_subtotal))" />
+                                                    </td>
+                                                </t>
+                                            </tr>
+                                            <t t-if="o.tax_totals_json">
+                                                <!--Tax totals-->
+                                                <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                <!-- <t t-call="account.document_tax_totals"/> -->
+                                                <!-- <span t-esc="tax_totals"/> -->
+                                                <t t-if="tax_totals['groups_by_subtotal']">
+                                                    <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                                                        <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                                                    </t>
+                                                    <t t-set="lines" t-value="tax_totals['groups_by_subtotal'][subtotal_to_show]"/>
+                                                    <!-- <span t-esc="lines"/> -->
+                                                    <tr t-foreach="lines" t-as='line_tax' class='table borderless' style="height:10pt; max-height:50pt;">
+                                                        <td class="text-left" style="width:650px!important;">- <span t-esc="line_tax['tax_group_name']" /></td>
+                                                        <td class="text-left" style="width:650px!important;"></td>
+                                                        <td class="text-left" style="width:150px!important;"></td>
+                                                        <td class="text-center" style="width:50px!important;">
+                                                            <t t-esc="o.currency_id.symbol"/>
+                                                        </td>
+                                                        <td class="text-right" style="width:350px!important;">
+                                                            <span t-esc="'{0:,.0f}'.format(float(line_tax['tax_group_amount']))" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+                                                <!-- <tr class='table borderless' style="height:10pt; max-height:50pt;">
+                                                    <td class="text-left" style="width:650px!important;">- <span t-esc="tax_totals['groups_by_subtotal']['Untaxed Amount']"/></td>
+                                                </tr> -->
+                                            </t>
+                                        </tbody>
+                                    </table>
+
+                                    <hr style="height:2px;border-width:0;color:black;background-color:black"/>
+
+                                    <table class="table">
+                                        <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                            }
+                                        </style>
+                                        <tbody class='borderless'>
+                                            <tr>
+                                                <td class="text-left" style="width:650px!important;"></td>
+                                                <td class="text-left" style="width:650px!important;">TOTAL</td>
+                                                <td class="text-center" style="width:50px!important;">
+                                                    <t t-esc="o.currency_id.symbol"/>
+                                                </td>
+                                                <td class="text-right" style="width:350px!important;">
+                                                    <span t-esc="'{0:,.0f}'.format(float(o.amount_total_signed))" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:650px!important;"></td>
+                                                <td class="text-left" style="width:650px!important;">NOMINAL TERBAYARKAN</td>
+                                                <td class="text-center" style="width:50px!important;">
+                                                    <t t-esc="o.currency_id.symbol"/>
+                                                </td>
+                                                <td class="text-right" style="width:350px!important;">
+                                                    <span t-esc="'{0:,.0f}'.format(float(o.amount_total_signed - o.amount_residual_signed))" />
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="width:650px!important;"></td>
+                                                <td class="text-left" style="width:650px!important;">SISA PEMBAYARAN</td>
+                                                <td class="text-center" style="width:50px!important;">
+                                                    <t t-esc="o.currency_id.symbol"/>
+                                                </td>
+                                                <td class="text-right" style="width:350px!important;">
+                                                    <span t-esc="'{0:,.0f}'.format(float(o.amount_residual_signed))" />
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

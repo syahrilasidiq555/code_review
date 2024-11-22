@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="hr_terminasi_view_tree_remove_crud_2" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_tree_remove_crud</field>
+        <field name="model">hr.terminasi</field>
+        <field name="inherit_id" ref="custom_hr.hr_terminasi_view_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">false</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_terminasi_view_tree_delete_2" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_tree_delete</field>
+        <field name="model">hr.terminasi</field>
+        <field name="inherit_id" ref="custom_hr.hr_terminasi_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_terminasi_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_terminasi_view_tree_create_2" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_tree_create</field>
+        <field name="model">hr.terminasi</field>
+        <field name="inherit_id" ref="custom_hr.hr_terminasi_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_terminasi_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="hr_terminasi_view_form_remove_crud_2" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_form_remove_crud</field>
+        <field name="model">hr.terminasi</field>
+        <field name="inherit_id" ref="custom_hr.hr_terminasi_view_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_terminasi_view_form_create_2" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_form_create</field>
+        <field name="model">hr.terminasi</field>
+        <field name="inherit_id" ref="custom_hr.hr_terminasi_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_terminasi_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_terminasi_view_form_update_2" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_form_update</field>
+        <field name="model">hr.terminasi</field>
+        <field name="inherit_id" ref="custom_hr.hr_terminasi_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_terminasi_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_terminasi_view_form_delete_2" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_form_delete</field>
+        <field name="model">hr.terminasi</field>
+        <field name="inherit_id" ref="custom_hr.hr_terminasi_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_terminasi_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_terminasi_view_form_access_2" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_form_access</field>
+        <field name="model">hr.terminasi</field>
+        <field name="inherit_id" ref="custom_hr.hr_terminasi_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='%(custom_hr.action_report_verklaring_terminasi4)d']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_terminasi_access_print_verklaring</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- MENU ITEM -->
+    <record id="custom_hr.menu_view_hr_terminasi" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_terminasi_access_read'))]" />
+    </record>
+    <record id="custom_hr.menu_hr_terminasi" model="ir.ui.menu">
+        <field name="groups_id" eval="False" />
+    </record>
+    
+<!-- END OF MENU ITEM -->
+</odoo>

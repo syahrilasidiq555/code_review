@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="report_performance_employee_atasan1_wizard_view_form" model="ir.ui.view">
+        <field name="name">Report Performance Appraisal Employee - Atasan 1</field>
+        <field name="model">report.performance.employee.atasan1.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Report Performance Appraisal Employee - Atasan 1">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <!-- <label for="start_date" string="Date"/> -->
+		   				<!-- <div>
+		   					<field name="start_date" class="oe_inline"/> - <field name="end_date" class="oe_inline"/>
+		   				</div> -->
+                        <field name="periode"/>
+                        <field name="tipe_report"/> 
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Department">
+                        <field name="department_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="print_report" string="Export" type="object" class="oe_highlight"/>
+                    Or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="report_performance_employee_atasan1_action" model="ir.actions.act_window">
+        <field name="name">Report Performance Appraisal Employee - Atasan 1</field>
+        <field name="res_model">report.performance.employee.atasan1.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="report_performance_appraisal_wizard_employee_atasan1" name="Report Performance Employee - Atasan 1" parent="report_performance_appraisal_menu"
+        sequence="2" action="report_performance_employee_atasan1_action" />
+</odoo>

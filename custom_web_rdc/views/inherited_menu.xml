@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- MENU ITEM -->
+        <!-- PINDAH MENU KE MODULE RDC -->
+
+        <record id="custom_sale_order.cost_sheet_menu" model="ir.ui.menu">
+            <field name="parent_id" ref="custom_web_rdc.rdc_custom_module_menu"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <menuitem
+            id="rdc_master_menu"
+            name="Master"
+            parent="custom_web_rdc.rdc_custom_module_menu"
+            sequence="20" />
+
+        <!-- Menu Jenazah -->
+        <record id="custom_sale_order.res_partner_jenazah_menu" model="ir.ui.menu">
+            <field name="parent_id" ref="custom_web_rdc.rdc_master_menu"/>
+            <field name="sequence">10</field>
+        </record>
+
+        <!-- menu master pemakaman -->
+        <record id="custom_sale_order.res_pemakaman_menu" model="ir.ui.menu">
+            <field name="parent_id" ref="custom_web_rdc.rdc_master_menu"/>
+            <field name="sequence">15</field>
+        </record>
+
+        <!-- Menu Bundle Product -->
+        <!-- <menuitem id="bundle_product_rdc_menu"
+            name="Produk Paket"
+            action="custom_sale_order.ni_bundle_product_template_action"
+            parent="custom_web_rdc.rdc_master_menu"
+            sequence="20"/> -->
+
+
+        <!-- menu invoice telat bayar -->
+        <record model="ir.actions.act_window" id="invoice_overdue_action">
+            <field name="name">Invoice Terlambat Bayar</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,form</field>
+            <field name="domain">[('move_type', '=', 'out_invoice'),('invoice_date_due', '&lt;', time.strftime('%Y-%m-%d')),('state', '=', 'posted'),('payment_state', 'in', ('not_paid', 'partial'))]</field>
+            <!-- <field name="domain">[('move_type', '=', 'out_invoice'),('payment_state', 'in', ('not_paid', 'partial'))]</field> -->
+            <field name="context">{                
+                'create':False,
+                'default_move_type': 'out_invoice',
+                'search_default_almarhum': 1,
+                'search_default_late':True
+            }</field>
+            <field name="view_id" ref="account.view_out_invoice_tree"/>
+            <field name="search_view_id" ref="account.view_account_invoice_filter"/>
+        </record>
+        
+        <menuitem
+            id="invoice_overdue_menu"
+            name="Invoice Terlambat Bayar"
+            action="invoice_overdue_action"
+            parent="custom_web_rdc.rdc_custom_module_menu"
+            sequence="15" />      
+    </data>
+</odoo>

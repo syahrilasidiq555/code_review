@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- INHERIT FORM VIEW -->
+    <record id="view_order_form_inherit" model="ir.ui.view">
+        <field name="name">view_order_form_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_cancel']" position="attributes">
+                <attribute name="invisible" >state not in ['draft', 'sent', 'sale','draft_quot','to approve'] or not id or locked</attribute>
+            </xpath>
+
+            <!-- add approval button -->
+            <xpath expr="//button[@name='action_quotation_send']" position="before">
+                <button name="button_rfa" type="object" string="Request for Approval" class="oe_highlight"
+                    invisible="state != 'draft_quot'"/>
+                <button name="button_approve" type="object" string="Approve Quotation" class="oe_highlight"
+                    invisible="not is_user_approve_now"
+                    confirm="Are you sure?"/>
+                <button name="button_reject" type="object" string="Reject" 
+                    invisible="not is_user_approve_now"
+                    confirm="Are you sure?"/>
+                
+            </xpath>
+
+            <!-- edit state visible for approval -->
+            <xpath expr="//field[@name='state']" position="attributes">
+                <attribute name="statusbar_visible">draft_quot,to approve,draft,sent,sale</attribute>
+            </xpath>
+
+            <!-- add approval information -->
+            <xpath expr="//group[@name='partner_details']" position="inside">
+                <field name="loa_type"
+                    readonly="state != 'draft_quot'"
+                    required="state == 'draft_quot'"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"
+                    force_save="1"/>
+                <field name="customer_id" readonly="1"/>
+                <field name="bill_cycle"/>
+                <field name="invoice_id"/> 
+                <!-- invisible="invoice_id == '' or invoice_id == False" -->
+            </xpath>
+
+
+            <!-- set readonly order line -->
+            <xpath expr="//field[@name='order_line']" position="attributes">
+                <attribute name="readonly">state in ['to approve','draft','cancel']</attribute>
+                <attribute name="force_save">True</attribute>
+            </xpath>
+
+
+            <!-- add signature -->
+            <xpath expr="//page[@name='customer_signature']" position="attributes">
+                <attribute name="string">Signature</attribute>
+                <attribute name="groups"></attribute>
+            </xpath>
+            <xpath expr="//page[@name='customer_signature']//group" position="replace">
+                <group name="signature">
+                    <group name="cust_sign">
+                        <field name="signed_by" readonly="signature"/>
+                        <field name="signed_on" readonly="signature"/>
+                        <field name="signature" widget="image" readonly="1" force_save="1"/>
+                    </group>
+                    <group name="sales_sign">
+                        <field name="salesperson_signed_on" readonly="1" force_save="1"/>
+                        <field name="salesperson_signature" widget="signature"/>
+                    </group>
+                </group>
+            </xpath>
+
+
+            <!-- add approval information -->
+            <xpath expr="//notebook" position="inside">
+                <page name="approval_information" string="Approval Information" invisible="not loa_type">
+                    <group>
+                        <field name="next_approve_user_id"/>
+                        <field name="is_user_approve_now" invisible="1"/>
+                        <field name="is_amount" readonly="1" force_save="1"/>
+                        <field name="from_amount" readonly="1" force_save="1"/>
+                        <field name="to_amount" readonly="1" force_save="1"/>
+                    </group>
+                    <field name="approval_info_ids" readonly="1" force_save="1">
+                        <tree>
+                            <field name="sequence" optional="hide"/>
+                            <field name="loa_id" optional="hide"/>
+                            <field name="model_id" optional="hide"/>
+                            <field name="trx_id" invisible="True"/>
+                            <field name="description"/>
+                            <field name="user_id"/>
+                            <!-- <field name="job_id"/> -->
+                            <field name="is_approve"/>
+                            <field name="approve_user_id"/>
+                            <field name="approve_date"/>
+                            <field name="sign_signature" invisible="True"/>
+                        </tree>
+                        <form>
+                            <group name="head">
+                                <group name="left">
+                                    <field name="sequence" />
+                                    <field name="loa_id" />
+                                    <field name="model_id" />
+                                    <field name="description"/>
+                                </group>
+                                <group name="right">
+                                    <field name="user_id"/>
+                                    <!-- <field name="job_id"/> -->
+                                    <field name="is_approve"/>
+                                    <field name="approve_user_id"/>
+                                    <field name="approve_date"/>
+                                    <field name="sign_signature" widget="signature"/>
+                                </group>
+                                
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+
+        </field>
+    </record>
+
+    <!-- INHERIT TREE VIEW -->
+    <record id="view_order_tree_inherit" model="ir.ui.view">
+        <field name="name">view_order_tree_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//header" position="inside">
+                <button name="button_multi_approve" type="object" string="Approve" confirm="Are you sure?"/>
+                <button name="button_multi_reject" type="object" string="Reject" confirm="Are you sure?"/>
+            </xpath>
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="customer_id"/>
+                <field name="bill_cycle"/>
+                <field name="invoice_id"/>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_quotation_tree_with_onboarding_inherit" model="ir.ui.view">
+        <field name="name">view_quotation_tree_with_onboarding_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale.view_quotation_tree_with_onboarding"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="customer_id"/>
+                <field name="bill_cycle"/>
+                <field name="invoice_id"/>
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

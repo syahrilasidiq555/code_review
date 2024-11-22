@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="hr_leave_view_tree_remove_crud" model="ir.ui.view">
+        <field name="name">hr_leave_view_tree_remove_crud</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">false</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_leave_view_tree_delete" model="ir.ui.view">
+        <field name="name">hr_leave_view_tree_delete</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_timeoff_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_leave_view_tree_create" model="ir.ui.view">
+        <field name="name">hr_leave_view_tree_create</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_timeoff_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- KANBAN -->
+    <record id="hr_leave_view_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">hr_leave_view_kanban_remove_crud</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_leave_view_kanban_delete" model="ir.ui.view">
+        <field name="name">hr_leave_view_kanban_delete</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='dropdown-menu']" position="replace">
+                <div class="dropdown-menu" role="menu">
+                    <a t-if="widget.editable" role="menuitem" type="edit" class="dropdown-item" groups="custom_access_right.group_submenu_timeoff_access_update">Edit Time Off</a>
+                    <a t-if="widget.deletable" role="menuitem" type="delete" class="dropdown-item" groups="custom_access_right.group_submenu_timeoff_access_delete">Delete</a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_leave_view_kanban_create" model="ir.ui.view">
+        <field name="name">hr_leave_view_kanban_create</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_timeoff_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- FORM -->
+    <record id="hr_leave_view_form_manager_remove_crud" model="ir.ui.view">
+        <field name="name">hr_leave_view_form_manager_remove_crud</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_leave_view_form_manager_create" model="ir.ui.view">
+        <field name="name">hr_leave_view_form_manager_create</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_timeoff_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_leave_view_form_manager_update" model="ir.ui.view">
+        <field name="name">hr_leave_view_form_manager_update</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_timeoff_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_leave_view_form_manager_delete" model="ir.ui.view">
+        <field name="name">hr_leave_view_form_manager_delete</field>
+        <field name="model">hr.leave</field>
+        <field name="inherit_id" ref="hr_holidays.hr_leave_view_form_manager"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_timeoff_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- MENU ITEM -->
+    <record id="hr_holidays.menu_open_department_leave_approve" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_timeoff_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

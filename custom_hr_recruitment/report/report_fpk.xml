@@ -1,0 +1,260 @@
+<odoo>
+    <data>
+        <template id="custom_hr_recruitment.print_fpk_template">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_hr.print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <style>
+                                        table, th, td {
+                                            border: 1px solid black;
+                                            border-collapse: collapse;
+                                            padding: 5pt;
+                                        }
+                                    </style>
+
+                                    <div class="text-center" style="background-color: #e8e6eb;">
+                                        <u><h5 class="mb-0" style="text-transform:uppercase">PERMOHONAN <span t-field="o.jenis_fpk"/></h5></u>
+                                        <b class="mb-2" t-field="o.name" />
+                                    </div>
+
+
+                                    <table style="width:100%;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="width:20%;"> 
+                                                Divisi
+                                            </td>
+                                            <td colspan="3"> 
+                                                <span t-field="o.department_id"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:20%;"> 
+                                                Bagian / Section
+                                            </td>
+                                            <td colspan="3"> 
+                                                <span t-field="o.section"/>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:20%;"> 
+                                                Nama Jabatan
+                                            </td>
+                                            <td colspan="3"> 
+                                                <span t-field="o.job_id"/>
+                                            </td>
+                                        </tr>
+
+                                        <t t-if="o.jenis_fpk in ('penambahan_jabatan_baru')">
+                                            <tr>
+                                                <td style="width:20%; vertical-align: top;"> 
+                                                    Alasan Ada Jabatan (Karyawan) Baru<br/>
+                                                    * Lampirkan struktur organisasi baru, Jobdesk, &amp; No. AP BSC / SK Kebutuhan
+                                                </td>
+                                                <td colspan="3"> 
+                                                    <span t-field="o.reason_jabatan"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                        <t t-if="o.jenis_fpk in ('penggantian_karyawan')">
+                                            <tr>
+                                                <td style="width:20%; vertical-align: top;"> 
+                                                    Alasan Penggantian<br/>
+                                                    * Lampirkan surat resign / Memo Promosi / Memo Mutasi / Memo Demosi :
+                                                </td>
+                                                <td colspan="3">
+                                                    <table style="width:100%; border: none;" border="0" cellpadding="2" cellspacing="2" padding="5" margin="0">
+                                                        <tr t-foreach='o.penggantian_karyawan_ids' t-as='line' style="line-height: 15pt;">
+                                                            <td style="width:25%;">
+                                                                <span t-field="line.status"/>
+                                                            </td>
+                                                            <td style="width:45%;">
+                                                                Nama : <span t-field="line.employee_id"/>
+                                                            </td>
+                                                            <td style="width:30%;">
+                                                                Tgl Resign / Habis Kontrak : <span t-esc="datetime.datetime(line.date.year, line.date.month, line.date.day).strftime('%d %b %Y')"/>
+                                                            </td>
+                                                        </tr>
+                                                    </table>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                        <tr>
+                                            <td style="width:20%;"> 
+                                                Jumlah Kebutuhan
+                                            </td>
+                                            <td colspan="3"> 
+                                                <span t-field="o.jenis_kelamin"/> : <span t-field="o.jumlah_orang"/> Orang
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:20%;"> 
+                                                Usia
+                                            </td>
+                                            <td colspan="3"> 
+                                                
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:20%; vertical-align: top;"> 
+                                                Pendidikan
+                                            </td>
+                                            <td colspan="3">
+                                                <table style="width:100%; border: none;" border="0" cellpadding="2" cellspacing="2" padding="5" margin="0">
+                                                    <tr t-foreach='o.pendidikan_ids' t-as='line' style="line-height: 15pt;">
+                                                        <td>
+                                                            <span t-field="line.pendidikan"/>
+                                                        </td>
+                                                        <td>
+                                                            Fakultas / Jurusan : <span t-field="line.jurusan"/>
+                                                        </td>
+                                                    </tr>
+                                                </table>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:20%;"> 
+                                                Pengalaman Kerja
+                                            </td>
+                                            <td colspan="3"> 
+                                                <span t-field="o.pengalaman_kerja"/>
+                                            </td>
+                                        </tr>
+
+                                        <t t-if="o.jenis_fpk in ('penambahan_karyawan','penggantian_karyawan')">
+                                            <tr>
+                                                <td style="width:20%; vertical-align: top;"> 
+                                                    Uraian Job Desk
+                                                </td>
+                                                <td colspan="3" style="vertical-align: top;"> 
+                                                    <span t-field="o.jobdesk"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                        <t t-if="o.jenis_fpk in ('penambahan_jabatan_baru')">
+                                            <tr>
+                                                <td style="width:20%; vertical-align: top;"> 
+                                                    Skill / Keahlian
+                                                </td>
+                                                <td colspan="3" style="vertical-align: top;"> 
+                                                    <span t-field="o.skill_keahlian"/>
+                                                </td>
+                                            </tr>
+                                        </t>
+
+                                        <tr>
+                                            <td style="width:20%;"> 
+                                                Status
+                                            </td>
+                                            <td colspan="3"> 
+                                                <span t-field="o.karyawan_status"/> : <span t-field="o.karyawan_durasi"/> <span t-field="o.karyawan_durasi_uom"/>
+                                            </td>
+                                        </tr>
+
+                                        <!-- <tr>
+                                            <td style="width:20%; height: 100px; vertical-align: top;"> 
+                                                Dibutuhkan Tanggal
+                                            </td>
+                                            <td> 
+                                                
+                                            </td>
+                                            <td style="width:20%;  height: 100px; vertical-align: bottom; text-align: center;"> 
+                                                TTD Head / Supervisor
+                                            </td>
+                                            <td style="width:20%;  height: 100px; vertical-align: bottom; text-align: center;"> 
+                                                TTD Manager
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td colspan="4" style="background-color: #e8e6eb;"> 
+                                                *Diisi Oleh HRD
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:20%; height: 100px; vertical-align: top;"> 
+                                                Tanggal Form Diterima
+                                            </td>
+                                            <td colspan="2"> 
+                                                
+                                            </td>
+                                            <td style="width:20%; height: 100px; vertical-align: bottom; text-align: center;"> 
+                                                TTD Recruitment Staff
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:20%; height: 100px; vertical-align: top;"> 
+                                                Analisa / Pendapat Divisi HRD
+                                            </td>
+                                            <td colspan="2"> 
+                                                
+                                            </td>
+                                            <td style="width:20%; height: 100px; vertical-align: bottom; text-align: center;"> 
+                                                TTD Recruitment Staff
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="width:20%; height: 100px; vertical-align: top;"> 
+                                                Tanggal Disetujui
+                                            </td>
+                                            <td colspan="2"> 
+                                                
+                                            </td>
+                                            <td style="width:20%; height: 100px; vertical-align: bottom; text-align: center;"> 
+                                                TTD Director
+                                            </td>
+                                        </tr> -->
+
+                                        <tr>
+                                            <td colspan="4" style="background-color: #e8e6eb;"> 
+                                                * Approval
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%; border: none;" border="0" cellpadding="2" cellspacing="2" padding="5" margin="0">
+                                                <tr t-foreach='o.approval_ids' t-as='line'>
+                                                    <td style="width:20%; height: 100px; vertical-align: top;"> 
+                                                        <span t-field="line.layer_id"/>
+                                                    </td>
+                                                    <td colspan="2" style="vertical-align: top;"> 
+                                                        <span t-field="line.reason"/>
+                                                    </td>
+                                                    <td style="width:20%; height: 100px; vertical-align: bottom; text-align: center;"> 
+                                                        <span t-field="line.department_id"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+                                        
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

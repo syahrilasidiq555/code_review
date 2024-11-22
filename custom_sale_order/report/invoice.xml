@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_invoice_inherit" inherit_id="account.report_invoice_document">
+            <xpath expr="//address[@t-field='o.partner_id']" position="after">
+                <t t-if="o.penanggungjawab_id or o.penanggungjawab2_id">
+                    <t t-if="o.penanggungjawab_id">
+                        <div>Penanggung Jawab : <span t-esc="o.penanggungjawab_id.name"/></div>
+                    </t>
+                    <t t-if="o.penanggungjawab2_id">
+                        <div>Penanggung Jawab : <span t-esc="o.penanggungjawab2_id.name"/></div>
+                    </t>
+                    <br/>
+                </t>
+            </xpath>
+        </template>
+    </data>
+</odoo>

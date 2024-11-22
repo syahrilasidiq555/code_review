@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="slide_channel_view_tree_remove_crud" model="ir.ui.view">
+        <field name="name">slide_channel_view_tree_remove_crud</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.slide_channel_view_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="slide_channel_view_tree_create" model="ir.ui.view">
+        <field name="name">slide_channel_view_tree_create</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.slide_channel_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_courses_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="slide_channel_view_tree_delete" model="ir.ui.view">
+        <field name="name">slide_channel_view_tree_delete</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.slide_channel_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_courses_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="view_slide_channel_form_remove_crud" model="ir.ui.view">
+        <field name="name">view_slide_channel_form_remove_crud</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_slide_channel_form_create" model="ir.ui.view">
+        <field name="name">view_slide_channel_form_create</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_courses_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_slide_channel_form_update" model="ir.ui.view">
+        <field name="name">view_slide_channel_form_update</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_courses_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_slide_channel_form_delete" model="ir.ui.view">
+        <field name="name">view_slide_channel_form_delete</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_courses_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_slide_channel_form_access" model="ir.ui.view">
+        <field name="name">view_slide_channel_form_access</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.view_slide_channel_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_channel_invite']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_courses_access_invite</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- KANBAN -->
+    <record id="slide_channel_view_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">slide_channel_view_kanban_remove_crud</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.slide_channel_view_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="slide_channel_view_kanban_create" model="ir.ui.view">
+        <field name="name">slide_channel_view_kanban_create</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.slide_channel_view_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_courses_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="slide_channel_view_kanban_access" model="ir.ui.view">
+        <field name="name">slide_channel_view_kanban_access</field>
+        <field name="model">slide.channel</field>
+        <field name="inherit_id" ref="website_slides.slide_channel_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='o_kanban_slides_card_manage_pane']" position="replace">
+                <div class="o_kanban_slides_card_manage_pane">
+                    <t t-if="widget.deletable">
+                        <div role="menuitem" groups="custom_access_right.group_submenu_courses_access_delete">
+                            <a type="delete">Delete</a>
+                        </div>
+                    </t>
+                    <div role="menuitem" groups="custom_access_right.group_submenu_courses_access_update">
+                        <a type="edit">Edit</a>
+                    </div>
+                    <div role="menuitem" groups="custom_access_right.group_submenu_courses_access_lesson">
+                        <a name="action_view_slides" type="object">Lessons</a>
+                    </div>
+                    <div role="menuitem" name="action_channel_invite" attrs="{'invisible': [('enroll', '!=', 'invite')]}" groups="custom_access_right.group_submenu_courses_access_invite">
+                        <a name="action_channel_invite" type="object">Invite</a>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- MENU ITEM -->
+    <record id="website_slides.website_slides_menu_courses_courses" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_courses_access_read'))]" />
+    </record>
+    <record id="website_slides.website_slides_menu_root" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_courses_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

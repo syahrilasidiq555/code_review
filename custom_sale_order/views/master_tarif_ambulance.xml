@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="master_tarif_ambulance_tree_view">
+            <field name="name">master_tarif_ambulance_tree_view</field>
+            <field name="model">master.tarif.ambulance</field>
+            <field name="arch" type="xml">
+                <tree string="" >
+                    <field name="kota" />
+                    <field name="tarif" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                    <field name="currency_id" invisible="1" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="master_tarif_ambulance_search_view" model="ir.ui.view">
+            <field name="name">master_tarif_ambulance_search_view</field>
+            <field name="model">master.tarif.ambulance</field>
+            <field name="arch" type="xml">
+                <search string="Search data...">
+                    <field name="kota" />
+                    <!-- <filter string="State Draft" name="state_draft" domain="[('state','=','draft')]"/>
+                    <filter string="State Confirm" name="state_confirm" domain="[('state','=','confirm')]"/>
+                    <filter string="State Approved" name="state_approved" domain="[('state','=','approved')]"/>
+                    <filter string="State Done" name="state_done" domain="[('state','=','done')]"/>
+                    <filter string="State Cancel" name="state_cancel" domain="[('state','=','cancel')]"/> -->
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="master_tarif_ambulance_form_view" model="ir.ui.view">
+            <field name="name">master_tarif_ambulance_form_view</field>
+            <field name="model">master.tarif.ambulance</field>
+            <field name="arch" type="xml">
+                <form string="Cost Sheet" duplicate='false'>
+                    <header>
+                    </header>
+                    <sheet>
+                        <!-- <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_view_so" class="oe_stat_button" icon="fa-file-text-o" attrs="{'invisible':[('sale_order_id','=',False)]}">
+                                <span class="o_stat_text" >Sale</span>
+                            </button>
+                        </div> -->
+                        <!-- <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'invisible': [('name', '=', '')]}" readonly="1"/>
+                            </h1>
+                        </div> -->
+
+                        <group string="" name="detail">                            
+                            <group name="left">
+                                <field name="kota" />
+                                <field name="tarif" widget="monetary" options="{'currency_field': 'currency_id'}"/>
+                                <field name="currency_id" />
+                            </group>
+                            <group name="right">
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Other Info">
+                                <group string="Audit Trail">
+                                    <group>
+                                        <field name="create_uid" readonly="1" force_save="1"/>
+                                        <field name="create_date" readonly="1" force_save="1"/>
+                                        
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" force_save="1"/>
+                                        <field name="write_date" readonly="1" force_save="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="chatter-container" style="background-color: white; min-height:100px;">
+                        <div class="oe_chatter" style="width:auto!important;">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids"/>	
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="master_tarif_ambulance_action">
+            <field name="name">Tarif Ambulance</field>
+            <field name="res_model">master.tarif.ambulance</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- <menuitem
+            id="master_tarif_ambulance_main_menu"
+            name="Cost Sheet"
+            sequence="142" 
+            web_icon="egs_custom_inventory,static/description/mr_icon.png"/> -->
+
+        <menuitem
+            id="master_tarif_ambulance_menu"
+            name="Tarif Ambulance"
+            action="master_tarif_ambulance_action"
+            parent="sale.menu_sale_config"
+            sequence="21" />        
+
+    </data>
+</odoo>

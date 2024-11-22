@@ -1,0 +1,128 @@
+{% extends 'layouts/main_background.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+<style>
+    body, html {
+        height: 89.4%;
+        margin: 0;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+{% block js_assets %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="pt-lg-3 px-lg-5 pt-md-2 px-md-4 p-2">
+    {{breadcrumb(paths = [{'href':'/portals/home','name':'Home'},{'href':'/portals/expense','name':'Expense'}], active = 'New')}}
+    <div class="card shadow">
+        <div class="card-header py-3 d-flex justify-content-between">
+            <div>
+                <button 
+                    type="submit"  
+                    class="btn btn-primary">Submit</button>
+                <div class="btn btn-secondary" @click="$store.partnerStore.editForm = false" x-show="$store.partnerStore.editForm">Cancel</div>
+            </div>
+            <p class="btn btn-success align-self-start" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">To Submit</p>
+        </div>
+        <div class="card-body">
+                <div class="row align-items-start">
+                    <form method="post">
+                        <div class="row mb-3">
+                            <div class="input-group input-group-lg col-md-6 align-items-end">
+                                <input type="text" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-lg" placeholder="e.g. Lunch With Customer" >
+                            </div>
+                            <div class="form-group col-md-6 text-right align-items-end"><button id="listDocuments"
+                                    name="listDocuments" type="button" class="btn btn-primary float-end"
+                                    data-toggle="modal" data-target="#attachmentModal"><span
+                                        id="attachment_number">0</span> Documents</button></div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 align-items-end mb-3">
+                                <label for="product_id" class="form-label fw-bold">Product</label>
+                                <select id="product_id" class="form-select">
+                                    <option selected disabled>Select Expense Product here..</option>
+                                    {% for product in products.records %}
+                                    <option value="{{product.id}}">{{product.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 align-items-end mb-3">
+                                <label for="date" class="form-label fw-bold">Expense Date</label>
+                                <input type="date" class="form-control" id="date" name="date" >
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 align-items-end mb-3">
+                                <label for="name" class="form-label fw-bold">Unit Price</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text">Rp</span></div>
+                                    <input class="form-control" id="name" name="name"
+                                        x-mask:dynamic="$money($input)">
+                                </div>
+
+                            </div>
+                            <div class="form-group col-md-6 align-items-end mb-3">
+                                <label for="quantity" class="form-label fw-bold">Quantity</label>
+                                <input type="number" class="form-control" id="quantity" name="quantity" value="1">
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group col-md-6 align-items-end mb-3">
+                                <label for="expense_location" class="form-label fw-bold">Location</label>
+                                <select id="expense_location" name="expense_location" class="form-select">
+                                    <option selected disabled>Select location..</option>
+                                    {% for location in locations.records %}
+                                    <option value="{{location.id}}">{{location.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                            <div class="form-group col-md-6 align-items-end mb-3">
+                                <label for="email" class="form-label fw-bold">Total Amount</label>
+                                <div class="input-group">
+                                    <div class="input-group-prepend"><span class="input-group-text">Rp</span></div>
+                                    <input type="text" class="form-control" id="name" name="name" disabled>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="form-group align-items-end mb-3">
+                                <label for="name" class="form-label fw-bold">Note</label>
+                                <textarea row="3" name="description" id="description" class="form-control" value="ini notesnya">ini notesnya</textarea>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+        </div>
+    </div>
+</div>
+<script>
+    // $(document).ready(function () {
+    //     po_table = $('#expense_table').DataTable();
+        
+    // });
+</script>
+
+
+{% endblock %}

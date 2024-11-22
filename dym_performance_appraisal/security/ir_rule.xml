@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <!-- administrator -->
+        <record id="performance_appraisal_form_b_rule_admin" model="ir.rule">
+            <field name="name">dym.performance.appraisal.form.b administrator</field>
+            <field name="model_id" ref="model_dym_performance_appraisal_form_b" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('group_performance_appraisal_form_b_administrator'))]"></field>
+        </record>
+        <record id="performance_appraisal_form_a_rule_admin" model="ir.rule">
+            <field name="name">dym.performance.appraisal.form.a administrator</field>
+            <field name="model_id" ref="model_dym_performance_appraisal_form_a" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('group_performance_appraisal_form_a_administrator'))]"></field>
+        </record>
+
+        <record id="performance_appraisal_form_b_rule" model="ir.rule">
+            <field name="name">dym.performance.appraisal.form.b department rule</field>
+            <field name="model_id" ref="model_dym_performance_appraisal_form_b" />
+            <field name="domain_force">['|','|',('employee_id.user_id','=',user.id),('atasan_1.user_id','=',user.id),('atasan_2.user_id','=',user.id)]</field>
+            <!-- <field name="global" eval="True"/> -->
+            <field name="groups" eval="[(4,ref('group_performance_appraisal_form_b')),(4,ref('group_performance_appraisal_form_b_manager'))]"></field>
+        </record>
+        <record id="performance_appraisal_form_a_rule" model="ir.rule">
+            <field name="name">dym.performance.appraisal.form.a department rule</field>
+            <field name="model_id" ref="model_dym_performance_appraisal_form_a" />
+            <field name="domain_force">['|','|',('employee_id.user_id','=',user.id),('atasan_1.user_id','=',user.id),('atasan_2.user_id','=',user.id)]</field>
+            <!-- <field name="global" eval="True"/> -->
+            <field name="groups" eval="[(4,ref('group_performance_appraisal_form_a')),(4,ref('group_performance_appraisal_form_a_manager'))]"></field>
+        </record>
+    </data>
+</odoo>

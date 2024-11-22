@@ -1,0 +1,144 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="crm_case_tree_view_job_remove_crud" model="ir.ui.view">
+        <field name="name">crm_case_tree_view_job_remove_crud</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">false</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="crm_case_tree_view_job_delete" model="ir.ui.view">
+        <field name="name">crm_case_tree_view_job_delete</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_application_recap_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="crm_case_tree_view_job_create" model="ir.ui.view">
+        <field name="name">crm_case_tree_view_job_create</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.crm_case_tree_view_job"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_application_recap_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- KANBAN -->
+    <record id="hr_kanban_view_applicant_remove_crud" model="ir.ui.view">
+        <field name="name">hr_kanban_view_applicant_crud</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="delete">false</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_kanban_view_applicant_delete" model="ir.ui.view">
+        <field name="name">hr_kanban_view_applicant_delete</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='dropdown-menu']" position="replace">
+                <div class="dropdown-menu" role="menu">
+                    <t t-if="widget.deletable"><a role="menuitem" type="delete" class="dropdown-item" groups="custom_access_right.group_submenu_application_recap_access_delete">Delete</a></t>
+                    <a role="menuitem" name="action_makeMeeting" type="object" class="dropdown-item">Schedule Interview</a>
+                    <div role="separator" class="dropdown-divider"/>
+                    <ul class="oe_kanban_colorpicker text-center" data-field="color"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_kanban_view_applicant_create" model="ir.ui.view">
+        <field name="name">hr_kanban_view_applicant_create</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_kanban_view_applicant"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_application_recap_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- FORM -->
+    <record id="hr_applicant_view_form_remove_crud" model="ir.ui.view">
+        <field name="name">hr_applicant_view_form_remove_crud</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_applicant_view_form_create" model="ir.ui.view">
+        <field name="name">hr_applicant_view_form_create</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_application_recap_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_applicant_view_form_update" model="ir.ui.view">
+        <field name="name">hr_applicant_view_form_update</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_application_recap_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_applicant_view_form_delete" model="ir.ui.view">
+        <field name="name">hr_applicant_view_form_delete</field>
+        <field name="model">hr.applicant</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_application_recap_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- MENU ITEM -->
+    <record id="hr_recruitment.menu_hr_job_position" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_application_recap_access_job_position'))]" />
+    </record>
+    <record id="hr_recruitment.menu_crm_case_categ_all_app" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_application_recap_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

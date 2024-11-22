@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- FORMAT KERTASNYAA -->
+        <record id="format_kertas_a4" model="report.paperformat">
+            <field name="name">Faktur A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="margin_top">60</field>
+            <field name="margin_bottom">50</field>
+            <field name="header_spacing">55</field>
+            <field name="dpi">90</field>
+        </record>
+
+
+        <!-- <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'account'), ('name', '=', 'account_invoices')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function> -->
+        <record id="account.account_invoices" model="ir.actions.report">
+            <field name="report_name">custom_accounting.report_sisnet_invoice_template</field>
+            <field name="is_password" eval="True" />
+            <field name="password_type">dynamic</field>
+            <field name="password_field_id" ref="custom_accounting.field_account_move__customer_id_pass" />
+            <field name="paperformat_id" ref="format_kertas_a4" />
+        </record>
+
+        
+
+        <!-- <record id="report_sisnet_invoice" model="ir.actions.report">
+            <field name="name">Sisnet Invoice</field>
+            <field name="model">account.move</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_accounting.report_sisnet_invoice_template</field>
+            <field name="report_file">custom_accounting.report_sisnet_invoice_template</field>
+            <field name="print_report_name">'Sisnet Invoice - %s' % (object.name)</field>
+            <field name="binding_model_id" ref="account.model_account_move"/>
+            <field name="paperformat_id" ref="format_kertas_a4" />
+            <field name="binding_type">report</field>
+        </record> -->
+    </data>
+</odoo>

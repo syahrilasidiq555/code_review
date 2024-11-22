@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<odoo>
+    <data>
+        <record id="view_move_line_tree_detailed_inherit" model="ir.ui.view">
+            <field name="name">view_move_line_tree_detailed_inherit</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_move_line_tree_detailed" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_id']" position="before" >
+                    <field name="picking_partner_id"/>
+                </xpath>
+
+                <xpath expr="//field[@name='qty_done']" position="before" >
+                    <field name="location_usage" invisible="1" />
+                    <field name="location_dest_usage" invisible="1" />
+                </xpath>
+
+                <xpath expr="//field[@name='qty_done']" position="attributes" >
+                    <attribute name="decoration-danger">(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))</attribute>
+                    <attribute name="decoration-success">(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))</attribute>
+                </xpath>
+                
+                <xpath expr="//field[@name='qty_done']" position="after" >
+                    <field name="inventory_qty_done" optional="show" decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))" decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))" />
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="view_move_line_tree_inherit" model="ir.ui.view">
+            <field name="name">view_move_line_tree_inherit</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.view_move_line_tree" />
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='location_id']" position="before" >
+                    <field name="picking_partner_id"/>
+                </xpath>
+                
+                <xpath expr="//field[@name='qty_done']" position="before" >
+                    <field name="location_usage" invisible="1" />
+                    <field name="location_dest_usage" invisible="1" />
+                </xpath>
+
+                <xpath expr="//field[@name='qty_done']" position="attributes" >
+                    <attribute name="decoration-danger">(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))</attribute>
+                    <attribute name="decoration-success">(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='qty_done']" position="after" >
+                    <field name="inventory_qty_done" optional="show" decoration-danger="(location_usage in ('internal','transit')) and (location_dest_usage not in ('internal','transit'))" decoration-success="(location_usage not in ('internal','transit')) and (location_dest_usage in ('internal','transit'))" />
+                </xpath>
+            </field>
+        </record>
+
+        <record id="stock_move_line_view_search_inherit" model="ir.ui.view">
+            <field name="name">stock_move_line_view_search_inherit</field>
+            <field name="model">stock.move.line</field>
+            <field name="inherit_id" ref="stock.stock_move_line_view_search" />
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='by_location']" position="after" >
+                    <filter string="Partner" name="groupby_partner" domain="[]" context="{'group_by': 'picking_partner_id'}"/>
+                </xpath>
+            </field>
+        </record>
+        
+    </data>
+</odoo>

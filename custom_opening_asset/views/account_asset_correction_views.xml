@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_asset_correction_tree" model="ir.ui.view">
+        <field name="name">account.asset.correction.tree</field>
+        <field name="model">account.asset.correction</field>
+        <field name="arch" type="xml">
+            <tree string="Assets Correction" decoration-info="state == 'draft'" decoration-muted="state == 'cancel'">
+                <field name="currency_id" invisible="1"/>
+                <field name="ref"/>
+                <field name="date"/>
+                <field name="journal_id"/>
+                <field name="move_name"/>
+                <field name="amount_total"/>
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="view_asset_correction_form" model="ir.ui.view">
+        <field name="name">account.asset.correction.form</field>
+        <field name="model">account.asset.correction</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Assets Correction">
+                <header>
+                    <button name="action_post" string="Post" type="object" class="oe_highlight" attrs="{'invisible': [('state', 'in', ('posted', 'cancel'))]}"/>
+                    <button name="button_draft" string="Reset to Draft" type="object" attrs="{'invisible': [('state', '=', 'draft')]}"/>
+                    <button name="button_cancel" string="Cancel Entry" type="object" attrs="{'invisible': [('state', 'in', ('posted', 'cancel'))]}"/>
+                    <field name="state" widget="statusbar" statusbar_visible="draft,posted"/>
+                </header>
+                <sheet>
+                    <div name="button_box" class="oe_button_box">
+                        <button name="open_move_id"
+                                type="object"
+                                icon="fa-bars"
+                                class="oe_stat_button"
+                                attrs="{'invisible': [('move_id', '=', False)]}">
+                            <span>Journal Item</span>
+                        </button>
+                    </div>
+                    <div class="oe_title">
+                        <label for="ref" string="Correction Name"/>
+                        <h1><field name="ref" placeholder="Computer Correction"/></h1>
+                    </div>
+                    <div>
+                        <div>
+                            <field name="is_correct_asset" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <label for="is_correct_asset"/>
+                        </div>
+                        <div>
+                            <field name="is_correct_depreciation" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <label for="is_correct_depreciation"/>
+                        </div>
+                        <div>
+                            <field name="is_correct_book" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <label for="is_correct_book"/>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="move_id" invisible="1"/>
+                            <field name="company_id" invisible="1"/>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="book_value" attrs="{'invisible': [('is_correct_book', '!=', True)], 'required': [('is_correct_book', '=', True)], 'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="asset_model" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="journal_id" readonly="1" force_save="1"/>
+                        </group>
+                        <group>
+                            <field name="date" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="create_journal_items" attrs="{'readonly': [('state', '!=', 'draft')]}"/>
+                            <field name="amount_total" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Journal Items">
+                            <field name="line_ids" mode="tree" context="{'default_line_id': active_id, 'default_name': ref, 'default_date': date}" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="move_id" invisible="1"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <field name="date" optional="hide" groups="base.group_no_one"/>
+                                    <field name="parent_state" optional="hide" groups="base.group_no_one"/>
+                                    <field name="account_id"/>
+                                    <field name="partner_id"/>
+                                    <field name="name"/>
+                                    <field name="debit" sum="Total Debit"/>
+                                    <field name="credit" sum="Total Credit"/>
+                                    <field name="balance" optional="hide" groups="base.group_no_one"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Opening Assets" attrs="{'invisible': [('opening_asset_ids', '=', [])]}" groups="base.group_no_one">
+                            <field name="opening_asset_ids" mode="tree" readonly="1">
+                                <tree>
+                                    <field name="name"/>
+                                    <field name="first_depreciation_date"/>
+                                    <field name="original_value"/>
+                                    <field name="value_residual"/>
+                                    <field name="amount_opening" sum="Total Amount Opening"/>
+                                    <field name="state" optional="hide"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                <!-- Attachment preview -->
+                <div class="o_attachment_preview"/>
+                <!-- Chatter -->
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers" groups="base.group_user"/>
+                    <field name="activity_ids" widget="mail_activity"/>
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_create_asset_correction" model="ir.actions.act_window">
+        <field name="name">Asset Corrections</field>
+        <field name="res_model">account.asset.correction</field>
+        <field name="view_mode">tree,form</field>
+        <field name="view_id" ref="view_asset_correction_tree"/>
+    </record>
+
+    <menuitem parent="account.menu_finance_entries_management"
+              id="menu_action_create_asset_correction"
+              action="action_create_asset_correction"
+              sequence="105"
+              groups="account.group_account_manager"/>
+</odoo>

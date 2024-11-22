@@ -1,0 +1,677 @@
+{% extends 'layouts/main.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<style>
+    [x-cloak] {
+        display: none !important
+    }
+    h1 {
+    text-align: center;
+    }
+    h2 {
+        margin: 0;
+    }
+    #multi-step-form-container {
+        margin-top: 3rem;
+    }
+    #multi-step-form-container .text-center {
+        text-align: center;
+    }
+    #multi-step-form-container .mx-auto {
+        margin-left: auto;
+        margin-right: auto;
+    }
+    #multi-step-form-container .pl-0 {
+        padding-left: 0;
+    }
+    #multi-step-form-container .button {
+        padding: 0.7rem 1.5rem;
+        border: 1px solid #4361ee;
+        background-color: #4361ee;
+        color: #fff;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+    #multi-step-form-container .submit-btn {
+        border: 1px solid #0e9594;
+        background-color: #0e9594;
+    }
+    #multi-step-form-container .mt-3 {
+        margin-top: 2rem;
+    }
+    #multi-step-form-container .d-none {
+        display: none;
+    }
+    #multi-step-form-container .form-step {
+        border: 1px solid rgba(0, 0, 0, 0.1);
+        border-radius: 20px;
+        padding: 3rem;
+    }
+    #multi-step-form-container .font-normal {
+        font-weight: normal;
+    }
+    #multi-step-form-container ul.form-stepper {
+        counter-reset: section;
+        margin-bottom: 3rem;
+    }
+    #multi-step-form-container ul.form-stepper .form-stepper-circle {
+        position: relative;
+    }
+    #multi-step-form-container ul.form-stepper .form-stepper-circle span {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translateY(-50%) translateX(-50%);
+    }
+    #multi-step-form-container .form-stepper-horizontal {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+        justify-content: space-between;
+    }
+    #multi-step-form-container ul.form-stepper > li:not(:last-of-type) {
+        margin-bottom: 0.625rem;
+        -webkit-transition: margin-bottom 0.4s;
+        -o-transition: margin-bottom 0.4s;
+        transition: margin-bottom 0.4s;
+    }
+    #multi-step-form-container .form-stepper-horizontal > li:not(:last-of-type) {
+        margin-bottom: 0 !important;
+    }
+    #multi-step-form-container .form-stepper-horizontal li {
+        position: relative;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        -webkit-box-align: start;
+        -ms-flex-align: start;
+        align-items: start;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+    }
+    #multi-step-form-container .form-stepper-horizontal li:not(:last-child):after {
+        position: relative;
+        -webkit-box-flex: 1;
+        -ms-flex: 1;
+        flex: 1;
+        height: 1px;
+        content: "";
+        top: 32%;
+    }
+    #multi-step-form-container .form-stepper-horizontal li:after {
+        background-color: #dee2e6;
+    }
+    #multi-step-form-container .form-stepper-horizontal li.form-stepper-completed:after {
+        background-color: #4da3ff;
+    }
+    #multi-step-form-container .form-stepper-horizontal li:last-child {
+        flex: unset;
+    }
+    #multi-step-form-container ul.form-stepper li a .form-stepper-circle {
+        display: inline-block;
+        width: 40px;
+        height: 40px;
+        margin-right: 0;
+        line-height: 1.7rem;
+        text-align: center;
+        background: rgba(0, 0, 0, 0.38);
+        border-radius: 50%;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-active .form-stepper-circle {
+        background-color: #4361ee !important;
+        color: #fff;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-active .label {
+        color: #4361ee !important;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-active .form-stepper-circle:hover {
+        background-color: #4361ee !important;
+        color: #fff !important;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-unfinished .form-stepper-circle {
+        background-color: #f8f7ff;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-completed .form-stepper-circle {
+        background-color: #0e9594 !important;
+        color: #fff;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-completed .label {
+        color: #0e9594 !important;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-completed .form-stepper-circle:hover {
+        background-color: #0e9594 !important;
+        color: #fff !important;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-active span.text-muted {
+        color: #fff !important;
+    }
+    #multi-step-form-container .form-stepper .form-stepper-completed span.text-muted {
+        color: #fff !important;
+    }
+    #multi-step-form-container .form-stepper .label {
+        font-size: 1rem;
+        margin-top: 0.5rem;
+    }
+    #multi-step-form-container .form-stepper a {
+        cursor: default;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <div class="container" x-init="$store.createCustomerStore" x-cloak>
+        <div id="multi-step-form-container">
+            <!-- Form Steps / Progress Bar -->
+            <ul class="form-stepper form-stepper-horizontal text-center mx-auto pl-0">
+                <!-- Step 1 -->
+                <li class="text-center form-stepper-list"
+                    :class="{'form-stepper-completed':$store.createCustomerStore.step > 1, 'form-stepper-active':$store.createCustomerStore.step == 1}"
+                    >
+                    <a class="mx-2">
+                        <span class="form-stepper-circle">
+                            <span>1</span>
+                        </span>
+                        <div class="label">Profil Customer</div>
+                    </a>
+                </li>
+                <!-- Step 2 -->
+                <li class="form-stepper-unfinished text-center form-stepper-list" 
+                    :class="{'form-stepper-completed':$store.createCustomerStore.step > 2, 'form-stepper-active':$store.createCustomerStore.step == 2}">
+                    <a class="mx-2">
+                        <span class="form-stepper-circle text-muted">
+                            <span>2</span>
+                        </span>
+                        <div class="label text-muted">Profil Jenazah</div>
+                    </a>
+                </li>
+                <!-- Step 3 -->
+                <li class="form-stepper-unfinished text-center form-stepper-list" 
+                    :class="{'form-stepper-completed':$store.createCustomerStore.step > 3, 'form-stepper-active':$store.createCustomerStore.step == 3}">
+                    <a class="mx-2">
+                        <span class="form-stepper-circle text-muted">
+                            <span>3</span>
+                        </span>
+                        <div class="label text-muted">Dokumen</div>
+                    </a>
+                </li>
+            </ul>
+            <!-- Step Wise Form Content -->
+            <form enctype="multipart/form-data" action="/customer-form/{{data.token}}" method="post">
+                <input type="hidden" name="csrf_token" value="{{csrf_token}}">
+                <!-- Step 1 Content -->
+                <section class="form-step" x-show="$store.createCustomerStore.step === 1">
+                    <h2 class="font-normal">Profil Customer</h2>
+                    <!-- ALERT -->
+                    <div class="row mt-3 mb-3" x-show="$store.createCustomerStore.alert.show" x-transition>
+                        <div :class="$store.createCustomerStore.alert.class" class="alert d-flex align-items-center p-2" >
+                            <div>
+                                <span x-text="$store.createCustomerStore.alert.message"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 1 input fields -->
+                    <div class="mt-3">
+                        <div class="row mb-3">
+                            <div class="col-md-6 form-group">
+                                <label for="customer_name" class="form-label">Name</label>
+                                <input type="text" class="form-control" 
+                                    id="customer_name"
+                                    name="customer_name"
+                                    placeholder="John Doe"
+                                    x-model="$store.createCustomerStore.records.step1.customer_name">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <label for="customer_email" class="form-label">Email</label>
+                                <input type="text" class="form-control" 
+                                    id="customer_email"
+                                    name="customer_email"
+                                    placeholder="johndoe@gmail.com"
+                                    required=""
+                                    x-model="$store.createCustomerStore.records.step1.customer_email">
+
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6 form-group">
+                                <label for="customer_phone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" 
+                                    id="customer_phone"
+                                    name="customer_phone"
+                                    placeholder="+6281231231231"
+                                    x-model="$store.createCustomerStore.records.step1.customer_phone">
+
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <label for="customer_ktp" class="form-label">No KTP</label>
+                                <input type="number" class="form-control" 
+                                    id="customer_ktp"
+                                    name="customer_ktp"
+                                    placeholder="321323212312231"
+                                    required=""
+                                    x-model="$store.createCustomerStore.records.step1.customer_ktp">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 form-group">
+                                <label for="customer_street" class="form-label">Address</label>
+                                <input type="text" class="form-control" 
+                                    id="customer_street"
+                                    name="customer_street"
+                                    placeholder="Jl. Salemba Raya No.41, RT.3/RW.5 Paseban, Kec. Senen"
+                                    x-model="$store.createCustomerStore.records.step1.customer_street">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <label for="customer_zip" class="form-label">ZIP</label>
+                                <input type="number" class="form-control" 
+                                    id="customer_zip"
+                                    name="customer_zip"
+                                    placeholder="10440"
+                                    required=""
+                                    x-model="$store.createCustomerStore.records.step1.customer_zip">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 form-group">
+                                <label for="customer_city" class="form-label">City</label>
+                                <input type="text" class="form-control" 
+                                    id="customer_city"
+                                    name="customer_city"
+                                    placeholder="Jakarta Pusat"
+                                    x-model="$store.createCustomerStore.records.step1.customer_city">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <label for="customer_province" class="form-label">Province</label>
+                                <select id="customer_province" name="customer_province" class="form-select"
+                                    x-model="$store.createCustomerStore.records.step1.customer_province">
+                                    <option value='' selected disabled>Select Province</option>
+                                    {% for province in provinces.records %}
+                                    <option value="{{province.id}}">{{province.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-between">
+                        <!-- <button class="button btn-navigate-form-step" type="button" step_number="2">Next</button> -->
+                        <div>
+                        </div>
+                        <div>
+                            <button
+                                type="button"
+                                @click="$store.createCustomerStore.nextStep()"
+                                class="btn btn-primary" 
+                            >Next</button>
+                        </div>
+                    </div>
+                </section>
+                <!-- Step 2 Content, default hidden on page load. -->
+                <section class="form-step" x-show="$store.createCustomerStore.step === 2">
+                    <h2 class="font-normal">Profil Jenazah</h2>
+                    <!-- ALERT -->
+                    <div class="row mt-3 mb-3" x-show="$store.createCustomerStore.alert.show" x-transition>
+                        <div :class="$store.createCustomerStore.alert.class" class="alert d-flex align-items-center p-2" >
+                            <div>
+                                <span x-text="$store.createCustomerStore.alert.message"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Step 2 input fields -->
+                    <div class="mt-3">
+                        <div class="row mb-3">
+                            <div class="col-md-6 form-group">
+                                <label for="jenazah_name" class="form-label">Name</label>
+                                <input type="text" class="form-control" 
+                                    id="jenazah_name"
+                                    name="jenazah_name"
+                                    placeholder="John Doe"
+                                    x-model="$store.createCustomerStore.records.step2.jenazah_name">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <label for="jenazah_email" class="form-label">Email</label>
+                                <input type="text" class="form-control" 
+                                    id="jenazah_email"
+                                    name="jenazah_email"
+                                    placeholder="johndoe@gmail.com"
+                                    required=""
+                                    x-model="$store.createCustomerStore.records.step2.jenazah_email">
+                            </div>
+                        </div>
+
+                        <div class="row mb-3">
+                            <div class="col-md-6 form-group">
+                                <label for="jenazah_phone" class="form-label">Phone</label>
+                                <input type="tel" class="form-control" 
+                                    id="jenazah_phone"
+                                    name="jenazah_phone"
+                                    placeholder="+6281231231231"
+                                    x-model="$store.createCustomerStore.records.step2.jenazah_phone">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <label for="jenazah_ktp" class="form-label">No KTP</label>
+                                <input type="number" class="form-control" 
+                                    id="jenazah_ktp"
+                                    name="jenazah_ktp"
+                                    placeholder="321323212312231"
+                                    required=""
+                                    x-model="$store.createCustomerStore.records.step2.jenazah_ktp">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 form-group">
+                                <label for="jenazah_street" class="form-label">Address</label>
+                                <input type="text" class="form-control" 
+                                    id="jenazah_street"
+                                    name="jenazah_street"
+                                    placeholder="Jl. Salemba Raya No.41, RT.3/RW.5 Paseban, Kec. Senen"
+                                    x-model="$store.createCustomerStore.records.step2.jenazah_street">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <label for="jenazah_zip" class="form-label">ZIP</label>
+                                <input type="number" class="form-control" 
+                                    id="jenazah_zip"
+                                    name="jenazah_zip"
+                                    placeholder="10440"
+                                    required=""
+                                    x-model="$store.createCustomerStore.records.step2.jenazah_zip">
+                            </div>
+                        </div>
+                        <div class="row mb-3">
+                            <div class="col-md-6 form-group">
+                                <label for="jenazah_city" class="form-label">City</label>
+                                <input type="text" class="form-control" 
+                                    id="jenazah_city"
+                                    name="jenazah_city"
+                                    placeholder="Jakarta Pusat"
+                                    x-model="$store.createCustomerStore.records.step2.jenazah_city">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <label for="jenazah_province" class="form-label">Province</label>
+                                <select id="jenazah_province" name="jenazah_province" class="form-select"
+                                    x-model="$store.createCustomerStore.records.step2.jenazah_province">
+                                    <option value='' selected disabled>Select Province</option>
+                                    {% for province in provinces.records %}
+                                    <option value="{{province.id}}">{{province.name}}</option>
+                                    {% endfor %}
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-between">
+                        <div>
+                            <button
+                                type="button"
+                                @click="$store.createCustomerStore.prevStep()"
+                                class="btn btn-outline-primary" 
+                            >Previous</button>
+                        </div>
+                        <div>
+                            <button
+                                type="button"
+                                @click="$store.createCustomerStore.nextStep()"
+                                class="btn btn-primary" 
+                            >Next</button>
+                        </div>
+                    </div>
+                </section>
+                <!-- Step 3 Content, default hidden on page load. -->
+                <section class="form-step" x-show="$store.createCustomerStore.step === 3">
+                    <h2 class="font-normal">Dokumen</h2>
+                    <!-- Step 3 input fields -->
+                    <div class="mt-3">
+                        <div class="form-group mt-3">
+                            <label for="documentA" class="form-label">Document A</label>
+                            <input id="documentA" 
+                                class="form-control"
+                                name="documentA" 
+                                data-edit="all" 
+                                type="file">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="documentB" class="form-label">Document B</label>
+                            <input id="documentB" 
+                                class="form-control"
+                                name="documentB" 
+                                data-edit="all" 
+                                type="file">
+                        </div>
+                        <div class="form-group mt-3">
+                            <label for="documentC" class="form-label">Document C</label>
+                            <input id="documentC" 
+                                class="form-control"
+                                name="documentC" 
+                                data-edit="all" 
+                                type="file">
+                        </div>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-between">
+                        <div>
+                            <button
+                                type="button"
+                                @click="$store.createCustomerStore.prevStep()"
+                                class="btn btn-outline-primary" 
+                            >Previous</button>
+                        </div>
+                        <div>
+                            <button
+                                type="submit"
+                                class="btn btn-success" 
+                            >Complete</button>
+                        </div>
+                    </div>
+                </section>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // function app() {
+        //     return {
+        //         step: 1 
+        //     }
+        // }
+
+        document.addEventListener('alpine:init', async () => {
+            Alpine.store('createCustomerStore', {
+                step: 1,
+                records: {
+                    step1 : {},
+                    step2 : {},
+                    step3 : {}
+                },
+                alert: {
+                    show: false,
+                    message: 'ini alert message',
+                    iconHref: "#check-circle-fill",
+                    class: 'alert-success',
+                },
+                validateData(){
+                    this.alert.show = false
+                    if (this.step == 1) {
+                        if (!this.records.step1.customer_name) {
+                            this.alert.show = true
+                            this.alert.message = 'Name must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step1.customer_email) {
+                            this.alert.show = true
+                            this.alert.message = 'Email must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step1.customer_phone) {
+                            this.alert.show = true
+                            this.alert.message = 'Phone must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step1.customer_ktp) {
+                            this.alert.show = true
+                            this.alert.message = 'KTP must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step1.customer_street) {
+                            this.alert.show = true
+                            this.alert.message = 'Address must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step1.customer_zip) {
+                            this.alert.show = true
+                            this.alert.message = 'ZIP must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step1.customer_city) {
+                            this.alert.show = true
+                            this.alert.message = 'City must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step1.customer_province) {
+                            this.alert.show = true
+                            this.alert.message = 'Province must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        
+                        return
+                    }
+                    if (this.step == 2) {
+                        if (!this.records.step2.jenazah_name) {
+                            this.alert.show = true
+                            this.alert.message = 'Name must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step2.jenazah_email) {
+                            this.alert.show = true
+                            this.alert.message = 'Email must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step2.jenazah_phone) {
+                            this.alert.show = true
+                            this.alert.message = 'Phone must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step2.jenazah_ktp) {
+                            this.alert.show = true
+                            this.alert.message = 'KTP must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step2.jenazah_street) {
+                            this.alert.show = true
+                            this.alert.message = 'Street must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step2.jenazah_zip) {
+                            this.alert.show = true
+                            this.alert.message = 'ZIP must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step2.jenazah_city) {
+                            this.alert.show = true
+                            this.alert.message = 'City must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        if (!this.records.step2.jenazah_province) {
+                            this.alert.show = true
+                            this.alert.message = 'Province must be filled!'
+                            this.alert.class = 'alert-danger'
+                            return true
+                        }
+                        return
+                    }
+                    if (this.step == 3) {
+                        return
+                        
+                    }
+                    
+
+                },
+                nextStep(){
+                    // this.validateData()
+                    isErrorValidate = this.validateData()
+                    if (isErrorValidate) {
+                        return
+                    }
+                    this.step++
+                },
+                prevStep(){
+                    this.step--
+                }
+            });
+        })
+    </script>
+</main>
+
+<!-- <script>
+    document.addEventListener('alpine:init', async () => {
+        Alpine.store('customerStore', {
+            token: '',
+            partner: {
+                name: '',
+                email: '',
+                phone: '',
+            },
+
+            submit(){
+                console.log(this.partner)
+            },
+            
+            async createData(){
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "jsonrpc": "2.0",
+                        "params": {
+                            "token": this.token,
+                            "values": {
+                                name: this.partner.name,
+                                email: this.partner.email,
+                                phone: this.partner.phone,
+                            },
+                        }
+                    })
+                };
+
+                try {
+                    const fetchResponse = await fetch(`/api/rdc/res.partner/create`, settings);
+                    const data = await fetchResponse.json();
+                    console.log(data)
+                    
+                } catch (e) {
+                    return e;
+                }
+            },
+        });
+
+    })
+</script> -->
+
+
+{% endblock %}

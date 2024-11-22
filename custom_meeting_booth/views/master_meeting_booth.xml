@@ -1,0 +1,21 @@
+<odoo>
+
+    <record id="master_meeting_booth_view_tree" model="ir.ui.view">
+        <field name="name">master_meeting_booth_view_tree</field>
+        <field name="model">master.meeting.booth</field>
+        <field name="arch" type="xml">
+            <tree string="Master Booth" default_order="create_date desc" editable="bottom">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="active"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="master_meeting_booth_action">
+        <field name="name">Master Meeting Booth</field>
+        <field name="res_model">master.meeting.booth</field>
+        <field name="view_mode">tree</field>
+    </record>
+    
+</odoo>

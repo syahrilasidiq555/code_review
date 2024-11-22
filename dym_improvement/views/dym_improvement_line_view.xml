@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_dym_improvement_line" model="ir.ui.view">
+        <field name="name">view_dym_improvement_line</field>
+        <field name="model">dym.improvement.line</field>
+        <field name="arch" type="xml">
+            <form string="Improvement Line View">
+                <header>
+                    <!-- <button string="Confirm" type="object" states="draft" name="action_confirm" confirm="Apakah anda yakin?"/> -->
+
+                    <field name="state" widget="statusbar" statusbar_visible="draft,rfa,approved" attrs="{'invisible':[('state','in',['refuse','revise'])]}"/>
+                    <field name="state_refuse" widget="statusbar" statusbar_visible="refuse" attrs="{'invisible':[('state','!=','refuse')]}"/>
+                    <field name="state_revise" widget="statusbar" statusbar_visible="revise" attrs="{'invisible':[('state','!=','revise')]}"/>
+                    <!-- <field name="state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':[('state','!=','cancel')]}"/> -->
+                </header>
+                <sheet>
+                    <group>
+                        <field name="improvement_id" readonly="True" force_save="True"/>
+                        <field name="step_id" readonly="True" force_save="True"/>
+                        <field name="desc" required="True"/> 
+                        <field name="due_date" readonly="True" force_save="True"/>
+                    </group>
+                    <notebook>
+                        <page string="Attachment">  
+                            <group>
+                                <b>Attachment :</b>
+                                <field name="attachment_ids" nolabel="1" colspan="2">
+                                    <tree editable="bottom" create="true" edit="true" delete="true">
+                                        <field name="description" />
+                                        <field name="attachment" filename="attachment_name"/>
+                                        <field name="attachment_name" invisible="1"/>
+                                    </tree>
+                                </field>
+                            </group>
+                        </page>
+                        <page string="Audit Trail">
+                            <group string="Audit Trail">
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    <!-- Assignment Attachment Form -->
+    <!-- FORM -->
+    <record id="dym_improvement_attachment_form" model="ir.ui.view">
+        <field name="name">dym_improvement_attachment_form</field>
+        <field name="model">dym.improvement.line.attachment</field>
+        <field name="arch" type="xml">
+            <form version="7.0">
+                <group string="Improvement">
+                    <field name="improvement_line_id" />
+                </group>
+                <group string="Improvement Step Attachment">
+                    <field name="description" />
+                    <field name="attachment" filename="attachment_name"/>
+                    <field name="attachment_name" invisible="1"/>
+                    <field name="attachment_view" nolabel="1" colspan="2" widget="pdf_viewer"/>
+                    <b style="color:red;">*Download file if this view doesn't appear.</b>
+                </group>
+                <group string="Audit Trail">
+                    <group>
+                        <field name="create_uid" readonly="1"/>
+                        <field name="create_date" readonly="1"/>
+                    </group>
+                    <group>
+                        <field name="write_uid" readonly="1"/>
+                        <field name="write_date" readonly="1"/>
+                    </group>
+                </group>
+            </form>
+        </field>
+    </record>
+</odoo>

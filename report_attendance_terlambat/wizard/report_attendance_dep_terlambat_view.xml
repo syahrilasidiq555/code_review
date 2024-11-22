@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- VIEW FORM -->
+    <record id="report_attendance_dep_terlambat_view_form" model="ir.ui.view">
+        <field name="name">Report Attendance Summary (Terlambat)</field>
+        <field name="model">report.attendance.dep.terlambat</field>
+        <field name="arch" type="xml">
+            <form string="Report Attendance Summary (Terlambat)">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Department">
+                        <field name="department_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="print_report" string="Export" type="object" class="oe_highlight"/>
+                    Or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- WINDOW ACTION -->
+    <record id="report_attendance_dep_terlambat_action" model="ir.actions.act_window">
+        <field name="name">Report Attendance Summary (Terlambat)</field>
+        <field name="res_model">report.attendance.dep.terlambat</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <!-- MENU -->
+    <menuitem 
+        id="report_attendance_export" 
+        name="Export Report" 
+        parent="hr_attendance.menu_hr_attendance_root"
+        sequence="30" />
+        
+    <menuitem 
+        id="report_attendance_dep_terlambat_menu" 
+        name="Report Attendance Summary (Terlambat)" 
+        parent="report_attendance_export"
+        sequence="30" 
+        action="report_attendance_dep_terlambat_action"/>
+    
+    <!-- REPORT -->
+    <report 
+		id="report_attendance_dep_terlambat_xlsx"
+		string="Report Attendance Summary (Terlambat)"
+		model="report.attendance.dep.terlambat"
+		report_type="xlsx"
+		name="hr_attendance.report_attendance_dep_terlambat"
+		file="Report Attendance Summary (Terlambat)"
+		attachment_use="False"/>
+
+</odoo>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <!-- APALAH -->
+    <record id="hr_attendance.menu_hr_attendance_my_attendances" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_attendance_access_checkinout'))]" />
+    </record>
+    <record id="hr_attendance.menu_hr_attendance_kiosk_no_user_mode" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_attendance_access_kiosk'))]" />
+    </record>
+
+    <!-- REPORT -->
+    <record id="hr_attendance.menu_hr_attendance_report" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_reporting_access_report'))]" />
+    </record>
+    <record id="report_attendance_terlambat.report_attendance_dep_terlambat_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_export_access_report_sum'))]" />
+    </record>
+    <record id="report_attendance_terlambat.report_attendance_emp_terlambat_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_export_access_report_employee'))]" />
+    </record>
+
+    <!-- CONFIGURATION -->
+    <record id="hr_attendance.menu_hr_attendance_settings" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_config_access_settings'))]" />
+    </record>
+    <record id="custom_finger_attendance.finger_attendance_config_submenu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_config_access_finger'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

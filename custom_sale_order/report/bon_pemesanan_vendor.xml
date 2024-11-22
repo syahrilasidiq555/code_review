@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- PEMESANAN VENDOR -->
+        <template id="custom_sale_order.pemesanan_vendor_print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="custom_purchase.purchase_request_layout_header"/>
+            <t t-raw="0"/>
+            <t t-call="custom_sale_order.pemesanan_vendor_layout_footer"/>
+        </template>
+
+        <template id="custom_sale_order.pemesanan_vendor_layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:14px">
+                <!-- <div class="last-page"> -->
+                    <table class="table table-sm" style="margin:100px auto; width:90%; border:0px;">
+                        <tr style="background-color:transparent;">
+                            <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Menyetujui,</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <u>Kepala Bidang Operasional</u><br/>
+                                </p>
+                            </td>
+                            
+                            <td style="width:25%; padding: 0 40px;">
+                                
+                            </td>
+
+                            <td style="width:25%; padding: 0 40px;">
+                                
+                            </td>
+
+                            <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Petugas Adm. KSO RDC</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <u>(..................................)</u><br/>
+                                </p>
+                            </td>
+                        </tr>
+                    </table>
+                <!-- <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div> -->
+            </div>
+        </template>
+        
+        <template id="custom_sale_order.pemesanan_vendor_print">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_sale_order.pemesanan_vendor_print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">BON PESANAN BARANG / JASA</h5>
+                                        <span>No. Registrasi : <b t-esc="o.cost_sheet_id.name"/><br/></span>
+                                    </div>
+
+                                    <br/>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <table class="table">
+                                                <!-- <style>
+                                                    .borderless td, .borderless th {
+                                                        border: none;
+                                                    }
+                                                </style>  -->
+                                                <tbody>
+                                                    <tr style="line-height: 4pt">
+                                                       <td>Vendor : </td> 
+                                                       <td>
+                                                            <b t-esc="o.vendor_id.name"/><br/>
+                                                       </td> 
+                                                    </tr>
+                                                    <tr>
+                                                       <td>Jenis Pesanan : </td> 
+                                                       <td>
+                                                            <b t-esc="o.name"/><br/>
+                                                       </td> 
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <table class="table">
+                                                <!-- <style>
+                                                    .borderless td, .borderless th {
+                                                        border: none;
+                                                    }
+                                                </style>  -->
+                                                <tbody>
+                                                    <tr style="line-height: 2pt">
+                                                       <td>Untuk Melayani</td> 
+                                                       <td/> 
+                                                    </tr>
+                                                    <tr style="line-height: 12pt">
+                                                       <td>Nama Almarhum/Almarhumah</td> 
+                                                       <td><b t-esc="o.sale_order_id.partner_id.name"/></td> 
+                                                    </tr>
+                                                    <tr style="line-height: 2pt">
+                                                       <td>Umur</td> 
+                                                       <td><b t-esc="o.sale_order_id.almarhum_usia"/> Tahun</td> 
+                                                    </tr>
+                                                    <tr style="line-height: 2pt">
+                                                       <td>Agama</td> 
+                                                       <td><b t-esc="o.sale_order_id.almarhum_agama"/></td> 
+                                                    </tr>
+                                                    <tr style="line-height: 2pt">
+                                                       <td>Kamar No</td> 
+                                                       <td/> 
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <table class="table">
+                                        <!-- <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                            }
+                                        </style>  -->
+                                        <thead>
+                                            <tr class="border-black o_total" style="line-height: 5pt">
+                                                <th class="text-center">No.</th>
+                                                <th class="text-left">Uraian</th>
+                                                <th class="text-center">Satuan Barang</th>
+                                                <th class="text-right">Jumlah Diminta</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                            }
+                                        </style>  -->
+                                        <tbody>
+                                            <tr t-foreach='o.po_id.order_line' t-as='line' class='table ' style="line-height: 0pt">
+                                                <td class="text-center"><span t-esc="line_index + 1"/></td>
+                                                <td class="text-left"><t t-esc="line.product_id.name"/></td>
+                                                <td class="text-center"><t t-esc="line.product_uom.name"/></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.product_qty))" /></td>
+                                            </tr>
+                                            
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+
+    <!-- REPORT Pemesanan Vendor -->
+    <record id="action_report_pemesanan_vendor_rdc" model="ir.actions.report">
+        <field name="name">Bon Pesanan Barang</field>
+        <field name="model">cost.sheet.line</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_sale_order.pemesanan_vendor_print</field>
+        <field name="report_file">custom_sale_order.pemesanan_vendor_print</field>
+        <!-- <field name="paperformat_id" ref="custom_accounting.format_kertas_a5"/>   -->
+    </record>
+</odoo>

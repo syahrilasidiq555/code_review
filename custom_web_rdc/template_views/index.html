@@ -1,0 +1,403 @@
+{% extends 'layouts/main.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<link href="/custom_web_rdc/static/src/vendor/animate.css/animate.min.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/css/swiper.min.css">
+{% endblock %}
+
+
+{% block content %}
+<main>
+    <!-- hero section -->
+    <section id="hero">
+        <div class="hero-container">
+            <div id="heroCarousel" data-bs-interval="3000" class="carousel slide carousel-fade" data-bs-ride="carousel">
+                <div class="carousel-indicators" id="hero-carousel-indicators">
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="0" class=""
+                        aria-label="Slide 1"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="1" aria-label="Slide 2"
+                        aria-current="true" class="active"></button>
+                    <button type="button" data-bs-target="#heroCarousel" data-bs-slide-to="2" aria-label="Slide 3"
+                        class=""></button>
+                </div>
+
+                <div class="carousel-inner" role="listbox">
+
+                    <!-- Slide 1 -->
+                    <div class="carousel-item"
+                        style="background-image: url(https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/cover_w1440_h680_1440-x-680.jpg.webp);">
+                        <div class="carousel-container">
+                            <div class="carousel-content">
+                                <h2 class="animate__animated animate__fadeInDown">Melayani Dengan Hati Menuju Keabadian
+                                </h2>
+                                <p class="animate__animated animate__fadeInUp">Perpanjangan tangan untuk mengantar
+                                    jiwa-jiwa menuju kehidupan kekal.</p>
+                                <a href="#about" class="btn btn-lg btn-primary animate__animated animate__fadeInUp">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 2 -->
+                    <div class="carousel-item active"
+                        style="background-image: url(https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/slider/cover_w1440_h680_slider-fasad-1920---924c.jpg.webp);">
+                        <div class="carousel-container">
+                            <div class="carousel-content">
+                                <h2 class="animate__animated animate__fadeInDown">Melayani Dengan Hati Menuju Keabadian
+                                </h2>
+                                <p class="animate__animated animate__fadeInUp">Perpanjangan tangan untuk mengantar
+                                    jiwa-jiwa menuju kehidupan kekal.</p>
+                                <a href="#about" class="btn btn-lg btn-primary animate__animated animate__fadeInUp">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slide 3 -->
+                    <div class="carousel-item"
+                        style="background-image: url(https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/slider/cover_w1440_h680_slider-drop-off-1920---924.jpg.webp);">
+                        <div class="carousel-container">
+                            <div class="carousel-content">
+                                <h2 class="animate__animated animate__fadeInDown">Terpercaya, Kompeten, dan Berbelarasa
+                                </h2>
+                                <p class="animate__animated animate__adeInUp">Hadir kembali dengan spirit baru, wajah
+                                    baru, dan fasilitas yang lebih modern.</p>
+                                <a href="#about" class="btn btn-lg btn-primary animate__animated animate__fadeInUp">Read
+                                    More</a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a class="carousel-control-prev d-none d-md-flex" href="#heroCarousel" role="button"
+                    data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                </a>
+                <a class="carousel-control-next d-none d-md-flex" href="#heroCarousel" role="button"
+                    data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about-us" class="container my-5">
+        <div class="section-title">
+            <h2>About Us</h2>
+            <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
+                consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
+                fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+        </div>
+
+        <!-- PC -->
+        <div class="d-none d-md-block">
+            <div class="row content">
+                <div
+                    class="col-md-5 order-1 order-md-2 justify-content-center align-self-center animate__animated animate__fadeInRight">
+                    <img src="https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/ilustrasi/cover_w402_h285_cs-tentang-kami-home.jpg.webp"
+                        class="img-fluid" alt="" width="100%">
+                </div>
+                <div
+                    class="col-md-7 pt-5 order-2 order-md-1 justify-content-center align-self-center animate__animated animate__fadeInLeft">
+                    <h3>Rumah duka yang memberikan pelayanan kedukaan 24 jam dan menyeluruh.</h3>
+                    <p class="fst-italic">
+                        Rumah Duka Carolus sebagai pilihan utama keluarga dalam pelayanan kedukaan. Hadir dengan beragam
+                        fasilitas baru serta ditangani secara profesional.
+                    </p>
+                    <a class="btn btn-success" href="#">About Us</a>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile -->
+        <div class="d-sm-block d-md-none">
+            <div class="row content">
+                <div
+                    class="col-md-7 pt-5 order-2 order-md-1 justify-content-center align-self-center animate__animated animate__fadeInLeft">
+                    <h3>Rumah duka yang memberikan pelayanan kedukaan 24 jam dan menyeluruh.</h3>
+                    <p class="fst-italic">
+                        Rumah Duka Carolus sebagai pilihan utama keluarga dalam pelayanan kedukaan. Hadir dengan beragam
+                        fasilitas baru serta ditangani secara profesional.
+                    </p>
+                    <a class="btn btn-success" href="#">About Us</a>
+                </div>
+                <div
+                    class="col-md-5 order-1 order-md-2 justify-content-center align-self-center animate__animated animate__fadeInRight">
+                    <img src="https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/ilustrasi/cover_w402_h285_cs-tentang-kami-home.jpg.webp"
+                        class="img-fluid" alt="" width="100%">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="services" class="team section-bg">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Pelayanan</h2>
+                <p>Selalu Melayani dengan sepenuh hati.</p>
+            </div>
+
+            <div class="row">
+
+                <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="member">
+                        <div class="member-img">
+                            <img src="https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/fasilitas/cover_w370_h320_thumbnail-persemayaman.jpg.webp"
+                                class="img-fluid" alt="">
+                        </div>
+                        <div class="member-info">
+                            <h4>Persemayaman</h4>
+                            <span>Persemayaman</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="member">
+                        <div class="member-img">
+                            <img src="https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/fasilitas/cover_w370_h320_columbarium-kecil.jpg.webp"
+                                class="img-fluid" alt="">
+                        </div>
+                        <div class="member-info">
+                            <h4>Columbarium</h4>
+                            <span>Columbarium</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4 d-flex align-items-stretch">
+                    <div class="member">
+                        <div class="member-img">
+                            <img src="https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/fasilitas/cover_w370_h320_krematorium-kecil.jpg.webp"
+                                class="img-fluid" alt="">
+                        </div>
+                        <div class="member-info">
+                            <h4>Krematorium</h4>
+                            <span>Krematorium</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <section id="facility" class="container px-4 py-5">
+        <div class="container">
+            <div class="section-title">
+                <h2>Fasilitas</h2>
+                <p>Fasilitas yang lengkap dengan pelayanan yang handal serta profesional.</p>
+            </div>
+            
+            <div class="row py-5">
+                <div class="swiper-container">
+                    <div class="swiper-wrapper">
+                        <div class="swiper-slide">
+                            <div class="row mx-1">
+                                <div class="col-md-4">
+                                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4"
+                                        style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(24, 22, 29, 0.73)), url('https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/fasilitas/cover_w480_h320_cctv.jpg.webp');">
+                                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                            <p class="pt-5 mb-4 display-6 lh-1 fw-bold">Keamanan + CCTV</p>
+                                            <small>Siaga 24 Jam</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4"
+                                        style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(24, 22, 29, 0.73)), url('https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/fasilitas/cover_w480_h320_thumbnail-persemayaman.jpg.webp');">
+                                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                            <p class="pt-5 mb-4 display-6 lh-1 fw-bold">Ruang Semayam</p>
+                                            <small>Tersedia 23 ruang semayam</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4"
+                                        style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(24, 22, 29, 0.73)), url('https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/fasilitas/cover_w480_h320_r-istirahat-kecil.jpg.webp');">
+                                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                            <p class="pt-5 mb-4 display-6 lh-1 fw-bold">Ruang Istirahat keluarga</p>
+                                            <small>Tersedia di seluruh ruang semayam</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="swiper-slide">
+                            <div class="row mx-1">
+                                <div class="col-md-4">
+                                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4"
+                                        style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(24, 22, 29, 0.73)), url('https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/fasilitas/cover_w480_h320_atm.jpg.webp');">
+                                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                            <p class="pt-5 mb-4 display-6 lh-1 fw-bold">ATM</p>
+                                            <small>Tersedia di Lobby</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4"
+                                        style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(24, 22, 29, 0.73)), url('https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/cover_w480_h320__mg_7109.jpg.webp');">
+                                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                            <p class="pt-5 mb-4 display-6 lh-1 fw-bold">Showroom Peti Jenazah</p>
+                                            <small>Berada di Lobby</small>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-md-4">
+                                    <div class="card card-cover h-100 overflow-hidden text-bg-dark rounded-4"
+                                        style="background-image: linear-gradient(to bottom, rgba(245, 246, 252, 0), rgba(24, 22, 29, 0.73)), url('https://rumahdukacarolus.com/cfind/convert/webp/thumb/images/fasilitas/cover_w480_h320_r-istirahat-kecil.jpg.webp');">
+                                        <div class="d-flex flex-column h-100 p-5 pb-3 text-white text-shadow-1">
+                                            <p class="pt-5 mb-4 display-6 lh-1 fw-bold">Ruang Istirahat keluarga</p>
+                                            <small>Tersedia di seluruh ruang semayam</small>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Arrows -->
+                    <div class="swiper-button-next"></div>
+                    <div class="swiper-button-prev"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- <section id="information" class="counts">
+        <div class="container">
+
+            <div class="text-center title">
+                <h3>What we have achieved so far</h3>
+                <p>Iusto et labore modi qui sapiente xpedita tempora et aut non ipsum consequatur illo.</p>
+            </div>
+
+            <div class="row counters position-relative">
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="232" data-purecounter-duration="1"
+                        class="purecounter"></span>
+                    <p>Clients</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="521" data-purecounter-duration="1"
+                        class="purecounter"></span>
+                    <p>Projects</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="1463" data-purecounter-duration="1"
+                        class="purecounter"></span>
+                    <p>Hours Of Support</p>
+                </div>
+
+                <div class="col-lg-3 col-6 text-center">
+                    <span data-purecounter-start="0" data-purecounter-end="15" data-purecounter-duration="1"
+                        class="purecounter"></span>
+                    <p>Hard Workers</p>
+                </div>
+
+            </div>
+
+        </div>
+    </section> -->
+
+    <section id="contact" class="contact">
+        <div class="container">
+
+            <div class="section-title">
+                <h2>Contact</h2>
+                <!-- <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. Sit sint
+                    consectetur velit. Quisquam quos quisquam cupiditate. Et nemo qui impedit suscipit alias ea. Quia
+                    fugiat sit in iste officiis commodi quidem hic quas.</p> -->
+            </div>
+
+            <div>
+                <div class="mapouter">
+                    <div class="gmap_canvas"><iframe class="gmap_iframe" width="100%" frameborder="0" scrolling="no"
+                            marginheight="0" marginwidth="0"
+                            src="https://maps.google.com/maps?width=800&amp;height=350&amp;hl=en&amp;q=rumah duka carolus&amp;t=&amp;z=13&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"></iframe><a
+                            href="https://connectionsgame.org/">Connections Game</a></div>
+                </div>
+            </div>
+
+            <div class="row mt-5">
+
+                <div class="col-lg-4">
+                    <div class="info">
+                        <div class="address">
+                            <i class="bi bi-geo-alt"></i>
+                            <h4>Location:</h4>
+                            <p>Jl. Salemba Raya No.41, RT.3 / RW.5
+                                Paseban, Kec. Senen, Kota Jakarta Pusat, 10440
+                                Daerah Khusus Ibukota Jakarta
+                                </p>
+                        </div>
+
+                        <div class="email">
+                            <i class="bi bi-envelope"></i>
+                            <h4>Email:</h4>
+                            <p>pelayanan@ksordc.com</p>
+                        </div>
+
+                        <div class="phone">
+                            <i class="bi bi-phone"></i>
+                            <h4>Call:</h4>
+                            <p>(021) 3920759</p>
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <div class="col-lg-8 mt-5 mt-lg-0">
+
+                    <form action="" method="post" role="form" class="php-email-form">
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <input type="text" name="name" class="form-control" id="name" placeholder="Your Name"
+                                    required="">
+                            </div>
+                            <div class="col-md-6 form-group mt-3 mt-md-0">
+                                <input type="email" class="form-control" name="email" id="email"
+                                    placeholder="Your Email" required="">
+                            </div>
+                        </div>
+                        <div class="form-group mt-3">
+                            <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject"
+                                required="">
+                        </div>
+                        <div class="form-group mt-3">
+                            <textarea class="form-control" name="message" rows="5" placeholder="Message"
+                                required=""></textarea>
+                        </div>
+                        <div class="my-3">
+                            <div class="loading">Loading</div>
+                            <div class="error-message"></div>
+                            <div class="sent-message">Your message has been sent. Thank you!</div>
+                        </div>
+                        <div class="text-center"><button type="submit">Send Message</button></div>
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </section>
+</main>
+
+<!-- Vendor JS Files -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/4.3.3/js/swiper.min.js"></script>
+<script src="/custom_web_rdc/static/src/vendor/purecounter/purecounter_vanilla.js"></script>
+
+
+{% endblock %}

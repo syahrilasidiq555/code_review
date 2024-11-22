@@ -1,0 +1,322 @@
+<odoo>
+    <data>
+        <template id="custom_accounting.payment_requisition_bill_print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="custom_accounting.payment_requisition_bill_layout_header"/>
+            <t t-raw="0"/>
+            <t t-call="custom_accounting.payment_requisition_bill_layout_footer"/>
+        </template>
+
+        <template id="custom_accounting.payment_requisition_bill_layout_header">
+            <div class="header">
+                <div class="row" name="header_faktur" style="font-size:14px"> 
+                    <div class="col-4">
+                        <img t-att-src="image_data_uri(company.logo)" style="width:130px; display: block; margin-left: auto; margin-right: auto;"/>
+                    </div>
+                    <div class="col-8" style="margin-top:0px;font-size:14px">
+                        <h3><b><span t-field="company.name"/></b></h3>
+                        <t t-if="company.street != False">
+                            <span t-field="company.street"/>
+                        </t>
+                        <t t-if="company.phone != False">
+                            <br><b>Telp </b>: <span t-field="company.phone"/></br>
+                        </t>
+                        <t t-if="company.mobile != False">
+                            <br><b>WA </b> : <span t-field="company.mobile"/></br>
+                        </t>
+                        <t t-if="company.email != False">
+                            <br><b>Email </b> : <span t-field="company.email"/></br>
+                        </t>
+                        <!-- <br><b>No </b> : <span t-field="o.name"/></br> -->
+                    </div>
+                </div>   
+                <hr style="height:3px;border-width:0;color:black;background-color:black"/>
+            </div>
+        </template>
+
+        <template id="custom_accounting.payment_requisition_bill_layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:16px">
+                <table class="table">
+                    <style>
+                        .borderless td, .borderless th {
+                            border: none;
+                            padding-left:0;
+                            padding-right:0;
+                        }
+                    </style>
+                    <tr class="borderless" style="line-height: 5pt">
+                        <br/>
+                        <td t-foreach='o.approval_info_ids' t-as='line_approval' style="width:25%; padding: 0 40px;">
+                            <td style="width:25%; padding: 0 40px;">
+                                <div>
+                                    <t t-if="line_index == 0">
+                                        <p><span t-field="o.company_id.city"/>, <span t-esc="datetime.datetime(o.pr_date.year, o.pr_date.month, o.pr_date.day).strftime('%d %b %Y')"/></p>
+                                    </t>
+                                    <t t-else="">
+                                        <br/><br/><br/>
+                                    </t>
+                                    <p>Disetujui,</p>
+                                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                    <p><u><span t-field="line_approval.user_id.partner_id.name"/></u></p>
+                                    <p><span t-field="line_approval.user_id.employee_id.job_id.name"/></p>
+                                </div>
+                            </td>
+                            <!-- <td style="width:25%; padding: 0 40px;">
+                                <div>
+                                    <p></p>
+                                    <br/><p>Diperiksa,</p>
+                                    <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                    <p>( Validasi )</p>
+                                </div>
+                            </td> -->
+                        </td>
+                        
+                        <td style="width:25%; padding: 0 40px;">
+                            <div>
+                                <br/><br/><br/>
+                                <br/><p>Dibuat,</p>
+                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                <p><u><span t-field="o.create_uid.partner_id.name"/></u></p>
+                                <p><span t-field="o.create_uid.employee_id.job_id.name"/></p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+                <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <template id="custom_accounting.payment_requisition_bill_print">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o" t-lang="company.partner_id.lang">
+                    <t t-call="custom_accounting.payment_requisition_bill_print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">Payment Requisition</h5>
+                                    </div>
+
+                                    <table class="table">
+                                        <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                            }
+                                        </style>
+                                        <tbody class='borderless'>
+                                            <tr style="line-height: 5pt">
+                                                <td class="text-left" style="width:180px!important;">Paid to</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <td class="text-left"><b t-field="o.payment_id.partner_id.name" /></td>
+                                            </tr>
+                                            <tr style="line-height: 5pt">
+                                                <td class="text-left" style="width:180px!important;">Bank</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <td class="text-left"><b t-field="o.partner_bank_id.bank_id.name"/></td>
+                                            </tr>
+                                            <tr style="line-height: 5pt">
+                                                <td class="text-left" style="width:180px!important;"></td>
+                                                <td class="text-center" style="width:50px!important;"></td>
+                                                <td class="text-left">Acc No: <b t-field="o.partner_bank_id.acc_number"/> (<b t-field="o.partner_bank_id.currency_id.name"/>)</td>
+                                            </tr>
+                                            <tr style="line-height: 5pt">
+                                                <td class="text-left" style="width:180px!important;">Amounted</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <td class="text-left">
+                                                    <div class="price2word">
+                                                        <b t-field="o.currency_id.name"/>:  <span t-esc="o._format_currency(o.payment_id.grand_amount, p2w=True)"/>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                            <tr style="line-height: 5pt">
+                                                <td class="text-left" style="width:180px!important;">Payment Description</td>
+                                                <td class="text-center" style="width:50px!important;">:</td>
+                                                <td class="text-left"><b t-field="o.payment_id.ref"/></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <table class="table table-sm">
+                                        <thead>
+                                            <tr class="border-black o_total">
+                                                <th class="text-center">Account</th>
+                                                <th class="text-center">A<br/>C</th>
+                                                <th class="text-center">D<br/>C</th>
+                                                <th class="text-center">Contract</th>
+                                                <th class="text-center">Cost<br/>Center</th>
+                                                <th class="text-center">Brutto</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <!-- 13 line per page -->
+                                            <t t-if="len(o.original_move_ids) + len(o.pr_line) > 0">
+                                                <tr t-foreach='o.payment_id.move_id.line_ids' t-as='line' class='table'>
+                                                    <t t-if="line.debit != 0 and line.account_id.user_type_id.name not in ['Bank and Cash','Bank dan Kas']">
+                                                        <td class="text-center"><span t-field="line.account_id.code"/></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-left"><span t-field="line.account_id.name"/></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-right"><span t-field="line.debit" t-field-options='{"widget": "monetary", "display_currency": "line.currency_id"}'/></td>
+                                                    </t>
+                                                </tr>
+                                                <tr t-foreach="range(13 - len(o.payment_id.move_id.line_ids.filtered(lambda x: x.account_id.user_type_id.name not in ['Bank and Cash','Bank dan Kas'])))" t-as='line' class='table' style="line-height:20pt; height:20pt; max-height:50pt;">
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                </tr>
+                                                <tr t-foreach='o.payment_id.move_id.line_ids' t-as='line' class='table' >
+                                                    <t t-if="line.credit != 0 and line.account_id.user_type_id.name not in ['Bank and Cash','Bank dan Kas']">
+                                                        <td class="text-center">
+                                                            <span t-field="line.account_id.code"/>
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-left"><span t-field="line.account_id.name"/></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-right">
+                                                            <span t-field="line.credit" t-field-options='{"widget": "monetary", "display_currency": "line.currency_id"}'/>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+                                            <t t-else="">
+                                                <tr t-foreach='o.payment_id.move_id.line_ids' t-as='line' class='table'>
+                                                    <t t-if="line.credit != 0 and line.account_id.user_type_id.name not in ['Bank and Cash','Bank dan Kas']">
+                                                        <td class="text-center"><span t-field="line.account_id.code"/></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-left"><span t-field="line.account_id.name"/></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-right"><span t-field="line.credit" t-field-options='{"widget": "monetary", "display_currency": "line.currency_id"}'/></td>
+                                                    </t>
+                                                </tr>
+                                                <tr t-foreach="range(13 - len(o.payment_id.move_id.line_ids.filtered(lambda x: x.account_id.user_type_id.name not in ['Bank and Cash','Bank dan Kas'])))" t-as='line' class='table' style="line-height:20pt; height:20pt; max-height:50pt;">
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                    <td class="text-center"></td>
+                                                </tr>
+                                                <tr t-foreach='o.payment_id.move_id.line_ids' t-as='line' class='table' >
+                                                    <t t-if="line.debit != 0 and line.account_id.user_type_id.name not in ['Bank and Cash','Bank dan Kas']">
+                                                        <td class="text-center">
+                                                            <span t-field="line.account_id.code"/>
+                                                        </td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-left"><span t-field="line.account_id.name"/></td>
+                                                        <td class="text-center"></td>
+                                                        <td class="text-right">
+                                                            <span t-field="line.debit" t-field-options='{"widget": "monetary", "display_currency": "line.currency_id"}'/>
+                                                        </td>
+                                                    </t>
+                                                </tr>
+                                            </t>
+                                            <tr class='table'>
+                                                <td class="text-center">
+                                                </td>
+                                                <td class="text-center"></td>
+                                                <td class="text-center">C</td>
+                                                <td class="text-left"><i>Total to be paid</i></td>
+                                                <td class="text-center"></td>
+                                                <td class="text-right">
+                                                    <span t-field="o.grand_amount" t-field-options='{"widget": "monetary", "display_currency": "line.currency_id"}'/>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+
+                                    <hr style="height:1px;border-width:0;color:black;background-color:black"/>
+
+                                    <div class="row">
+                                        <div class="col-8">
+                                            <table class="table">
+                                                <style>
+                                                    .borderless td, .borderless th {
+                                                        border: none;
+                                                        padding-left:0;
+                                                        padding-right:0;
+                                                    }
+                                                </style>
+                                                <tbody class='borderless'>
+                                                    <tr style="line-height: 5pt">
+                                                        <td class="text-left" style="width:180px!important;">Bank</td>
+                                                        <td class="text-center" style="width:50px!important;">:</td>
+                                                        <td class="text-left"><b t-field="o.payment_id.journal_id.name" /></td>
+                                                    </tr>
+                                                    <tr style="line-height: 5pt">
+                                                        <td class="text-left" style="width:180px!important;">No. Giro</td>
+                                                        <td class="text-center" style="width:50px!important;">:</td>
+                                                        <td class="text-left"></td>
+                                                    </tr>
+                                                    <tr style="line-height: 5pt">
+                                                        <td class="text-left" style="width:180px!important;">Transfer</td>
+                                                        <td class="text-center" style="width:50px!important;">:</td>
+                                                        <td class="text-left"><b t-field="o.payment_id.method_id.name"/></td>
+                                                    </tr>
+                                                    <tr style="line-height: 5pt">
+                                                        <td class="text-left" style="width:180px!important;">Prepared by</td>
+                                                        <td class="text-center" style="width:50px!important;">:</td>
+                                                        <td class="text-left"></td>
+                                                    </tr>
+                                                    <tr style="line-height: 5pt">
+                                                        <td class="text-left" style="width:180px!important;">Date</td>
+                                                        <td class="text-center" style="width:50px!important;">:</td>
+                                                        <t t-if="o.payment_id.date">
+                                                            <td class="text-left"><span t-esc="datetime.datetime(o.payment_id.date.year, o.payment_id.date.month, o.payment_id.date.day).strftime('%d %b %Y')"/></td>
+                                                        </t>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-4">
+                                            <div class="text-left pull-right" style="border:1px solid black; width: 300px;">
+                                                <span style="padding: 10px;">For this BPV, we have checked:</span><br/>
+                                                <span style="padding: 10px;"><input type="checkbox"/> Bank AC #</span><br/>
+                                                <span style="padding: 10px;"><input type="checkbox"/> Vendor Name</span><br/>
+                                                <span style="padding: 10px;"><input type="checkbox"/> 3-way match/contract</span>
+                                                <hr style="height:1px;border-width:0;color:black;background-color:black"/>
+                                                <u style="padding: 10px;">Initials: </u>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

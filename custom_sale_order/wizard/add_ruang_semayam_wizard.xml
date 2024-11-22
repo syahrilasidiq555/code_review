@@ -1,0 +1,86 @@
+<odoo>
+    <data>
+        <record id='add_ruang_semayam_wizard_view_form' model='ir.ui.view'>
+            <field name="name">add_ruang_semayam_wizard_view_form</field>
+            <field name="model">add.ruang.semayam.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group>
+                        <field name="sale_order_id" readonly="1" force_save="1" />
+                        <field name="currency_id" invisible="1" />
+                        <field name="type" />
+                    </group>
+                    <notebook>
+                        <page name="baru" string="Tambah Produk Baru" attrs="{'invisible':[('type','!=','baru')]}">
+                            <group name="baru">
+                                <group name="left">
+                                    <field name="ruang_semayam_id" options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True, 'no_open': True}" />
+                                    <label for="pickup_date" string="Tanggal"/>
+                                    <div class="o_row" style="min-width: 300px!important;">
+                                        <field name="pickup_date" widget="daterange" options="{'related_end_date': 'return_date'}" />
+                                        <span> to </span>
+                                        <field name="return_date" widget="daterange" options="{'related_start_date': 'pickup_date'}" />
+                                    </div>
+                                    <field name="list_price" widget="monetary"/>
+                                    <field name="rental_status" invisible="1" />
+                                    <field name="rental_status_detail" />
+                                </group>
+                                <group name="right">
+                                </group>
+                            </group>
+                        </page>
+                        <page name="tambah_hari" string="Penambahan Hari" attrs="{'invisible':[('type','not in',['tambah_hari','tambah_hari_dan_lebar'])]}">
+                            <b attrs="{'invisible':[('so_ruang_semayam_id','!=',False)]}" style="color:red;">* Tidak ada ruang semayam di sale order ini. Jika ada, silahkan perhatikan kategori produk ruang semayam!</b>
+                            <group attrs="{'invisible':[('so_ruang_semayam_id','=',False)]}">
+                                <group name="left">
+                                    <field name="so_ruang_semayam_id" />
+                                    <field name="so_pickup_date" invisible="1" />
+                                    <!-- <field name="so_return_date" /> -->
+                                    <label for="pickup_date_new" string="Tanggal"/>
+                                    <div class="o_row" style="min-width: 300px!important;">
+                                        <!-- <field name="so_return_date" /> -->
+                                        <field name="pickup_date_new" />
+                                        <span> to </span>
+                                        <field name="return_date_new"/>
+                                    </div>
+                                    <field name="tambah_hari_list_price" widget="monetary"/>
+                                    <field name="tambah_hari_rental_status" invisible="1" />
+                                    <field name="tambah_hari_rental_status_detail" />
+                                </group>
+                                <group name="right">
+                                </group>
+                            </group>
+                        </page>
+                        <page name="tambah_lebar" string="Penambahan Lebar" attrs="{'invisible':[('type','not in',['tambah_lebar','tambah_hari_dan_lebar'])]}">
+                            <b attrs="{'invisible':[('so_ruang_semayam_id','!=',False)]}" style="color:red;">* Tidak ada ruang semayam di sale order ini. Jika ada, silahkan perhatikan kategori produk ruang semayam!</b>
+                            <group attrs="{'invisible':[('so_ruang_semayam_id','=',False)]}">
+                                <group name="left">
+                                    <field name="ruang_semayam_variant_id_domain" invisible="1"/>
+                                    <field name="ruang_semayam_variant_id" domain="ruang_semayam_variant_id_domain" 
+                                        options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True, 'no_open': True}"/>
+                                    <label for="start_date_new_lebar" string="Tanggal"/>
+                                    <div class="o_row" style="min-width: 300px!important;">
+                                        <field name="start_date_new_lebar" widget="daterange" options="{'related_end_date': 'return_date_new_lebar'}" />
+                                        <span> to </span>
+                                        <field name="return_date_new_lebar" widget="daterange" options="{'related_start_date': 'start_date_new_lebar'}" />
+                                    </div>
+                                    <field name="tambah_lebar_list_price" widget="monetary"/>
+                                    <field name="tambah_lebar_rental_status" invisible="1" />
+                                    <field name="tambah_lebar_rental_status_detail" />
+                                </group>
+                                <group name="right">
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="add_ruang_semayam" class="btn-primary" type="object" string="Konfirmasi"/>
+                        <button string="Batal" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

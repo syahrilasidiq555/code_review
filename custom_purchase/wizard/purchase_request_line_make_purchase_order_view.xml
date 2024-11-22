@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_purchase_request_line_make_purchase_order_inherit" model="ir.ui.view">
+        <field name="name">view_purchase_request_line_make_purchase_order_inherit</field>
+        <field name="model">purchase.request.line.make.purchase.order</field>
+        <field name="inherit_id" ref="purchase_request.view_purchase_request_line_make_purchase_order"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='sync_data_planned']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//field[@name='purchase_order_id']" position="attributes">
+                <attribute name="invisible">1</attribute>
+            </xpath>
+            <xpath expr="//form//separator[1]" position="replace">
+                <!-- DI BIARKAN KOSONG -->
+            </xpath>
+        </field>
+    </record>
+
+</odoo>

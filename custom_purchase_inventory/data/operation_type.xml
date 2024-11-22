@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <!-- <record id="sequence_job_costing" model="ir.sequence">
+            <field name="name">Internal Use Sequence</field>
+            <field name="implementation">standard</field>
+            <field name="prefix">INTERNAL-U/</field>
+            <field name="padding" eval="5"/>
+        </record> -->
+
+        <record id="location_internal_use" model="stock.location">
+            <field name="name">Internal Use</field>
+            <field name="location_id" ref="stock.stock_location_locations_virtual" />
+            <field name="usage">inventory</field>
+        </record>
+
+        <!-- <record id="operation_job_costing" model="stock.picking.type">
+            <field name="name">Job Costing / Internal Use</field>
+            <field name="code">internal</field>
+            <field name="sequence_id" ref="sequence_job_costing" />
+            <field name="sequence_code">IU</field>
+            <field name="warehouse_id" eval="False" />
+            <field name="default_location_src_id" ref="stock.stock_location_stock" />
+            <field name="default_location_dest_id" ref="location_internal_use" />
+        </record> -->
+    </data>
+</odoo>

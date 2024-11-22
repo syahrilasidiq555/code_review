@@ -1,0 +1,1401 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- CHANGE NO UPDATE TO FALSE -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'menu_finance_entries')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        
+        <!-- UNTUK OPEN Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu">
+            <field name="name">Access Submenu</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        
+        <record id="account.group_account_manager" model="res.groups">
+            <field name="menu_access" eval="[(5)]" />
+        </record>
+
+        <!-- Account > Accounting > miscellaneous > Journal Entries    -->
+        <record id="account.menu_action_move_journal_line_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0)]" />
+        </record>
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_ct_cal">
+            <field name="name">Access Submenu Kontak &amp; Kalendar</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        <!-- Kalender > Konfigurasi -->
+        <!-- <record id="group_submenu_calendar_configuration" model="res.groups">
+            <field name="name">Kalender > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_ct_cal" />
+        </record>
+        <record id="calendar.calendar_menu_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_calendar_configuration'))]" />
+        </record> -->
+
+        <!-- Kontak > Konfigurasi -->
+        <!-- <record id="group_submenu_contact_configuration" model="res.groups">
+            <field name="name">Kontak > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_ct_cal" />
+        </record> -->
+        <!-- <record id="contacts.res_partner_menu_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_contact_configuration'))]" />
+        </record> -->
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_crm">
+            <field name="name">Access Submenu CRM</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+        
+        <!-- CRM > Penjualan -->
+        <!-- <record id="group_submenu_crm_penjualan" model="res.groups">
+            <field name="name">CRM > Penjualan</field>
+            <field name="category_id" ref="module_category_submenu_crm" />
+        </record>
+        <record id="crm.crm_menu_sales" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_crm_penjualan'))]" />
+        </record> -->
+
+        <!-- CRM > Laporan -->
+        <!-- <record id="group_submenu_crm_laporan" model="res.groups">
+            <field name="name">CRM > Laporan</field>
+            <field name="category_id" ref="module_category_submenu_crm" />
+        </record>
+        <record id="crm.crm_menu_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_crm_laporan'))]" />
+        </record> -->
+
+        <!-- CRM > Konfigurasi -->
+        <!-- <record id="group_submenu_crm_konfigurasi" model="res.groups">
+            <field name="name">CRM > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_crm" />
+        </record>
+        <record id="crm.crm_menu_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_crm_konfigurasi'))]" />
+        </record> -->
+
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_rdc">
+            <field name="name">Access Submenu RDC</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        <!-- RDC > Customer Form -->
+        <!-- <record id="group_submenu_rdc_customer_form" model="res.groups">
+            <field name="name">RDC > Customer Form</field>
+            <field name="category_id" ref="module_category_submenu_rdc" />
+        </record> -->
+        <!-- <record id="custom_web_rdc.customer_form_website_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_rdc_customer_form'))]" />
+        </record> -->
+
+        <!-- RDC > Cost Sheet -->
+        <!-- <record id="group_submenu_rdc_cost_sheet" model="res.groups">
+            <field name="name">RDC > Cost Sheet</field>
+            <field name="category_id" ref="module_category_submenu_rdc" />
+        </record>
+        <record id="custom_sale_order.cost_sheet_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_rdc_cost_sheet'))]" />
+        </record> -->
+
+        <!-- RDC > Invoice Terlambat Bayar -->
+        <!-- <record id="group_submenu_rdc_inv_telat" model="res.groups">
+            <field name="name">RDC > Invoice Terlambat</field>
+            <field name="category_id" ref="module_category_submenu_rdc" />
+        </record> -->
+        <record id="custom_web_rdc.invoice_overdue_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_rdc_inv_terlambat_read'))]" />
+        </record>
+
+        <!-- RDC > Master -->
+        <!-- <record id="group_submenu_rdc_master" model="res.groups">
+            <field name="name">RDC > Master</field>
+            <field name="category_id" ref="module_category_submenu_rdc" />
+        </record>
+        <record id="custom_web_rdc.rdc_master_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_rdc_master'))]" />
+        </record> -->
+
+
+        <!-- RDC > Master jenazah -->
+        <record id="custom_sale_order.res_partner_jenazah_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_rdc_mst_jenazah_read'))]" />
+        </record>
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_sale">
+            <field name="name">Access Submenu Sale</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        <!-- Penjualan > order -->
+        <!-- <record id="group_submenu_sale_order" model="res.groups">
+            <field name="name">Penjualan > Order</field>
+            <field name="category_id" ref="module_category_submenu_sale" />
+        </record>
+        <record id="sale.sale_order_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_sale_order'))]" />
+        </record> -->
+
+        <!-- Penjualan > Siap difakturkan -->
+        <!-- <record id="group_submenu_sale_to_invoice" model="res.groups">
+            <field name="name">Penjualan > Siap difakturkan</field>
+            <field name="category_id" ref="module_category_submenu_sale" />
+        </record>
+        <record id="sale.menu_sale_invoicing" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_sale_to_invoice'))]" />
+        </record> -->
+
+        <!-- Penjualan > Produk -->
+        <!-- <record id="group_submenu_sale_products" model="res.groups">
+            <field name="name">Penjualan > Produk</field>
+            <field name="category_id" ref="module_category_submenu_sale" />
+        </record>
+        <record id="sale.product_menu_catalog" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_sale_products'))]" />
+        </record> -->
+
+        <!-- Penjualan > Laporan -->
+        <!-- <record id="group_submenu_sale_reporting" model="res.groups">
+            <field name="name">Penjualan > Laporan</field>
+            <field name="category_id" ref="module_category_submenu_sale" />
+        </record>
+        <record id="sale.menu_sale_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_sale_reporting'))]" />
+        </record> -->
+
+        <!-- Penjualan > Konfigurasi -->
+        <!-- <record id="group_submenu_sale_config" model="res.groups">
+            <field name="name">Penjualan > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_sale" />
+        </record>
+        <record id="sale.menu_sale_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_sale_config'))]" />
+        </record> -->
+
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_rental">
+            <field name="name">Access Submenu Rental</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+        
+        <!-- Rental >  Order -->
+        <!-- <record id="group_submenu_rental_order" model="res.groups">
+            <field name="name">Rental > Order</field>
+            <field name="category_id" ref="module_category_submenu_rental" />
+        </record>
+        <record id="sale_renting.rental_order_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_rental_order'))]" />
+        </record> -->
+
+        <!-- Rental >  Jadwal -->
+        <!-- <record id="group_submenu_rental_jadwal" model="res.groups">
+            <field name="name">Rental > Jadwal</field>
+            <field name="category_id" ref="module_category_submenu_rental" />
+        </record>
+        <record id="sale_renting.menu_rental_schedule" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_rental_jadwal'))]" />
+        </record> -->
+
+        <!-- Rental >  Produk -->
+        <!-- <record id="group_submenu_rental_produk" model="res.groups">
+            <field name="name">Rental > Produk</field>
+            <field name="category_id" ref="module_category_submenu_rental" />
+        </record>
+        <record id="sale_renting.menu_rental_products" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_rental_produk'))]" />
+        </record> -->
+
+        <!-- Rental >  Laporan -->
+        <!-- <record id="group_submenu_rental_report" model="res.groups">
+            <field name="name">Rental > Laporan</field>
+            <field name="category_id" ref="module_category_submenu_rental" />
+        </record>
+        <record id="sale_renting.menu_rental_reporting" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_rental_report'))]" />
+        </record> -->
+
+        <!-- Rental >  Konfigurasi -->
+        <!-- <record id="group_submenu_rental_config" model="res.groups">
+            <field name="name">Rental > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_rental" />
+        </record>
+        <record id="sale_renting.menu_rental_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_rental_config'))]" />
+        </record> -->
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_pos">
+            <field name="name">Access Submenu POS</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        <!-- POS > Dashboard -->
+        <!-- <record id="group_submenu_pos_dashboard" model="res.groups">
+            <field name="name">POS > Dashboard</field>
+            <field name="category_id" ref="module_category_submenu_pos" />
+        </record> -->
+        <record id="point_of_sale.menu_pos_dashboard" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_pos_dashboard_read'))]" />
+        </record>
+
+        <!-- POS >  Order -->
+        <!-- <record id="group_submenu_pos_order" model="res.groups">
+            <field name="name">POS > Order</field>
+            <field name="category_id" ref="module_category_submenu_pos" />
+        </record>
+        <record id="point_of_sale.menu_point_of_sale" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_pos_order'))]" />
+        </record> -->
+
+        <!-- POS >  Produk -->
+        <!-- <record id="group_submenu_pos_produk" model="res.groups">
+            <field name="name">POS > Produk</field>
+            <field name="category_id" ref="module_category_submenu_pos" />
+        </record>
+        <record id="point_of_sale.pos_config_menu_catalog" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_pos_produk'))]" />
+        </record> -->
+
+        <!-- POS >  Laporan -->
+        <!-- <record id="group_submenu_pos_report" model="res.groups">
+            <field name="name">POS > Laporan</field>
+            <field name="category_id" ref="module_category_submenu_pos" />
+        </record>
+        <record id="point_of_sale.menu_point_rep" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_pos_report'))]" />
+        </record> -->
+
+        <!-- POS >  Konfigurasi -->
+        <!-- <record id="group_submenu_pos_config" model="res.groups">
+            <field name="name">POS > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_pos" />
+        </record>
+        <record id="point_of_sale.menu_point_config_product" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_pos_config'))]" />
+        </record> -->
+
+
+
+        <!-- UNTUK Group Submenu -->
+        <record model="ir.module.category" id="module_category_submenu_web">
+            <field name="name">Access Submenu Website</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record>
+
+        <!-- Website > Dashboard -->
+        <record id="group_submenu_website_dashboard" model="res.groups">
+            <field name="name">Website > Dashboard</field>
+            <field name="category_id" ref="module_category_submenu_web" />
+        </record>
+        <record id="website.menu_dashboard" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_website_dashboard'))]" />
+        </record>
+
+        <!-- Website > Pengunjung -->
+        <record id="group_submenu_website_Pengunjung" model="res.groups">
+            <field name="name">Website > Pengunjung</field>
+            <field name="category_id" ref="module_category_submenu_web" />
+        </record>
+        <record id="website.website_visitor_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_website_Pengunjung'))]" />
+        </record>
+
+        <!-- Website >  Konfigurasi -->
+        <record id="group_submenu_website_config" model="res.groups">
+            <field name="name">Website > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_web" />
+        </record>
+        <record id="website.menu_website_global_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_website_config'))]" />
+        </record>
+
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_po">
+            <field name="name">Access Submenu Purchase</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        <!-- Pembelian > Order -->
+        <!-- <record id="group_submenu_purchase_order" model="res.groups">
+            <field name="name">Pembelian > Order</field>
+            <field name="category_id" ref="module_category_submenu_po" />
+        </record>
+        <record id="purchase.menu_procurement_management" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_order'))]" />
+        </record> -->
+
+        <!-- Pembelian > Order > Permintaan Penawaran -->
+        <!-- <record id="group_submenu_purchase_order_pp" model="res.groups">
+            <field name="name">Pembelian > Order > Permintaan Penawaran</field>
+            <field name="category_id" ref="module_category_submenu_po" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_purchase_order')) ]"/>
+        </record>
+        <record id="purchase.menu_purchase_rfq" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_order_pp'))]" />
+        </record> -->
+
+        <!-- Pembelian > Order > Order Semayam-->
+        <!-- <record id="group_submenu_purchase_order_semayam" model="res.groups">
+            <field name="name">Pembelian > Order > Order Semayam</field>
+            <field name="category_id" ref="module_category_submenu_po" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_purchase_order')) ]"/>
+        </record> -->
+        <!-- <record id="custom_sale_order.purchase_cost_sheet_action_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_order_semayam'))]" />
+        </record> -->
+
+        <!-- Pembelian > Order > Order Pembelian-->
+        <!-- <record id="group_submenu_purchase_order_pembelian" model="res.groups">
+            <field name="name">Pembelian > Order > Order Pembelian</field>
+            <field name="category_id" ref="module_category_submenu_po" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_purchase_order')) ]"/>
+        </record>
+        <record id="purchase.menu_purchase_form_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_order_pembelian'))]" />
+        </record> -->
+
+        <!-- Pembelian > Order > Pemasok-->
+        <!-- <record id="group_submenu_purchase_order_pemasok" model="res.groups">
+            <field name="name">Pembelian > Order > Pemasok</field>
+            <field name="category_id" ref="module_category_submenu_po" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_purchase_order')) ]"/>
+        </record>
+        <record id="purchase.menu_procurement_management_supplier_name" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_order_pemasok'))]" />
+        </record> -->
+
+        <!-- Pembelian >  Produk -->
+        <!-- <record id="group_submenu_purchase_produk" model="res.groups">
+            <field name="name">Pembelian > Produk</field>
+            <field name="category_id" ref="module_category_submenu_po" />
+        </record>
+        <record id="purchase.menu_purchase_products" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_produk'))]" />
+        </record> -->
+
+        <!-- Pembelian >  Laporan -->
+        <!-- <record id="group_submenu_purchase_report" model="res.groups">
+            <field name="name">Pembelian > Laporan</field>
+            <field name="category_id" ref="module_category_submenu_po" />
+        </record>
+        <record id="purchase.purchase_report_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_report'))]" />
+        </record> -->
+
+        <!-- Pembelian >  Konfigurasi -->
+        <!-- <record id="group_submenu_purchase_config" model="res.groups">
+            <field name="name">Pembelian > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_po" />
+        </record> -->
+        <!-- <record id="purchase.menu_purchase_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_config'))]" />
+        </record> -->
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_inv">
+            <field name="name">Access Submenu Stok Persediaan</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        <!-- Stok Persediaan > Overview -->
+        <!-- <record id="group_submenu_inventory_overview" model="res.groups">
+            <field name="name">Stok Persediaan > Overview</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+        </record> -->
+        <record id="stock.stock_picking_type_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_inv_overview_read'))]" />
+        </record>
+
+        <!-- Stok Persediaan > Operasi -->
+        <!-- <record id="group_submenu_inventory_operation" model="res.groups">
+            <field name="name">Stok Persediaan > Operasi</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+        </record>
+        <record id="stock.menu_stock_warehouse_mgmt" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_inventory_operation'))]" />
+        </record> -->
+
+        <!-- Stok Persediaan > Operasi > Transfer-->
+        <!-- <record id="group_submenu_inventory_operation_transfer" model="res.groups">
+            <field name="name">Stok Persediaan > Operasi > Transfer</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_inventory_operation')) ]"/>
+        </record> -->
+        <record id="stock.all_picking" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_inv_transfer_read'))]" />
+        </record>
+
+        <!-- Stok Persediaan > Operasi > Replenishment-->
+        <!-- <record id="group_submenu_inventory_operation_repelnishment" model="res.groups">
+            <field name="name">Stok Persediaan > Operasi > Replenishment</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_inventory_operation')) ]"/>
+        </record>
+        <record id="stock.menu_reordering_rules_replenish" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_inventory_operation_repelnishment'))]" />
+        </record> -->
+
+        <!-- Stok Persediaan > Operasi > Penyesuaian Stok Persediaan-->
+        <!-- <record id="group_submenu_inventory_operation_penyesuaian" model="res.groups">
+            <field name="name">Stok Persediaan > Operasi > Penyesuaian Stok Persediaan</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_inventory_operation')) ]"/>
+        </record>
+        <record id="stock.menu_action_inventory_tree" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_inventory_operation_penyesuaian'))]" />
+        </record> -->
+
+        <!-- Stok Persediaan > Operasi > Pembuangan-->
+        <!-- <record id="group_submenu_inventory_operation_pembuangan" model="res.groups">
+            <field name="name">Stok Persediaan > Operasi > Pembuangan</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_inventory_operation')) ]"/>
+        </record>
+        <record id="stock.menu_stock_scrap" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_inventory_operation_pembuangan'))]" />
+        </record> -->
+
+        <!-- Stok Persediaan > Operasi > Jalankan Penjadwal-->
+        <!-- <record id="group_submenu_inventory_operation_penjadwalan" model="res.groups">
+            <field name="name">Stok Persediaan > Operasi > Jalankan Penjadwal</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_inventory_operation')) ]"/>
+        </record> -->
+        <record id="stock.menu_procurement_compute" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_inv_penjadwalan_read'))]" />
+        </record>
+
+        <!-- Stok Persediaan > Produk -->
+        <!-- <record id="group_submenu_inventory_product" model="res.groups">
+            <field name="name">Stok Persediaan > Produk</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+        </record>
+        <record id="stock.menu_stock_inventory_control" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_inventory_product'))]" />
+        </record> -->
+
+        <!-- Stok Persediaan > Laporan -->
+        <!-- <record id="group_submenu_inventory_report" model="res.groups">
+            <field name="name">Stok Persediaan > Laporan</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+        </record>
+        <record id="stock.menu_warehouse_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_inventory_report'))]" />
+        </record> -->
+
+        <!-- Stok Persediaan > Konfigurasi -->
+        <!-- <record id="group_submenu_inventory_config" model="res.groups">
+            <field name="name">Stok Persediaan > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_inv" />
+        </record>
+        <record id="stock.menu_stock_config_settings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_inventory_config'))]" />
+        </record> -->
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_emp">
+            <field name="name">Access Submenu Karyawan</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        <!-- Karyawan > Karyawan -->
+        <!-- <record id="group_submenu_employee_emp" model="res.groups">
+            <field name="name">Karyawan > Karyawan</field>
+            <field name="category_id" ref="module_category_submenu_emp" />
+        </record>
+        <record id="hr.menu_hr_employee_payroll" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_employee_emp'))]" />
+        </record> -->
+        
+        <!-- Karyawan > Departemen -->
+        <record id="group_submenu_employee_department" model="res.groups">
+            <field name="name">Access Departemen</field>
+            <field name="category_id" ref="custom_access_right.module_category_employee_emp_dep_rep" />
+        </record>
+        <record id="hr.menu_hr_department_kanban" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_employee_department'))]" />
+        </record>
+
+        <!-- Karyawan > Laporan -->
+        <record id="group_submenu_employee_report" model="res.groups">
+            <field name="name">Access Laporan</field>
+            <field name="category_id" ref="custom_access_right.module_category_employee_emp_dep_rep" />
+        </record>
+        <record id="hr.hr_menu_hr_reports" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_employee_report'))]" />
+        </record>
+
+        <!-- Karyawan > Konfigurasi -->
+        <!-- <record id="group_submenu_employee_config" model="res.groups">
+            <field name="name">Karyawan > Konfigurasi</field>
+            <field name="category_id" ref="custom_access_right.module_category_employee_emp_dep_rep" />
+        </record>
+        <record id="hr.menu_human_resources_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_employee_config'))]" />
+        </record> -->
+
+
+        <!-- UNTUK Group Submenu -->
+        <!-- <record model="ir.module.category" id="module_category_submenu_exp">
+            <field name="name">Access Submenu Pengeluaran</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record> -->
+
+        <!-- Pengeluaran > Pengeluaran Saya -->
+        <!-- <record id="group_submenu_expense_exp" model="res.groups">
+            <field name="name">Pengeluaran > Pengeluaran Saya</field>
+            <field name="category_id" ref="module_category_submenu_exp" />
+        </record>
+        <record id="hr_expense.menu_hr_expense_my_expenses" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_expense_exp'))]" />
+        </record> -->
+
+        <!-- Pengeluaran > Laporan Pengeluaran -->
+        <!-- <record id="group_submenu_expense_exp_report" model="res.groups">
+            <field name="name">Pengeluaran > Laporan Pengeluaran</field>
+            <field name="category_id" ref="module_category_submenu_exp" />
+        </record>
+        <record id="hr_expense.menu_hr_expense_report" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_expense_exp_report'))]" />
+        </record> -->
+
+        <!-- Pengeluaran > Laporan -->
+        <!-- <record id="group_submenu_expense_report" model="res.groups">
+            <field name="name">Pengeluaran > Laporan</field>
+            <field name="category_id" ref="module_category_submenu_exp" />
+        </record>
+        <record id="hr_expense.menu_hr_expense_reports" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_expense_report'))]" />
+        </record> -->
+
+        <!-- Pengeluaran > Konfigurasi -->
+        <!-- <record id="group_submenu_expense_config" model="res.groups">
+            <field name="name">Pengeluaran > Konfigurasi</field>
+            <field name="category_id" ref="module_category_submenu_exp" />
+        </record>
+        <record id="hr_expense.menu_hr_expense_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_expense_config'))]" />
+        </record> -->
+
+
+
+
+        <!-- UNTUK Group Submenu -->
+        <record model="ir.module.category" id="module_category_submenu_acc">
+            <field name="name">Access Submenu Accounting</field>
+            <field name="description">Group for view submenu</field>
+            <field name="sequence">31</field>
+        </record>
+
+        <!-- Account > Dashboard -->
+        <!-- <record id="group_submenu_account_dashboard" model="res.groups">
+            <field name="name">Account > Dashboard</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+        </record>
+        <record id="account.menu_board_journal_1" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_dashboard'))]" />
+        </record> -->
+
+        <!-- Account > Dashboard > Dashboard -->
+        <!-- <record id="group_submenu_account_dashboard_child" model="res.groups">
+            <field name="name">Account > Dashboard > Dashboard</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_dashboard')) ]"/>
+        </record>
+        <record id="custom_accounting.menu_board_journal_1_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_dashboard_child'))]" />
+        </record> -->
+
+        <!-- Account > Dashboard > Analisa Keuangan -->
+        <!-- <record id="group_submenu_account_dashboard_analisa_keu" model="res.groups">
+            <field name="name">Account > Dashboard > Analisa Keuangan</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_dashboard')) ]"/>
+        </record>
+        <record id="custom_accounting.menu_board_analisa_keuangan_1_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_dashboard_analisa_keu'))]" />
+        </record> -->
+
+        <!-- Account > Customers -->
+        <!-- <record id="group_submenu_account_customers" model="res.groups">
+            <field name="name">Account > Customers</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+        </record>
+        <record id="account.menu_finance_receivables" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_customers'))]" />
+        </record> -->
+
+        <!-- Account > Customers > Invoices -->
+        <!-- <record id="group_submenu_account_customers_invoices" model="res.groups">
+            <field name="name">Account > Customers > Invoices</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_customers')) ]"/>
+        </record>
+        <record id="account.menu_action_move_out_invoice_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_invoices'))]" />
+        </record> -->
+
+        <!-- Account > Customers > Credit Notes -->
+        <!-- <record id="group_submenu_account_customers_credit_notes" model="res.groups">
+            <field name="name">Account > Customers > Credit Notes</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_customers')) ]"/>
+        </record>
+        <record id="account.menu_action_move_out_refund_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_credit_notes'))]" />
+        </record> -->
+
+        <!-- Account > Customers > E-Faktur -->
+        <!-- <record id="group_submenu_account_customers_efaktur" model="res.groups">
+            <field name="name">Account > Customers > E-Faktur</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_customers')) ]"/>
+        </record>
+        <record id="l10n_id_efaktur.menu_efaktur_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_efaktur'))]" />
+        </record> -->
+
+        <!-- Account > Customers > E-Faktur List -->
+        <!-- <record id="group_submenu_account_customers_efaktur_list" model="res.groups">
+            <field name="name">Account > Customers > E-Faktur List</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_customers')) ]"/>
+        </record>
+        <record id="custom_accounting.menu_efaktur_list_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_efaktur_list'))]" />
+        </record> -->
+
+
+        <!-- Account > Customers > Payments -->
+        <!-- <record id="group_submenu_account_customers_payments" model="res.groups">
+            <field name="name">Account > Customers > Payments</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_customers')) ]"/>
+        </record>
+        <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_payments'))]" />
+        </record> -->
+
+        <!-- Account > Customers > Follow-up Reports -->
+        <!-- <record id="group_submenu_account_customers_followup" model="res.groups">
+            <field name="name">Account > Customers > Follow-up Reports</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_customers')) ]"/>
+        </record>
+        <record id="account_followup.customer_statements_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_followup'))]" />
+        </record> -->
+
+        <!-- Account > Customers > Products -->
+        <!-- <record id="group_submenu_account_customers_products" model="res.groups">
+            <field name="name">Account > Customers > Products</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_customers')) ]"/>
+        </record>
+        <record id="account.product_product_menu_sellable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_products'))]" />
+        </record> -->
+
+        <!-- Account > Customers > Customers -->
+        <!-- <record id="group_submenu_account_customers_customers" model="res.groups">
+            <field name="name">Account > Customers > Customers</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_customers')) ]"/>
+        </record>
+        <record id="account.menu_account_customer" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_customers'))]" />
+        </record> -->
+
+
+
+        <!-- Account > Vendors -->
+        <!-- <record id="group_submenu_account_vendors" model="res.groups">
+            <field name="name">Account > Vendors</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+        </record>
+        <record id="account.menu_finance_payables" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_vendors'))]" />
+        </record> -->
+
+
+        <!-- Account > Vendors > Bills -->
+        <!-- <record id="group_submenu_account_vendors_bills" model="res.groups">
+            <field name="name">Account > Vendors > Bills</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_vendors')) ]"/>
+        </record>
+        <record id="account.menu_action_move_in_invoice_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_bills'))]" />
+        </record> -->
+
+        <!-- Account > Vendors > Refunds -->
+        <!-- <record id="group_submenu_account_vendors_refunds" model="res.groups">
+            <field name="name">Account > Vendors > Refunds</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_vendors')) ]"/>
+        </record>
+        <record id="account.menu_action_move_in_refund_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_refunds'))]" />
+        </record> -->
+
+        <!-- Account > Vendors > Payments -->
+        <!-- <record id="group_submenu_account_vendors_payments" model="res.groups">
+            <field name="name">Account > Vendors > Payments</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_vendors')) ]"/>
+        </record>
+        <record id="account.menu_action_account_payments_payable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_payments'))]" />
+        </record> -->
+
+        <!-- Account > Vendors > Payment Requisition -->
+        <!-- <record id="group_submenu_account_vendors_payment_req" model="res.groups">
+            <field name="name">Account > Vendors > Payment Requisition</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_vendors')) ]"/>
+        </record>
+        <record id="custom_accounting.menu_payment_requisition" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_payment_req'))]" />
+        </record> -->
+
+        <!-- Account > Vendors > Pengeluaran Karyawan -->
+        <!-- <record id="group_submenu_account_vendors_expense_emp" model="res.groups">
+            <field name="name">Account > Vendors > Pengeluaran Karyawan</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_vendors')) ]"/>
+        </record>
+        <record id="hr_expense.menu_hr_expense_account_employee_expenses" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_expense_emp'))]" />
+        </record> -->
+
+        <!-- Account > Vendors > Products -->
+        <!-- <record id="group_submenu_account_vendors_products" model="res.groups">
+            <field name="name">Account > Vendors > Products</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_vendors')) ]"/>
+        </record>
+        <record id="account.product_product_menu_purchasable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_products'))]" />
+        </record> -->
+        
+        <!-- Account > Vendors > Vendors -->
+        <!-- <record id="group_submenu_account_vendors_vendors" model="res.groups">
+            <field name="name">Account > Vendors > Vendors</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_vendors')) ]"/>
+        </record>
+        <record id="account.menu_account_supplier" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_vendors'))]" />
+        </record> -->
+
+
+
+        <!-- Account > Accounting -->
+        <!-- <record id="group_submenu_account_accounting" model="res.groups">
+            <field name="name">Account > Accounting</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+        </record>
+        <record id="account.menu_finance_entries" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_accounting'))]" />
+        </record> -->
+
+        <!-- Account > Accounting > Miscellaneous -->
+        <!-- <record id="group_submenu_account_miscellaneous" model="res.groups">
+            <field name="name">Account > Accounting > Miscellaneous</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_accounting')) ]"/>
+        </record>
+        <record id="account.menu_finance_entries_accounting_miscellaneous" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_miscellaneous'))]" />
+        </record> -->
+
+        <!-- Account > Accounting > Journals -->
+        <!-- <record id="group_submenu_account_journals" model="res.groups">
+            <field name="name">Account > Accounting > Journals</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_accounting')) ]"/>
+        </record>
+        <record id="account.menu_finance_entries_accounting_journals" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_journals'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Journals > Sales -->
+        <!-- <record id="group_submenu_account_journals_sales" model="res.groups">
+            <field name="name">Account > Accounting > Journals > Sales</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_journals')) ]"/>
+        </record>
+        <record id="account.menu_action_account_moves_journal_sales" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_journals_sales'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Journals > Purchase -->
+        <!-- <record id="group_submenu_account_journals_purchase" model="res.groups">
+            <field name="name">Account > Accounting > Journals > Purchase</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_journals')) ]"/>
+        </record>
+        <record id="account.menu_action_account_moves_journal_purchase" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_journals_purchase'))]" />
+        </record> -->
+        
+        
+        <!-- Account > Accounting > Journals > Bank and Cash -->
+        <!-- <record id="group_submenu_account_journals_bankandcash" model="res.groups">
+            <field name="name">Account > Accounting > Journals > Bank and Cash</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_journals')) ]"/>
+        </record>
+        <record id="account.menu_action_account_moves_journal_bank_cash" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_journals_bankandcash'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Journals > Miscellaneous -->
+        <!-- <record id="group_submenu_account_journals_miscellaneous" model="res.groups">
+            <field name="name">Account > Accounting > Journals > Miscellaneous</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_journals')) ]"/>
+        </record>
+        <record id="account.menu_action_account_moves_journal_misc" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_journals_miscellaneous'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Ledgers -->
+        <!-- <record id="group_submenu_account_ledgers" model="res.groups">
+            <field name="name">Account > Accounting > Ledgers</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_accounting')) ]"/>
+        </record>
+        <record id="account.menu_finance_entries_accounting_ledgers" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_ledgers'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Ledgers > Buku Besar -->
+        <!-- <record id="group_submenu_account_ledgers_gl" model="res.groups">
+            <field name="name">Account > Accounting > Ledgers > Buku Besar</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_ledgers')) ]"/>
+        </record>
+        <record id="account.menu_action_account_moves_ledger_general" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_ledgers_gl'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Ledgers > Buku Besar Mitra -->
+        <!-- <record id="group_submenu_account_ledgers_pl" model="res.groups">
+            <field name="name">Account > Accounting > Ledgers > Buku Besar Mitra</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_ledgers')) ]"/>
+        </record>
+        <record id="account.menu_action_account_moves_ledger_partner" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_ledgers_pl'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Management -->
+        <!-- <record id="group_submenu_account_management" model="res.groups">
+            <field name="name">Account > Accounting > Management</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_accounting')) ]"/>
+        </record>
+        <record id="account.menu_finance_entries_management" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_management'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Management > Automatic Transfers -->
+        <!-- <record id="group_submenu_account_management_automatic_transfers" model="res.groups">
+            <field name="name">Account > Accounting > Management > Automatic Transfers</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_management')) ]"/>
+        </record>
+        <record id="account_auto_transfer.menu_auto_transfer" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_automatic_transfers'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Management > Assets -->
+        <!-- <record id="group_submenu_account_management_assets" model="res.groups">
+            <field name="name">Account > Accounting > Management > Assets</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_management')) ]"/>
+        </record>
+        <record id="account_asset.menu_action_account_asset_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_assets'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Management > Deffered Revenues -->
+        <!-- <record id="group_submenu_account_management_deff_revenues" model="res.groups">
+            <field name="name">Account > Accounting > Management > Deffered Revenues</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_management')) ]"/>
+        </record>
+        <record id="account_asset.menu_action_account_revenue_recognition" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_deff_revenues'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Management > Deffered Expenses -->
+        <!-- <record id="group_submenu_account_management_deff_expenses" model="res.groups">
+            <field name="name">Account > Accounting > Management > Deffered Expenses</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_management')) ]"/>
+        </record>
+        <record id="account_asset.menu_action_account_expense_recognition" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_deff_expenses'))]" />
+        </record> -->
+        
+
+
+
+        <!-- Account > Accounting > Actions -->
+        <!-- <record id="group_submenu_account_actions" model="res.groups">
+            <field name="name">Account > Accounting > Actions</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_accounting')) ]"/>
+        </record>
+        <record id="account.menu_finance_entries_actions" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_actions'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Actions > Reconciliation -->
+        <!-- <record id="group_submenu_account_actions_reconcilliation" model="res.groups">
+            <field name="name">Account > Accounting > Actions > Reconciliation</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_actions')) ]"/>
+        </record>
+        <record id="account_accountant.menu_action_manual_reconciliation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_actions_reconcilliation'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Actions > Tax Adjustment -->
+        <!-- <record id="group_submenu_account_actions_tax_adjustment" model="res.groups">
+            <field name="name">Account > Accounting > Actions > Tax Adjustment</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_actions')) ]"/>
+        </record>
+        <record id="account.menu_action_tax_adjustment" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_actions_tax_adjustment'))]" />
+        </record> -->
+        
+
+        <!-- Account > Accounting > Actions > Lock Dates -->
+        <!-- <record id="group_submenu_account_actions_lock_dates" model="res.groups">
+            <field name="name">Account > Accounting > Actions > Lock Dates</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_actions')) ]"/>
+        </record>
+        <record id="account_accountant.menu_action_change_lock_date" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_actions_lock_dates'))]" />
+        </record> -->
+        
+
+
+        
+        <!-- Account > REPORTING -->
+        <!-- <record id="group_submenu_account_reporting" model="res.groups">
+            <field name="name">Account > Reporting</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+        </record>
+        <record id="account.menu_finance_reports" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_reporting'))]" />
+        </record> -->
+
+
+        <!-- Account > REPORTING > Laporan Umum -->
+        <!-- <record id="group_submenu_account_reporting_gs" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Umum</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+        </record> -->
+        <!-- <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'account_reports_legal_statements_menu')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function> -->
+        <!-- <record id="account.account_reports_legal_statements_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Umum > Laba dan Rugi -->
+        <!-- <record id="group_submenu_account_reporting_gs_pl" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Umum > Laba dan Rugi</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_gs')) ]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'account_financial_html_report_menu_1')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="account_reports.account_financial_html_report_menu_1" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs_pl'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Umum > Lembar Saldo -->
+        <!-- <record id="group_submenu_account_reporting_gs_bs" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Umum > Lembar Saldo</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_gs')) ]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'account_financial_html_report_menu_2')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="account_reports.account_financial_html_report_menu_2" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs_bs'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Umum > Ringkasan Eksekutif -->
+        <!-- <record id="group_submenu_account_reporting_gs_executive_summary" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Umum > Ringkasan Eksekutif</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_gs')) ]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'account_financial_html_report_menu_3')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="account_reports.account_financial_html_report_menu_3" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs_executive_summary'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Umum > Pernyataan Aliran Kas -->
+        <!-- <record id="group_submenu_account_reporting_gs_cashflow" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Umum > Pernyataan Aliran Kas</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting')) ]"/>
+        </record>
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'menu_action_account_report_cash_flow')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="account_reports.menu_action_account_report_cash_flow" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs_cashflow'))]" />
+        </record> -->
+
+
+        <!-- Account > REPORTING > Laporan Mitra -->
+        <!-- <record id="group_submenu_account_reporting_partner" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Mitra</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting')) ]"/>
+        </record>
+        <record id="account_reports.account_reports_partners_reports_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_partner'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Mitra > Buku Besar Mitra -->
+        <!-- <record id="group_submenu_account_reporting_partner_ledger" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Mitra > Buku Besar Mitra</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_partner')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_partner_ledger" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_partner_ledger'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Mitra > Piutang Seusia -->
+        <!-- <record id="group_submenu_account_reporting_partner_ar" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Mitra > Piutang Seusia</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_partner')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_aged_receivable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_partner_ar'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Mitra > Utang Seusia -->
+        <!-- <record id="group_submenu_account_reporting_partner_ap" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Mitra > Utang Seusia</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_partner')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_aged_payable" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_partner_ap'))]" />
+        </record> -->
+
+
+        <!-- Account > REPORTING > Laporan Audit -->
+        <!-- <record id="group_submenu_account_reporting_audit" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Audit</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting')) ]"/>
+        </record>
+        <record id="account_reports.account_reports_audit_reports_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Audit > Buku Besar -->
+        <!-- <record id="group_submenu_account_reporting_audit_gl" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Audit > Buku Besar</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_audit')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_general_ledger" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_gl'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Audit > Neraca Saldo -->
+        <!-- <record id="group_submenu_account_reporting_audit_tb" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Audit > Neraca Saldo</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_audit')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_coa" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_tb'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Audit > Jurnal yang digabung -->
+        <!-- <record id="group_submenu_account_reporting_audit_cj" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Audit > Jurnal yang digabung</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_audit')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_cj" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_cj'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Audit > Laporan Pajak -->
+        <!-- <record id="group_submenu_account_reporting_audit_tax" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Audit > Laporan Pajak</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_audit')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_gt" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_tax'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Laporan Audit > Audit Jurnal -->
+        <!-- <record id="group_submenu_account_reporting_audit_journals" model="res.groups">
+            <field name="name">Account > Reporting > Laporan Audit > Audit Jurnal</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_audit')) ]"/>
+        </record>
+        <record id="account_reports.menu_print_journal" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_journals'))]" />
+        </record> -->
+
+
+        <!-- Account > REPORTING > Manajemen -->
+        <!-- <record id="group_submenu_account_reporting_managements" model="res.groups">
+            <field name="name">Account > Reporting > Manajemen</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting')) ]"/>
+        </record>
+        <record id="account.account_reports_management_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Manajemen > Analisis Faktur -->
+        <!-- <record id="group_submenu_account_reporting_managements_invoice" model="res.groups">
+            <field name="name">Account > Reporting > Manajemen > Analisis Faktur</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_managements')) ]"/>
+        </record>
+        <record id="account.menu_action_account_invoice_report_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements_invoice'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Manajemen > Analytic Report -->
+        <!-- <record id="group_submenu_account_reporting_managements_analytic" model="res.groups">
+            <field name="name">Account > Reporting > Manajemen > Analytic Report</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_managements')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_report_account_analytic" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements_analytic'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Manajemen > Kerugian Mata Uang yang Belum Direalisasi -->
+        <!-- <record id="group_submenu_account_reporting_managements_gainloss" model="res.groups">
+            <field name="name">Account > Reporting > Manajemen > Kerugian Mata Uang yang Belum Direalisasi</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_managements')) ]"/>
+        </record>
+        <record id="account_reports.menu_action_account_report_multicurrency_revaluation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements_gainloss'))]" />
+        </record> -->
+
+        <!-- Account > REPORTING > Manajemen > Jadwal Depresiasi -->
+        <!-- <record id="group_submenu_account_reporting_managements_depreciation" model="res.groups">
+            <field name="name">Account > Reporting > Manajemen > Jadwal Depresiasi</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_reporting_managements')) ]"/>
+        </record>
+        <record id="account_asset.menu_action_account_report_assets" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements_depreciation'))]" />
+        </record> -->
+
+        <!-- Account > Configuration -->
+        <!-- <record id="group_submenu_account_config" model="res.groups">
+            <field name="name">Account > Configuration</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+        </record>
+        <record id="account.menu_finance_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_config'))]" />
+        </record> -->
+        
+        <!-- Account > Configuration > Pengaturan -->
+        <!-- <record id="group_submenu_account_config_settings" model="res.groups">
+            <field name="name">Account > Configuration > Pengaturan</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config')) ]"/>
+        </record>
+        <record id="account.menu_account_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_settings'))]" />
+        </record> -->
+
+        <!-- Account > Configuration > Penagihan -->
+        <!-- <record id="group_submenu_account_config_inv" model="res.groups">
+            <field name="name">Account > Configuration > Penagihan</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config')) ]"/>
+        </record>
+        <record id="account.account_invoicing_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_inv'))]" />
+        </record> -->
+
+        <!-- Account > Configuration > Penagihan > Syarat Pembayaran   -->
+        <!-- <record id="group_submenu_account_config_inv_terms" model="res.groups">
+            <field name="name">Account > Configuration > Penagihan > Syarat Pembayaran</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config_inv')) ]"/>
+        </record>
+        <record id="account.menu_action_payment_term_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_inv_terms'))]" />
+        </record> -->
+
+        <!-- Account > Configuration > Penagihan > Tingkatan Tindak Lanjut   -->
+        <!-- <record id="group_submenu_account_config_inv_followup" model="res.groups">
+            <field name="name">Account > Configuration > Penagihan > Tingkatan Tindak Lanjut</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config_inv')) ]"/>
+        </record>
+        <record id="account_followup.account_followup_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_inv_followup'))]" />
+        </record> -->
+
+        <!-- Account > Configuration > Penagihan > Incoterm   -->
+        <!-- <record id="group_submenu_account_config_inv_incoterms" model="res.groups">
+            <field name="name">Account > Configuration > Penagihan > Incoterm</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config_inv')) ]"/>
+        </record>
+        <record id="account.menu_action_incoterm_open" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_inv_incoterms'))]" />
+        </record> -->
+
+
+
+        <!-- Account > Configuration > Banks -->
+        <!-- <record id="group_submenu_account_config_bank" model="res.groups">
+            <field name="name">Account > Configuration > Bank</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config')) ]"/>
+        </record>
+        <record id="account.account_banks_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_bank'))]" />
+        </record> -->
+
+        <!-- Account > Configuration > Akuntansi -->
+        <!-- <record id="group_submenu_account_config_acc" model="res.groups">
+            <field name="name">Account > Configuration > Akuntansi</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config')) ]"/>
+        </record>
+        <record id="account.account_account_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_acc'))]" />
+        </record> -->
+
+        <!-- Account > Configuration > Pembayaran -->
+        <!-- <record id="group_submenu_account_config_payments" model="res.groups">
+            <field name="name">Account > Configuration > Pembayaran</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config')) ]"/>
+        </record>
+        <record id="account.root_payment_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_payments'))]" />
+        </record> -->
+
+        <!-- Account > Configuration > Manajemen -->
+        <!-- <record id="group_submenu_account_config_management" model="res.groups">
+            <field name="name">Account > Configuration > Manajemen</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config')) ]"/>
+        </record>
+        <record id="account.account_management_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_management'))]" />
+        </record> -->
+
+
+
+        <!-- Account > Configuration > Level of Approval -->
+        <!-- <record id="group_submenu_account_config_loa" model="res.groups">
+            <field name="name">Account > Configuration > Level of Approval</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config')) ]"/>
+        </record>
+        <record id="custom_accounting.menu_action_loa_form_view" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_loa'))]" />
+        </record> -->
+        
+        <!-- Account > Configuration > Payment method -->
+        <!-- <record id="group_submenu_account_config_p_method" model="res.groups">
+            <field name="name">Account > Configuration > Payment method</field>
+            <field name="category_id" ref="module_category_submenu_acc" />
+            <field name="implied_ids" eval="[(4,ref('custom_access_right.group_submenu_account_config')) ]"/>
+        </record>
+        <record id="custom_accounting.menu_action_payment_method_form_view" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_p_method'))]" />
+        </record> -->
+    </data>
+</odoo>

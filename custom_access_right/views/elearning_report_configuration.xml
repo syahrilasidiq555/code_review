@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <!-- REPORT -->
+    <record id="website_slides.website_slides_menu_report_courses" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_reporting_access_read'))]" />
+    </record>
+    <record id="website_slides.website_slides_menu_report_contents" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_reporting_access_content'))]" />
+    </record>
+    <record id="website_slides.website_slides_menu_report_attendees" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_reporting_access_atendees'))]" />
+    </record>
+    <record id="website_slides.website_slides_menu_report_reviews" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_reporting_access_reviews'))]" />
+    </record>
+    <record id="website_slides.website_slides_menu_report_quizzes" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_reporting_access_quizzes'))]" />
+    </record>
+    <record id="website_slides_survey.website_slides_menu_report_certification" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_reporting_access_certifications'))]" />
+    </record>
+
+    <!-- CONFIGURATION -->
+    <record id="website_slides.website_slides_menu_config_settings" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_settings'))]" />
+    </record>
+    <record id="website_slides.website_slides_menu_config_course_groups" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_course_groups'))]" />
+    </record>
+    <record id="website_slides.website_slides_menu_config_content_tags" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_content_tags'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

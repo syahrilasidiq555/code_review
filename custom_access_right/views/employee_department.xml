@@ -1,0 +1,176 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="view_department_tree_remove_crud" model="ir.ui.view">
+        <field name="name">view_department_tree_remove_crud</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">false</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_department_tree_delete" model="ir.ui.view">
+        <field name="name">view_department_tree_delete</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_departments_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_department_tree_create" model="ir.ui.view">
+        <field name="name">view_department_tree_create</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_departments_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- KANBAN -->
+    <record id="hr_department_view_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">hr_department_view_kanban_remove_crud</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.hr_department_view_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="delete">false</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_department_view_kanban_delete" model="ir.ui.view">
+        <field name="name">hr_department_view_kanban_delete</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.hr_department_view_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_departments_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_department_view_kanban_create" model="ir.ui.view">
+        <field name="name">hr_department_view_kanban_create</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.hr_department_view_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_departments_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_department_view_kanban_access_attendance" model="ir.ui.view">
+        <field name="name">hr_department_view_kanban_access_attendance</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr_attendance.hr_department_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//a[@name='%(hr_attendance.hr_attendance_report_action_filtered)d']" position="replace">
+                <a role="menuitem" class="dropdown-item" name="%(hr_attendance.hr_attendance_report_action_filtered)d" type="action" groups="custom_access_right.group_submenu_departments_access_report_attendances">
+                    Attendances
+                </a>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_department_view_kanban_access_holidays" model="ir.ui.view">
+        <field name="name">hr_department_view_kanban_access_holidays</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr_holidays.hr_department_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//a[@name='%(hr_holidays.hr_leave_action_action_department)d']" position="replace">
+                <a role="menuitem" class="dropdown-item" name="%(hr_holidays.hr_leave_action_action_department)d" type="action" groups="custom_access_right.group_submenu_departments_access_report_timeoff">
+                    Time Off
+                </a>
+            </xpath>
+        </field>
+    </record>
+    <record id="hr_department_view_kanban_access_holidays" model="ir.ui.view">
+        <field name="name">hr_department_view_kanban_access_holidays</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr_recruitment.hr_department_view_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//a[@name='%(hr_recruitment.action_hr_recruitment_report_filtered_department)d']" position="replace">
+                <a role="menuitem" class="dropdown-item" name="%(hr_recruitment.action_hr_recruitment_report_filtered_department)d" type="action" groups="custom_access_right.group_submenu_departments_access_report_recruitments">
+                    Recruitments
+                </a>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- FORM -->
+    <record id="view_department_form_remove_crud" model="ir.ui.view">
+        <field name="name">view_department_form_remove_crud</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_department_form_create" model="ir.ui.view">
+        <field name="name">view_department_form_create</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_departments_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_department_form_update" model="ir.ui.view">
+        <field name="name">view_department_form_update</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_departments_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_department_form_delete" model="ir.ui.view">
+        <field name="name">view_department_form_delete</field>
+        <field name="model">hr.department</field>
+        <field name="inherit_id" ref="hr.view_department_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_departments_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- MENU ITEM -->
+    <record id="hr.menu_hr_department_kanban" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_departments_access_read'))]" />
+    </record>
+    <record id="hr.menu_hr_department_tree" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_departments_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

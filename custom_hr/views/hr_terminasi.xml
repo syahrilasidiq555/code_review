@@ -1,0 +1,1215 @@
+<odoo>
+    <record id="hr_terminasi_view_tree" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_tree</field>
+        <field name="model">hr.terminasi</field>
+        <field name="arch" type="xml">
+            <tree string="Pengajuan Terminasi Karyawan" default_order="create_date desc">
+                <field name="name"/>
+                <field name="state"/>
+
+
+                <field name="create_date"/>
+                <field name="write_date"/>
+            </tree>
+        </field>
+    </record>
+
+    <record id="hr_terminasi_view_form" model="ir.ui.view">
+        <field name="name">hr_terminasi_view_form</field>
+        <field name="model">hr.terminasi</field>
+        <field name="arch" type="xml">
+            <form string="Pengajuan Terminasi Karyawan">
+                <header>
+                    <button string="Approve" type="object" name="button_approved" 
+                        attrs="{'invisible':[('is_user_approve_now','=',False)]}"
+                        class="oe_highlight"
+                        confirm="Apakah anda yakin untuk melakukan Approve proses ini ?"/>
+                    <button string="Refuse" type="object" name="button_rejected" 
+                        attrs="{'invisible':[('is_user_approve_now','=',False)]}"
+                        confirm="Apakah anda yakin untuk melakukan Refuse proses ini ?"/>
+                    <button string="RFA" name="button_to_approve"
+                        type="object" class="oe_highlight" icon="fa-refresh"
+                        attrs="{'invisible':[('to_approve_allowed','=',False),('state','!=','revise')]}"
+                    />
+                    <!-- set to draft -->
+                    <!-- <button string="Set to Draft" type="object" name="button_draft" 
+                        attrs="{'invisible':[('is_user_approve_now','=',False)]}"
+                        confirm="Apakah anda yakin?"/> -->
+                    
+                    <button name="btn_revise" attrs="{'invisible':[('state','!=','rfa')]}" string="Revise" class="oe_highlight" type="object" icon="fa-close"/>
+                    <button name="btn_done" attrs="{'invisible':[('state','!=','processing')]}" string="Set to Done" class="oe_highlight" type="object" 
+                        confirm="Apakah anda yakin untuk melakukan proses ini?" icon="fa-check"/>
+                        <!-- tambahin group="group HRD" -->
+                    
+                    <button name="%(custom_hr.action_report_verklaring_terminasi4)d" 
+                        class="oe_stat_button" string="Print Verklaring" type="action" icon="fa-print"
+                        attrs="{'invisible': [('state','!=','done')]}"/>
+                    
+                    <field name="state" widget="statusbar" statusbar_visible="draft,rfa,approved,processing,done" attrs="{'invisible':[('state','in',('refuse','cancel','revise'))]}"/>
+                    <field name="state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':[('state','!=','cancel')]}"/>
+                    <field name="state_refuse" widget="statusbar" statusbar_visible="refuse" attrs="{'invisible':[('state','!=','refuse')]}"/>
+                    <field name="state_revise" widget="statusbar" statusbar_visible="revise" attrs="{'invisible':[('state','!=','revise')]}"/>
+                </header>
+
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" attrs="{'invisible': [('name', '=', 'New')]}" readonly="1"/>
+                        </h1>
+                    </div>
+
+                    <group>
+                        <group string="Employee Information">
+                            <field name="employee_id" 
+                                options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"
+                                attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="barcode"/>
+                            <field name="identification_id"/>
+                            <field name="department_id"/>
+                            <field name="section_id"/>
+                            <field name="job_id"/>
+                            <field name="company_id" invisible="1" force_save="1"/>
+                        </group>
+                        <group string="Work Information">
+                            <field name="manager_id" 
+                                options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"
+                                attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="coach_id" 
+                                options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"
+                                attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="employee_type_id"/>
+                            <field name="jenis_terminasi_id" 
+                                options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"
+                                attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="need_exit_clearance"/>
+                            <field name="need_evaluasi"/>
+                        </group>
+                        <group string="Date Information">
+                            <field name="join_date"/>
+                            <field name="resign_pengajuan_date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="resign_effective_date" attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="remaining_leaves"/>
+                        </group>
+                    </group>
+                    
+                    <notebook>
+                        <page string="Upload Document" >
+                            <group>
+                                <field name="surat_resign" attrs="{'readonly': [('state','==','done')]}"/>
+                            </group>
+                        </page>
+                        
+                        <page string="Form Exit Interview" attrs="{'invisible': [('need_exit_clearance','!=',True)]}">
+                            <table style="vertical-align: center; width: 75%" border="0" cellpadding="5" cellspacing="5" padding="1" margin="0">
+                                <tr>
+                                    <td style="width:5%; text-align:left; vertical-align:top;" rowspan="5">
+                                        <img src="/custom_hr/static/src/img/BIG_LOGO.png" class="img-fluid" style="max-width: 100px;"/>
+                                    </td>
+                                    <td style="width:70%; text-align: left; font-size:120%">
+                                        <strong>FORM “EXIT INTERVIEW”</strong>
+                                    </td>
+                                </tr>
+                                <tr/>
+                                <tr/>
+                                <tr>
+                                    <td style="width:70%; text-align: left; font-size:95%">
+                                        PT. BANDUNG INDAH GEMILANG
+                                    </td>
+                                </tr>
+                                <tr/>
+                                <tr/>
+                            </table>
+
+                            <group>
+                                <div>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #ba8df0;"> 
+                                                <strong>DATA KARYAWAN</strong>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>Nama Karyawan</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="employee_id" force_save="True" readonly="1"/></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>NIK</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="barcode" force_save="True" readonly="1"/></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>Department</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="department_id" force_save="True" readonly="1"/></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>Tanggal Pengunduran Diri</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="resign_effective_date" force_save="True" readonly="1"/></strong>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+
+                                        <tr>
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td colspan="2" style="background-color: #e8e6eb;">
+                                                        <br/>
+                                                        Form ini kami sebarkan kepada Anda yang akan mengundurkan diri dari perusahaan ini.<br/>
+                                                        Kami berharap Anda dapat memberikan pendapat, kesan ataupun masukan mengenai hal-hal berikut, 
+                                                        khususnya mengenai pengalaman Anda selama bekerja di Perusahaan ini. <br/>
+                                                        Besar harapan kami agar Anda dapat memberikan informasi yang sebenarnya untuk perbaikan manajemen selanjutnya.
+                                                        <br/><br/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+
+                                        <tr>
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:center; background-color: #e8e6eb;">
+                                                        Apa alasan Anda mengundurkan diri dari perusahaan ini? Berilah Check List (√) sesuai keadaan yang sebenarnya pada tempat yang disediakan :
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_1" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Memperoleh pekerjaan lain
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_2" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Beban kerja yang terlalu tinggi
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_3" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Memilih untuk berwirausaha
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_4" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Gaji yang kurang seimbang
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_5" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Lokasi kantor terlalu jauh dari rumah
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_6" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Atasan yang kurang mendukung
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_7" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Kondisi kesehatan yang kurang baik
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_8" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Rekan kerja yang kurang menyenangkan
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_9" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Tidak ada kesempatan untuk berkembang
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_10" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Birokrasi yang terlalu rumit
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_11" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Lain-lain
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="checklist_11_text" force_save="True" attrs="{'invisible': [('checklist_11','=',False)], 'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </table>
+
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left; background-color: #e8e6eb;">
+                                                        <br/>
+                                                        Selanjutnya pilihlah salah satu alternatif berikut, Jika :<br/>
+                                                        ((4) Sangat Setuju ; (3) Setuju ; (2) Tidak Setuju ; (1) Sangat Tidak Setuju)
+                                                        <br/><br/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        Tugas dan tanggung jawab kerja saya sesuai dengan job deskripsi jabatan tersebut
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="radio_1" force_save="True" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        Selama ini saya menyukai rutinitas pekerjaan saya
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="radio_2" force_save="True" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        Atasan saya memberikan bimbingan dan pengarahan yang baik selama saya bekerja
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="radio_3" force_save="True" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        Saya memperoleh training yang cukup yang menunjang pekerjaan saya
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="radio_4" force_save="True" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        Hubungan kerja dengan atasan tidak pernah menyulitkan pekerjaan saya
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="radio_5" force_save="True" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        Hubungan kerja dengan rekan kerja tidak pernah menyulitkan pekerjaan saya 
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="radio_6" force_save="True" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        Hubungan kerja dengan bawahan tidak pernah menyulitkan pekerjaan saya
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="radio_7" force_save="True" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:30%; text-align:left; vertical-align:center;">
+                                                        Saya menyukai lingkungan kerja perusahaan ini, baik lingkungan fisik kantor maupun lingkungan sosialnya
+                                                    </td>
+                                                    <td style="width:70%; text-align:left; vertical-align:center;">
+                                                        <field name="radio_8" force_save="True" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left; background-color: #e8e6eb;">
+                                                        <br/>
+                                                        Menurut Anda, apa yang perlu diperbaiki di perusahaan ini? Pilihlah sesuai keadaan yang sebenarnya
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left;">
+                                                        <field name="text_1" force_save="True" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left; background-color: #e8e6eb;">
+                                                        <br/>
+                                                        Menurut Anda apakah daya tarik perusahaan ini ?
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left;">
+                                                        <field name="text_2" force_save="True" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left; background-color: #e8e6eb;">
+                                                        <br/>
+                                                        dan apakah yang tidak Anda sukai dari perusahaan ini ?
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left;">
+                                                        <field name="text_3" force_save="True" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left; background-color: #e8e6eb;">
+                                                        <br/>
+                                                        Apakah saran Anda terhadap perusahaan ini untuk perbaikan selanjutnya ?
+                                                        <br/>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="2" text-align="center" style="text-align:left;">
+                                                        <field name="text_4" force_save="True" attrs="{'readonly': [('state','==','done')]}"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </group>
+                        </page>
+
+                        <page string="Checlist Exit Interview" attrs="{'invisible': [('need_exit_clearance','!=',True)]}">
+                            <table style="vertical-align: center; width: 75%" border="0" cellpadding="5" cellspacing="5" padding="1" margin="0">
+                                <tr>
+                                    <td style="width:5%; text-align:left; vertical-align:top;" rowspan="5">
+                                        <img src="/custom_hr/static/src/img/BIG_LOGO.png" class="img-fluid" style="max-width: 100px;"/>
+                                    </td>
+                                    <td style="width:70%; text-align: left; font-size:120%">
+                                        <strong>CHEKLIST "EXIT INTERVIEW"</strong>
+                                    </td>
+                                </tr>
+                                <tr/>
+                                <tr/>
+                                <tr>
+                                    <td style="width:70%; text-align: left; font-size:95%">
+                                        PT. BANDUNG INDAH GEMILANG
+                                    </td>
+                                </tr>
+                                <tr/>
+                                <tr/>
+                            </table>
+
+                            <group>
+                                <div>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #ba8df0;"> 
+                                                <strong>DATA KARYAWAN</strong>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>Nama Karyawan</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="employee_id" force_save="True" readonly="1"/></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>NIK</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="barcode" force_save="True" readonly="1"/></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>Department</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="department_id" force_save="True" readonly="1"/></strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>Tanggal Pengunduran Diri</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="resign_effective_date" force_save="True" readonly="1"/></strong>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+
+                                        <tr>
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td text-align="center" style="width:20%; text-align:center; background-color: #e8e6eb;">
+                                                        Remark Department
+                                                    </td>
+                                                    <td text-align="center" style="width:50%; text-align:center; background-color: #e8e6eb;">
+                                                        Item
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:center; background-color: #e8e6eb;">
+                                                        Keterangan
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:center; background-color: #e8e6eb;">
+                                                        Tandatangan - Nama
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td text-align="center" style="width:20%; text-align:left;">
+                                                        Department Terkait
+                                                    </td>
+                                                    <td text-align="center" style="width:50%; text-align:left;">
+                                                        Pekerjaan :<br/>
+                                                        <field name="checklist_kertas_kerja" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Kertas Kerja<br/>
+                                                        <field name="checklist_document" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Dokumen<br/>
+                                                        <field name="checklist_file" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> File<br/>
+                                                        <field name="checklist_perlengkapan_kerja" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Perlengkapan Kerja<br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        <br/>
+                                                        <field name="radio_kertas_kerja" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_document" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_file" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_perlengkapan_kerja" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        Diapprove oleh Head / Manager Dept Terkait
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td text-align="center" style="width:20%; text-align:left;">
+                                                        HRD - Payroll
+                                                    </td>
+                                                    <td text-align="center" style="width:50%; text-align:left;">
+                                                        <br/>
+                                                        <field name="checklist_kasbon" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Kasbon<br/>
+                                                        <br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        <br/>
+                                                        <field name="radio_kasbon" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        Approval oleh HRD
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td text-align="center" style="width:20%; text-align:left;">
+                                                        HRD - Medical
+                                                    </td>
+                                                    <td text-align="center" style="width:50%; text-align:left;">
+                                                        <br/>
+                                                        <field name="checklist_jamsostek" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Kartu Asuransi Jamsostek<br/>
+                                                        <field name="checklist_piut_medical" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Piutang Medical<br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        <br/>
+                                                        <field name="radio_jamsostek" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_piut_medical" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        Approval oleh HRD
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td text-align="center" style="width:20%; text-align:left;">
+                                                        HRD - GA
+                                                    </td>
+                                                    <td text-align="center" style="width:50%; text-align:left;">
+                                                        <br/>
+                                                        <field name="checklist_srt_pengunduran" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Surat Pengunduran Diri<br/>
+                                                        <field name="checklist_name_tag" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Name Tag<br/>
+                                                        <field name="checklist_kunci_loker" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Kunci Loker<br/>
+                                                        <field name="checklist_hp" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Handphone (HP)<br/>
+                                                        <field name="checklist_kendaraan" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Kendaraan<br/>
+                                                        <field name="checklist_seragam" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Seragam<br/>
+                                                        <field name="checklist_sepatu" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Sepatu Kerja<br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        <br/>
+                                                        <field name="radio_srt_pengunduran" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_name_tag" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_kunci_loker" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_hp" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_kendaraan" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_seragam" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_sepatu" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        Approval oleh HRD
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td text-align="center" style="width:20%; text-align:left;">
+                                                        MIS - IT
+                                                    </td>
+                                                    <td text-align="center" style="width:50%; text-align:left;">
+                                                        <br/>
+                                                        <field name="checklist_laptop" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Notebook / Laptop dan Kelengkapannya<br/>
+                                                        <br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        <br/>
+                                                        <field name="radio_laptop" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        Approval oleh IT
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td text-align="center" style="width:20%; text-align:left;">
+                                                        Finance Accounting
+                                                    </td>
+                                                    <td text-align="center" style="width:50%; text-align:left;">
+                                                        <br/>
+                                                        <field name="checklist_cash" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Cash Voucher<br/>
+                                                        <field name="checklist_bank" force_save="True" attrs="{'readonly': [('state','==','done')]}"/> Bank Voucher<br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        <br/>
+                                                        <field name="radio_cash" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                        <field name="radio_bank" force_save="True" widget="radio" options="{'horizontal':True}" attrs="{'readonly': [('state','==','done')]}"/> <br/>
+                                                    </td>
+                                                    <td text-align="center" style="width:15%; text-align:left;">
+                                                        Approval oleh Tim Finance / Accounting
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </group>
+                        </page>
+
+                        <page string="Form Evaluasi" attrs="{'invisible': [('need_evaluasi','!=',True)]}">
+                            <table style="vertical-align: center; width: 75%" border="0" cellpadding="5" cellspacing="5" padding="1" margin="0">
+                                <tr>
+                                    <td style="width:5%; text-align:left; vertical-align:top;" rowspan="5">
+                                        <img src="/custom_hr/static/src/img/BIG_LOGO.png" class="img-fluid" style="max-width: 100px;"/>
+                                    </td>
+                                    <td style="width:70%; text-align: left; font-size:120%">
+                                        <strong>FORM EVALUASI KARYAWAN</strong>
+                                    </td>
+                                </tr>
+                                <tr/>
+                                <tr/>
+                                <tr>
+                                    <td style="width:70%; text-align: left; font-size:95%">
+                                        PT. BANDUNG INDAH GEMILANG
+                                    </td>
+                                </tr>
+                                <tr/>
+                                <tr/>
+                            </table>
+                            <group>
+                                <div>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #ba8df0;"> 
+                                                <strong>DATA KARYAWAN</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                        <strong>NIK</strong>
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: center;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;">
+                                                        <strong><field name="barcode" force_save="True"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        Nama
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: top;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;">
+                                                        <field name="employee_id" force_save="True" readonly="True" options="{'no_open': True}"/>
+                                                    </td>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        Jabatan
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: top;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;">
+                                                        <field name="job_id" force_save="True" readonly="True" options="{'no_open': True}"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        Department / Section
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: top;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;">
+                                                        <field name="department_id" readonly="1" force_save="1"/> / <field name="section_id" readonly="1" force_save="1"/>
+                                                    </td>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        Status Karyawan
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: top;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;">
+                                                        <field name="employee_type_id" force_save="True" readonly="True"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        Tanggal Masuk
+                                                    </td>
+                                                    <td style="width:1%; text-align: center; vertical-align: top;">:</td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;">
+                                                        <field name="join_date" force_save="True" readonly="True"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="background-color: #ba8df0;">
+                                                <strong>ASPEK PENILAIAN</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%" border="0" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td colspan="4">
+                                                        <strong>
+                                                            (Pilihlah jawaban yang paling sesuai, KS=Kurang Sekali; K=Kurang; B=Baik; BS=Baik Sekali)
+                                                        </strong>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        1.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Kuantitas Hasil Kerja
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                        Jumlah / volume output yang dihasilkan dan atau tingkat produktifitas yang berhasil dicapai berdasarkan pengukuran tertentu, dan atau penggunaan waktu (durasi / kecepatan) dalam menyelesaikan suatu tugas.
+                                                    </td>
+                                                    <td style="width:20%; background-color: #e8e6eb;">
+                                                        <strong><field name="kuantitas_hasil_kerja" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        2.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Kualitas Hasil Kerja
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                        Ketelitian / kecermatan / keakuratan, kerapihan, kelengkapan dan kesempurnaan hasil kerja dan atau tingkat kesalahan / kerusakan / kegagalan pada hasil kerja yang diperoleh.
+                                                    </td>
+                                                    <td style="width:20%; background-color: #e8e6eb;">
+                                                        <strong><field name="kualitas_hasil_kerja" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        3.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Pengetahuan dan Keterampilan
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                        Pemahaman dan penguasaan akan hal-hal yang berkaitan dengan tugas dan jabatannya (apa yang harus dikerjakan, bagaimana metode kerjanya dan lainnya) serta kemampuan / kemahiran dalam melaksanakannya.
+                                                    </td>
+                                                    <td style="width:20%; background-color: #e8e6eb;">
+                                                        <strong><field name="pengetahuan_keterampilan" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        4.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Inisiatif dan Kreatif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                        Kemampuan bekerja secara mandiri tanpa pengaruh atasan, serta kemampuan dalam menyampaikan ide / gagasan kreatif dan inovatif yang bermanfaat bagi peningkatan efektivitas dan efisiensi kerja.
+                                                    </td>
+                                                    <td style="width:20%; background-color: #e8e6eb;">
+                                                        <strong><field name="inisiatif_kreatif" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        5.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Tanggung Jawab
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                        Memiliki komitmen, kesungguhan dan keterlibatan kerja tinggi, bekerja secara tuntas / tidak menunda-nunda pekerjaan, tidak melemparkan kesalahan kepada orang lain, kejujuran dalam bekerja serta dedikasi / pengabdian yang tinggi kepada perusahaan.
+                                                    </td>
+                                                    <td style="width:20%; background-color: #e8e6eb;">
+                                                        <strong><field name="tanggung_jawab" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        6.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Kerjasama
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center; background-color: #e8e6eb;">
+                                                        Kemampuan menjalin hubungan dan kerjasama secara harmonis dan efektif dengan orang / pihak lain (karyawan, rekan kerja, atasan, pihak eksternal dll), sesuai dengan tugasnya, termasuk kemampuan bekerjasama di dalam kelompok.
+                                                    </td>
+                                                    <td style="width:20%; background-color: #e8e6eb;">
+                                                        <strong><field name="kerjasama" widget="radio" options="{'horizontal': true}" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="background-color: #ba8df0;">
+                                                <strong>Klasifikasi Penilaian</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Total Nilai Predikat</strong>
+                                                    </td>
+                                                    <td style="width:60%;">
+                                                        <strong>Angka Pengurang SP (Data dari Personalia)</strong>
+                                                    </td>
+                                                    <td style="width:15%;">
+                                                        <strong>Subtotal</strong>
+                                                    </td>
+                                                    <td style="width:10%; horizontal-align:center;">
+                                                        <strong><field name="avg_answer" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%">
+                                                        <strong>&lt; 2 (KS = Kurang Sekali)</strong>
+                                                    </td>
+                                                    <td style="width:60%">
+                                                        <strong>SP I : Dikurangi 48.08 %</strong>
+                                                    </td>
+                                                    <td style="width:15%">
+                                                        <strong>SP</strong>
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <strong><field name="sp_type" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%">
+                                                        <strong>2 - 2.75 (K = Kurang)</strong>
+                                                    </td>
+                                                    <td style="width:60%">
+                                                        <strong>SP II : Dikurangi 64.10 %</strong>
+                                                    </td>
+                                                    <td style="width:15%" rowspan="3">
+                                                        <strong>Faktor pengurang dari Absensi</strong>
+                                                    </td>
+                                                    <td style="width:10%; vertical-align:center;" rowspan="3">
+                                                        <strong><field name="pengurang_absensi" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%">
+                                                        <strong>2.76 - 3.25 (B = Baik)</strong>
+                                                    </td>
+                                                    <td style="width:60%">
+                                                        <strong>SP III : Dikurangi 80.13 %</strong>
+                                                    </td>
+                                                    <!-- <td style="width:15%">
+                                                        <strong></strong>
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <strong></strong>
+                                                    </td> -->
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%">
+                                                        <strong>3.26 - 4 (BS = Baik Sekali)</strong>
+                                                    </td>
+                                                    <td style="width:60%">
+                                                        <strong></strong>
+                                                    </td>
+                                                    <!-- <td style="width:15%">
+                                                        <strong></strong>
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <strong></strong>
+                                                    </td> -->
+                                                </tr>
+                                            </table>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="background-color: #ba8df0;">
+                                                <strong>Angka Pengurangan Absen (Data dari Personalia)</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Sakit</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   1.28 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <field name="sakit" attrs="{'readonly': [('state','==','done')]}"/> Hari
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:15%;" rowspan="2">
+                                                        <strong>Total Angka Pengurang</strong>
+                                                    </td>
+                                                    <td style="width:10%" rowspan="2">
+                                                        <strong><field name="total_pengurang" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Ijin</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   3.85 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <field name="ijin" attrs="{'readonly': [('state','==','done')]}"/> Hari
+                                                        </div>
+                                                    </td>
+                                                    <!-- <td style="width:15%;">
+                                                        <strong></strong>
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <strong></strong>
+                                                    </td> -->
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Mangkir</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   48.08 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <field name="mangkir" attrs="{'readonly': [('state','==','done')]}"/> Hari
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:15%;" rowspan="2">
+                                                        <strong>Total Nilai</strong>
+                                                    </td>
+                                                    <td style="width:10%" rowspan="2">
+                                                        <strong><field name="total_nilai" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Terlambat</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   2.56 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <field name="terlambat" attrs="{'readonly': [('state','==','done')]}"/> Hari
+                                                        </div>
+                                                    </td>
+                                                    <!-- <td style="width:15%;">
+                                                        <strong></strong>
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <strong></strong>
+                                                    </td> -->
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Pulang Cepat</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   2.56 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <field name="pulang_cepat" attrs="{'readonly': [('state','==','done')]}"/> Hari
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:15%;">
+                                                        <strong>Predikat</strong>
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <strong><field name="predikat" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+
+                                        <tr>
+                                            <td style="background-color: #ba8df0;">
+                                                <strong>Saran Untuk Pengembangan Karyawan</strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%" border="0" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        1
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        Kelemahan Yang Dimilki Karyawan
+                                                    </td>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        <strong><field name="kelemahan" force_save="True" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                    <td style="width:20%"/>
+                                                </tr>
+
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        2
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        Kelebihan Yang Dimilki Karyawan
+                                                    </td>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        <strong><field name="kelebihan" force_save="True" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                    <td style="width:20%"/>
+                                                </tr>
+
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        3
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        Pelatihan Yang Diperlukan Karyawan
+                                                    </td>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        <strong><field name="pelatihan" force_save="True" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                    <td style="width:20%"/>
+                                                </tr>
+
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        4
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        Catatan Lainnya
+                                                    </td>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        <strong><field name="catatan_lainnya" force_save="True" attrs="{'readonly': [('state','==','done')]}"/></strong>
+                                                    </td>
+                                                    <td style="width:20%"/>
+                                                </tr>
+                                                
+                                            </table>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </group>
+                        </page>
+
+                        <page string="Approval &amp; Audit Trail">
+                            <group>
+                                <group string="Approval Information">
+                                    <field name="matrix_id" 
+                                        readonly="1" force_save="1"
+                                        options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"/>
+                                    <field name="responsible_id"/>
+                                    <field name="next_approve_user_ids" widget="many2many_tags"/>
+                                    <field name="is_user_approve_now" invisible="1"/>
+                                    <field name="to_approve_allowed" invisible="1"/>
+                                </group>
+                                <group>
+                                </group>
+                            </group>
+
+                            <field name="approval_info_ids" readonly="1" force_save="1">
+                                <tree>
+                                    <field name="sequence" optional="hide"/>
+                                    <field name="matrix_id" optional="hide"/>
+                                    <field name="model_id" optional="hide"/>
+                                    <field name="trx_id" invisible="1"/>
+                                    <field name="state"/>
+                                    <field name="approve_description"/>
+                                    <field name="matrix_line_id"/>
+                                    <field name="user_ids" widget="many2many_tags" invisible="1"/>
+                                    <field name="job_id" invisible="1"/>
+                                    <field name="is_approve" invisible="1"/>
+                                    <field name="approve_user_id"/>
+                                    <field name="approve_dept_id"/>
+                                    <field name="approve_job_id"/>
+                                    <field name="approve_date"/>
+                                    <field name="approver_sign" invisible="1"/>
+                                    <field name="group_id" invisible="1" force_save="1"/>
+                                </tree>
+                            </field>
+                            
+                        </page>
+                        
+                    </notebook>
+
+                    <group  string="Audit Trail">
+                        <group>
+                            <field name="create_uid"/>
+                            <field name="create_date"/>
+                        </group>
+                        <group>
+                            <field name="write_uid"/>
+                            <field name="write_date"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div style="margin: 0px 16px 16px 16px; background-color: white; border: 1px solid #c8c8d3; box-shadow: 0 4px 20px rgb(0 0 0 / 15%); min-height:100px;">
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids" widget="mail_followers"/>
+                        <field name="activity_ids"/>	
+                        <field name="message_ids" widget="mail_thread"/>
+                    </div>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="hr_terminasi_action">
+        <field name="name">Pengajuan Terminasi Karyawan</field>
+        <field name="res_model">hr.terminasi</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="context">
+            {'search_default_bulan_ayeuna': 1}
+        </field> -->
+    </record>
+
+    <!-- MASTER JENIS TERMINASI -->
+    <record id="hr_jenis_terminasi_view_tree" model="ir.ui.view">
+        <field name="name">hr_jenis_terminasi_view_tree</field>
+        <field name="model">hr.jenis.terminasi</field>
+        <field name="arch" type="xml">
+            <tree string="Jenis Terminasi" default_order="create_date desc" editable="bottom">
+                <field name="name"/>
+                <field name="need_exit_clearance"/>
+                <field name="need_evaluasi"/>
+                <field name="active" invisible="1"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="hr_jenis_terminasi_action">
+        <field name="name">Jenis Terminasi</field>
+        <field name="res_model">hr.jenis.terminasi</field>
+        <field name="view_mode">tree</field>
+        <!-- <field name="context">
+            {'search_default_bulan_ayeuna': 1}
+        </field> -->
+    </record>
+</odoo>

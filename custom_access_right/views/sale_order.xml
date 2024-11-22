@@ -1,0 +1,512 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record id="view_order_tree_inherit_view" model="ir.ui.view">
+            <field name="name">view_order_tree_inherit_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <!-- HANYA BISA VIEW AMOUNT DI GROUP TERTENTU -->
+                <field name="amount_untaxed" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </field>
+                <field name="amount_tax" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </field>
+                <field name="amount_total" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </field>
+            </field>
+        </record>
+
+        <record id="rental_order_view_tree_inherit_view" model="ir.ui.view">
+            <field name="name">rental_order_view_tree_inherit_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_view_tree"/>
+            <field name="arch" type="xml">
+                <!-- HANYA BISA VIEW AMOUNT DI GROUP TERTENTU -->
+                <field name="amount_total" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </field>
+            </field>
+        </record>
+
+        <!-- Kanban View -->
+        <record id="view_sale_order_kanban_inherit_view" model="ir.ui.view">
+            <field name="name">view_sale_order_kanban_inherit_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
+            <field name="arch" type="xml">
+                <!-- HANYA BISA VIEW AMOUNT DI GROUP TERTENTU -->
+                <xpath expr="//div[hasclass('o_kanban_record_top')]" position="replace">
+                    <div class="o_kanban_record_top mb16">
+                        <div class="o_kanban_record_headings mt4">
+                            <strong class="o_kanban_record_title"><span><t t-esc="record.partner_id.value"/></span></strong>
+                        </div>
+                        <strong><field name="amount_total" widget="monetary" groups="custom_access_right.group_sale_order_view_amount"/></strong>
+                    </div>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- BUTTON FORM VIEW -->
+        <record id="view_order_form_inherit_view" model="ir.ui.view">
+            <field name="name">view_order_form_inherit_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='open_pickup']" position="attributes">
+                    <attribute name="string">OCCUPIED</attribute>
+                    <attribute name="groups">custom_access_right.group_sale_button_open_pickup</attribute>
+                </xpath>
+                <xpath expr="//button[@name='open_return'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_open_return</attribute>
+                </xpath>
+                <xpath expr="//button[@name='open_return'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_open_return</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_buat_faktur</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(sale.action_view_sale_advance_payment_inv)d'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_buat_faktur</attribute>
+                </xpath>
+
+
+                <xpath expr="//button[@name='ruang_semayam_co']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_co_r_semayam</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_quotation_send'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_kirim_email</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_quotation_send'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_kirim_email</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_quotation_send'][3]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_kirim_email</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_quotation_send'][4]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_kirim_email</attribute>
+                </xpath>
+                
+
+                <!-- <xpath expr="//button[@name='action_bayar_columnbarium']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_bayar_columnbarium</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_create_invoice_columnbarium']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_create_invoice_columnbarium</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_recon_hutang_titipo']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_recon_hutang_titipo</attribute>
+                </xpath> -->
+
+                <xpath expr="//button[@name='action_confirm'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_confirm</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_confirm'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_confirm</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_draft']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_draft</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_refresh_qty']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_refresh_qty</attribute>
+                </xpath>
+
+
+                <xpath expr="//button[@name='get_bundle_product_list']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sales_order_create,custom_access_right.group_sales_order_update</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_add_ruang_semayam']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sales_order_create,custom_access_right.group_sales_order_update</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_add_transportasi']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sales_order_create,custom_access_right.group_sales_order_update</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_add_columbarium']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sales_order_create,custom_access_right.group_sales_order_update</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_add_ruangdoa']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sales_order_create,custom_access_right.group_sales_order_update</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/button[@name='action_change_pack_item']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sales_order_create,custom_access_right.group_sales_order_update</attribute>
+                </xpath>
+
+                <!-- HANYA BISA VIEW AMOUNT DI GROUP TERTENTU -->
+                <xpath expr="//field[@name='order_line']//tree//field[@name='price_unit']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//tree//field[@name='tax_id']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//tree//field[@name='price_subtotal']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </xpath>
+
+
+                <xpath expr="//field[@name='order_line']//form//group//field[@name='price_total']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//form//group//field[@name='price_tax']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']//form//group//field[@name='price_subtotal']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_order_view_amount</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- FORM VIEW -->
+        <!-- <record id="rental_order_primary_form_view_accounting_inherit_access" model="ir.ui.view">
+            <field name="name">rental_order_primary_form_view_accounting_inherit_access</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="custom_accounting.rental_order_primary_form_view_accounting_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_bayar_columnbarium']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_bayar_columnbarium</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_create_invoice_columnbarium']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_create_invoice_columnbarium</attribute>
+                </xpath>
+                yg ini ga perlu, karna hanya tampil saat debug mode saja
+                <xpath expr="//button[@name='action_recon_hutang_titipo']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_sale_button_action_recon_hutang_titipo</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+
+        <!-- REMOVE CRUD in FORM-->
+        <record id="rental_order_primary_form_view_remove_crud" model="ir.ui.view">
+            <field name="name">rental_order_primary_form_view_remove_crud</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <record id="view_order_tree_remove_crud" model="ir.ui.view">
+            <field name="name">view_order_tree_remove_crud</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <record id="rental_order_view_tree_remove_crud" model="ir.ui.view">
+            <field name="name">rental_order_view_tree_remove_crud</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_view_tree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in Kanban-->
+        <record id="view_sale_order_kanban_remove_crud" model="ir.ui.view">
+            <field name="name">view_sale_order_kanban_remove_crud</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        
+        <!-- Add Create & Delete IN TREE VIEW -->
+        <!-- TREE 1 -->
+        <record id="sale_order_tree_create_tree" model="ir.ui.view">
+            <field name="name">sale_order_tree_create_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="sale_order_tree_delete_tree" model="ir.ui.view">
+            <field name="name">sale_order_tree_delete_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- TREE 2 -->
+        <record id="rental_order_tree_create_tree" model="ir.ui.view">
+            <field name="name">rental_order_tree_create_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_view_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="rental_order_tree_delete_tree" model="ir.ui.view">
+            <field name="name">rental_order_tree_delete_tree</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_view_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add Create, Update, Delete IN FORM -->
+        <record id="rental_order_form_create_view" model="ir.ui.view">
+            <field name="name">rental_order_form_create_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="rental_order_form_edit_view" model="ir.ui.view">
+            <field name="name">rental_order_form_edit_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_update'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="rental_order_form_delete_view" model="ir.ui.view">
+            <field name="name">rental_order_form_delete_view</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Add Create & Delete IN KANBAN VIEW -->
+        <record id="sale_order_create_kanban" model="ir.ui.view">
+            <field name="name">sale_order_create_kanban</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="sale_order_delete_kanban" model="ir.ui.view">
+            <field name="name">sale_order_delete_kanban</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_sale_order_kanban"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_sales_order_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- MENU ITEM -->
+        <!-- SALE / Order / Penawaran -->
+        <record id="sale.menu_sale_quotations" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_read'))]" />
+        </record>
+
+        <!-- SALE / Order / Order -->
+        <record id="sale.menu_sale_order" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_create'))]" />
+        </record>
+
+        <!-- SALE / Order / Penjualan Tim -->
+        <record id="sale.report_sales_team" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_penjualan_tim_read'))]" />
+        </record>
+
+        <!-- SALE / Order / Pelanggan -->
+        <record id="sale.res_partner_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_pelanggan_read'))]" />
+        </record>
+
+        <!-- SALE / Siap Difakturkan / Order siap Difakturkan -->
+        <record id="sale.menu_sale_order_invoice" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_ready_faktur_read'))]" />
+        </record>
+
+        <!-- SALE / Siap Difakturkan / Order Penjualan untuk Upsell -->
+        <record id="sale.menu_sale_order_upselling" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_order_upsell_read'))]" />
+        </record>
+
+
+        <!-- SALE / Produk / Produk -->
+        <record id="sale.menu_product_template_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_product_read'))]" />
+        </record>
+
+        <!-- SALE / Produk / Varian Produk -->
+        <record id="sale.menu_product" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_product_varian_read'))]" />
+        </record>
+        <record id="sale.menu_products" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_product_varian_read'))]" />
+        </record>
+
+        <!-- SALE / Produk / Daftar Harga -->
+        <record id="sale.menu_product_pricelist_main" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_pricelist_read'))]" />
+        </record>
+
+        <!-- SALE / Produk / Produk Paket -->
+        <record id="custom_sale_order.ni_bundle_product_sales_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_bundle_product_read'))]" />
+        </record>
+
+
+        <!-- SALE / Laporan / Dashboard -->
+        <record id="sale_enterprise.menu_sale_report_dashboard" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_dashboard_rep_read'))]" />
+        </record>
+
+        <!-- SALE / Laporan / Penjualan -->
+        <record id="sale.menu_report_product_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_penjualan_rep_read'))]" />
+        </record>
+
+
+        <!-- SALE / Konfigurasi / Pengaturan -->
+        <record id="sale.menu_sale_general_settings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_pengaturan_read'))]" />
+        </record>
+        
+        <!-- SALE / Konfigurasi / Penjualan Tim -->
+        <record id="sale.sales_team_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_penjualan_tim_config_read'))]" />
+        </record>
+
+        <!-- SALE / Konfigurasi / Label -->
+        <record id="sale.menu_tag_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_label_read'))]" />
+        </record>
+
+        <!-- SALE / Konfigurasi / Atribut -->
+        <record id="sale_management.menu_product_attribute_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_atribut_read'))]" />
+        </record>
+
+        <!-- SALE / Konfigurasi / Kategori Satuan Ukuran -->
+        <record id="sale.menu_product_uom_categ_form_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_uom_read'))]" />
+        </record>
+
+        <!-- SALE / Konfigurasi / Jenis Aktivitas -->
+        <record id="sale.sale_menu_config_activity_type" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_activity_read'))]" />
+        </record>
+
+        <!-- SALE / Konfigurasi / Jadwal Ruang Doa -->
+        <record id="custom_sale_order.jadwal_ruangdoa_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_ruangdoa_read'))]" />
+        </record>
+
+        <!-- SALE / Konfigurasi / Tarif Ambulance -->
+        <record id="custom_sale_order.master_tarif_ambulance_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_tarif_ambulance_read'))]" />
+        </record>
+
+
+
+
+
+        <!-- Rental / Order / Order -->
+        <record id="sale_renting.rental_orders_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_sales_order_create'))]" />
+        </record>
+
+        <!-- Rental / Order / Pelanggan -->
+        <record id="sale_renting.menu_orders_customers" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_rental_order_pelanggan_read'))]" />
+        </record>
+
+        <!-- Rental / Order / Pickup -->
+        <record id="sale_renting.rental_orders_pickup" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_rental_order_pickup_read'))]" />
+        </record>
+
+        <!-- Rental / Order / Retur -->
+        <record id="sale_renting.rental_orders_return" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_rental_order_retur_read'))]" />
+        </record>
+
+        <!-- Rental / Jadwal -->
+        <record id="sale_renting.menu_rental_schedule" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_rental_order_schedule_read'))]" />
+        </record>
+
+        <!-- Rental / Product -->
+        <record id="sale_renting.menu_rental_products" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_rental_order_product_read'))]" />
+        </record>
+
+        <!-- Rental / Laporan -->
+        <record id="sale_renting.menu_rental_reporting" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_rental_order_report_read'))]" />
+        </record>
+
+        <!-- Rental / Konfigurasi -->
+        <record id="sale_renting.menu_rental_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_rental_order_config_read'))]" />
+        </record>
+
+
+    </data>
+</odoo>

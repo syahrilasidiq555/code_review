@@ -1,0 +1,39 @@
+<odoo>
+    <data>
+
+        <!-- POS ORDER FORM -->
+        <record id="view_pos_pos_form_inherit" model="ir.ui.view">
+            <field name="name">view_pos_pos_form_inherit</field>
+            <field name="model">pos.order</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_pos_form"/>
+            <field name="arch" type="xml">
+                <!-- add button view rental schedule -->
+                <button name="action_view_invoice" position="after">
+                    <field name="bill_ids" invisible="1" />
+                    <button name="action_view_bills" string="Konsinyasi Bills" type="object" class="oe_stat_button" icon="fa-pencil-square-o" attrs="{'invisible':[('bill_ids','=',[])]}" />
+                </button>
+
+                <field name="partner_id" position="replace">
+                    <field name="is_paylater_semayam" invisible="1"/>
+                    <field name="partner_id" 
+                        context="{'res_partner_search_mode': 'customer'}"
+                        string="Pelanggan" 
+                        attrs="{'readonly': [('state','=','invoiced')], 'invisible':[('is_paylater_semayam','=',True)]}" />
+                    <field name="partner_id" 
+                        context="{'res_partner_search_mode': 'customer'}" 
+                        string="Almarhum" 
+                        attrs="{'readonly': [('state','=','invoiced')], 'invisible':[('is_paylater_semayam','!=',True)]}" />
+                </field>
+
+                <field name="fiscal_position_id" position="before">
+                    <field name="penanggungjawab_id" 
+                        widget="res_partner_many2one" 
+                        context="{'only_name':True,'default_is_customer':True}" 
+                        options="{'always_reload': True}" 
+                        attrs="{'invisible':['|',('penanggungjawab_id','=',False),('is_paylater_semayam','!=',True)]}" />
+                </field>
+            </field>
+        </record>
+
+    </data>
+</odoo>

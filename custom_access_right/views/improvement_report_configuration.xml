@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <record id="suggestion_system.suggestion_system_report_summary" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_summary'))]" />
+    </record>
+    <record id="suggestion_system.report_ss_percentage" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_involvement'))]" />
+    </record>
+    <record id="dym_improvement.report_improvement" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_qcc_1'))]" />
+    </record>
+    <record id="dym_improvement.report_improvement_tahunan" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_qcc_2'))]" />
+    </record>
+    <record id="dym_improvement.report_improvement_dep" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_qcc_3'))]" />
+    </record>
+    <record id="dym_improvement.improvement_step_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_config_step'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

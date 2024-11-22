@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="meeting_booth_view_tree_remove_crud" model="ir.ui.view">
+        <field name="name">meeting_booth_view_tree_remove_crud</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="meeting_booth_view_tree_create" model="ir.ui.view">
+        <field name="name">meeting_booth_view_tree_create</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_booth_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="meeting_booth_view_tree_delete" model="ir.ui.view">
+        <field name="name">meeting_booth_view_tree_delete</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_booth_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="meeting_booth_view_form_remove_crud" model="ir.ui.view">
+        <field name="name">meeting_booth_view_form_remove_crud</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="meeting_booth_view_form_create" model="ir.ui.view">
+        <field name="name">meeting_booth_view_form_create</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_booth_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="meeting_booth_view_form_update" model="ir.ui.view">
+        <field name="name">meeting_booth_view_form_update</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_booth_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="meeting_booth_view_form_delete" model="ir.ui.view">
+        <field name="name">meeting_booth_view_form_delete</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_booth_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- KANBAN -->
+    <record id="meeting_booth_view_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">meeting_booth_view_kanban_remove_crud</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="meeting_booth_view_kanban_create" model="ir.ui.view">
+        <field name="name">meeting_booth_view_kanbane_create</field>
+        <field name="model">meeting.booth</field>
+        <field name="inherit_id" ref="custom_meeting_booth.meeting_booth_view_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_booth_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- MENU ITEM -->
+    <record id="custom_meeting_booth.meeting_booth_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_booth_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

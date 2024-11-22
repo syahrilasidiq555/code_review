@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="asset_sequence" model="ir.sequence">
+            <field name="name">Asset Number</field>
+            <field name="code">account.asset.seq</field>
+            <field name="prefix">%(y)s/</field>
+            <!-- <field name="prefix">%(location_asset)s/%(y)s/</field> -->
+            <field name="padding">4</field>
+            <field name="implementation">standard</field>
+            <field name="use_date_range">True</field>
+        </record>
+
+    </data>
+</odoo>

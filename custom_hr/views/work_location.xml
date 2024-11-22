@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_work_location_form_view_inherit" model="ir.ui.view">
+            <field name="name">hr_work_location_form_view_inherit</field>
+            <field name="model">hr.work.location</field>
+            <field name="type">form</field>
+            <field name="inherit_id" ref="hr.hr_work_location_form_view" />
+            <field name="arch" type="xml">
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page name="config" string="Configuration">
+                            <group name="head">
+                                <field name="latitude" />
+                                <field name="longitude" />
+                                <field name="is_wonogiri_area" />
+                            </group>
+                        </page>
+                    </notebook>
+                    
+                </xpath>
+            </field>
+        </record>
+
+        <record id="hr.hr_work_location_action" model="ir.actions.act_window">
+            <field name="name">Unit</field>
+        </record>
+
+        <menuitem
+                name="Unit"
+                id="hr.menu_hr_work_location_tree"
+                action="hr.hr_work_location_action"
+                parent="hr.menu_human_resources_configuration"
+                sequence="5"
+                groups="hr.group_hr_user"/>
+
+    </data>
+</odoo>

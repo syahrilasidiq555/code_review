@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- INHERIT TREE VIEW -->
+        <!-- ASSET -->
+        <record id="view_account_asset_tree_inherit" model="ir.ui.view">
+            <field name="name">view_account_asset_tree_inherit</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="before">
+                    <field name="code_name" />
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ASSET Location-->
+        <record id="view_account_asset_model_tree_inherit" model="ir.ui.view">
+            <field name="name">view_account_asset_model_tree_inherit</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_model_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="abbreviation" />
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <!-- INHERIT FORM VIEW -->
+        <record id="view_move_form_inherit" model="ir.ui.view">
+            <field name="name">crm.quick.create.opportunity.form.inherit</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='original_value']" position="before">
+                    <field name="code_name" 
+                        readonly="True"
+                        force_save="True"
+                        invisible="state == 'model'"/>
+                </xpath>
+
+                <xpath expr="//field[@name='prorata_computation_type'][1]" position="after">
+                    <field name="abbreviation" 
+                        invisible="state != 'model'"
+                        required="state == 'model'"/>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- INHERIT SEARCH VIEW -->
+        <record id="view_account_asset_search_inherit" model="ir.ui.view">
+            <field name="name">view_account_asset_search_inherit</field>
+            <field name="model">account.asset</field>
+            <field name="inherit_id" ref="account_asset.view_account_asset_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='name']" position="after">
+                    <field name="code_name" />
+                </xpath>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+    <record id="action_report_purchase_requests" model="ir.actions.report">
+        <field name="name">Purchase Request</field>
+        <field name="model">purchase.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_purchase.purchase_request_print</field>
+        <field name="report_file">custom_purchase.purchase_request_print</field>
+        <field name="paperformat_id" ref="custom_accounting.format_kertas_a5"/>  
+    </record>
+
+    <record id="action_report_product_requests" model="ir.actions.report">
+        <field name="name">Product Request</field>
+        <field name="model">purchase.request</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_purchase.product_request_print</field>
+        <field name="report_file">custom_purchase.product_request_print</field>
+        <field name="paperformat_id" ref="custom_accounting.format_kertas_a5"/>  
+    </record>
+
+    <!-- REPORT PO -->
+    <record id="action_report_purchase_order_rdc" model="ir.actions.report">
+        <field name="name">Purchase Order RDC</field>
+        <field name="model">purchase.order</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_purchase.purchase_order_print</field>
+        <field name="report_file">custom_purchase.purchase_order_print</field>
+        <field name="paperformat_id" ref="custom_accounting.format_kertas_a4"/>  
+    </record>
+</odoo>

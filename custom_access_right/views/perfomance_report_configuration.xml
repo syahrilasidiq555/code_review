@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <record id="dym_performance_appraisal.report_performance_appraisal_wizard_belum_employee" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_perform_belum'))]" />
+    </record>
+    <record id="dym_performance_appraisal.report_performance_appraisal_wizard_employee_atasan1" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_perform_employee_atasan'))]" />
+    </record>
+    <record id="dym_performance_appraisal.report_performance_appraisal_wizard_atasan1_done" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_atasan_posted'))]" />
+    </record>
+    <record id="dym_performance_appraisal.dym_performance_appraisal_job_classification" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_form_job_class'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

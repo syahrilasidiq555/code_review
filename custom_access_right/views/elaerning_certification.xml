@@ -1,0 +1,180 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="survey_tree_remove_crud" model="ir.ui.view">
+        <field name="name">survey_tree_remove_crud</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="survey_tree_create" model="ir.ui.view">
+        <field name="name">survey_tree_create</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_certification_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="survey_tree_delete" model="ir.ui.view">
+        <field name="name">survey_tree_delete</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_certification_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="survey_form_remove_crud" model="ir.ui.view">
+        <field name="name">survey_form_remove_crud</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="survey_form_create" model="ir.ui.view">
+        <field name="name">survey_form_create</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_certification_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="survey_form_update" model="ir.ui.view">
+        <field name="name">survey_form_update</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_certification_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="survey_form_delete" model="ir.ui.view">
+        <field name="name">survey_form_delete</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_certification_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="survey_form_access" model="ir.ui.view">
+        <field name="name">survey_form_access</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_send_survey']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_certification_access_share</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_result_survey']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_certification_access_result</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_start_session']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_certification_access_live_session</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_open_session_manager']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_certification_access_open_session</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_end_session']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_certification_access_end_session</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_test_survey']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_certification_access_test</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_print_survey']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_certification_access_print</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_archive']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_certification_access_close</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- KANBAN -->
+    <record id="survey_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">survey_kanban_remove_crud</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="survey_kanban_create" model="ir.ui.view">
+        <field name="name">survey_kanban_create</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_certification_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="survey_kanban_access" model="ir.ui.view">
+        <field name="name">survey_kanban_access</field>
+        <field name="model">survey.survey</field>
+        <field name="inherit_id" ref="survey.survey_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='dropdown-menu']" position="replace">
+                <div class="dropdown-menu" role="menu">
+                    <a role="menuitem" type="edit" class="dropdown-item" groups="custom_access_right.group_submenu_certification_access_update">Edit Survey</a>
+                    <a t-if="record.active.raw_value" role="menuitem" type="object" class="dropdown-item" name="action_send_survey" groups="custom_access_right.group_submenu_certification_access_share">Share</a>
+                    <a t-if="widget.deletable" role="menuitem" type="delete" class="dropdown-item" groups="custom_access_right.group_submenu_certification_access_delete">Delete</a>
+                    <div role="separator" class="dropdown-divider"/>
+                    <div role="separator" class="dropdown-item-text">Color</div>
+                    <ul class="oe_kanban_colorpicker" data-field="color"/>
+                </div>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- OTHER ACCESS -->
+    <!-- SURVEY: Clean Test -->
+    <!-- <record id="survey.survey_action_server_clean_test_answers" model="ir.actions.server">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_certification_access_clean'))]" />
+    </record> -->
+<!-- END OF OTHER ACCESS -->
+
+<!-- MENU ITEM -->
+    <record id="website_slides_survey.website_slides_menu_courses_certification" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_certification_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

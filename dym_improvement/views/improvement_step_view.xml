@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- TREE -->
+    <record id="view_improvement_step_tree" model="ir.ui.view">
+        <field name="name">view_improvement_step_tree</field>
+        <field name="model">improvement.step</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Improvement Step">
+                <field name="sequence" widget="handle"/>
+                <field name="name"/>
+                <field name="jenis_improvement" />
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- SEARCH -->
+    <record id="view_improvement_step_search" model="ir.ui.view">
+        <field name="name">view_improvement_step_search</field>
+        <field name="model">improvement.step</field>
+        <field name="arch" type="xml">
+            <search string="Search Data...">
+                <field name="name"/>
+                <field name="jenis_improvement" />
+                <filter string="Archived" name="inactive" domain="[('active','=',False)]"/>
+                <separator/>
+                <filter string="QCC" name="qcc" domain="[('jenis_improvement','=','qcc')]"/>
+                <filter string="QCP" name="qcp" domain="[('jenis_improvement','=','qcp')]"/>
+                <filter string="QCL" name="qcl" domain="[('jenis_improvement','=','qcl')]"/>
+                <filter string="PPS" name="pps" domain="[('jenis_improvement','=','pps')]"/>
+                <filter string="5R" name="fiver" domain="[('jenis_improvement','=','fiver')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="Jenis Improvement" name="by_jenis_improvement" context="{'group_by': 'jenis_improvement'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+    <record id="view_improvement_step_form" model="ir.ui.view">
+        <field name="name">view_improvement_step_form</field>
+        <field name="model">improvement.step</field>
+        <field name="arch" type="xml">
+            <form string="Improvement Form">
+                <header>
+                    <!-- <field name="active" invisible="True" /> -->
+                    <!-- <button string="Set Unarchieve" type="object" name="set_active" class="oe_highlight" confirm="Apakah anda yakin?" attrs="{'invisible':[('active','=',False)]}"/> -->
+                    <!-- <button string="Set Archieve" type="object" name="set_unactive" class="oe_highlight" confirm="Apakah anda yakin?" attrs="{'invisible':[('active','!=',False)]}"/> -->
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name" />
+                            <field name="description" />
+                        </group>
+                        <group>
+                            <field name="jenis_improvement" />
+                        </group>
+                    </group>
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    
+    
+    <record id="action_improvement_step" model="ir.actions.act_window">
+        <field name="name">Step Improvement</field>
+        <field name="res_model">improvement.step</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{'search_default_by_jenis_improvement': 1}</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Add new Step Improvement
+            </p><p>
+            With just a quick glance on the Odoo screen, you
+            can easily find all the information you need.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="improvement_config_menu"
+        name="Configuration"
+        parent="suggestion_system.suggestion_system_menu"
+        sequence="400"/>
+
+    <menuitem
+        id="improvement_step_menu"
+        name="Step / Stage"
+        action="action_improvement_step"
+        parent="improvement_config_menu"
+        sequence="10"/>
+</odoo>

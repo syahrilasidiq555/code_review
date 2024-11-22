@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_approve_signature_wizard" model="ir.ui.view">
+            <field name="name">view_approve_signature_wizard</field>
+            <field name="model">approve.signature.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <h3>
+                        <field name="message" nolabel="1" readonly="True"/>
+                    </h3>
+                    <!-- <field name="incentive_id" invisible="1"/> -->
+                    <field name="data_id" invisible="1"/>
+                    <field name="model_name" invisible="1"/>
+                    <field name="function_name" invisible="1"/>
+                    <field name="function_parameter" invisible="1"/>
+                    <group>
+                        <field name="signature" widget="signature" nolabel="1"/>                        
+                    </group>
+                    <group>
+                        <group>
+                            <field name="invoice_date_due" string="Batas Waktu Berikutnya" 
+                                invisible="context.get('default_is_approved_over_due') != True"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="btn_continue" type="object" string="Approve" class="oe_highlight"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,22 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_surat_teguran_attendance_admin,Surat Teguran Attendance,model_dym_teguran_attendance,,1,1,0,0
+access_surat_teguran_attendance_approval_lines_admin,Surat Teguran Attendance Approval,model_dym_teguran_attendance_approval_line,,1,1,1,1
+access_surat_teguran_attendance_user,Surat Teguran Attendance,model_dym_teguran_attendance,hr_attendance.group_hr_attendance,1,1,1,1
+access_surat_teguran_attendance_approval_lines_user,Surat Teguran Attendance Approval,model_dym_teguran_attendance_approval_line,hr_attendance.group_hr_attendance,1,1,1,1
+
+access_hr_job_grade,access_hr_job_grade,custom_hr.model_hr_job_grade,,1,1,1,1
+access_hr_employee_family,access_hr_employee_family,custom_hr.model_hr_employee_family,,1,1,1,1
+access_revise_wizard,access_revise_wizard,custom_hr.model_revise_wizard,,1,1,1,1
+access_hr_employee_type,access_hr_employee_type,custom_hr.model_hr_employee_type,,1,1,1,1
+access_hr_surat_peringatan,access_hr_surat_peringatan,custom_hr.model_hr_surat_peringatan,,1,1,1,1
+
+access_hr_promosi_demosi_mutasi,access_hr_promosi_demosi_mutasi,custom_hr.model_hr_promosi_demosi_mutasi,,1,1,1,1
+access_form_lupa_absen,access_form_lupa_absen,custom_hr.model_form_lupa_absen,,1,1,1,1
+access_form_lupa_absen_approval_line,access_form_lupa_absen_approval_line,custom_hr.model_form_lupa_absen_approval_line,,1,1,1,1
+
+access_matrix_approval,access.matrix.approval,model_matrix_approval,,1,1,1,1
+access_matrix_approval_line,access.matrix.approval.line,model_matrix_approval_line,,1,1,1,1
+access_matrix_approval_info,access.matrix.approval.info,model_matrix_approval_info,,1,1,1,1
+
+access_hr_terminasi,access.hr.terminasi,model_hr_terminasi,,1,1,1,1
+access_hr_jenis_terminasi,access.hr.jenis.terminasi,model_hr_jenis_terminasi,,1,1,1,1

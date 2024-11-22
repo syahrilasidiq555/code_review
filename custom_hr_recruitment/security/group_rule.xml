@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- add Perjalanan Dinas in ir.module.category -->
+        <record model="ir.module.category" id="module_cateogry_fpk">
+            <field name="name">Form Permintaan Karyawan</field>
+            <field name="description">...</field>
+            <field name="sequence">20</field>
+        </record>   
+
+        <!-- Group ROLE -->
+        <record id="fpk_user_input" model="res.groups">
+            <field name="name">Input User</field>
+            <field name="comment">
+            </field>
+            <field name="category_id" ref="custom_hr_recruitment.module_cateogry_fpk" />
+        </record>
+
+        <record id="fpk_head" model="res.groups">
+            <field name="name">Head</field>
+            <field name="comment">
+            </field>
+            <field name="category_id" ref="custom_hr_recruitment.module_cateogry_fpk" />
+        </record>
+
+        <record id="fpk_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="comment">
+            </field>
+            <field name="category_id" ref="custom_hr_recruitment.module_cateogry_fpk" />
+        </record>
+
+        <record id="fpk_hr1" model="res.groups">
+            <field name="name">HR 1</field>
+            <field name="comment">
+            </field>
+            <field name="category_id" ref="custom_hr_recruitment.module_cateogry_fpk" />
+        </record>
+
+        <record id="fpk_hr2" model="res.groups">
+            <field name="name">HR 2</field>
+            <field name="comment">
+            </field>
+            <field name="category_id" ref="custom_hr_recruitment.module_cateogry_fpk" />
+        </record>
+
+        <record id="fpk_direksi" model="res.groups">
+            <field name="name">Direksi</field>
+            <field name="comment">
+            </field>
+            <field name="category_id" ref="custom_hr_recruitment.module_cateogry_fpk" />
+        </record>
+
+        <record id="fpk_superadmin" model="res.groups">
+            <field name="name">Superadmin</field>
+            <field name="comment">
+            </field>
+            <field name="category_id" ref="custom_hr_recruitment.module_cateogry_fpk" />
+        </record>
+
+
+        <!-- group for recruitment -->
+        <record id="recruitment_user_interviewer" model="res.groups">
+            <field name="name">User Interviewer</field>
+            <field name="comment">
+            </field>
+            <field name="category_id" ref="base.module_category_human_resources_recruitment" />
+            <field name="menu_access" eval="[(4,ref('hr_recruitment.menu_hr_recruitment_root'))]"/>
+        </record>
+
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'res.groups'), ('name', '=', 'group_hr_recruitment_user')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="hr_recruitment.group_hr_recruitment_user" model="res.groups">
+            <field name="implied_ids" eval="[(4,ref('custom_hr_recruitment.recruitment_user_interviewer'))]"/>
+        </record>
+
+
+
+        <!-- record rule -->
+        <record id="hr_applicant_only_view_his_user_interviewer" model="ir.rule">
+            <field name="name">Hanya bisa melihat recruitment dengan job position yang HR interviewernya = user</field>
+            <field name="model_id" ref="custom_hr_recruitment.model_hr_applicant"/>
+            <field name="domain_force">[('job_id.user_interviewer_id','in',[user.id])]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('custom_hr_recruitment.recruitment_user_interviewer'))]"/>
+        </record>
+        <record id="hr_applicant_view_all" model="ir.rule">
+            <field name="name">Can See All</field>
+            <field name="model_id" ref="custom_hr_recruitment.model_hr_applicant"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('hr_recruitment.group_hr_recruitment_user'))]"/>
+        </record>
+
+        
+        <!-- FPK -->
+        <record id="big_fpk_superviser_own_job" model="ir.rule">
+            <field name="name">FPK : Head Superviser hanya bisa melihat job dengan dirinya sebagai superviser</field>
+            <field name="model_id" ref="custom_hr_recruitment.model_big_fpk"/>
+            <field name="domain_force">[('job_id','!=',False),('job_id.superviser_id','=',user.employee_id.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('custom_hr_recruitment.fpk_head'))]"/>
+        </record>
+
+        <record id="big_fpk_manager_own_department" model="ir.rule">
+            <field name="name">FPK : Group Manager hanya bisa melihat department sendiri</field>
+            <field name="model_id" ref="custom_hr_recruitment.model_big_fpk"/>
+            <field name="domain_force">[('department_id','=',user.employee_id.department_id.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('custom_hr_recruitment.fpk_manager'))]"/>
+        </record>
+
+        <record id="big_fpk_see-all" model="ir.rule">
+            <field name="name">Can See All</field>
+            <field name="model_id" ref="custom_hr_recruitment.model_big_fpk"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('custom_hr_recruitment.fpk_hr1')), (4,ref('custom_hr_recruitment.fpk_hr2')), (4,ref('custom_hr_recruitment.fpk_direksi'))]"/>
+        </record>
+    </data>
+</odoo>

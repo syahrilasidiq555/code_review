@@ -1,0 +1,374 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- TREE -->
+    <record id="view_dym_improvement_tree" model="ir.ui.view">
+        <field name="name">view_dym_improvement_tree</field>
+        <field name="model">dym.improvement</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Improvement">
+                <field name="name"/>
+                <field name="team_name"/>
+                <field name="tema_improvement"/>
+                <field name="pic"/>
+                <field name="loc_improvement"/>
+                <field name="bulan_pendaftaran"/>
+                <field name="jenis_improvement"/>
+                <field name="step_id" />
+                <field name="state"/>
+            </tree>
+        </field>
+    </record>
+
+    <!-- Kanban -->
+    <record id="view_dym_improvement_kanban" model="ir.ui.view">
+        <field name="name">view_dym_improvement_kanban</field>
+        <field name="model">dym.improvement</field>
+        <field name="type">kanban</field>
+        <field name="arch" type="xml">
+            <kanban default_group_by="state_improvement" class="o_kanban_small_column" disable_sort_record="true" quick_create="false" records_draggable="false">
+                <field name="name" />
+                <field name="team_name"/>
+                <field name="tema_improvement"/>
+                <field name="pic"/>
+                <field name="loc_improvement"/>
+                <field name="bulan_pendaftaran"/>
+                <field name="jenis_improvement"/>
+                <templates>
+                    <t t-name="kanban-box">
+                       <div class="oe_kanban_global_click o_kanban_record_has_image_fill o_hr_kanban_record">
+                            <div class="oe_kanban_details">
+                               <div class="o_kanban_record_top">
+                                   <div class="o_kanban_record_headings">
+                                       <strong class="o_kanban_record_title">
+                                            <b><field name="name"/></b>
+                                       </strong>
+                                   </div>
+                               </div>
+                               <ul>
+                                  <div><b><field name="tema_improvement"/></b></div>
+                                   <div><field name="team_name"/></div>
+                                   <div><field name="jenis_improvement"/></div>
+                                   <div><field name="bulan_pendaftaran"/></div>
+                               </ul>
+                           </div>
+                       </div>
+                    </t>
+                </templates>
+            </kanban>
+        </field>
+    </record>
+
+    <!-- SEARCH -->
+    <record id="view_dym_improvement_search" model="ir.ui.view">
+        <field name="name">view_dym_improvement_search</field>
+        <field name="model">dym.improvement</field>
+        <field name="arch" type="xml">
+            <search string="Search Perjalanan Dinas">
+                <field name="name" />
+                <field name="team_name" />
+                <field name="pic" />
+                <field name="tema_improvement" />
+                <field name="bulan_pendaftaran" />
+                <field name="state_improvement" />
+                <field name="state" />
+                <filter string="State Draft" name="improvement_state_draft" domain="[('state','=','draft')]"/>
+                <filter string="State WFA" name="improvement_state_wfa" domain="[('state','=','rfa')]"/>
+                <filter string="State Done" name="improvement_state_wfa" domain="[('state','=','done')]"/>
+                <filter string="State Refuse" name="improvement_state_wfa" domain="[('state','=','refuse')]"/>
+                <filter string="State Revise" name="improvement_state_wfa" domain="[('state','=','revise')]"/>
+                <!-- <separator/>
+                <filter string="Step Menentukan Tema" name="improvement_step1" domain="[('state_improvement','=','step1')]"/>
+                <filter string="Step Analisa Situasi" name="improvement_step2" domain="[('state_improvement','=','step2')]"/>
+                <filter string="Step Menetapkan Target" name="improvement_step3" domain="[('state_improvement','=','step3')]"/>
+                <filter string="Step Merencanakan Penanggulangan" name="improvement_step4" domain="[('state_improvement','=','step4')]"/>
+                <filter string="Step Melaksanakan Penanggulangan" name="improvement_step5" domain="[('state_improvement','=','step5')]"/>
+                <filter string="Step Evaluasi Hasil" name="improvement_step6" domain="[('state_improvement','=','step6')]"/>
+                <filter string="Step Standarisasi dan tindak Lanjut" name="improvement_step7" domain="[('state_improvement','=','step7')]"/> -->
+                <separator/>
+                <filter string="QCC" name="improvement_qcc" domain="[('jenis_improvement','=','qcc')]"/>
+                <filter string="QCP" name="improvement_qcp" domain="[('jenis_improvement','=','qcp')]"/>
+                <filter string="QCL" name="improvement_qcl" domain="[('jenis_improvement','=','qcl')]"/>
+                <filter string="PPS" name="improvement_pps" domain="[('jenis_improvement','=','pps')]"/>
+                <filter string="5R" name="improvement_fiver" domain="[('jenis_improvement','=','fiver')]"/>
+                <filter string="Safety Improvement" name="improvement_safety_improvement" domain="[('jenis_improvement','=','safety_improvement')]"/>
+                <group expand="0" string="Group By">
+                    <filter string="State" name="state" context="{'group_by': 'state'}"/>
+                    <filter string="State Improvement" name="state_improvement" context="{'group_by': 'state_improvement'}"/>
+                    <filter string="Jenis Improvement" name="jenis_improvement" context="{'group_by': 'jenis_improvement'}"/>
+                    <filter string="Level" name="level_group" context="{'group_by': 'level'}"/>
+                </group>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+    <record id="view_dym_improvement_form" model="ir.ui.view">
+        <field name="name">view_dym_improvement_form</field>
+        <field name="model">dym.improvement</field>
+        <field name="arch" type="xml">
+            <form string="Improvement Form">
+                <header>
+                    <button string="Request for Approval" type="object" states="new,in_progress,revise" name="action_rfa" class="oe_highlight" confirm="Apakah anda yakin?"/>
+                    <button string="Approve to Next Step" type="object" states="rfa" name="action_next_step" class="oe_highlight" confirm="Anda akan melakukan Approve dan lanjut ke Step Berikutnya, apakah anda yakin?"/>
+                    <button string="Revise" type="object" states="rfa" name="action_revise" class="oe_highlight"/>
+                    <button string="Refuse" type="object" states="rfa" name="action_refuse" confirm="Apakah anda yakin akan melakukan Refuse?"/>
+                    
+                    <field name="state" widget="statusbar" statusbar_visible="new,rfa,in_progress,done" attrs="{'invisible':[('state','in',['refuse','revise'])]}"/>
+                    <field name="state_refuse" widget="statusbar" statusbar_visible="refuse" attrs="{'invisible':[('state','!=','refuse')]}"/>
+                    <field name="state_revise" widget="statusbar" statusbar_visible="revise" attrs="{'invisible':[('state','!=','revise')]}"/>
+                </header>
+                <header>
+                    <!-- <field name="state_improvement" widget="statusbar"/> -->
+                    <!-- <field name="step_domain" invisible="1" /> -->
+                    <field name="step_id" widget="statusbar" domain="[('jenis_improvement','=',jenis_improvement)]"/>
+                </header>
+                <sheet>
+                    <div>
+                        <div class="oe_title" style="float:left;">
+                            <h1>
+                                <label for="name" string="Improvement/"/>
+                                <field name="name" class="oe_inline" readonly="1"/>
+                            </h1>
+                        </div>
+                        <div class="oe_right" style="float:right;">
+                            <h1>
+                                <field name="rel_level" readonly="1"/>
+                            </h1>
+                        </div>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="team_name"/>
+                            <field name="department_ids" widget="many2many_tags" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/> 
+                            <field name="jenis_improvement" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('id','>',0)]}"/>
+                            <field name="pic" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="team_ids" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" widget="many2many_tags"/>
+                            <br/><br/><br/>
+                            <b colspan="2">Deskripsi Improvement</b>
+                            <field name="deskripsi_plan" nolabel="1" placeholder="Masukan deskripsi Improvement yang akan dijalankan...." colspan="2"/>
+                            <b colspan="2">Rencana Improvement</b>
+                            <field name="improvement_line_plan_ids" nolabel="1" colspan="2" style="max-width:680px;">
+                                <tree editable="bottom" create="false" edit="true" delete="false">
+                                    <field name="step_id" required="True" readonly="True"/>
+                                    <!-- <field name="tipe"/> -->
+                                    <field name="due_date"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group>
+                            <field name="tema_improvement"/>
+                            <field name="loc_improvement"/>
+                            <field name="bulan_pendaftaran"/>
+                            <br/><br/><br/><br/><br/>
+                            <field name="level" groups="suggestion_system.group_suggestion_system_pic_improvement"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="improvement" string="Improvement Progress">
+                            <field name="improvement_line_ids" nolabel="1" colspan="2">
+                                <tree create="false" edit="true" delete="false" decoration-danger="state in ['draft','revise']" decoration-info="state=='rfa'" decoration-warning="state=='refuse'">
+                                    <field name="step_id"/>
+                                    <field name="desc" required="True"/>
+                                    <field name="due_date" />
+                                    <field name="attachment_ids" string="Attachment"/>
+                                    <field name="state" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="costbenefit" string="Resiko, Cost, and Benefit">
+                            <group string="Resiko">
+                                <field name="estimasibiaya_lines" nolabel="1" widget="one2many_list">
+                                    <tree editable="bottom" create="true">
+                                        <field name="deskripsi_biaya" />
+                                        <!-- <field name="biaya" /> -->
+                                    </tree>
+                                </field>
+                            </group>
+                            <!-- <group class="oe_subtotal_footer oe_right" colspan="2" name="work_total">
+                                <div class="oe_subtotal_footer_seperator oe_inline">
+                                    <label for="total_biaya_estimasi"/>
+                                </div>
+                                <field name="total_biaya_estimasi" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                            </group> -->
+                            <group string="Ratio Benefit / Cost">
+                                <table>
+                                    <tr>
+                                        <h5>Perhitungan Cost</h5>
+                                    </tr>
+                                    <tr>
+                                        <field name="hasil_cost_lines" nolabel="1" widget="one2many_list">
+                                                <tree editable="bottom" create="true">
+                                                    <field name="deskripsi_biaya" />
+                                                    <field name="biaya" />
+                                                </tree>
+                                        </field>
+                                        <group class="oe_subtotal_footer oe_right" colspan="2" name="work_total">
+                                            <div class="oe_subtotal_footer_seperator oe_inline">
+                                                <label for="total_cost"/>
+                                            </div>
+                                            <field name="total_cost" readonly="1" force_save="1" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                        </group>
+                                    </tr>
+                                    <tr>
+                                        <h5>Perhitungan Benefit</h5>
+                                    </tr>
+                                    <tr>
+                                        <field name="hasil_benefit_lines" nolabel="1" widget="one2many_list">
+                                            <tree editable="bottom" create="true"> 
+                                                <field name="deskripsi_biaya"/>
+                                                <field name="benefit"/>
+                                            </tree>
+                                        </field>
+                                        <group class="oe_subtotal_footer oe_right" colspan="2" name="work_total">
+                                            <div class="oe_subtotal_footer_seperator oe_inline">
+                                                <label for="total_benefit"/>
+                                            </div>
+                                            <field name="total_benefit" readonly="1" force_save="1" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                        </group>
+                                    </tr>
+                                    <tr>
+                                        <group class="oe_subtotal_footer oe_right" colspan="2" name="work_total">
+                                            <div class="oe_subtotal_footer_seperator oe_inline">
+                                                <label for="total_ratio" string="Net Quality Income (NQI)"/>
+                                            </div>
+                                            <field name="total_ratio" readonly="1" force_save="1" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                            <div class="oe_subtotal_footer_seperator oe_inline">
+                                                <label for="ratio_percentage" string="Ratio Percentage (Benefit / Cost)"/>
+                                            </div>
+                                            <b>
+                                                <field name="ratio_percentage" readonly="1" force_save="1" nolabel="1" class="oe_subtotal_footer_separator"/>
+                                            </b>
+                                        </group>
+                                    </tr>
+                                </table>
+                            </group>
+                        </page>
+                        <page name="pic_improvement" string="PIC Improvement" groups="suggestion_system.group_suggestion_system_pic_improvement">
+                            <group string="Ratio Benefit / Cost">
+                                <table>
+                                    <tr>
+                                        <h5>Perhitungan Cost</h5>
+                                    </tr>
+                                    <tr>
+                                        <field name="hasil_cost_lines_pic_imp" nolabel="1" widget="one2many_list" >
+                                            <tree editable="bottom" create="true">
+                                                <field name="deskripsi_biaya" />
+                                                <field name="biaya" />
+                                            </tree>
+                                        </field>
+                                        <group class="oe_subtotal_footer oe_right" colspan="2" name="work_total">
+                                            <div class="oe_subtotal_footer_seperator oe_inline">
+                                                <label for="total_cost_pic_imp"/>
+                                            </div>
+                                            <field name="total_cost_pic_imp" readonly="1" force_save="1" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                        </group>
+                                    </tr>
+                                    <tr>
+                                        <h5>Perhitungan Benefit</h5>
+                                    </tr>
+                                    <tr>
+                                        <field name="hasil_benefit_lines_pic_imp" nolabel="1" widget="one2many_list" >
+                                            <tree editable="bottom" create="true"> 
+                                                <field name="deskripsi_biaya"/>
+                                                <field name="benefit"/>
+                                            </tree>
+                                        </field>
+                                        <group class="oe_subtotal_footer oe_right" colspan="2" name="work_total">
+                                            <div class="oe_subtotal_footer_seperator oe_inline">
+                                                <label for="total_benefit_pic_imp"/>
+                                            </div>
+                                            <field name="total_benefit_pic_imp" readonly="1" force_save="1" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                        </group>
+                                    </tr>
+                                    <tr>
+                                        <group class="oe_subtotal_footer oe_right" colspan="2" name="work_total">
+                                            <div class="oe_subtotal_footer_seperator oe_inline">
+                                                <label for="total_ratio_pic_imp" string="Net Quality Income (NQI)"/>
+                                            </div>
+                                            <field name="total_ratio_pic_imp" readonly="1" force_save="1" nolabel="1" class="oe_subtotal_footer_separator" widget="monetary"/>
+                                            <div class="oe_subtotal_footer_seperator oe_inline">
+                                                <label for="ratio_percentage_pic_imp" string="Ratio Percentage (Benefit / Cost)"/>
+                                            </div>
+                                            <b>
+                                                <field name="ratio_percentage_pic_imp" readonly="1" force_save="1" nolabel="1" class="oe_subtotal_footer_separator"/>
+                                            </b>
+                                        </group>
+                                    </tr>
+                                </table>
+                            </group>
+                        </page>
+                        <page name="approval_and_audit" string="Approval and Audit Trail">
+                            <group string="Approval">
+                                <field name="approval_ids" nolabel="1" widget="one2many_list">
+                                    <tree string="" editable="bottom" create="false" edit="false" delete="false" decoration-danger="sts in ['4','5']">
+                                        <field name="step_id"/>
+                                        <field name="sts"/>
+                                        <field name="reason"/>
+                                        <field name="pelaksana_id"/>
+                                        <field name="rel_department" />
+                                        <field name="rel_job" />
+                                        <field name="tanggal"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Audit Trail">
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                    
+                </sheet>
+            </form>
+        </field>
+    </record>
+
+
+    
+    
+    <record id="action_improvement" model="ir.actions.act_window">
+        <field name="name">Improvement</field>
+        <field name="res_model">dym.improvement</field>
+        <field name="view_mode">tree,form,kanban</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Add new Improvement
+            </p><p>
+            With just a quick glance on the Odoo screen, you
+            can easily find all the information you need.
+            </p>
+        </field>
+    </record>
+
+    <!-- Main Menu -->
+    <!-- <menuitem 
+        id="improvement_menu" 
+        name="Improvement" 
+        web_icon="dym_improvement,static/description/icon.png" 
+        sequence="76"/> -->
+
+    <menuitem
+        id="improvement_submenu"
+        name="Improvement"
+        action="action_improvement"
+        parent="suggestion_system.suggestion_system_menu"
+        sequence="0"/>
+
+    <!-- <menuitem 
+        id="suggestion_system_submenu" 
+        name="Suggestion System" 
+        parent="dym_improvement.improvement_menu" 
+        sequence="1"/> -->
+</odoo>

@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="hr_premi_search" model="ir.ui.view">
+        <field name="name">hr_premi_search</field>
+        <field name="model">hr.payslip.premi</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search string="hr_premi_search">
+                <field name="name"/>
+                <field name="salary_rule_id"/>
+                <field name="create_date"/>
+                <field name="write_uid"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_premi_tree">
+        <field name="name">hr_premi_tree</field>
+        <field name="model">hr.payslip.premi</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="company_id" invisible="1"/>
+                <field name="salary_rule_id"/>
+                <field name="state" widget="badge" decoration-success="state == 'confirm'" decoration-warning="state == 'draft'"/>
+                <field name="create_date"/>
+                <field name="write_uid"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="hr_premi_form">
+        <field name="name">hr_premi_form</field>
+        <field name="model">hr.payslip.premi</field>
+        <field name="arch" type="xml">
+            <form string="Employee Premi">
+                <header>
+                    <button string="Confirm" name="action_confirm" type="object" class="oe_highlight" states="draft"/>
+                    <button string="Reset To Draft" name="action_reset_to_draft" type="object" states="confirm"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <field name="name" attrs="{'invisible': [('name', '=', 'New')]}" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="company_id" invisible="1"/>
+                            <field name="salary_rule_id" 
+                                options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True, 'no_open_edit': True}"
+                                attrs="{'readonly': [('state','!=','draft')]}"/>
+                            <field name="type_length" widget="radio" attrs="{'readonly': [('state','!=','draft')]}"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page string="Premi Detail" >
+                            <field name="premi_line" attrs="{'readonly': [('state','!=','draft')]}">
+                                <tree editable="bottom" >
+                                    <field name="premi_id" invisible="1"/>
+                                    <field name="start_length_of_work"/>
+                                    <field name="end_length_of_work"/>
+                                    <field name="type_length"/>
+                                    <field name="amount"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                    <group  string="Audit Trail">
+                        <group>
+                            <field name="create_uid"/>
+                            <field name="create_date"/>
+                        </group>
+                        <group>
+                            <field name="write_uid"/>
+                            <field name="write_date"/>
+                        </group>
+                    </group>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="hr_premi_action">
+        <field name="name">Employee Premi</field>
+        <field name="res_model">hr.payslip.premi</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="context">
+            {'search_default_bulan_ayeuna': 1}
+        </field> -->
+    </record>
+
+    <menuitem id="menu_hr_salary_premi"
+              name="Employee Premi"
+              action="hr_premi_action"
+              parent="om_hr_payroll.menu_payroll_employee"
+              sequence="6"/>
+</odoo>

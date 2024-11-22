@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- FORM VIEW -->
+        <record id="crm_lead_view_form_inherit" model="ir.ui.view">
+            <field name="name">crm_lead_view_form_inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//widget[@name='web_ribbon'][1]" position="replace">
+                    <field name="is_lost" invisible="1" />
+                    <widget name="web_ribbon" title="Lost" bg_color="text-bg-danger" invisible="not is_lost"/>
+                </xpath>
+
+                <xpath expr="//group[@name='opportunity_partner']//field[@name='partner_id']" position="before">
+                    <field name="type_business"/>
+                </xpath>
+                <xpath expr="//group[@name='Misc']//field[@name='team_id']" position="after">
+                    <field name="last_stage_moved" readonly="1" force_save="1"/>
+                </xpath>
+                
+                <xpath expr="//group[@name='Misc']//field[@name='day_close']" position="after">
+                    <field name="day_close_today" invisible="is_lost or probability == 100"/>
+                </xpath>
+                
+                <xpath expr="//page[@name='lead']" position="after">
+                    <page string="Audit Trail">
+                        <group string="Audit Trail">
+                            <group>
+                                <field name="create_uid" readonly="1"/>
+                                <field name="create_date" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="write_uid" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- QUICK CREATE FORM -->
+        
+        <record id="quick_create_opportunity_form_inherit" model="ir.ui.view">
+            <field name="name">quick_create_opportunity_form_inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.quick_create_opportunity_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="type_business"/>
+                </xpath>
+                <xpath expr="//field[@name='company_currency']" position="before">
+                    <field name="campaign_id" />
+                    <field name="medium_id" />
+                    <field name="source_id" />
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- KANBAN VIEW -->
+        <record id="crm_case_kanban_view_leads_inherit" model="ir.ui.view">
+            <field name="name">crm_case_kanban_view_leads_inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='team_id']" position="after">
+                    <field name="type_business"/>
+                </xpath>
+                <xpath expr="//span[@class='o_text_overflow']" position="after">
+                    <br/>
+                    <t t-set="new_business" t-value="record.type_business.raw_value == 'new'"/>
+                    <div t-attf-class="btn #{new_business ? 'btn btn-outline-success' : 'btn btn-outline-info'} btn-sm my-2" t-if="record.type_business.value" t-esc="record.type_business.value"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REPORTING PIPELINE -->
+        <record id="crm_lead_view_tree_opportunity_reporting_inherit" model="ir.ui.view">
+            <field name="name">crm_lead_view_tree_opportunity_reporting_inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_tree_opportunity_reporting"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='stage_id']" position="before">
+                    <field name="day_close"/>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

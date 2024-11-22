@@ -1,0 +1,352 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ACCESS BUTTON-->
+        <record id="view_account_move_inherit_access_btn" model="ir.ui.view">
+            <field name="name">view_account_move_inherit_access_btn</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="custom_accounting.view_account_move_inherit"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='approve_over_due']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_approve_invoice_overdue</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_post'][1]" position="attributes">
+                    <attribute name="confirm">Apakah anda yakin?</attribute>
+                    <attribute name="groups">custom_access_right.group_am_button_action_post</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_post'][2]" position="attributes">
+                    <attribute name="confirm">Apakah anda yakin?</attribute>
+                    <attribute name="groups">custom_access_right.group_am_button_action_post</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_register_payment']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_action_register_payment</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(account.action_view_account_move_reversal)d']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_action_view_account_move_reversal</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_reverse']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_action_reverse</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_button_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_button_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_cancel_posted_moves']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_button_cancel_posted_moves</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_abandon_cancel_posted_posted_moves']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_button_abandon_cancel_posted_posted_moves</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_draft']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_button_draft</attribute>
+                </xpath>
+                <!-- <xpath expr="//button[@name='reset_efaktur']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_reset_efaktur</attribute>
+                </xpath> -->
+                <xpath expr="//button[@name='button_set_checked']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_button_set_checked</attribute>
+                </xpath>
+
+                <!-- send & print -->
+                <xpath expr="//button[@name='action_invoice_sent'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_accounting_invoice_button_send_print</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_invoice_sent'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_accounting_invoice_button_send_print</attribute>
+                </xpath>
+
+                <!-- pratinjau -->
+                <xpath expr="//button[@name='preview_invoice']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_accounting_invoice_button_pratinjau</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_invoice_tree_inherit_access_btn" model="ir.ui.view">
+            <field name="name">view_invoice_tree_inherit_access_btn</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_register_payment']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_am_button_action_register_payment</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_merge_invoice']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_accounting_invoice_button_merge</attribute>
+                </xpath>
+                
+            </field>
+        </record>
+        
+
+        <!-- REMOVE CRUD in FORM-->
+        <record id="view_move_form_remove_crud" model="ir.ui.view">
+            <field name="name">view_move_form_remove_crud</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <record id="view_invoice_tree_remove_crud" model="ir.ui.view">
+            <field name="name">view_invoice_tree_remove_crud</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <record id="view_move_tree_remove_crud" model="ir.ui.view">
+            <field name="name">view_move_tree_remove_crud</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_out_credit_note_tree_remove_crud" model="ir.ui.view">
+            <field name="name">view_out_credit_note_tree_remove_crud</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_credit_note_tree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_in_invoice_refund_tree_remove_crud" model="ir.ui.view">
+            <field name="name">view_in_invoice_refund_tree_remove_crud</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_in_invoice_refund_tree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- REMOVE CRUD in Kanban-->
+        <record id="view_account_move_kanban_remove_crud" model="ir.ui.view">
+            <field name="name">view_account_move_kanban_remove_crud</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_move_kanban"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW CREATE and EDIT in FORM-->
+        <record id="view_move_form_create_edit_view" model="ir.ui.view">
+            <field name="name">view_move_form_create_edit_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_move_form_edit_view" model="ir.ui.view">
+            <field name="name">view_move_form_edit_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW CREATE and EDIT in tree-->
+        <record id="view_invoice_tree_create_edit_view" model="ir.ui.view">
+            <field name="name">view_invoice_tree_create_edit_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_move_tree_create_edit_view" model="ir.ui.view">
+            <field name="name">view_move_tree_create_edit_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes"> 
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_out_credit_note_tree_create_edit_view" model="ir.ui.view">
+            <field name="name">view_out_credit_note_tree_create_edit_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_credit_note_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes"> 
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_in_invoice_refund_tree_create_edit_view" model="ir.ui.view">
+            <field name="name">view_in_invoice_refund_tree_create_edit_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_in_invoice_refund_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes"> 
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- VIEW CREATE and EDIT in kanban-->
+        <record id="view_account_move_kanban_create_edit_view" model="ir.ui.view">
+            <field name="name">view_account_move_kanban_create_edit_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_move_kanban"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW delete in FORM-->
+        <record id="view_move_form_delete_view" model="ir.ui.view">
+            <field name="name">view_move_form_delete_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW delete in tree-->
+        <record id="view_invoice_tree_delete_view" model="ir.ui.view">
+            <field name="name">view_invoice_tree_delete_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_invoice_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_move_tree_delete_view" model="ir.ui.view">
+            <field name="name">view_move_tree_delete_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_out_credit_note_tree_delete_view" model="ir.ui.view">
+            <field name="name">view_out_credit_note_tree_delete_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_out_credit_note_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_in_invoice_refund_tree_delete_view" model="ir.ui.view">
+            <field name="name">view_in_invoice_refund_tree_delete_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_in_invoice_refund_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- VIEW delete in kanban-->
+        <record id="view_account_move_kanban_delete_view" model="ir.ui.view">
+            <field name="name">view_account_move_kanban_delete_view</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_move_kanban"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_am_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ekseun server / windows -->
+        <record id="account.action_account_invoice_from_list" model="ir.actions.server">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_am_button_action_register_payment'))]" />
+        </record>
+        <record id="account.invoice_send" model="ir.actions.server">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_accounting_invoice_button_send_print'))]" />
+        </record>
+        <record id="l10n_id_efaktur.dowload_efaktur_action" model="ir.actions.server">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_accounting_invoice_button_efaktur'))]" />
+        </record>
+        <record id="account_invoice_extract.model_account_send_for_digitalization" model="ir.actions.server">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_accounting_invoice_button_digitalization'))]" />
+        </record>
+        <record id="account.action_move_switch_invoice_to_credit_note" model="ir.actions.server">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_am_button_action_reverse'))]" />
+        </record>
+        
+
+
+        <record id="account.action_validate_account_move" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_am_button_action_post'))]" />
+        </record>
+        <record id="account.action_view_account_move_reversal" model="ir.actions.act_window">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_am_button_action_view_account_move_reversal'))]" />
+        </record>
+        
+
+    </data>
+</odoo>

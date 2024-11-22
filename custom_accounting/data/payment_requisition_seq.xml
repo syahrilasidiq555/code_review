@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data noupdate="1">
+
+        <record id="pr_sequence" model="ir.sequence">
+            <field name="name">Payment Requisition Number</field>
+            <field name="code">payment.requisition.seq</field>
+            <field name="prefix">PR/%(range_month)s-%(y)s/</field>
+            <!-- <field name="prefix">%(location_asset)s/%(y)s/</field> -->
+            <field name="padding">4</field>
+            <field name="implementation">standard</field>
+            <field name="use_date_range">True</field>
+        </record>
+
+    </data>
+</openerp>

@@ -1,0 +1,11 @@
+<odoo>
+    <menuitem 
+        name="Meeting Booth" 
+        id="main_meeting_booth" 
+        sequence="99"
+        web_icon="custom_meeting_booth,static/description/icon.png"
+    />
+
+    <menuitem name="Meeting Booth" id="meeting_booth_menu" parent="main_meeting_booth" action="meeting_booth_action" sequence="1"/>
+    <menuitem name="Master Meeting Booth" id="master_meeting_booth_menu" parent="main_meeting_booth" action="master_meeting_booth_action" sequence="2"/>
+</odoo>

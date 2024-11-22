@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="report_payment_receipt_document_inherit" inherit_id="account.report_payment_receipt_document">
+            <xpath expr="//div[@class='page']//div[@class='mb-4 mt-3']//div[@class='row'][3]" position="after">
+                <div class="row">
+                    <div class="col-12" t-if="o.amount">
+                        <div class="price2word">
+                            Terbilang: <span t-esc="o._format_currency(o.grand_amount, p2w=True)"/>
+                        </div>
+                    </div>
+                </div>
+            </xpath>
+
+            <xpath expr='//div[@class="page"]//table[@class="table table-sm"]' position="after">
+                <!-- UNTUK TANDA TANGAN -->
+                <table class="table table-sm" style="margin:100px auto; width:90%; border:0px;">
+                    <tr style="background-color:transparent; line-height: 5pt">
+                        <td style="width:25%; padding: 0 40px;">
+                            <div>
+                                <p><span t-field="o.company_id.city"/>, <span t-esc="datetime.datetime(o.date.year, o.date.month, o.date.day).strftime('%d %b %Y')"/></p>
+                                <p>Kasir Pelayanan</p>
+                                <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                <p>( <span t-field="o.create_uid.partner_id.name"/> )</p>
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+            </xpath>
+        </template>
+    </data>
+</odoo>

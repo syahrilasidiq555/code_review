@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <record id="contacts.menu_partner_category_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_tags'))]" />
+    </record>
+    <record id="contacts.menu_partner_title_contact" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_title'))]" />
+    </record>
+    <record id="contacts.res_partner_industry_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_industry'))]" />
+    </record>
+    <record id="contacts.menu_country_partner" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_country'))]" />
+    </record>
+    <record id="contacts.menu_country_state_partner" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_states'))]" />
+    </record>
+    <record id="contacts.menu_country_group" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_country_group'))]" />
+    </record>
+    <record id="contacts.menu_action_res_bank_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_banks'))]" />
+    </record>
+    <record id="contacts.menu_action_res_partner_bank_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_bank_accounts'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

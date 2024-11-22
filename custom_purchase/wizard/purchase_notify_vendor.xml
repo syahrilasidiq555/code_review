@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_purchase_notify_vendor_wizard" model="ir.ui.view">
+            <field name="name">view_purchase_notify_vendor_wizard</field>
+            <field name="model">purchase.notif.vendor</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Komparasi Notifikasi">
+                    <div class="oe_title">
+                        <field name="desc" readonly="1"/>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="po_id" readonly="1"/>
+                            <field name="yes_no" widget="radio"/>
+                            <field name="alasan" attrs="{'invisible':[('yes_no','!=','no')]}"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

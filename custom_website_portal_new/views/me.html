@@ -1,0 +1,875 @@
+{% extends 'layouts/main_background.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> -->
+<style>
+    [x-cloak] {
+        display: none !important
+    }
+    
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        min-height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* overflow: auto; */
+    }
+    
+    .op-0 {
+        opacity: 0;
+    }
+
+    .op-100 {
+        opacity: 100;
+    }
+
+    .ava_image {
+        position: relative; 
+        width:100px; 
+        overflow-y: hidden; 
+        max-height: 100px; 
+        object-fit: cover; 
+        float: right;
+    }
+    .cus_image_control {
+        position: absolute;
+        top: 0;
+        left: auto;
+        bottom: auto;
+        right: 0;
+        width: 100%;
+        color: white;
+        background-color: #6b97db;
+        /* opacity: 0; */
+        transition: opacity ease 400ms;
+    }
+
+    .cus_image_control button {
+        background-color: transparent;
+        border-color: transparent;
+        padding: 5px;
+    }
+    
+</style>
+{% endblock %}
+
+{% block js_assets %}
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> -->
+
+<!-- my custom alpine js script -->
+<!-- <script defer src="/custom_website_portal_new/static/js/expenseFormCreateEdit.js"></script> -->
+
+{% endblock %}
+
+
+{% block content %}
+{% set ava_img_src = 'data:image/*; base64,' + employee.image_1920 | remove_b64 if employee.image_1920 else '/custom_website_portal_new/static/img/placeholder.png' %}
+
+<div class="pt-lg-3 px-lg-5 pt-md-2 px-md-4 p-2" x-init="$store.employee" x-cloak>
+    {{breadcrumb(paths = [{'href':'/portals/home','name':'Home'}], active = title)}}
+    <div class="card shadow">
+        <form id="employeeForm" enctype="multipart/form-data" x-on:submit="event.preventDefault();">
+            <div class="card-header py-3 d-flex justify-content-between">
+                <!-- <h6 class="m-0 font-weight-bold text-primary">My Account</h6> -->
+                <input type="hidden" name="active_id" 
+                    x-model="$store.employee.active_id"
+                    x-init="$store.employee.active_id = '{{employee.id}}'">
+                <div>
+                    <div class="btn btn-secondary" @click="$store.employee.action_edit()"
+                        x-show="!$store.employee.editForm">Edit</div>
+                    <button type="submit" class="btn btn-primary" @click="$store.employee.editData()"
+                        x-show="$store.employee.editForm">Submit</button>
+                    <div class="btn btn-secondary" @click="$store.employee.action_cancel()"
+                        x-show="$store.employee.editForm">Cancel</div>
+                </div>
+                
+
+            </div>
+            <div class="card-body">
+                <div class="row align-items-start">
+                    <!-- ALERT -->
+                    
+                    <div class="row mb-3" x-show="$store.employee.alert.show" x-transition>
+                        <div :class="$store.employee.alert.class"
+                            class="alert d-flex align-items-center">
+                            <div>
+                                <span x-text="$store.employee.alert.message"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6">
+                            <div class="form-group input-group input-group-lg mb-1">
+                                <input type="text" class="form-control" aria-label="Sizing example input"
+                                    aria-describedby="inputGroup-sizing-lg" placeholder="e.g. Lunch With Customer"
+                                    x-model="$store.employee.employee.name"
+                                    x-init="$store.employee.employee.name = '{{employee.name}}'"
+                                    disabled>
+                            </div>
+                            <div>
+                                <input type="text" class="form-control" id="job_title" name="job_title"
+                                    placeholder="Job Title"
+                                    x-model="$store.employee.employee.job_title"
+                                    x-init="$store.employee.employee.job_title = '{{employee.job_title if employee.job_title else ''}}'"
+                                    disabled>
+                            </div>
+                        </div>
+                        
+                        <div x-data="{className: 'op-0'}" class="form-group col-md-6 text-right align-items-end mb-3"
+                            @mouseleave="className = 'op-0'"
+                            x-init="$store.employee.image.actionGetImage('{{ava_img_src}}')">
+                            <div class="ava_image" @mouseover="className = 'op-100'">
+                                <img id="image_1920_img" :src="$store.employee.image.file" class="img img-fluid" />
+                                
+                                <div class="cus_image_control" :class="className" x-show="$store.employee.editForm">
+                                    <button type="button" id="edit_avatar"
+                                        class="fa fa-pen float-left" title="Edit"
+                                        @click="$store.employee.image.actionEditImage()">
+                                    </button>
+
+                                    <button type="button" id="delete_avatar"
+                                        class="fa fa-trash float-right" title="Clear"
+                                        @click="$store.employee.image.actionDeleteImage()">
+                                    </button>
+
+                                    <div class="d-none" >
+                                        <input type="file" 
+                                            id="avaImageFile"
+                                            accept="image/*"
+                                            @change="$store.employee.image.changeAttachment(event)">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="mobile_phone" class="form-label fw-bold">Work Mobile</label>
+                            <input type="text" class="form-control" id="mobile_phone" name="mobile_phone"
+                                placeholder="Work Mobile"
+                                x-model="$store.employee.employee.mobile_phone"
+                                x-init="$store.employee.employee.mobile_phone = '{{employee.mobile_phone if employee.mobile_phone else ''}}'"
+                                :disabled="!$store.employee.editForm">
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="barcode" class="form-label fw-bold">NIP</label>
+                            <input type="text" class="form-control" id="barcode" name="barcode"
+                                placeholder="NIP"
+                                x-model="$store.employee.employee.barcode"
+                                x-init="$store.employee.employee.barcode = '{{employee.barcode if employee.barcode else ''}}'"
+                                disabled>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="work_phone" class="form-label fw-bold">Work Phone</label>
+                            <input type="text" class="form-control" id="work_phone" name="work_phone"
+                                placeholder="Work Phone"
+                                x-model="$store.employee.employee.work_phone"
+                                x-init="$store.employee.employee.work_phone = '{{employee.work_phone if employee.work_phone else ''}}'"
+                                :disabled="!$store.employee.editForm">
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="department_id" class="form-label fw-bold">Department</label>
+                            <select id="department_id" class="form-select" 
+                                x-model="$store.employee.employee.department_id"
+                                x-init="$store.employee.employee.department_id = {{employee.department_id.id if employee.department_id else 0}}"
+                                disabled>
+                                <option value="0" selected>Select Department..</option>
+                                {% for department in departments.records %}
+                                <option value="{{department.id}}">{{department.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="work_email" class="form-label fw-bold">Work Email</label>
+                            <input type="text" class="form-control" id="work_email" name="work_email"
+                                placeholder="Work Email"
+                                x-model="$store.employee.employee.work_email"
+                                x-init="$store.employee.employee.work_email = '{{employee.work_email if employee.work_email else ''}}'"
+                                disabled>
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="job_id" class="form-label fw-bold">Job Position</label>
+                            <select id="job_id" class="form-select" 
+                                x-model="$store.employee.employee.job_id"
+                                x-init="$store.employee.employee.job_id = {{employee.job_id.id if employee.job_id else 0}}"
+                                disabled>
+                                <option value="0" selected>Select Job Position..</option>
+                                {% for job in jobs.records %}
+                                <option value="{{job.id}}">{{job.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="work_location_id" class="form-label fw-bold">Work Location</label>
+                            <select id="work_location_id" class="form-select" 
+                                x-model="$store.employee.employee.work_location_id"
+                                x-init="$store.employee.employee.work_location_id = {{employee.work_location_id.id if employee.work_location_id else 0}}"
+                                disabled>
+                                <option value="0" selected disabled>Select Work Location..</option>
+                                {% for work_location in work_locations.records %}
+                                <option value="{{work_location.id}}">{{work_location.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="parent_id" class="form-label fw-bold">Manager</label>
+                            <select id="parent_id" class="form-select" 
+                                x-model="$store.employee.employee.parent_id"
+                                x-init="$store.employee.employee.parent_id = {{employee.parent_id.id if employee.parent_id else 0}}"
+                                disabled>
+                                <option value="0" selected>Select Manager..</option>
+                                {% for manager in managers.records %}
+                                <option value="{{manager.id}}">{{manager.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mt-3 mb-2">
+                        <!-- Nav tabs -->
+                        <ul class="nav nav-tabs card-header p-0" id="myTab" role="tablist">
+                            <li class="nav-item">
+                                <button class="nav-link active" id="workInformation-tab" data-bs-toggle="tab" data-bs-target="#workInformation"
+                                    type="button" role="tab" aria-controls="workInformation" aria-selected="true">Work Information</button>
+                            </li>
+                            <li class="nav-item">
+                                <button class="nav-link" id="privateInformation-tab" data-bs-toggle="tab"
+                                    data-bs-target="#privateInformation" type="button" role="tab"
+                                    aria-controls="privateInformation" aria-selected="false">Private Information</button>
+                            </li>
+                            <!-- <li class="nav-item">
+                                <button class="nav-link" id="credentials-tab" data-bs-toggle="tab" data-bs-target="#credentials" type="button"
+                                    role="tab" aria-controls="credentials" aria-selected="false">Credentials</button>
+                            </li> -->
+                        </ul>
+        
+                        <!-- Tab panes -->
+                        <div class="tab-content">
+                            <div class="tab-pane p-1 pt-3 active" id="workInformation" role="tabpanel" aria-labelledby="workInformation-tab"
+                                tabindex="0">
+                                <div class="form-group">
+                                    <h5 class="text-start">Location</h5>
+                                    <div class="form-group">
+                                        <select id="address_id" class="form-select" 
+                                            x-model="$store.employee.employee.address_id"
+                                            x-init="$store.employee.employee.address_id = {{employee.address_id.id if employee.address_id else 0}}"
+                                            disabled>
+                                            <option value="0" selected>Select Address..</option>
+                                            {% for address in work_addresses.records %}
+                                            <option value="{{address.id}}">{{address.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h5 class="text-start">Coach</h5>
+                                    <div class="form-group">
+                                        <select id="coach_id" class="form-select" 
+                                            x-model="$store.employee.employee.coach_id"
+                                            x-init="$store.employee.employee.coach_id = {{employee.coach_id.id if employee.coach_id else 0}}"
+                                            disabled>
+                                            <option value="0" selected>Select Coach..</option>
+                                            {% for coach in coaches.records %}
+                                            <option value="{{coach.id}}">{{coach.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select id="expense_manager_id" class="form-select" 
+                                            x-model="$store.employee.employee.expense_manager_id"
+                                            x-init="$store.employee.employee.expense_manager_id = {{employee.expense_manager_id.id if employee.expense_manager_id else 0}}"
+                                            disabled>
+                                            <option value="0" selected>Select Expense Manager..</option>
+                                            {% for expense_manager in expense_managers.records %}
+                                            <option value="{{expense_manager.id}}">{{expense_manager.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group">
+                                    <h5 class="text-start">Schedule</h5>
+                                    <div class="form-group">
+                                        <select id="resource_calendar_id" class="form-select" 
+                                            x-model="$store.employee.employee.resource_calendar_id"
+                                            x-init="$store.employee.employee.resource_calendar_id = {{employee.resource_calendar_id.id if employee.resource_calendar_id else 0}}"
+                                            disabled>
+                                            <option value="0" selected disabled>Select Working Hours..</option>
+                                            {% for resource_calendar in resource_calendars.records %}
+                                            <option value="{{resource_calendar.id}}">{{resource_calendar.name}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                    <div class="form-group">
+                                        <select id="tz" class="form-select" 
+                                            x-model="$store.employee.employee.tz"
+                                            x-init="$store.employee.employee.tz = '{{employee.tz if employee.tz else ''}}'"
+                                            disabled>
+                                            {% for tz in fields_list['tz']['selection'] %}
+                                            <option value="{{tz[0]}}">{{tz[1]}}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="tab-pane p-1 pt-3" id="privateInformation" role="tabpanel"
+                                aria-labelledby="privateInformation-tab" tabindex="0">
+                                <div class="row">
+                                    <div class="form-group col-md-6 align-items-end mb-3">
+                                        <div class="form-group">
+                                            <h5 class="text-start">Private Contact</h5>
+                                            
+                                            
+
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="private_email" name="private_email"
+                                                    placeholder="Email"
+                                                    x-model="$store.employee.employee.private_email"
+                                                    x-init="$store.employee.employee.private_email = '{{employee.private_email if employee.private_email else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="phone" name="phone"
+                                                    placeholder="Phone"
+                                                    x-model="$store.employee.employee.phone"
+                                                    x-init="$store.employee.employee.phone = '{{employee.phone if employee.phone else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="km_home_work" name="km_home_work"
+                                                    placeholder="Km Home-Work"
+                                                    x-model="$store.employee.employee.km_home_work"
+                                                    x-init="$store.employee.employee.km_home_work = '{{employee.km_home_work if employee.km_home_work else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h5 class="text-start">Marital Status</h5>
+                                            <div class="form-group">
+                                                <select id="marital" class="form-select" 
+                                                    x-model="$store.employee.employee.marital"
+                                                    x-init="$store.employee.employee.marital = '{{employee.marital if employee.marital else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                                    <option value="" selected>Select Marital Status..</option>
+                                                    {% for marital in fields_list['marital']['selection'] %}
+                                                        <option value="{{marital[0]}}">{{marital[1]}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <template x-if="$store.employee.employee.marital == 'married' | $store.employee.employee.marital == 'cohabitant'">
+                                                <div>
+                                                    <div class="form-group">
+                                                        <input type="text" class="form-control" id="spouse_complete_name" name="spouse_complete_name"
+                                                            placeholder="Spouse Complete Name"
+                                                            x-model="$store.employee.employee.spouse_complete_name"
+                                                            x-init="$store.employee.employee.spouse_complete_name = '{{employee.spouse_complete_name if employee.spouse_complete_name else ''}}'"
+                                                            :disabled="!$store.employee.editForm">
+                                                    </div>
+                                                    <div class="form-group">
+                                                        <input type="date" class="form-control" id="spouse_birthdate" name="spouse_birthdate"
+                                                            placeholder="Spouse Date of Birth"
+                                                            x-model="$store.employee.employee.spouse_birthdate"
+                                                            x-init="$store.employee.employee.spouse_birthdate = '{{employee.spouse_birthdate if employee.spouse_birthdate else ''}}'"
+                                                            :disabled="!$store.employee.editForm">
+                                                    </div>
+                                                </div>
+                                            </template>
+
+                                            
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h5 class="text-start">Emergency</h5>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="emergency_contact" name="emergency_contact"
+                                                    placeholder="Emergency Contact"
+                                                    x-model="$store.employee.employee.emergency_contact"
+                                                    x-init="$store.employee.employee.emergency_contact = '{{employee.emergency_contact if employee.emergency_contact else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="emergency_phone" name="emergency_phone"
+                                                    placeholder="Emergency Phone"
+                                                    x-model="$store.employee.employee.emergency_phone"
+                                                    x-init="$store.employee.employee.emergency_phone = '{{employee.emergency_phone if employee.emergency_phone else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h5 class="text-start">Education</h5>
+                                            <div class="form-group">
+                                                <select id="certificate" class="form-select" 
+                                                    x-model="$store.employee.employee.certificate"
+                                                    x-init="$store.employee.employee.certificate = '{{employee.certificate if employee.certificate else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                                    <option value="" selected>Select Certificate Level..</option>
+                                                    {% for certificate in fields_list['certificate']['selection'] %}
+                                                        <option value="{{certificate[0]}}">{{certificate[1]}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="study_field" name="study_field"
+                                                    placeholder="Field of Study"
+                                                    x-model="$store.employee.employee.study_field"
+                                                    x-init="$store.employee.employee.study_field = '{{employee.study_field if employee.study_field else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="study_school" name="study_school"
+                                                    placeholder="School"
+                                                    x-model="$store.employee.employee.study_school"
+                                                    x-init="$store.employee.employee.study_school = '{{employee.study_school if employee.study_school else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    
+
+                                    <div class="form-group col-md-6 align-items-end mb-3">
+                                        <div class="form-group">
+                                            <h5 class="text-start">Citizenship</h5>
+                                            <div class="form-group">
+                                                <select id="country_id" class="form-select" 
+                                                    x-model="$store.employee.employee.country_id"
+                                                    x-init="$store.employee.employee.country_id = {{employee.country_id.id if employee.country_id else 0}}"
+                                                    :disabled="!$store.employee.editForm">
+                                                    <option value="0" selected>Select Nationaly (Country)..</option>
+                                                    {% for country in countries.records %}
+                                                    <option value="{{country.id}}">{{country.name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="identification_id" name="identification_id"
+                                                    placeholder="Identification No"
+                                                    x-model="$store.employee.employee.identification_id"
+                                                    x-init="$store.employee.employee.identification_id = '{{employee.identification_id if employee.identification_id else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="passport_id" name="passport_id"
+                                                    placeholder="Passport No"
+                                                    x-model="$store.employee.employee.passport_id"
+                                                    x-init="$store.employee.employee.passport_id = '{{employee.passport_id if employee.passport_id else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                            <div class="form-group">
+                                                <select id="gender" class="form-select" 
+                                                    x-model="$store.employee.employee.gender"
+                                                    x-init="$store.employee.employee.gender = '{{employee.gender if employee.gender else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                                    <option value="" selected>Select Gender..</option>
+                                                    {% for gender in fields_list['gender']['selection'] %}
+                                                        <option value="{{gender[0]}}">{{gender[1]}}</option>
+                                                    {% endfor %}
+                                                </select>
+
+                                            </div>
+                                            <div class="form-group">
+                                                <h5 class="text-start">Date of Birth</h5>
+                                                <input type="date" class="form-control" id="birthday" name="birthday"
+                                                    placeholder="Date of Birth"
+                                                    x-model="$store.employee.employee.birthday"
+                                                    x-init="$store.employee.employee.birthday = '{{employee.birthday if employee.birthday else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="place_of_birth" class="form-control" id="place_of_birth" name="place_of_birth"
+                                                    placeholder="Place of Birth"
+                                                    x-model="$store.employee.employee.place_of_birth"
+                                                    x-init="$store.employee.employee.place_of_birth = '{{employee.place_of_birth if employee.place_of_birth else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+
+                                            <div class="form-group">
+                                                <select id="country_of_birth" class="form-select" 
+                                                    x-model="$store.employee.employee.country_of_birth"
+                                                    x-init="$store.employee.employee.country_of_birth = {{employee.country_of_birth.id if employee.country_of_birth else 0}}"
+                                                    :disabled="!$store.employee.editForm">
+                                                    <option value="0" selected>Select Country of Birth..</option>
+                                                    {% for country in countries.records %}
+                                                    <option value="{{country.id}}">{{country.name}}</option>
+                                                    {% endfor %}
+                                                </select>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <h5 class="text-start">Dependant</h5>
+                                            <div class="form-group">
+                                                <input type="number" class="form-control" id="children" name="children"
+                                                    placeholder="Number of Children"
+                                                    x-model="$store.employee.employee.children"
+                                                    x-init="$store.employee.employee.children = '{{employee.children if employee.children else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="form-group">
+                                            <h5 class="text-start">Work Permit</h5>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="visa_no" name="visa_no"
+                                                    placeholder="Visa No"
+                                                    x-model="$store.employee.employee.visa_no"
+                                                    x-init="$store.employee.employee.visa_no = '{{employee.visa_no if employee.visa_no else ''}}'"
+                                                    :disabled="!$store.employee.editForm">                                        
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="text" class="form-control" id="permit_no" name="permit_no"
+                                                    placeholder="Work Permit No"
+                                                    x-model="$store.employee.employee.permit_no"
+                                                    x-init="$store.employee.employee.permit_no = '{{employee.permit_no if employee.permit_no else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                            <div class="form-group">
+                                                <input type="date" class="form-control" id="visa_expire" name="visa_expire"
+                                                    placeholder="Visa Expire Date"
+                                                    x-model="$store.employee.employee.visa_expire"
+                                                    x-init="$store.employee.employee.visa_expire = '{{employee.visa_expire if employee.visa_expire else ''}}'"
+                                                    :disabled="!$store.employee.editForm">
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- <div class="tab-pane p-1 pt-3" id="credentials" role="tabpanel" aria-labelledby="credentials-tab" tabindex="0">
+                                <div class="form-group">
+                                    <h5 class="text-start">Attendance</h5>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="pin" name="pin"
+                                            placeholder="PIN Code"
+                                            x-model="$store.employee.employee.pin"
+                                            x-init="$store.employee.employee.pin = '{{employee.pin if employee.pin else ''}}'"
+                                            :disabled="!$store.employee.editForm">
+                                    </div>
+                                    <div class="form-group">
+                                        <input type="text" class="form-control" id="barcode" name="barcode"
+                                            placeholder="Badge ID"
+                                            x-model="$store.employee.employee.barcode"
+                                            x-init="$store.employee.employee.barcode = '{{employee.barcode if employee.barcode else ''}}'"
+                                            :disabled="!$store.employee.editForm">
+
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+<script>
+    document.addEventListener('alpine:init', async () => {
+        Alpine.store('employee', {
+            active_id : 0,
+            employee: {
+                name: '',
+                job_title: '',
+                mobile_phone: '',
+                department_id: '0',
+                work_phone: '',
+                job_id: '0',
+                work_email: '',
+                parent_id: '0',
+                work_location_id: '0',
+                address_id:'0',
+                coach_id:'0',
+                expense_manager_id: '0',
+                resource_calendar_id: '0',
+                tz: '',
+                pin: '',
+                barcode: '',
+                address_home_id: '0',
+                private_email:'',
+                phone:'',
+                km_home_work: 0,
+                marital: '',
+                spouse_complete_name: '',
+                spouse_birthdate: '',
+                emergency_contact: '',
+                emergency_phone: '',
+                certificate: '',
+                study_field: '',
+                study_school: '',
+                country_id: '0',
+                identification_id: '',
+                passport_id:'',
+                gender: '',
+                birthday: '',
+                place_of_birth: '',
+                country_of_birth: '0',
+                children: 0,
+                visa_no: '',
+                permit_no: '',
+                visa_expire: '',
+
+            },
+            old_employee : {},
+
+            image: {
+                name: '',
+                size: '',
+                file: false,
+                old_file:false,
+                changeAttachment(e){
+                    if (e.target.files.length >= 1) {
+                        let file = e.target.files[0]
+                        if (file.size > 2000000) {
+                            alert("Can't add attachment that has size more than 2 MB!");
+                            this.file = this.old_file
+                            return
+                        }
+
+                        var reader = new FileReader();
+                        reader.readAsDataURL(file);
+
+                        reader.onload = z => {
+                            this.name = file.name,
+                            this.size = file.size,
+                            this.file = z.target.result
+                        }
+                        // console.log(String(this.file) == String(this.old_file))
+
+                    } else {
+                        return
+                    }
+                    
+
+                },
+                actionEditImage(){
+                    document.getElementById('avaImageFile').click()
+                },
+                actionDeleteImage(){
+                    // console.log('delete')
+                    this.name = '',
+                    this.size = '',
+                    this.file = '/custom_website_portal_new/static/img/placeholder.png'
+                },
+                actionGetImage(imagesrc){
+                    this.file =  imagesrc
+                    this.old_file = imagesrc
+                }
+            },
+            alert: {
+                show: false,
+                message: 'ini alert message',
+                iconHref: "#check-circle-fill",
+                class: 'alert-success',
+            },
+            editForm: false,
+            
+            action_edit(){
+                this.old_employee = {...this.employee}
+                this.editForm =  true
+            },
+            action_cancel(){
+                // cancel dalam edit mode
+                this.alert.show = false
+                if (JSON.stringify(this.employee) === JSON.stringify(this.old_employee) && String(this.image.file) === String(this.image.old_file)) {
+                    this.editForm = false
+                } else {
+                    let isConfirmed = confirm('The record has been modified, your changes will be discarded. Do you want to proceed')
+                    if (isConfirmed) {
+                        this.employee = {...this.old_employee}
+                        this.image.file = this.image.old_file
+                        this.editForm = false
+
+                    }
+                    
+                }
+            },
+            validateData(){
+                this.alert.show = false
+                if (!this.employee.name) {
+                    this.alert.show = true
+                    this.alert.message = 'Name must be filled!'
+                    this.alert.class = 'alert-danger'
+                    return true
+                }
+                if (!this.employee.work_email) {
+                    this.alert.show = true
+                    this.alert.message = 'Work Email must be filled!'
+                    this.alert.class = 'alert-danger'
+                    return true
+                }
+
+                if (!this.employee.address_id | parseInt(this.employee.address_id) == 0) {
+                    this.alert.show = true
+                    this.alert.message = 'Location Address must be filled!'
+                    this.alert.class = 'alert-danger'
+                    return true
+                }
+
+                if (!this.employee.resource_calendar_id | !this.employee.tz) {
+                    this.alert.show = true
+                    this.alert.message = 'Working Hour and Timezone must be filled!'
+                    this.alert.class = 'alert-danger'
+                    return true
+                }
+                
+                // return false
+
+            },
+            async editData() {
+                // console.log(this.employee)
+                if (JSON.stringify(this.employee) === JSON.stringify(this.old_employee) && String(this.image.file) === String(this.image.old_file)) {
+                    this.editForm = false
+                    return
+                }
+                // console.log(this.employee)
+                isErrorValidate = this.validateData()
+                if (isErrorValidate) {
+                    return
+                }
+
+                // make sure not click this twice
+                this.editForm = !this.editForm
+                this.alert.message = 'Loading.....'
+                this.alert.class =  'alert-secondary'
+                this.alert.show = true
+
+                let fileImage = this.image.file;
+                const fileImageArray = fileImage.split(",");
+                let imageString = fileImageArray[1];
+
+                // console.log(imageString?imageString:false)
+
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "jsonrpc": "2.0",
+                        "params": {
+                            "values": {
+                                name: this.employee.name,
+                                job_title: this.employee.job_title,
+                                
+                                mobile_phone: this.employee.mobile_phone,
+                                department_id: parseInt(this.employee.department_id) > 0 ? parseInt(this.employee.department_id) : false,
+                                work_phone: this.employee.work_phone,
+                                job_id: parseInt(this.employee.job_id) > 0 ? parseInt(this.employee.job_id) : false,
+                                work_email: this.employee.work_email,
+                                parent_id: parseInt(this.employee.parent_id) > 0 ? parseInt(this.employee.parent_id) : false,
+                                work_location_id: parseInt(this.employee.work_location_id) > 0 ? parseInt(this.employee.work_location_id) : false,
+                                
+                                address_id: parseInt(this.employee.address_id) > 0 ? parseInt(this.employee.address_id) : false,
+                                coach_id: parseInt(this.employee.coach_id) > 0 ? parseInt(this.employee.coach_id) : false,
+                                expense_manager_id: parseInt(this.employee.expense_manager_id) > 0 ? parseInt(this.employee.expense_manager_id) : false,
+                                resource_calendar_id: parseInt(this.employee.resource_calendar_id) > 0 ? parseInt(this.employee.resource_calendar_id) : false,
+                                tz: this.employee.tz,
+                                
+                                
+                                // pin: this.employee.pin,
+                                // barcode: this.employee.barcode,
+                                
+                                // address_home_id: parseInt(this.employee.address_home_id) > 0 ? parseInt(this.employee.address_home_id) : false,
+                                private_email: this.employee.private_email,
+                                phone: this.employee.phone,
+                                km_home_work: parseInt(this.employee.km_home_work),
+                                marital: this.employee.marital,
+                                spouse_complete_name: this.employee.spouse_complete_name,
+                                spouse_birthdate: this.employee.spouse_birthdate,
+                                emergency_contact: this.employee.emergency_contact,
+                                emergency_phone: this.employee.emergency_phone,
+                                certificate: this.employee.certificate,
+                                study_field: this.employee.study_field,
+                                study_school: this.employee.study_school,
+                                
+                                country_id: parseInt(this.employee.country_id) > 0 ? parseInt(this.employee.country_id) : false,
+                                identification_id: this.employee.identification_id,
+                                passport_id: this.employee.passport_id,
+                                gender: this.employee.gender,
+                                birthday: this.employee.birthday,
+                                place_of_birth: this.employee.place_of_birth,
+                                country_of_birth: parseInt(this.employee.country_of_birth) > 0 ? parseInt(this.employee.country_of_birth) : false,
+
+                                children: parseInt(this.employee.children),
+                                visa_no: this.employee.visa_no,
+                                permit_no: this.employee.permit_no,
+                                visa_expire: this.employee.visa_expire,
+
+                                image_1920: imageString?imageString:false 
+                            },
+                        }
+                    })
+                };
+
+                try {
+                    const fetchResponse = await fetch(`/portals/hr_employee/update/me`, settings);
+                    const data = await fetchResponse.json();
+
+                    if (data.result.status != 'success') {
+                        this.editForm = false
+                        // console.log(data)
+                        this.alert.class =  'alert-danger'
+                        this.alert.message = data.result.message
+                        this.alert.show = true
+                        // this.expense = {...this.old_expense}
+                        // this.newAttachments = []
+                        setTimeout(()=>{
+                            this.alert.show = false
+                        }, 5000);
+                        return
+                    }
+                    else {
+                        // console.log(data)
+                        this.editForm = false
+                        this.alert.message = data['result']['message']
+                        this.alert.class =  'alert-success'
+                        this.alert.show = true
+                        
+                        // remove alert
+                        setTimeout(()=>{
+                            this.alert.show = false
+                        }, 3000);
+                    }
+                    
+                
+                } catch (e) {
+                    return e;
+                }
+            }
+
+        });
+
+    })
+</script>
+
+{% endblock %}

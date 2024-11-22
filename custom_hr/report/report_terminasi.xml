@@ -1,0 +1,112 @@
+<odoo>
+    <data>
+        <template id="custom_hr.print_terminasi_verklaring_template">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_hr.print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <!-- <style>
+                                        table, th, td {
+                                            border: 1px solid black;
+                                            border-collapse: collapse;
+                                            padding: 5pt;
+                                        }
+                                    </style> -->
+                                    <div class="text-center">
+                                        <u><h5 class="mb-0">SURAT KETERANGAN KERJA</h5></u>
+                                        No. <b class="mb-2" t-field="o.name" />
+                                    </div>
+
+                                    <style>
+                                        .borderless td, .borderless th {
+                                            border: none;
+                                            border-collapse: collapse;
+                                            padding: 5pt;
+                                            padding-left:0;
+                                            padding-right:0;
+                                        }
+                                    </style>
+
+                                    <br/><br/><br/>
+
+                                    <table class="borderless" style="width:100%; vertical-align: center;">
+                                        <tr>
+                                            <td colspan="3"> 
+                                                Yang bertanda tangan dibawah ini, <span t-field="company.name"/>, <span t-field="company.street"/>.
+                                            </td>
+                                        </tr>
+                                        <tr style="line-height: 5pt"><td colspan="3"></td></tr>
+                                        <tr>
+                                            <td colspan="3"> 
+                                                Dengan ini menerangkan, bahwa :
+                                            </td>
+                                        </tr>
+                                        <tr style="line-height: 5pt">
+                                            <td style="width:10%;">NAMA</td>
+                                            <td style="width:1%;">:</td>
+                                            <td><span t-field="o.employee_id.name"/></td>
+                                        </tr>
+                                        <tr style="line-height: 5pt">
+                                            <td style="width:10%;">NIK</td>
+                                            <td style="width:1%;">:</td>
+                                            <td><span t-field="o.employee_id.barcode"/></td>
+                                        </tr>
+                                        <tr><td colspan="3"></td></tr>
+                                        <tr>
+                                            <td colspan="3"> 
+                                                Yang bersangkutan pernah bekerja pada Perusahaan kami sebagai <u><b><span t-field="o.employee_id.job_id.name"/></b></u> terhitung sejak 
+                                                <b><span t-esc="datetime.datetime(o.employee_id.join_date.year, o.employee_id.join_date.month, o.employee_id.join_date.day).strftime('%d %b %Y')"/></b>
+                                                sampai dengan 
+                                                <b><span t-esc="datetime.datetime(o.resign_effective_date.year, o.resign_effective_date.month, o.resign_effective_date.day).strftime('%d %b %Y')"/></b>. 
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td colspan="3"> 
+                                                Selama bekerja karyawan tersebut telah melakukan pekerjaan sebaik-baiknya, dan keluar dari perusahaan kami dikarenakan <u><b><span t-field="o.jenis_terminasi_id.name"/></b></u>
+                                            </td>
+                                        </tr>
+                                        <tr><td colspan="3"></td></tr>
+                                        <tr>
+                                            <td colspan="3"> 
+                                                Demikian Surat Keterangan ini dibuat untuk dipergunakan sebagaimana mestinya.
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                    <table class="table" style="margin:100px auto; width:90%; border:0px;">
+                                        <tr style="background-color:transparent;">
+                                            <td style="width:25%; padding: 0 40px;">
+                                                <p>
+                                                    <span t-field="company.city"/>, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y')"/><br/>
+                                                    <span t-field="company.name"/><br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <br/>
+                                                    <u><span t-esc="user.name"></span></u><br/>
+                                                    <b><span t-esc="user.employee_id.job_id.name"/></b>
+                                                </p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

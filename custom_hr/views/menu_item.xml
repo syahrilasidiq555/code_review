@@ -1,0 +1,86 @@
+
+
+<odoo>
+
+    <menuitem
+        name="Matrix Approval"
+        id="menu_view_level_of_approval_matrix"
+        parent="hr.menu_human_resources_configuration"
+        sequence="1"/>
+
+    <!-- TERMINASI -->
+    <menuitem
+        name="Terminasi"
+        id="menu_hr_terminasi"
+        parent="hr.menu_hr_root"
+        sequence="4"/>
+
+        <menuitem
+            name="Pengajuan Terminasi Karyawan"
+            id="menu_view_hr_terminasi"
+            action="hr_terminasi_action"
+            parent="menu_hr_terminasi"
+            sequence="1"/>
+        <menuitem
+            name="Jenis Terminasi"
+            id="menu_view_hr_jenis_terminasi"
+            action="hr_jenis_terminasi_action"
+            parent="menu_hr_terminasi"
+            sequence="2"/>
+        <menuitem
+            name="Employee Type"
+            id="menu_view_hr_employee_type_digidaw"
+            action="hr_employee_type_action"
+            parent="menu_hr_terminasi"
+            sequence="3"/>
+    <menuitem
+        name="Terminasi Matrix Approval"
+        id="menu_view_level_of_approval_terminasi"
+        action="action_matrix_approval_terminasi"
+        parent="menu_view_level_of_approval_matrix"
+        sequence="2"/>
+        
+    <!-- FPSK -->
+    <menuitem
+        name="FPSK Matrix Approval"
+        id="menu_view_level_of_approval"
+        action="action_matrix_approval2"
+        parent="menu_view_level_of_approval_matrix"
+        sequence="1"/>
+
+    <menuitem id="menu_hr_promosi_demosi_mutasi"
+        name="FPSK (Perubahan Status Karyawan)"
+        action="hr_promosi_demosi_mutasi_action"
+        parent="hr.menu_hr_employee_payroll"
+        groups="dym_perjalanan_dinas.pd_human_resource"
+        sequence="4"/>
+
+    <!-- JOB GRADE -->
+    <menuitem
+        name="Job Grade"
+        id="menu_view_hr_job_grade"
+        action="hr_job_grade_action"
+        parent="hr.menu_human_resources_configuration"
+        sequence="1"/>
+
+    <!-- EMPLOYEE TYPE -->
+    <menuitem
+        name="Employee Type"
+        id="menu_view_hr_employee_type"
+        action="hr_employee_type_action"
+        parent="hr.menu_human_resources_configuration"
+        sequence="1"/>
+
+    <menuitem id="menu_resource_employee_calendar"
+        parent="hr.menu_human_resources_configuration"
+        action="resource.action_resource_calendar_form"
+        sequence="2"/>
+
+    <!-- PKWT -->
+    <menuitem id="menu_hr_kompensasi_pkwt"
+        name="Kompensasi PKWT"
+        action="hr_kompensasi_pkwt_action"
+        parent="hr.menu_hr_employee_payroll"
+        groups="dym_perjalanan_dinas.pd_human_resource"
+        sequence="5"/>
+</odoo>

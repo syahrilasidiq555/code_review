@@ -1,0 +1,227 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- KANBAN -->
+    <!-- REMOVE CRUD-->
+    <record id="view_dms_file_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">view_dms_file_kanban_remove_crud</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dms_file_kanban_create" model="ir.ui.view">
+        <field name="name">view_dms_file_kanban_create</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_files_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_file_kanban_access" model="ir.ui.view">
+        <field name="name">view_dms_file_kanban_access</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_kanban"/>
+        <field name="arch" type="xml">
+            <xpath expr="//div[@class='col-6 border-left mk_file_kanban_actions']" position="replace">
+                <div class="col-6 border-left mk_file_kanban_actions">
+                    <h6 class="dropdown-header">
+                        Actions
+                    </h6>
+                    <a role="menuitem" type="open" class="dropdown-item" groups="custom_access_right.group_submenu_files_access_read">
+                        <i class="fa fa-external-link"/>
+                        Open
+                    </a>
+                    <a role="menuitem" type="edit" class="dropdown-item" groups="custom_access_right.group_submenu_files_access_update">
+                        <i class="fa fa-pencil-square-o"/>
+                        Edit
+                    </a>
+                    <a role="menuitem" type="delete" class="dropdown-item" groups="custom_access_right.group_submenu_files_access_delete">
+                        <i class="fa fa-trash-o"/>
+                        Delete
+                    </a>
+                </div>
+            </xpath>
+            <xpath expr="//div[@class='col-6 mk_file_kanban_operations']" position="replace">
+                <div class="col-6 mk_file_kanban_operations">
+                    <h6 class="dropdown-header">
+                        Operations
+                    </h6>
+                    <a role="menuitem" name="lock" type="object" class="dropdown-item" groups="custom_access_right.group_submenu_files_access_lock">
+                        <i class="fa fa-lock" />
+                        Lock
+                    </a>
+                    <a role="menuitem" name="unlock" type="object" class="dropdown-item" groups="custom_access_right.group_submenu_files_access_unlock">
+                        <i class="fa fa-unlock-alt" />
+                        Unlock
+                    </a>
+                    <a t-if="record.permission_write.raw_value and record.active.raw_value"
+                        role="menuitem"
+                        name="toggle_active"
+                        type="object"
+                        class="dropdown-item">
+                        <i class="fa fa-archive" />
+                        Archive
+                    </a>
+                    <a t-if="record.permission_write.raw_value and !record.active.raw_value"
+                        role="menuitem"
+                        name="toggle_active"
+                        type="object"
+                        class="dropdown-item">
+                        <i class="fa fa-archive" />
+                        Unarchive
+                    </a>
+                    <a
+                        role="menuitem"
+                        class="dropdown-item"
+                        t-attf-href="/web/content?id=#{record.id.raw_value}&amp;field=content&amp;model=dms.file&amp;filename_field=name&amp;download=true">
+                        <i class="fa fa-download" />
+                        Download
+                    </a>
+                </div>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- TREE -->
+    <!-- REMOVE CRUD-->
+    <record id="view_dms_file_tree_remove_crud" model="ir.ui.view">
+        <field name="name">view_dms_file_tree_remove_crud</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dms_file_tree_create" model="ir.ui.view">
+        <field name="name">view_dms_file_tree_create</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_files_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_file_tree_delete" model="ir.ui.view">
+        <field name="name">view_dms_file_tree_delete</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_files_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="view_dms_file_form_remove_crud" model="ir.ui.view">
+        <field name="name">view_dms_file_form_remove_crud</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="duplicate">false</attribute>
+                <attribute name="edit">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dms_file_form_create" model="ir.ui.view">
+        <field name="name">view_dms_file_form_create</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_files_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+                <attribute name="duplicate">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_file_form_edit" model="ir.ui.view">
+        <field name="name">view_dms_file_form_edit</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_files_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dms_file_form_delete" model="ir.ui.view">
+        <field name="name">view_dms_file_form_delete</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_files_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- BUTTON -->
+    <record id="view_dms_file_form_button" model="ir.ui.view">
+        <field name="name">view_dms_file_form_button</field>
+        <field name="model">dms.file</field>
+        <field name="inherit_id" ref="dms.view_dms_file_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='lock']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_files_access_lock</attribute>
+            </xpath>
+            <xpath expr="//button[@name='unlock']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_files_access_unlock</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- OTHER ACCESS -->
+    <!-- ACCESS SHARE -->
+    <record id="dms.wizard_dms_file_share_action" model="ir.actions.act_window">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_files_access_share'))]" />
+    </record>
+
+    <!-- ACCESS MIGRATE -->
+    <record id="dms.action_dms_attachment_migrate" model="ir.actions.server">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_files_access_migrate'))]" />
+    </record>
+
+    <!-- ACCESS MOVE -->
+    <record id="dms.action_wizard_dms_file_move" model="ir.actions.server">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_files_access_move'))]" />
+    </record>
+<!-- END OF OTHER ACCESS -->
+
+<!-- MENU ITEM -->
+    <record id="dms.menu_dms_file" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_files_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

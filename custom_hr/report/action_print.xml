@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="action_report_fpsk" model="ir.actions.report">
+        <field name="name">FPSK (Perubahan Status Karyawan)</field>
+        <field name="model">hr.promosi.demosi.mutasi</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_hr.print_pdm_template</field>
+        <field name="report_file">custom_hr.print_pdm_template</field>
+        <field name="paperformat_id" ref="format_kertas_a4_custom_hr"/>  
+    </record>
+
+    <record id="action_report_verklaring_terminasi4" model="ir.actions.report">
+        <field name="name">Verklaring Karyawan</field>
+        <field name="model">hr.terminasi</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_hr.print_terminasi_verklaring_template</field>
+        <field name="report_file">custom_hr.print_terminasi_verklaring_template</field>
+        <field name="paperformat_id" ref="format_kertas_a4_custom_hr"/>  
+    </record>
+</odoo>

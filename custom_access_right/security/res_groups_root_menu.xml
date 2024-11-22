@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Group Label for Menu -->
+        <record model="ir.module.category" id="module_category_menu">
+            <field name="name">Menu</field>
+            <field name="description">Group for view menu</field>
+            <field name="sequence">30</field>
+        </record>
+
+        <!-- Discuss -->
+        <record id="group_menu_discuss" model="res.groups">
+            <field name="name">Discuss</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="mail.menu_root_discuss" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_discuss'))]" />
+        </record>
+
+        <!-- Calendar -->
+        <record id="group_menu_calendar" model="res.groups">
+            <field name="name">Calendar</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="calendar.mail_menu_calendar" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_calendar'))]" />
+        </record>
+
+        <!-- Contacts -->
+        <record id="group_menu_contacts" model="res.groups">
+            <field name="name">Contacts</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="contacts.menu_contacts" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_contacts'))]" />
+        </record>
+
+        <!-- CRM -->
+        <record id="group_menu_crm" model="res.groups">
+            <field name="name">CRM</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="crm.crm_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_crm'))]" />
+        </record>
+        
+        <!-- SALE -->
+        <record id="group_menu_sales" model="res.groups">
+            <field name="name">Sales</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="sale.sale_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_sales'))]" />
+        </record>
+
+        <!-- RENTAL -->
+        <record id="group_menu_rental" model="res.groups">
+            <field name="name">Rental</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="sale_renting.rental_menu_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_rental'))]" />
+        </record>
+
+        <!-- Accounting -->
+        <record id="group_menu_accounting" model="res.groups">
+            <field name="name">Accounting</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="account_accountant.menu_accounting" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_accounting'))]" />
+        </record>
+
+        <!-- WEBSITE -->
+        <record id="group_menu_website" model="res.groups">
+            <field name="name">Website</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="website.menu_website_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_website'))]" />
+        </record>
+
+        <!-- Purchase -->
+        <record id="group_menu_purchase" model="res.groups">
+            <field name="name">Purchase</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="purchase.menu_purchase_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_purchase'))]" />
+        </record>
+
+        <!-- INVENTORY -->
+        <record id="group_menu_inventory" model="res.groups">
+            <field name="name">Inventory</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="stock.menu_stock_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_inventory'))]" />
+        </record>
+
+        <!-- EMPLOYEE -->
+        <record id="group_menu_employees" model="res.groups">
+            <field name="name">Employees</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="hr.menu_hr_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_employees'))]" />
+        </record>
+
+        <!-- POS -->
+        <record id="group_menu_pos" model="res.groups">
+            <field name="name">Point of Sale</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="point_of_sale.menu_point_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_pos'))]" />
+        </record>
+
+        <!-- Link Tracker -->
+        <record id="group_menu_link_tracker" model="res.groups">
+            <field name="name">Link Tracker</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="utm.menu_link_tracker_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_link_tracker'))]" />
+        </record>   
+
+        <!-- EXPENSES -->
+        <record id="group_menu_expenses" model="res.groups">
+            <field name="name">Expenses</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="hr_expense.menu_hr_expense_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_expenses'))]" />
+        </record>
+
+        <!-- RDC -->
+        <record id="group_menu_rdc" model="res.groups">
+            <field name="name">RDC</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="custom_web_rdc.rdc_custom_module_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_rdc'))]" />
+        </record>
+
+        <!-- Permintaan Barang -->
+        <record id="group_menu_permintaan_barang" model="res.groups">
+            <field name="name">Permintaan Barang</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="purchase_request.parent_menu_purchase_request" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_permintaan_barang'))]" />
+        </record>
+
+        <!-- Cash Advance -->
+        <!-- <record id="group_menu_cash_advance" model="res.groups">
+            <field name="name">Cash Advance</field>
+            <field name="category_id" ref="module_category_menu" />
+        </record>
+        <record id="custom_cash_advance.cash_advance_root_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('group_menu_cash_advance'))]" />
+        </record> -->
+
+    </data>
+</odoo>

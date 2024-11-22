@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <!-- REPORT -->
+    <record id="report_survey.report_survey_wizard" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_export_report_access_detail'))]" />
+    </record>
+    <record id="report_survey.report_survey_summary_wizard" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_export_report_access_summary'))]" />
+    </record>
+    <record id="report_survey.report_survey_detail_wizard" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_export_report_access_survey'))]" />
+    </record>
+    <record id="report_survey.report_survey_detail_external_wizard" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_export_report_access_external'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

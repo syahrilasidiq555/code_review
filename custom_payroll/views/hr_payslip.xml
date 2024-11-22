@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <!-- form view-->
+        <record id="view_hr_payslip_form_inherit" model="ir.ui.view">
+            <field name="name">view_hr_payslip_form_inherit</field>
+            <field name="model">hr.payslip</field>
+            <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='credit_note']" position="replace">
+                    <field name="is_worker_payslip" invisible="1" />
+                    <field name="is_gaji_probation" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='worked_days_line_ids']" position="attributes">
+                    <attribute name="readonly" >True</attribute>
+                    <attribute name="force_save" >True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='input_line_ids']" position="attributes">
+                    <!-- <attribute name="readonly" >True</attribute> -->
+                    <attribute name="force_save" >True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='input_line_ids']//tree" position="replace">
+                    <!-- <attribute name="editable">bottom</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute> -->
+                    <tree string="Input Data" editable="bottom" create="false" delete="false">
+                        <field name="name" readonly="1" force_save="1"/>
+                        <field name="code" readonly="1" force_save="1"/>
+                        <field name="amount" readonly="1" force_save="1"/>
+                        <field name="contract_id" readonly="1" force_save="1"/>
+                        <field name="correction_checklist" attrs="{'invisible': [('is_correction','=',False)]}"/>
+                        <field name="is_correction" invisible="1"/>
+                        <field name="sequence" invisible="True"/>
+                        <field name="correction_detail_id" invisible="1"/>
+                    </tree>
+                </xpath>
+
+                <xpath expr="//field[@name='input_line_ids']//form" position="replace">
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

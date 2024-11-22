@@ -1,0 +1,354 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<template>
+    <t t-name="AnalisaKeuanganDashboard">
+        <div class="oh_dashboards" style="margin-top: 20px;">
+            <div class="container-fluid o_pj_dashboard">
+            </div>
+        </div>
+    </t>
+    <t t-name="DashboardRasio">
+        <div class="container-fluid my-5 o_hr_dashboard">
+            <section class="dashboard_main_section" id="main_section_login">
+                <div class="row">
+                    <div class="col-sm-12 mb-4">
+                        <div class="row">
+                            <div class="col-12 col-sm-12 col-md-8">
+                                <h2 class="section-header">Analisa Keuangan <t t-esc="widget.company_names"/></h2>
+                            </div>
+                            <div class="col-12 col-sm-12 col-md-4">
+                                <form class="form-group">
+                                    <select id="income_expense_values" class="form-control">
+                                        <option id="this_year" value="this_year">Tahun Ini</option>
+                                        <option id="this_month" value="this_month">Bulan Ini</option>
+                                        <option id="this_week" value="this_week">Pekan Ini</option>
+                                        <option id="this_day" value="this_day" selected="">Hari Ini</option>
+                                    </select>
+                                </form>
+                            </div>
+                        </div>
+                        <!-- <hr> -->
+                    </div>
+                </div>
+            </section>
+
+            <section class="dashboard_main_section" id="main_section_manager">
+                <div class="crm_dash_cards">
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-8">
+                            <h2 class="section-header">Rasio Solvabilitas</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dashboard-card card-shadow revenue_card rasio_hutang">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_hutang">
+                                                <t t-esc="widget.rasio_hutang"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Hutang
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dashboard-card card-shadow revenue_card rasio_hutang_pendekatan_modal">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_hutang_pendekatan_modal">
+                                                <t t-esc="widget.rasio_hutang_pendekatan_modal"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Hutang Pendekatan Modal
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-8">
+                            <h2 class="section-header">Rasio Likuiditas</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4">
+                            <div class="dashboard-card card-shadow revenue_card rasio_lancar">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_lancar">
+                                                <t t-esc="widget.rasio_lancar"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Lancar
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="dashboard-card card-shadow revenue_card rasio_kas">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_kas">
+                                                <t t-esc="widget.rasio_kas"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Kas
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="dashboard-card card-shadow revenue_card rasio_cepat">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_cepat">
+                                                <t t-esc="widget.rasio_cepat"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Cepat
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-8">
+                            <h2 class="section-header">Rasio Aktivitas</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-3">
+                            <div class="dashboard-card card-shadow revenue_card rasio_perputaran_persediaan">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_perputaran_persediaan">
+                                                <t t-esc="widget.rasio_perputaran_persediaan"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Perputaran Persediaan
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3">
+                            <div class="dashboard-card card-shadow revenue_card rasio_perputaran_piutang">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_perputaran_piutang">
+                                                <t t-esc="widget.rasio_perputaran_piutang"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Perputaran Piutang
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3">
+                            <div class="dashboard-card card-shadow revenue_card rasio_perputaran_aktiva_tetap">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_perputaran_aktiva_tetap">
+                                                <t t-esc="widget.rasio_perputaran_aktiva_tetap"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Perputaran Aktiva Tetap
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-3">
+                            <div class="dashboard-card card-shadow revenue_card rasio_perputaran_total_aktiva">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_perputaran_total_aktiva">
+                                                <t t-esc="widget.rasio_perputaran_total_aktiva"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Perputaran Total Aktiva
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-12 col-sm-12 col-md-8">
+                            <h2 class="section-header">Rasio Profitabilitas</h2>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="col-sm-12 col-md-4">
+                            <div class="dashboard-card card-shadow revenue_card rasio_margin_laba_kotor">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_margin_laba_kotor">
+                                                <t t-esc="widget.rasio_margin_laba_kotor"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Margin Laba Kotor
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="dashboard-card card-shadow revenue_card rasio_margin_laba_bersih">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_margin_laba_bersih">
+                                                <t t-esc="widget.rasio_margin_laba_bersih"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Margin Laba Bersih
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-4">
+                            <div class="dashboard-card card-shadow revenue_card rasio_margin_laba_operasi">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="rasio_margin_laba_operasi">
+                                                <t t-esc="widget.rasio_margin_laba_operasi"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Rasio Margin Laba Operasi
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dashboard-card card-shadow revenue_card return_on_investment">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="return_on_investment">
+                                                <t t-esc="widget.return_on_investment"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Return On Investment
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-sm-12 col-md-6">
+                            <div class="dashboard-card card-shadow revenue_card return_on_assets">
+                                <div class="dashboard-card__icon-container bg-mauve-light d-flex justify-content-center align-items-center">
+                                    <i class="fa fa-money text-mauve"></i>
+                                </div>
+                                <div class="dashboard-card__details">
+                                    <h3>
+                                        <span>
+                                            <div id="return_on_assets">
+                                                <t t-esc="widget.return_on_assets"/><span> %</span>
+                                            </div>
+                                        </span>
+                                    </h3>
+                                    <div style="font-size: 14px">
+                                        Return On Assets
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </section>
+
+        </div>
+    </t>
+</template>

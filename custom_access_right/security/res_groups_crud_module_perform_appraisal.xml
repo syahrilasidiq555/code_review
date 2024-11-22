@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Perfomance Appraisal / Form A -->
+        <record model="ir.module.category" id="module_perform_appraisal_category_form_a">
+            <field name="name">Perfomance Appraisal / Form A Perfomance Appraisal</field>
+            <field name="sequence">508</field>
+        </record>
+        <record id="group_submenu_form_a_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_perform_appraisal_category_form_a"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_form_a_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_perform_appraisal_category_form_a"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_form_a_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_perform_appraisal_category_form_a"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_form_a_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_perform_appraisal_category_form_a"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Perfomance Appraisal / Form B -->
+        <record model="ir.module.category" id="module_perform_appraisal_category_form_b">
+            <field name="name">Perfomance Appraisal / Form B Perfomance Appraisal</field>
+            <field name="sequence">509</field>
+        </record>
+        <record id="group_submenu_form_b_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_perform_appraisal_category_form_b"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_form_b_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_perform_appraisal_category_form_b"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_form_b_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_perform_appraisal_category_form_b"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_form_b_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_perform_appraisal_category_form_b"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Improvement / Report & Configuration -->
+        <record model="ir.module.category" id="module_perform_appraisal_category_report_config">
+            <field name="name">Improvement / Report &amp; Configuration</field>
+            <field name="sequence">510</field>
+        </record>
+        <record id="group_submenu_report_config_perform_belum" model="res.groups">
+            <field name="name">Access Report Perfomance Belum - Employee Answered</field>
+            <field name="category_id" ref="module_perform_appraisal_category_report_config"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_report_config_perform_employee_atasan" model="res.groups">
+            <field name="name">Access Report Perfomance Employee - Atasan 1</field>
+            <field name="category_id" ref="module_perform_appraisal_category_report_config"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_report_config_atasan_posted" model="res.groups">
+            <field name="name">Access Report Perfomance Atasan 1 - Posted</field>
+            <field name="category_id" ref="module_perform_appraisal_category_report_config"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_report_config_form_job_class" model="res.groups">
+            <field name="name">Access Configuration Form Job Classification</field>
+            <field name="category_id" ref="module_perform_appraisal_category_report_config"/>            
+            <field name="sequence">4</field>
+        </record>
+    </data>
+</odoo>

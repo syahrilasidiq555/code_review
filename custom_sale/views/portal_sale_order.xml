@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="sale_order_portal_content_inherit" inherit_id="sale.sale_order_portal_content">
+            
+            <xpath expr="//div[@id='total']//div" position="inside">
+                <t t-if="sale_order.recurring_total">
+                    <table class="table table-borderless table-sm">
+                        <tr>
+                            <td colspan="3" style="height:25px;"></td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-nowrap">Total Recurring</span></td>
+                            <td class="text-end o_price_total">
+                                <span class="text-nowrap" t-field="sale_order.recurring_total"/>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><span class="text-nowrap">Total Non Recurring</span></td>
+                            <td class="text-end o_price_total">
+                                <span class="text-nowrap" t-field="sale_order.non_recurring_total"/>
+                            </td>
+                        </tr>
+                    </table>
+                </t>
+            </xpath>
+
+            <xpath expr="//section[@id='signature']" position="replace">
+                <section id="signature" name="Signature">
+                    <div class="row mt-4" name="signature" >
+                        <div t-if="sale_order.salesperson_signature" t-attf-class="#{'col-3' if report_type != 'html' else 'col-sm-7 col-md-4'} me-auto text-center">
+                            <h5>Salesperson Signature</h5>
+                            <img t-att-src="image_data_uri(sale_order.salesperson_signature)" style="max-height: 6rem; max-width: 100%;"/>
+                            <p t-field="sale_order.user_id.name"/>
+                        </div>
+                        
+                        <!-- <t t-foreach="sale_order.approval_info_ids" t-as="approval_info">
+                            <div t-if="approval_info.sign_signature" t-attf-class="#{'col-3' if report_type != 'html' else 'col-sm-7 col-md-4'} mx-auto text-center">
+                                <h5><span t-esc="approval_info.description" /> Signature</h5>
+                                <img t-att-src="image_data_uri(approval_info.sign_signature)" style="max-height: 6rem; max-width: 100%;"/>
+                                <p t-field="approval_info.approve_user_id.name"/>
+                            </div>
+                        </t> -->
+
+                        <div t-if="sale_order.signature" t-attf-class="#{'col-3' if report_type != 'html' else 'col-sm-7 col-md-4'} ms-auto text-center">
+                            <h5>Signature</h5>
+                            <img t-att-src="image_data_uri(sale_order.signature)" style="max-height: 6rem; max-width: 100%;"/>
+                            <p t-field="sale_order.signed_by"/>
+                        </div>
+                    </div>
+                </section>
+            </xpath>
+
+        </template>
+    </data>
+</odoo>

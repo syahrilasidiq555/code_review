@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- INHERIT PRINT INVOICE FROM PO -->
+        <template id="report_invoice_with_last_month" inherit_id="account.report_invoice_document">
+            <!-- <t t-call="web.external_layout" position="before">
+                <style type="text/css">
+                .comment span p {
+                    margin-bottom: 0px;
+                }
+                </style>
+            </t> -->
+
+            <!-- add last month invoice table -->
+
+            <!-- posisi diatas tulisan draft invoice -->
+            <xpath expr="//div[@class='page mb-4']//h2" position="before">
+                <t t-if="o.last_month_move_ids">
+                    <div name="last_month_move_ids">
+                        <strong>Last Month's Invoices</strong>
+                    </div>
+                    <table class="table table-sm o_main_table table-borderless" name="invoice_line_table">
+                        <!-- <thead>
+                            <tr>
+                                <th name="th_name" class="text-start"><span>Number</span></th>
+                                <th name="th_date" class="text-start"><span>Accounting Date</span></th>
+                                <th name="th_total" class="text-end"><span>Total</span></th>
+                                <th name="th_due" class="text-end"><span>Amount Due</span></th>
+                                <th name="th_state" class="text-start"><span>Status</span></th>
+                            </tr>
+                        </thead> -->
+                        <tbody class="invoice_tbody">
+                            <t t-set="last_month_amount_due" t-value="0"/>
+                            <t t-set="pph23_amount" t-value="0"/>
+                            <t t-set="last_month_lines" t-value="o.last_month_move_ids"/>
+                            <t t-foreach="last_month_lines" t-as="line">
+                                <t t-set="last_month_amount_due" t-value="last_month_amount_due+line.amount_residual"/>
+                                <tr>
+                                    <td name="th_name">
+                                        <span t-field="line.name"/>
+                                    </td>
+                                    <!-- <td name="th_date">
+                                        <span t-field="line.date"/>
+                                    </td> -->
+                                    <td name="th_total" class="text-end o_price_total">
+                                        <span class="text-nowrap" t-field="line.amount_total">27.00</span>
+                                    </td>
+                                    <!-- <td name="th_due" class="text-end o_price_total">
+                                        <span class="text-nowrap" t-field="line.amount_residual_signed">27.00</span>
+                                    </td>
+                                    <td name="th_state">
+                                        <span t-field="line.state"/>
+                                    </td> -->
+                                </tr>
+                                <t t-if="line.invoice_payments_widget">
+                                    <t t-foreach="line.invoice_payments_widget['content']" t-as="payment">
+                                        <tr>
+                                            <td name="th_name">
+                                                <span t-esc="payment['date'].strftime('%d/%m/%Y')"/> - Customer Payment
+                                            </td>
+                                            <td name="th_total" class="text-end o_price_total">
+                                                <t t-if="payment['amount_foreign_currency']">
+                                                    (<span class="text-nowrap" t-esc="payment['amount_foreign_currency']"/>)
+                                                </t>
+                                                <t t-else="">
+                                                    (<span class="text-nowrap" t-esc="payment['amount_company_currency']"/>)
+                                                </t>
+                                            </td>
+                                        </tr>
+                                    </t>
+                                </t>
+                                <t t-if="line.tax_totals and line.tax_totals['groups_by_subtotal'] and line.tax_totals['groups_by_subtotal']['Untaxed Amount']">
+                                    <t t-foreach="line.tax_totals['groups_by_subtotal']['Untaxed Amount']" t-as="tax_group">
+                                        <t t-if="'PPH 23' in tax_group['tax_group_name']">
+                                            <t t-set="pph23_amount" t-value="tax_group['tax_group_amount']"/>
+                                            <tr>
+                                                <td name="th_name">
+                                                    <span t-field="line.invoice_date_due"/> - <span t-esc="tax_group['tax_group_name']" />
+                                                </td>
+                                                <td name="th_total" class="text-end o_price_total">
+                                                    (<span class="text-nowrap" t-esc="tax_group['formatted_tax_group_amount']"/>)
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+                                </t>
+                            </t>
+                            
+                        </tbody>
+                    </table>
+                </t>
+            </xpath>
+            
+            <xpath expr="//div[@id='total']//div//table" position="inside">
+                <t t-if="o.last_month_move_ids">
+                    <tr class="border-black fw-bold">
+                        <td>Total (+last month)</td>
+                        <td class="text-end">
+                            <span t-esc="o.amount_residual + last_month_amount_due + pph23_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+
+        </template>
+
+        <!-- INHERIT PRINT INVOICE FROM PO -->
+        <template id="document_tax_totals_company_currency_template_last_month" inherit_id="account.document_tax_totals_company_currency_template">
+            <xpath expr="//div[hasclass('totals_taxes_company_currency')]//table" position="inside">
+                <t t-if="o.last_month_move_ids">
+                    <tr class="border-black fw-bold">
+                        <td>Total (+last month)</td>
+                        <td class="text-end">
+                            <span t-esc="o.amount_total_signed + sum(o.last_month_move_ids.mapped('amount_total_signed'))" t-options='{"widget": "monetary", "display_currency": o.company_currency_id}'/> 
+                        </td>
+                    </tr>
+                </t>
+            </xpath>
+
+            
+
+        </template>
+    </data>
+</odoo>

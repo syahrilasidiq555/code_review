@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ACCESS BUTTON -->
+        <record id="view_account_payment_form_access_btn" model="ir.ui.view">
+            <field name="name">view_account_payment_form_access_btn</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_to_approve']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_action_to_approve</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_post']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_action_post</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_draft']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_action_draft</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_cancel']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_action_cancel</attribute>
+                </xpath>
+                <xpath expr="//button[@name='mark_as_sent']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_mark_as_sent</attribute>
+                </xpath>
+                <xpath expr="//button[@name='unmark_as_sent']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_unmark_as_sent</attribute>
+                </xpath>
+
+
+                <xpath expr="//button[@name='button_open_invoices']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_button_open_invoices</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_open_bills']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_button_open_bills</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_open_statements']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_button_open_statements</attribute>
+                </xpath>
+                <xpath expr="//button[@name='button_open_journal_entry']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_button_open_journal_entry</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_payment_tree_access_btn" model="ir.ui.view">
+            <field name="name">view_account_payment_tree_access_btn</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_post']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_payment_button_action_post</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- server action (tombol post payment) -->
+        <record id="account.action_account_confirm_payments" model="ir.actions.server">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_payment_button_action_post'))]" />
+        </record>
+
+        <!-- REMOVE CRUD in FORM-->
+        <record id="view_account_payment_form_remove_crud" model="ir.ui.view">
+            <field name="name">view_account_payment_form_remove_crud</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <record id="view_account_payment_tree_remove_crud" model="ir.ui.view">
+            <field name="name">view_account_payment_tree_remove_crud</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in Kanban-->
+        <record id="view_account_payment_kanban_remove_crud" model="ir.ui.view">
+            <field name="name">view_account_payment_kanban_remove_crud</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_kanban"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW CREATE and EDIT in FORM-->
+        <record id="view_account_payment_form_create_edit_view" model="ir.ui.view">
+            <field name="name">view_account_payment_form_create_edit_view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_account_payment_form_edit_view" model="ir.ui.view">
+            <field name="name">view_account_payment_form_edit_view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_button_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW CREATE and EDIT in tree-->
+        <record id="view_account_payment_tree_create_edit_view" model="ir.ui.view">
+            <field name="name">view_account_payment_tree_create_edit_view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW CREATE and EDIT in kanban-->
+        <record id="view_account_payment_kanban_create_edit_view" model="ir.ui.view">
+            <field name="name">view_account_payment_kanban_create_edit_view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_kanban"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW delete in FORM-->
+        <record id="view_account_payment_form_delete_view" model="ir.ui.view">
+            <field name="name">view_account_payment_form_delete_view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW delete in tree-->
+        <record id="view_account_payment_tree_delete_view" model="ir.ui.view">
+            <field name="name">view_account_payment_tree_delete_view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- VIEW delete in kanban-->
+        <record id="view_account_payment_kanban_delete_view" model="ir.ui.view">
+            <field name="name">view_account_payment_kanban_delete_view</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_kanban"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_payment_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>

@@ -1,0 +1,437 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="dym_performance_appraisal_form_a_tree_view" model="ir.ui.view">
+            <field name="name">dym.performance.appraisal.form.a.tree.view</field>
+            <field name="model">dym.performance.appraisal.form.a</field>
+            <field name="arch" type="xml">
+                <tree string="Form A Performance Appraisal" default_order="create_date desc">
+                    <field name="periode"/>
+                    <field name="name"/>
+                    <field name="date"/>
+                    <field name="department_id"/>
+                    <field name="employee_id"/>
+                    <field name="job_id"/>
+                    <field name="atasan_1"/>
+                    <field name="atasan_2"/>
+                    <field name="loc"/>
+                    <field name="state"/>
+                    <field name="keterangan_nilai_akhir" attrs="{'invisible':[('state','=','cancel')]}"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id="dym_performance_appraisal_form_a_form_view" model="ir.ui.view">
+            <field name="name">dym.performance.appraisal.form.a.form.view</field>
+            <field name="model">dym.performance.appraisal.form.a</field>
+            <field name="arch" type="xml">
+                <form string="Form A Performance Appraisal">
+                    <header>
+                        <field name="state" invisible="1"/>
+                        <field name="state" widget="statusbar" statusbar_visible="draft,start,employee_answer,atasan1_answer,atasan2_answer,posted" />
+                        <button name="start_answer" states="draft" string="Start" type="object" class="oe_highlight"/>
+                        <button name="forward_atasan_1" states="start" string="Forward Atasan 1" type="object" class="oe_highlight"/>
+                        <button name="forward_atasan_2" states="employee_answer" string="Forward Atasan 2" type="object" class="oe_highlight" groups="dym_performance_appraisal.group_performance_appraisal_form_a_manager"/>
+                        <button name="atasan2_answer_done" states="atasan1_answer" string="Forward Answer" type="object" class="oe_highlight" groups="dym_performance_appraisal.group_performance_appraisal_form_a_manager"/>
+                        <button name="calculate_nilai" states="atasan2_answer" string="Calculate Nilai Akhir" type="object" class="oe_highlight" groups="dym_performance_appraisal.group_performance_appraisal_form_a_manager" confirm="Apakah anda yakin untuk mengcalculate nilai akhir?"/>
+                        <button name="cancel" states="posted" string="Cancel Appraisal" type="object" class="oe_highlight" groups="dym_performance_appraisal.group_performance_appraisal_form_a_manager" confirm="Apakah anda yakin untuk mengcancel entry ini?"/>
+                        <button name="revise" states="posted,cancel" string="Revise" type="object" class="oe_highlight" groups="dym_performance_appraisal.group_performance_appraisal_form_a_manager" confirm="Apakah anda yakin untuk merevisi jawaban anda kembali?"/>
+
+                    </header> 
+                    <sheet>
+                        <group>
+                            <div class="oe_title">
+                                <h1>
+                                    <field name="name" class="oe_inline" />
+                                </h1>
+                            </div>
+                            <div class="oe_right">
+                                <div class="oe_title">
+                                    <h1>
+                                        <!-- <label for="nilai_akhir" string="Nilai Akhir"/> -->
+                                        <field name="nilai_akhir" force_save="1" invisible="1"/>
+                                        <field name="kode_nilai_akhir" force_save="1" invisible="1"/>
+                                        <field name="keterangan_nilai_akhir" force_save="1" attrs="{'invisible':[('state','!=','posted')]}"/>
+                                    </h1>
+                                </div>
+                            </div>
+                        </group>
+                        <group>
+                            <group>
+                                <field name="department_id" options="{'no_create': True}" attrs="{'readonly':[('state','not in',['draft',False])]}"/>
+                                <field name="date" attrs="{'readonly':[('state','not in',['draft',False])]}"/>
+                                <field name="employee_id" options="{'no_create': True}" attrs="{'readonly':[('state','not in',['draft',False])]}"/>
+                                <field name="job_id" options="{'no_create': True}" attrs="{'readonly':[('state','not in',['draft',False])]}"/>
+                            </group>
+                            <group>
+                                <field name="periode" force_save="1"/>
+                                <field name="atasan_1" options="{'no_create': True}" attrs="{'readonly':[('state','not in',['draft',False])]}"/>
+                                <field name="atasan_2" options="{'no_create': True}" attrs="{'readonly':[('state','not in',['draft',False])]}"/>
+                                <field name="loc" force_save="1"/>
+                            </group>
+                        </group>
+                        <group>
+                            <div class="alert alert-info">
+                                <div>
+                                    <table style="width:100%;" border="1" cellpadding="5" cellspacing="0" padding="0" margin="0">
+                                        <tr>
+                                            <td style="width:10%; text-align: center;">
+                                                <p><strong>Aspek Penilaian</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>1</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>2</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>3</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>4</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>5</strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:10%; text-align: center;">
+                                                <p><strong>Kualitas</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mutu hasil kerja dibawah target dan hasilnya sering tidak dapat diterima</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mutu hasil kerja dibawah target dan hasilnya masih harus diteliti lagi,serta dilakukan perbaikan lagi.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mutu hasil kerja sesuai target namun belum konsisten.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mutu hasil kerja sesuai target, konsisten dan hasilnya tidak perlu diteliti lagi</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mutu hasil kerja selalu melebihi target konsisten dan hasilnya tidak perlu diteliti lagi</strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:10%; text-align: center;">
+                                                <p><strong>Kuantitas</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Pencapaian kuantitas kerjanya ≤ 80% dari target yang ditentukan</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Pencapaian kuantitas kerjanya 81% sd 90% dari target yang ditentukan</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Pencapaian kuantitas kerjanya > 90% dari target yang ditentukan</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Pencapaian kuantitas kerjanya > 90% dari target yang ditentukan dan menunjukan kinerja unggul (menonjol) dibandingkan rekan-rekan satu timnya yang lain.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Pencapaian kuantitas kerjanya > 90% dari target yang ditentukan menunjukan kinerja unggul (menonjol) dan menjadi role model (panutan) bagi rekan-rekan satu timnya.</strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:10%; text-align: center;">
+                                                <p><strong>Kerjasama</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Sering mendapatkan masalah yang berkaitan dengan kerja sama dan sikapnya terhadap anggota kelompok yang lain</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Tidak mudah bekerja sama dan kadang masih menonjolkan kepentingan pribadinya</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Bisa bekerjasama dengan kelompok</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mudah bekerja sama dan mau membantu anggota kelompok kerja yang lain</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mudah bekerja sama dan bahkan dapat meningkatkan semangat kerja anggota kelompok kerja yang lain</strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:10%; text-align: center;">
+                                                <p><strong>Disiplin</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Dengan sengaja sering melakukan tindakan indisipliner, baik berupa pelanggaran tata tertib atau melalaikan pekerjaan.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Kadang-kadang suka melakukan tindakan indisipliner, baik berupa pelanggaran tata tertib atau melalaikan pekerjaan.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Tindakan indisipliner yang dilakukan hanya berupa pelanggaran tata tertib tanpa unsur kesengajaan</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Tidak pernah melakukan tindakan indisipliner dalam bentuk apapun</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Tidak pernah melakukan tindakan indisipliner, sangat patuh terhadap ketentuan dan aturan, serta dapat dijadikan teladan bagi yang lainnya.</strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:10%; text-align: center;">
+                                                <p><strong>Kompetensi</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Tidak memiliki kemampuan untuk melaksanakan pekerjaan dan tidak terlihat senang dalam melaksanakan pekerjaannya</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Memiliki kemampuan yang sedang sedang saja dan belum terlihat senang dalam melaksanakan pekerjaannya</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Memiliki kemampuan yang cukup untuk melaksanakan pekerjaan dan menunjukkan rasa senang dalam melaksanakan pekerjaannya</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Memiliki kemampuan yang lebih untuk melaksanakan pekerjaan yang lebih maju dan menunjukkan rasa senang dlm setiap melaksanakan pekerjaannya</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Memiliki kemampuan yang sudah diakui oleh rekan kerjanya atasan dan bawahan. Serta mampu menciptakan suasana kerja yang menyenangkan</strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:10%; text-align: center;">
+                                                <p><strong>Kreatifitas</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Selalu puas dalam segala hal dan tidak pernah mengadakan improvement sendiri terhadap kinerjanya</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Kemauan untuk belajar dan meningkatkan performance kerja hanya ditunjukkan kepada hal-hal yang mendesak saja.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Selalu memiliki ide ide yang kreatif dan innovatif untuk perbaikan kualitas serta kuantitas pekerjaannya</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mampu menciptakan sistim operasional baru yang innovatif dan kreatif dan sudah terealisasikan</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Mampu menciptakan sistim operasional baru yang innovatif dan kreatif dan sudah terealisasikan dan mampu menciptakan suasana kerja dan mempengaruhi rekan untuk melakukan terobosan-terobosan baru dalam pekerjaannya</strong></p>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td style="width:10%; text-align: center;">
+                                                <p><strong>Konsistensi</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Dalam melakukan pekerjaan sering tidak konsisten, begitu juga hasil kerjanya.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Kurang konsisten dalam melakukan pekerjaan, begitu juga dilihat dari hasil kerjanya.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Konsisten dalam melakukan pekerjaan, namun kadang kurang konsisten dari hasil kerjanya.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Konsisten dalam melakukan pekerjaan, dan konsisten juga dalam hasil kerjanya.</strong></p>
+                                            </td>
+                                            <td style="width:18%; text-align: center;">
+                                                <p><strong>Sangat konsisten dalam melakukan pekerjaan, dan juga sangat konsisten dari hasil kerjanya.</strong></p>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                </div>
+                            </div>                              
+                        </group>
+                        <group col="4">
+                            <group col="1" string="Penilaian Karyawan" attrs="{'invisible':[('state','in',[False,'draft'])]}">
+                                <group>
+                                <field name="kualitas" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','start')]}"/>
+                                </group>
+                                <group>
+                                <field name="kuantitas" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','start')]}"/>
+                                </group>
+                                <group>
+                                <field name="kerjasama" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','start')]}"/>
+                                </group>
+                                <group>
+                                <field name="disiplin" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','start')]}"/>
+                                </group>
+                                <group>
+                                <field name="kompetensi" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','start')]}"/>
+                                </group>
+                                <group>
+                                <field name="kreatifitas" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','start')]}"/>
+                                </group>
+                                <group>
+                                <field name="konsistensi" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','start')]}"/>
+                                </group>
+
+                            </group>
+                            <!-- <group col="1" string="Penilaian Atasan 1" attrs="{'invisible':[('state','in',[False,'draft'])]}" groups="dym_performance_appraisal.group_performance_appraisal_form_a_manager"> -->
+                            <group col="1" string="Penilaian Atasan 1" attrs="{'invisible':[('state','in',[False,'draft'])]}">
+
+                                <group>
+                                <field name="kualitas_1" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','employee_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="kuantitas_1" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','employee_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="kerjasama_1" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','employee_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="disiplin_1" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','employee_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="kompetensi_1" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','employee_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="kreatifitas_1" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','employee_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="konsistensi_1" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','employee_answer')]}"/>
+                                </group>
+
+                            </group>
+                            <!-- <group col="1" string="Penilaian Atasan 2" attrs="{'invisible':[('state','in',[False,'draft'])]}" groups="dym_performance_appraisal.group_performance_appraisal_form_a_manager"> -->
+                            <group col="1" string="Penilaian Atasan 2" attrs="{'invisible':[('state','in',[False,'draft'])]}">
+                                <group>
+                                <field name="kualitas_2" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','atasan1_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="kuantitas_2" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','atasan1_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="kerjasama_2" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','atasan1_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="disiplin_2" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','atasan1_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="kompetensi_2" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','atasan1_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="kreatifitas_2" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','atasan1_answer')]}"/>
+                                </group>
+                                <group>
+                                <field name="konsistensi_2" widget="radio" options="{'horizontal': true}" attrs="{'readonly':[('state','!=','atasan1_answer')]}"/>
+                                </group>
+    
+                            </group>
+                            <group col="1" string="Score Atasan 2" attrs="{'invisible':[('state','!=','posted')]}">
+                                <group>
+                                <field name="score_kualitas_2" force_save="1" />
+                                </group>
+                                <group>
+                                <field name="score_kuantitas_2" force_save="1"/>
+                                </group>
+                                <group>
+                                <field name="score_kerjasama_2" force_save="1" />
+                                </group>
+                                <group>
+                                <field name="score_disiplin_2" force_save="1" />
+                                </group>
+                                <group>
+                                <field name="score_kompetensi_2" force_save="1"/>
+                                </group>
+                                <group>
+                                <field name="score_kreatifitas_2" force_save="1" />
+                                </group>
+                                <group>
+                                <field name="score_konsistensi_2" force_save="1"/>
+                                </group>
+                                <group>
+                                <field name="total_score" force_save="1"/>
+                                </group>
+                            </group>
+                        </group>
+                        <notebook attrs="{'invisible':[('state','not in',['atasan2_answer','posted'])]}">
+                            <page name="hasil_penilaian" string="Hasil Penilaian" >
+                                <group string="Hasil Penilaian Atasan 2" >
+                                    <group col="1">
+                                        <group>
+                                            <field name="kekuatan_karyawan" attrs="{'required':[('state','=','atasan2_answer')],'readonly':[('state','!=','atasan2_answer')]}"/>
+                                        </group>
+                                        <group>
+                                            <field name="kekurangan_karyawan" attrs="{'required':[('state','=','atasan2_answer')],'readonly':[('state','!=','atasan2_answer')]}"/>
+                                        </group>
+                                    </group>
+                                    <group col="1">
+                                        <group>
+                                            <field name="kebutuhan_training" attrs="{'required':[('state','=','atasan2_answer')],'readonly':[('state','!=','atasan2_answer')]}"/>
+                                        </group>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                        <notebook>
+
+                            <page name="audit_trail" string="Audit Trail" >
+                                <group>
+                                    <group>
+                                        <field name="create_uid"/>
+                                        <field name="create_date"/>
+                                    </group>
+                                    <group>
+                                        <field name="write_uid"/>
+                                        <field name="write_date"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <record id="form_a_admin_readonly" model="ir.ui.view">
+            <field name="name">form.a.admin.radonly</field>
+            <field name="model">dym.performance.appraisal.form.a</field>
+            <field name="inherit_id" ref= "dym_performance_appraisal.dym_performance_appraisal_form_a_form_view" />
+            <field name="groups_id" eval="[(6, 0, [ref('dym_performance_appraisal.group_performance_appraisal_form_a_administrator')])]"/>
+            <field name="arch" type="xml">
+                <field name="department_id" position="attributes">
+                   <attribute name="attrs">{'readonly':0}</attribute>                   
+                </field>
+                <field name="date" position="attributes">
+                   <attribute name="attrs">{'readonly':0}</attribute>                   
+                </field>
+                <field name="employee_id" position="attributes">
+                   <attribute name="attrs">{'readonly':0}</attribute>                   
+                </field>
+                <field name="job_id" position="attributes">
+                   <attribute name="attrs">{'readonly':0}</attribute>                   
+                </field>
+                <field name="atasan_1" position="attributes">
+                   <attribute name="attrs">{'readonly':0}</attribute>                   
+                </field>
+                <field name="atasan_2" position="attributes">
+                   <attribute name="attrs">{'readonly':0}</attribute>                   
+                </field>
+		<field name="periode" position="attributes">
+                   <attribute name="attrs">{'readonly':0}</attribute>                   
+                </field>
+            </field>
+        </record>
+
+        <record id="view_dym_form_a_search" model="ir.ui.view">
+            <field name="name">view.dym.form.a.search</field>
+            <field name="model">dym.performance.appraisal.form.a</field>
+            <field name="arch" type="xml">
+                <search string="Search Form A">
+                    <field name="periode" />
+                    <field name='department_id' />
+                    <field name='employee_id' />
+                    <field name='atasan_1' />
+                    <field name='atasan_2' />
+                </search>
+            </field>
+        </record>
+        
+        <record model="ir.actions.act_window" id="dym_performance_appraisal_form_a_action_window">
+            <field name="name">Form A Performance Appraisal</field>
+            <field name="res_model">dym.performance.appraisal.form.a</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="dym_performance_appraisal_form_a_menu" name="Form A Performance Appraisal" sequence="2" parent="dym_performance_appraisal_menu" action="dym_performance_appraisal_form_a_action_window" />
+
+    </data>
+</odoo>

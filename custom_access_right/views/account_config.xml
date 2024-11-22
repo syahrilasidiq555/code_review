@@ -1,0 +1,240 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- MENU ITEM DASHBOARD (NITIP) -->
+    <record id="custom_accounting.menu_board_journal_1_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_dashboard_child'))]" />
+    </record>
+    <record id="custom_accounting.menu_board_analisa_keuangan_1_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_dashboard_analisa_keu'))]" />
+    </record>
+
+    <!-- MENU ITEM LAPORAN (NITIP JUGA) -->
+    <record id="account_reports.account_financial_html_report_menu_1" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs_pl'))]" />
+    </record>
+    <record id="account_reports.account_financial_html_report_menu_2" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs_bs'))]" />
+    </record>
+    <record id="account_reports.account_financial_html_report_menu_3" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs_executive_summary'))]" />
+        </record>
+    <record id="account_reports.menu_action_account_report_cash_flow" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_gs_cashflow'))]" />
+    </record>
+    <record id="account_reports.menu_action_account_report_partner_ledger" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_partner_ledger'))]" />
+    </record>
+    <record id="account_reports.menu_action_account_report_aged_receivable" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_partner_ar'))]" />
+    </record>
+    <record id="account_reports.menu_action_account_report_aged_payable" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_partner_ap'))]" />
+    </record>
+    <record id="account_reports.menu_action_account_report_general_ledger" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_gl'))]" />
+    </record>
+    <record id="account_reports.menu_action_account_report_coa" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_tb'))]" />
+    </record>
+    <record id="account_reports.menu_action_account_report_cj" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_cj'))]" />
+    </record>
+    <record id="account_reports.menu_action_account_report_gt" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_tax'))]" />
+    </record>
+    <record id="account_reports.menu_print_journal" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_audit_journals'))]" />
+    </record>
+    <record id="account.menu_action_account_invoice_report_all" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements_invoice'))]" />
+    </record>
+    <record id="account_reports.menu_action_report_account_analytic" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements_analytic'))]" />
+    </record>
+    <record id="account_reports.menu_action_account_report_multicurrency_revaluation" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements_gainloss'))]" />
+    </record>
+    <record id="account_asset.menu_action_account_report_assets" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_reporting_managements_depreciation'))]" />
+    </record>
+
+    <!-- MENU ITEM ACCOUNT MOVE -->
+    <record id="account.menu_action_move_out_invoice_type" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_invoices'))]" />
+    </record>
+    <record id="account.menu_action_move_in_invoice_type" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_bills'))]" />
+    </record>
+    <record id="account.menu_finance_entries_accounting_miscellaneous" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_miscellaneous'))]" />
+    </record>
+    <record id="account.menu_action_move_in_refund_type" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_refunds'))]" />
+    </record>
+    <record id="account.menu_action_move_out_refund_type" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_credit_notes'))]" />
+    </record>
+
+    <!-- MENU ITEM PEMBAYARAN -->
+    <record id="account.menu_action_account_payments_receivable" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_payments'))]" />
+    </record>
+    <record id="account.menu_action_account_payments_payable" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_payments'))]" />
+    </record>
+
+    <!-- MENU ITEM PELANGGAN MASTER -->
+    <record id="account_followup.customer_statements_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_followup'))]" />
+    </record>
+    <record id="account.product_product_menu_sellable" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_products'))]" />
+    </record>
+    <record id="l10n_id_efaktur.menu_efaktur_action" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_efaktur'))]" />
+    </record>
+    <record id="custom_accounting.menu_efaktur_list_action" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_efaktur_list'))]" />
+    </record>
+    <record id="account.menu_account_customer" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_customers_customers'))]" />
+    </record>
+
+    <!-- MENU ItEM PAYMENT REQUIsiTioN  -->
+    <record id="custom_accounting.menu_payment_requisition" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_payment_req'))]" />
+    </record>
+    <record id="custom_accounting.menu_payment_requisition_approve" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_payment_req_approve'))]" />
+    </record>
+
+    <!-- MENU ITeM PemAsOK MAstER -->
+    <record id="hr_expense.menu_hr_expense_account_employee_expenses" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_expense_emp'))]" />
+    </record>
+    <record id="account.product_product_menu_purchasable" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_products'))]" />
+    </record>
+    <record id="account.menu_account_supplier" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_vendors_vendors'))]" />
+    </record>
+
+    <!-- mEnU itEM juRNaL-jUrNaL -->
+    <record id="account.menu_action_account_moves_journal_sales" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_journals_sales'))]" />
+    </record>
+    <record id="account.menu_action_account_moves_journal_purchase" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_journals_purchase'))]" />
+    </record>
+    <record id="account.menu_action_account_moves_journal_bank_cash" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_journals_bankandcash'))]" />
+    </record>
+    <record id="account.menu_action_account_moves_journal_misc" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_journals_miscellaneous'))]" />
+    </record>
+
+    <!-- MENU ITEM LEDGER -->
+    <record id="account.menu_action_account_moves_ledger_partner" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_ledgers_pl'))]" />
+    </record>
+    <record id="account.menu_action_account_moves_ledger_general" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_ledgers_gl'))]" />
+    </record>
+
+    <!-- meNU ITem MANAGEMENT -->
+    <record id="account_auto_transfer.menu_auto_transfer" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_automatic_transfers'))]" />
+    </record>
+    <record id="account_asset.menu_action_account_asset_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_assets'))]" />
+    </record>
+    <record id="account_asset.menu_action_account_revenue_recognition" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_deff_revenues'))]" />
+    </record>
+    <record id="account_asset.menu_action_account_expense_recognition" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_deff_expenses'))]" />
+    </record>
+    <record id="custom_accounting.menu_action_account_asset_model_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_asset_category'))]" />
+    </record>
+    <record id="custom_accounting.menu_action_asset_location_model_tree" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_asset_location'))]" />
+    </record>
+    <record id="custom_accounting.menu_action_asset_merek_model_tree" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_asset_merek'))]" />
+    </record>
+    <record id="custom_opening_asset.menu_action_create_asset_correction" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_management_asset_correction'))]" />
+    </record>
+
+    <!-- MENU ITEM TINDAKAN -->
+    <record id="account_accountant.menu_action_manual_reconciliation" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_actions_reconcilliation'))]" />
+    </record>
+    <record id="account.menu_action_tax_adjustment" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_actions_tax_adjustment'))]" />
+    </record>
+    <record id="account_accountant.menu_action_change_lock_date" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_actions_lock_dates'))]" />
+    </record>
+
+    <!-- MENU ITEM CONFIG -->
+    <record id="account.menu_account_config" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_config_settings'))]" />
+    </record>
+    <record id="account.menu_action_payment_term_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_config_inv_terms'))]" />
+    </record>
+    <record id="account_followup.account_followup_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_account_config_inv_followup'))]" />
+    </record>
+    <record id="account.menu_action_incoterm_open" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_inv_incoterms'))]" />
+    </record>
+    <record id="account.menu_action_account_bank_journal_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_tambahkan_akun_bank'))]" />
+    </record>
+    <record id="account.action_account_reconcile_model_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_model_rekonsiliasi'))]" />
+    </record>
+    <record id="account_online_synchronization.menu_action_online_link_account" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_sinkronisasi_daring'))]" />
+    </record>
+    <record id="account.menu_action_account_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_coa'))]" />
+    </record>
+    <record id="account.menu_action_tax_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_tax'))]" />
+    </record>
+    <record id="account.menu_action_account_journal_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_journal'))]" />
+    </record>
+    <record id="account.menu_action_currency_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_currency'))]" />
+    </record>
+    <record id="account.menu_action_account_fiscal_position_form" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_posisi_fiskal'))]" />
+    </record>
+    <record id="account.menu_action_account_journal_group_list" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_journal_groups'))]" />
+    </record>
+    <menuitem id="menu_action_account_type_form" parent="account.account_account_menu" action="account.action_account_type_form" groups="group_accounting_config_coa_type" sequence="1"/>
+    <record id="payment.payment_acquirer_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_penerima_pembayaran'))]" />
+    </record>
+    <record id="account_asset.menu_action_account_revenue_model_recognition" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_model_deffered_revenue'))]" />
+    </record>
+    <record id="account.menu_product_product_categories" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_kategori_produk'))]" />
+    </record>
+    <record id="account_asset.menu_action_account_expense_model_recognition" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_accounting_config_model_deffered_expense'))]" />
+    </record>
+    <record id="custom_accounting.menu_action_loa_form_view" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_loa'))]" />
+    </record>
+    <record id="custom_accounting.menu_action_payment_method_form_view" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_submenu_account_config_p_method'))]" />
+    </record>
+</odoo>

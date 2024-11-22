@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_meeting_booth,access_meeting_booth_all,custom_meeting_booth.model_meeting_booth,,1,1,1,1
+access_master_meeting_booth,access_master_meeting_booth,custom_meeting_booth.model_master_meeting_booth,,1,1,1,1

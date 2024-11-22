@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+
+        <record id="seq_salary_correction" model="ir.sequence">
+            <field name="name">Salary Correction</field>
+            <field name="code">salary.correction.number</field>
+            <field name="prefix">PSC/%(y)s%(range_month)s/</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+            <field name="use_date_range">true</field>
+        </record>
+
+        <record id="seq_premi" model="ir.sequence">
+            <field name="name">Employee Premi</field>
+            <field name="code">hr.premi.number</field>
+            <field name="prefix">PRE/%(y)s%(range_month)s/</field>
+            <field name="padding">4</field>
+            <field name="implementation">no_gap</field>
+            <field name="use_date_range">true</field>
+        </record>
+
+    </data>
+</odoo>

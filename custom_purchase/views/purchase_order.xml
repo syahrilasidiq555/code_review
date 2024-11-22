@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_form_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">           
+            <xpath expr="//button[@name='print_quotation'][1]" position="attributes">
+                <attribute name="icon">fa-print</attribute>
+            </xpath>
+            <xpath expr="//button[@name='print_quotation'][2]" position="attributes">
+                <attribute name="icon">fa-print</attribute>
+            </xpath> 
+            <xpath expr="//button[@name='print_quotation'][2]" position="after">
+                <button name="print_po"
+                    icon="fa-print" 
+                    string="Print PO"
+                    type="object" />
+            </xpath>
+        
+            <xpath expr="//page[@name='purchase_delivery_invoice']//group" position="inside">
+                <group name="purchase_request_info" string="Purchase Request Information">
+                    <field name="yes_no" readonly="1"/>
+                    <field name="alasan" attrs="{'invisible':[('yes_no','!=','no')]}"/>
+                    <field name="is_editable" invisible="1"/>
+                </group>
+            </xpath>
+
+            <!-- Tidak boleh add produk jika PO tsb dari Permintaan Barang -->
+            <xpath expr="//notebook//page[@name='products']//field[@name='order_line']//tree//field[@name='product_id']" position="attributes">
+                <attribute name="attrs">{
+                    'readonly': ['|', ('parent.is_editable','=', False), ('state', 'in', ('purchase', 'to approve','done', 'cancel'))],
+                    'required': [('display_type', '=', False)]
+                }</attribute>
+                <!-- <field name="product_id" attrs="{'readonly': [('state', 'in', ('purchase', 'to approve','done', 'cancel'))],'required': [('display_type', '=', False)]}" 
+                    context="{'partner_id':parent.partner_id, 'quantity':product_qty,'uom':product_uom, 'company_id': parent.company_id}" 
+                    force_save="1" 
+                    domain="[('purchase_ok', '=', True), '|', ('company_id', '=', False), ('company_id', '=', parent.company_id)]"/> -->
+                <!-- <attribute name="attrs">{'readonly': ['|', ('is_editable','=', False), ('state', 'in', ('done', 'cancel'))]}</attribute> -->
+            </xpath>
+
+            <!-- TOMBOL CREATE DI HILANGKAN -->
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+            
+            <!-- Informasi no permintaan / purchase request -->
+            <xpath expr="//sheet//notebook//page[@name='products']//field[@name='order_line']//field[@name='product_id']" position="before">
+                <field name='purchase_request_id' readonly="1" attrs="{'invisible':[('purchase_request_id','=',False)]}"/>
+            </xpath>
+
+            
+            <xpath expr="//form//sheet//div[@class='oe_title']" position="replace">
+                <div class="oe_title row">
+                    <div class="col-6">
+                        <span class="o_form_label">Request for Quotation </span>
+                        <h1>
+                            <field name="priority" widget="priority" class="mr-3"/>
+                            <field name="name" readonly="1"/>
+                        </h1>
+                    </div>
+                    <div class="col-6">
+                        <span class="o_form_label">Purchase Order </span>
+                        <h1>
+                            <field name="purchase_name" readonly="1"/>
+                        </h1>
+                    </div>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="purchase_order_view_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_tree_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+            <!-- TOMBOL CREATE DI HILANGKAN -->
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+            
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="purchase_name" attrs="{'invisible':[('purchase_name','=','New')]}"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <record id="purchase_order_kpis_treeinherit" model="ir.ui.view">
+        <field name="name">purchase_order_tree_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <!-- TOMBOL CREATE DI HILANGKAN -->
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="view_purchase_order_kanban_remove_create" model="ir.ui.view">
+        <field name="name">view_purchase_order_kanban_remove_create</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_kanban"/>
+        <field name="arch" type="xml">
+            <!-- TOMBOL CREATE DI HILANGKAN -->
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+
+    <!-- remove button print in po form -->
+    <record id="purchase.action_report_purchase_order" model="ir.actions.report">
+        <field name="binding_model_id"></field>
+    </record>
+    <record id="purchase.report_purchase_quotation" model="ir.actions.report">
+        <field name="binding_model_id"></field>
+    </record>
+
+</odoo>

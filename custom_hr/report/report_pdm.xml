@@ -1,0 +1,647 @@
+<odoo>
+    <data>
+        <template id="custom_hr.print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="custom_hr.layout_header"/>
+            <t t-raw="0"/>
+            <t t-call="custom_hr.layout_footer"/>
+        </template>
+
+
+        <template id="custom_hr.layout_header">
+            <div class="header">
+                <div class="row" name="header_faktur" style="font-size:14px"> 
+                    <div class="col-4">
+                        <img t-att-src="image_data_uri(company.logo)" style="width:130px; display: block; margin-left: auto; margin-right: auto;"/>
+                    </div>
+                    <div class="col-8" style="margin-top:0px;font-size:14px">
+                        <h3><b><span t-field="company.name"/></b></h3>
+                        <t t-if="company.street != False">
+                            <span t-field="company.street"/>
+                        </t>
+                        <t t-if="company.phone != False">
+                            <br><b>Telp </b>: <span t-field="company.phone"/></br>
+                        </t>
+                        <t t-if="company.mobile != False">
+                            <br><b>WA </b> : <span t-field="company.mobile"/></br>
+                        </t>
+                        <t t-if="company.email != False">
+                            <br><b>Email </b> : <span t-field="company.email"/></br>
+                        </t>
+                    </div>
+                </div>   
+                <hr style="height:3px;border-width:0;color:black;background-color:black"/>
+            </div>
+        </template>
+
+        <template id="custom_hr.layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:16px">
+                <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <template id="custom_hr.print_pdm_template">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_hr.print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <style>
+                                        table, th, td {
+                                            border: 1px solid black;
+                                            border-collapse: collapse;
+                                            padding: 5pt;
+                                        }
+                                    </style>
+                                    <div class="text-center">
+                                        <h5 class="mb-0">PERMOHONAN <span t-field="o.pdm_type"/> KARYAWAN</h5>
+                                        No. <b class="mb-2" t-field="o.name" />
+                                    </div>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #e8e6eb;"> 
+                                                <strong>DATA LAMA : </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: center;">
+                                                    <!-- border-bottom: 1px solid; padding-left: 10pt; -->
+                                                        <strong>NIK</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: center;" colspan="3">
+                                                        <span t-field="o.barcode"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>NAMA LENGKAP</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.employee_id"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>DEPARTMENT</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.old_dept_id"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>SECTION</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.old_section_id"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>JABATAN LAMA</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.old_job_id"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>JAM KERJA LAMA</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.old_jam_kerja"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>TANGGAL MASUK</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;">
+                                                        <span t-field="o.tgl_masuk"/>
+                                                    </td>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>STATUS KARYAWAN</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;">
+                                                        <span t-field="o.old_employee_state"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #e8e6eb;"> 
+                                                <strong>DIMUTASIKAN KE : </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>DEPARTMENT</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.new_dept_id"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>SECTION</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.new_section_id"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>JABATAN BARU</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.new_job_id"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>JAM KERJA BARU</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;"  colspan="3">
+                                                        <span t-field="o.new_jam_kerja"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>TERHITUNG MULAI TANGGAL</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;" colspan="3">
+                                                        <span t-field="o.new_tgl_masuk"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%; text-align: left; vertical-align: top;">
+                                                        <strong>ALASAN PERUBAHAN</strong>
+                                                    </td>
+                                                    <td style="width:34%; text-align: left; vertical-align: top;" colspan="3">
+                                                        <span t-field="o.pdm_reason"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #e8e6eb;"> 
+                                                <strong>ASPEK PENILAIAN : </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        1.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Kuantitas Hasil Kerja
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center; ">
+                                                        Jumlah / volume output yang dihasilkan dan atau tingkat produktifitas yang berhasil dicapai berdasarkan pengukuran tertentu, dan atau penggunaan waktu (durasi / kecepatan) dalam menyelesaikan suatu tugas.
+                                                    </td>
+                                                    <td style="width:20%; ">
+                                                        <span t-field="o.kuantitas_hasil_kerja"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        2.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Kualitas Hasil Kerja
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center; ">
+                                                        Ketelitian / kecermatan / keakuratan, kerapihan, kelengkapan dan kesempurnaan hasil kerja dan atau tingkat kesalahan / kerusakan / kegagalan pada hasil kerja yang diperoleh.
+                                                    </td>
+                                                    <td style="width:20%; ">
+                                                        <span t-field="o.kualitas_hasil_kerja"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        3.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Pengetahuan dan Keterampilan
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center; ">
+                                                        Pemahaman dan penguasaan akan hal-hal yang berkaitan dengan tugas dan jabatannya (apa yang harus dikerjakan, bagaimana metode kerjanya dan lainnya) serta kemampuan / kemahiran dalam melaksanakannya.
+                                                    </td>
+                                                    <td style="width:20%; ">
+                                                        <span t-field="o.pengetahuan_keterampilan"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        4.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Inisiatif dan Kreatif
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center; ">
+                                                        Kemampuan bekerja secara mandiri tanpa pengaruh atasan, serta kemampuan dalam menyampaikan ide / gagasan kreatif dan inovatif yang bermanfaat bagi peningkatan efektivitas dan efisiensi kerja.
+                                                    </td>
+                                                    <td style="width:20%; ">
+                                                        <span t-field="o.inisiatif_kreatif"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        5.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Tanggung Jawab
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center;">
+                                                        Memiliki komitmen, kesungguhan dan keterlibatan kerja tinggi, bekerja secara tuntas / tidak menunda-nunda pekerjaan, tidak melemparkan kesalahan kepada orang lain, kejujuran dalam bekerja serta dedikasi / pengabdian yang tinggi kepada perusahaan.
+                                                    </td>
+                                                    <td style="width:20%;">
+                                                        <span t-field="o.tanggung_jawab"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        6.
+                                                    </td>
+                                                    <td style="text-align:left; vertical-align:center" colspan="3">
+                                                        Kerjasama
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center;">
+                                                        Kemampuan menjalin hubungan dan kerjasama secara harmonis dan efektif dengan orang / pihak lain (karyawan, rekan kerja, atasan, pihak eksternal dll), sesuai dengan tugasnya, termasuk kemampuan bekerjasama di dalam kelompok.
+                                                    </td>
+                                                    <td style="width:20%;">
+                                                        <span t-field="o.kerjasama"/>
+                                                    </td>
+                                                </tr>
+
+                                            </table>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #e8e6eb;"> 
+                                                <strong>KLASIFIKASI PENILAIAN : </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        Total Nilai Predikat
+                                                    </td>
+                                                    <td style="width:60%;">
+                                                        Angka Pengurang SP (Data dari Personalia)
+                                                    </td>
+                                                    <td style="width:15%;">
+                                                        Subtotal
+                                                    </td>
+                                                    <td style="width:10%; horizontal-align:center;">
+                                                        <span t-field="o.avg_answer"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%">
+                                                        &lt; 2 (KS = Kurang Sekali)
+                                                    </td>
+                                                    <td style="width:60%">
+                                                        SP I : Dikurangi 48.08 %
+                                                    </td>
+                                                    <td style="width:15%">
+                                                        SP
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <span t-field="o.sp_type"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%">
+                                                        2 - 2.75 (K = Kurang)
+                                                    </td>
+                                                    <td style="width:60%">
+                                                        SP II : Dikurangi 64.10 %
+                                                    </td>
+                                                    <td style="width:15%" rowspan="3">
+                                                        Faktor pengurang dari Absensi
+                                                    </td>
+                                                    <td style="width:10%; vertical-align:center;" rowspan="3">
+                                                        <span t-field="o.pengurang_absensi"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%">
+                                                        2.76 - 3.25 (B = Baik)
+                                                    </td>
+                                                    <td style="width:60%">
+                                                        SP III : Dikurangi 80.13 %
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%">
+                                                        3.26 - 4 (BS = Baik Sekali)
+                                                    </td>
+                                                    <td style="width:60%">
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #e8e6eb;"> 
+                                                <strong>ANGKA PENGURANGAN ABSEN (Data dari Personalia) : </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Sakit</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   1.28 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <span t-esc="'{0:,.0f}'.format(float(o.sakit))"/> Hari
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:15%;" rowspan="2">
+                                                        <strong>Total Angka Pengurang</strong>
+                                                    </td>
+                                                    <td style="width:10%" rowspan="2">
+                                                        <span t-field="o.total_pengurang"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Ijin</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   3.85 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <span t-esc="'{0:,.0f}'.format(float(o.ijin))"/> Hari
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Mangkir</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   48.08 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <span t-esc="'{0:,.0f}'.format(float(o.mangkir))"/> Hari
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:15%;" rowspan="2">
+                                                        <strong>Total Nilai</strong>
+                                                    </td>
+                                                    <td style="width:10%" rowspan="2">
+                                                        <span t-field="o.total_nilai"/>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Terlambat</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   2.56 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <span t-esc="'{0:,.0f}'.format(float(o.terlambat))"/> Hari
+                                                        </div>
+                                                    </td>
+                                                </tr>
+
+                                                <tr>
+                                                    <td style="width:15%;">
+                                                        <strong>Pulang Cepat</strong>
+                                                    </td>
+                                                    <td style="width:30%;">
+                                                        <strong>Dikurangi   2.56 % / Hari</strong>
+                                                    </td>
+                                                    <td style="width:30%; padding-right: 5pt;">
+                                                        <div class="o_row">
+                                                            <span t-esc="'{0:,.0f}'.format(float(o.pulang_cepat))"/> Hari
+                                                        </div>
+                                                    </td>
+                                                    <td style="width:15%;">
+                                                        <strong>Predikat</strong>
+                                                    </td>
+                                                    <td style="width:10%">
+                                                        <span t-field="o.predikat"/>
+                                                    </td>
+                                                </tr>
+                                            </table>
+                                        </tr>
+                                    </table>
+                                    <br/>
+                                    <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                        <tr>
+                                            <td style="background-color: #e8e6eb;"> 
+                                                <strong>SARAN UNTUK PENGEMBANGAN KARYAWAN : </strong>
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <table style="width:100%" border="0" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        1
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        Kelemahan Yang Dimilki Karyawan
+                                                    </td>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        <span t-field="o.kelemahan"/>
+                                                    </td>
+                                                    <td style="width:20%"/>
+                                                </tr>
+
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        2
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        Kelebihan Yang Dimilki Karyawan
+                                                    </td>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        <span t-field="o.kelebihan"/>
+                                                    </td>
+                                                    <td style="width:20%"/>
+                                                </tr>
+
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        3
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        Pelatihan Yang Diperlukan Karyawan
+                                                    </td>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        <span t-field="o.pelatihan"/>
+                                                    </td>
+                                                    <td style="width:20%"/>
+                                                </tr>
+
+                                                <tr>
+                                                    <td/>
+                                                    <td style="width:1%; text-align:left; vertical-align:center">
+                                                        4
+                                                    </td>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        Catatan Lainnya
+                                                    </td>
+                                                    <td/>
+                                                </tr>
+                                                <tr>
+                                                    <td/>
+                                                    <td/>
+                                                    <td style="width:70% text-align:left; vertical-align:center">
+                                                        <span t-field="o.catatan_lainnya"/>
+                                                    </td>
+                                                    <td style="width:20%"/>
+                                                </tr>
+                                                
+                                            </table>
+                                        </tr>
+                                    </table>
+
+                                    <table class="table">
+                                        <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                            }
+                                        </style>
+                                        <tr class="borderless" style="line-height: 5pt">
+                                            <br/>
+                                            <td t-foreach='o.approval_info_ids' t-as='line_approval' style="width:25%; padding: 0 40px;">
+                                                <td style="width:25%; padding: 0 40px;">
+                                                    <div>
+                                                        <t t-if="line_index == 1">
+                                                            <p><span t-field="o.company_id.city"/>, <span t-esc="datetime.datetime(o.pr_date.year, o.pr_date.month, o.pr_date.day).strftime('%d %b %Y')"/></p>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <br/><br/><br/>
+                                                        </t>
+                                                        <p>Disetujui,</p>
+                                                        <br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/><br/>
+                                                        <p><u><span t-field="line_approval.approve_user_id.partner_id.name"/></u></p><br/>
+                                                        <p><span t-field="line_approval.approve_user_id.employee_id.job_id.name"/></p>
+                                                    </div>
+                                                </td>
+                                            </td>
+                                        </tr>
+                                    </table>
+                                    
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

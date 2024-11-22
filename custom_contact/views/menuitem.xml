@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <menuitem id="menu_contact_config_other" name="Others" parent="contacts.res_partner_menu_config">
+        <menuitem id="menu_contact_config_segment" action="segment_action" sequence="1"/>
+    </menuitem>
+</odoo>
+
+

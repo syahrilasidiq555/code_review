@@ -1,0 +1,178 @@
+<odoo>
+    <data>
+
+        <!-- FORMAT KERTASNYAA -->
+        <record id="format_kertas_a5" model="report.paperformat">
+            <field name="name">Faktur A5</field>
+            <field name="default" eval="True"/>
+            <field name="format">A5</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Landscape</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="margin_top">39</field>
+            <field name="margin_bottom">35</field>
+            <field name="header_spacing">34</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <record id="format_kertas_a4" model="report.paperformat">
+            <field name="name">Faktur A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="margin_top">45</field>
+            <field name="margin_bottom">50</field>
+            <field name="header_spacing">40</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- BUTTON PRINT NYA -->
+        <report
+                id="print_overdue_a5_full"
+                string="Perjanjian Pelunasan Pembayaran"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="custom_accounting.overdue_print_a5_full"
+                file="custom_accounting.overdue_print_a5_full"
+                paperformat="format_kertas_a4"
+                menu="True"
+                print_report_name="'Perjanjian Pembayaran - %s' % (object.name)"
+        />
+        <report
+                id="print_overdue_a5"
+                string="Perjanjian Cicilan Pembayaran"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="custom_accounting.overdue_print_a5"
+                file="custom_accounting.overdue_print_a5"
+                paperformat="format_kertas_a4"
+                menu="True"
+                print_report_name="'Perjanjian Pembayaran - %s' % (object.name)"
+        />
+
+        <!-- CUSTOMER FORM -->
+        <report
+                id="print_surat_kuasa_kremasi"
+                string="Surat Kuasa Kremasi"
+                model="customer.form.website"
+                report_type="qweb-pdf"
+                name="custom_accounting.print_surat_kuasa_kremasi_template"
+                file="custom_accounting.print_surat_kuasa_kremasi_template"
+                paperformat="format_kertas_a4"
+                menu="True"
+                print_report_name="'Surat Kuasa Kremasi - %s' % (object.name)"
+        />
+
+        <report
+                id="print_surat_pernyataan_ahli_waris_kremasi"
+                string="Surat Pernyataan Ahli Waris Kremasi"
+                model="customer.form.website"
+                report_type="qweb-pdf"
+                name="custom_accounting.print_surat_pernyataan_ahli_waris_kremasi_template"
+                file="custom_accounting.print_surat_pernyataan_ahli_waris_kremasi_template"
+                paperformat="format_kertas_a4"
+                menu="True"
+                print_report_name="'Surat Pernyataan Ahli Waris Kremasi - %s' % (object.name)"
+        />
+
+        <report
+                id="print_tanda_terima_abu"
+                string="Tanda Terima Abu Jenazah"
+                model="customer.form.website"
+                report_type="qweb-pdf"
+                name="custom_accounting.print_tanda_terima_abu_template"
+                file="custom_accounting.print_tanda_terima_abu_template"
+                paperformat="format_kertas_a4"
+                menu="True"
+                print_report_name="'Tanda Terima Abu Jenazah - %s' % (object.name)"
+        />
+
+        <!-- INVOCIE RDC -->
+        <report
+                id="print_invoice_rdc"
+                string="Faktur RDC"
+                model="account.move"
+                report_type="qweb-pdf"
+                name="custom_accounting.invoice_rdc_print"
+                file="custom_accounting.invoice_rdc_print"
+                paperformat="format_kertas_a4"
+                menu="True"
+                print_report_name="'Faktur - %s' % (object.name)"
+        />
+
+        <record id="print_dispose" model="ir.actions.report">
+            <field name="name">Berita Acara Dispose</field>
+            <field name="model">account.asset</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_accounting.dispose_print</field>
+            <field name="report_file">custom_accounting.dispose_print</field>
+            <field name="paperformat_id" ref="custom_accounting.format_kertas_a4"/>  
+            <field name="print_report_name">'Dispose Asset - %s' % (object.name)</field>
+        </record>
+
+        <record id="print_location" model="ir.actions.report">
+            <field name="name">Berita Acara Pindah Lokasi</field>
+            <field name="model">account.asset</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_accounting.location_print</field>
+            <field name="report_file">custom_accounting.location_print</field>
+            <field name="paperformat_id" ref="custom_accounting.format_kertas_a4"/>  
+            <field name="print_report_name">'Change Location Asset - %s' % (object.name)</field>
+        </record>
+
+        <!-- PAYMENT REQUISITION -->
+        <report
+                id="print_payment_requisition_bill_a4"
+                string="Payment Requisition"
+                model="account.payment.requisition"
+                report_type="qweb-pdf"
+                name="custom_accounting.payment_requisition_bill_print"
+                file="custom_accounting.payment_requisition_bill_print"
+                paperformat="format_kertas_a4"
+                menu="True"
+                print_report_name="'Payment Requisition - %s' % (object.name)"
+        />
+        <report
+                id="print_payment_requisition_a4"
+                string="Payment Requisition Rekap"
+                model="account.payment.requisition"
+                report_type="qweb-pdf"
+                name="custom_accounting.payment_requisition_print"
+                file="custom_accounting.payment_requisition_print"
+                paperformat="format_kertas_a4"
+                menu="True"
+                print_report_name="'Payment Requisition Rekap - %s' % (object.name)"
+        />
+
+        <!-- BUKTI KAS KELUAR -->
+        <record id="print_payment_out" model="ir.actions.report">
+            <field name="name">Bukti Kas Keluar</field>
+            <field name="model">account.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_accounting.payment_out_print</field>
+            <field name="report_file">custom_accounting.payment_out_print</field>
+            <field name="paperformat_id" ref="custom_accounting.format_kertas_a5"/>  
+            <field name="print_report_name">'Bukti Kas Keluar - %s' % (object.name)</field>
+        </record>
+
+        <!-- PAYMENT IN -->
+        <record id="print_payment_in" model="ir.actions.report">
+            <field name="name">Bukti Kas Masuk</field>
+            <field name="model">account.payment</field>
+            <field name="report_type">qweb-pdf</field>
+            <field name="report_name">custom_accounting.payment_in_print</field>
+            <field name="report_file">custom_accounting.payment_in_print</field>
+            <field name="paperformat_id" ref="custom_accounting.format_kertas_a5"/>  
+            <field name="print_report_name">'Bukti Kas Masuk - %s' % (object.name)</field>
+        </record>
+
+    </data>
+</odoo>

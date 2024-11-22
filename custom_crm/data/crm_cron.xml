@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rdc_columbarium_whatsapp_notify" model="ir.cron">
+        <field name="name">RDC : Send Columbarium WhatsApp Notify</field>
+        <field name="model_id" ref="crm.model_crm_lead"/>
+        <field name="code">
+model.send_notif_columbarium_via_whatsapp(reminder_before_days=90)
+model.send_crm_notif_columbarium_via_whatsapp(reminder_before_days=60)
+model.send_crm_notif_columbarium_via_whatsapp(reminder_before_days=30)
+model.send_crm_notif_columbarium_via_whatsapp(reminder_before_days=7)
+        </field>
+        <field name="active" eval="True"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+</odoo>

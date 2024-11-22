@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="point_of_sale.OrderReceipt" t-inherit-mode="extension" owl="1">
+        <xpath expr="//img[@class='pos-receipt-logo']" position="replace">
+            <img class="pos-receipt-logo" t-att-src="receipt.company.logo" alt="Logo" style="width:20%!important"/>
+        </xpath>
+
+        <xpath expr="//t[@t-if='!isTaxIncluded']" position="replace">
+            <t t-if="!isTaxIncluded">
+                <div class="pos-receipt-right-align">--------</div>
+                <br/>
+                <div>Subtotal<span t-esc="env.pos.format_currency(receipt.subtotal)" class="pos-receipt-right-align"/></div>
+                <div>Total Taxes<span t-esc="env.pos.format_currency(receipt.total_tax)" class="pos-receipt-right-align"/></div>
+                <!-- <t t-foreach="receipt.tax_details" t-as="tax" t-key="tax.name">
+                    <div class="responsive-price">
+                        <t t-esc="tax.name" />
+                        <span t-esc='env.pos.format_currency_no_symbol(tax.amount)' class="pos-receipt-right-align"/>
+                    </div>
+                </t> -->
+            </t>
+        </xpath>
+
+        <xpath expr="//div[@class='pos-receipt-amount receipt-change']" position="replace">
+            <div class="pos-receipt-amount receipt-change">
+                KEMBALI
+                <span t-esc="env.pos.format_currency(receipt.change)" class="pos-receipt-right-align"/>
+            </div>
+        </xpath>
+
+        <xpath expr="//div[@class='pos-receipt-order-data']" position="inside">
+            <div>
+                <br/>
+                <b>**BARANG YANG SUDAH DIBELI TIDAK BOLEH DITUKAR/DIKEMBALIKAN**</b>
+            </div>
+        </xpath>
+    </t>
+
+</templates>

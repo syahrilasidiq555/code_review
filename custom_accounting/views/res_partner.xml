@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_partner_form_inherit" model="ir.ui.view">
+        <field name="name">view_partner_form_inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="base.view_partner_form"/>
+        <field eval="1" name="priority"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//sheet//group" position="before">
+                <div name="options">
+                    <span class="d-inline-block">
+                        <field name="is_customer"/>
+                        <label for="is_customer"/>
+                    </span>
+                    <span class="d-inline-block">
+                        <field name="is_vendor"/>
+                        <label for="is_vendor"/>
+                    </span>
+                </div>
+            </xpath>
+        </field>
+    </record>
+
+    <record id="res_partner_view_search_inherit" model="ir.ui.view">
+        <field name="name">res.partner.search.inherit</field>
+        <field name="model">res.partner</field>
+        <field name="inherit_id" ref="account.res_partner_view_search"/>
+        <field name="arch" type="xml">
+            
+            <xpath expr="//filter[@name='supplier']" position="replace">
+                <filter string="Vendor" name="supplier" domain="[('is_vendor','=', True)]"/>
+            </xpath>
+
+            <xpath expr="//filter[@name='customer']" position="replace">
+                <filter string="Customer" name="customer" domain="[('is_customer','=', True)]"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <record id="account.res_partner_action_customer" model="ir.actions.act_window">
+        <field name="domain">[('is_customer','=',True)]</field>
+        <field name="context">{'res_partner_search_mode': 'customer', 'default_is_company': True, 'default_customer_rank': 1, 'default_is_customer': True}</field>
+        <!-- 'search_default_customer': 1, -->
+    </record>
+
+    <record id="account.res_partner_action_supplier" model="ir.actions.act_window">
+        <field name="domain">[('is_vendor','=',True)]</field>
+        <field name="context">{'res_partner_search_mode': 'supplier', 'default_is_company': True, 'default_supplier_rank': 1, 'default_is_vendor': True}</field>
+        <!-- 'search_default_supplier': 1, -->
+    </record>
+</odoo>

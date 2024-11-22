@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_pembayaran_columnbarium_wizard" model="ir.ui.view">
+            <field name="name">view_pembayaran_columnbarium_wizard</field>
+            <field name="model">account.payment.columnbarium.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Pembayaran Columbarium">
+                    <!-- <div class="oe_title">
+                        <h1>
+                            <field name="asset_id" readonly="1"/>
+                        </h1>
+                    </div> -->
+                    <sheet>
+                        <group>
+                            <group string="Detail Payment">
+                                <field name="payment_type"/>
+                                <field name="payment_mode"/>
+                                <field name="criteria_type"/>
+                                <field name="date" string="Tanggal"/>
+                            </group>
+                            <group string="Amount Payment">
+                                <label for="amount" string="Total"/>
+                                <div>
+                                    <field name="amount" class="oe_inline" options="{'horizontal': true, 'currency_field': 'currency_id'}"/>
+                                    <field name="account_titipan_id" style="width:50%%; padding-left:10pt" />
+                                </div>
+
+                                <label for="discount" string="Discount"/>
+                                <div>
+                                    <field name="discount" class="oe_inline" options="{'horizontal': true, 'currency_field': 'currency_id'}"/>
+                                    <field name="account_discount_id" style="width:50%%; padding-left:10pt" />
+                                </div>
+                                <field name="grand_amount"/>
+                            </group>
+                            <group string="Account Payment">
+                                <field name="method_id"/>
+                                <field name="journal_id"/>
+                                <field name="currency_id"/>
+                                <field name="company_id" invisible="1"/>
+                            </group>
+                        </group>
+                        
+                    </sheet>
+
+                    <footer>
+                        <button name="action_confirm" type="object" string="Confirm" class="oe_highlight"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

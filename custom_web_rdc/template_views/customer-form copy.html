@@ -1,0 +1,100 @@
+{% extends 'layouts/main.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+{% endblock %}
+
+
+{% block content %}
+<main x-init>
+    <div class="container" >
+        <div class="row mt-5 contact">
+            <form class="php-email-form" method="post"
+                x-on:submit="event.preventDefault();">
+                <input type="hidden" name="token" 
+                    x-model="$store.customerStore.token"
+                    x-init="$store.customerStore.token = '{{data.token}}'">
+
+                <div class="row mb-4">
+                    <h2>{{data.name}}</h2>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-6 form-group">
+                        <input type="text" class="form-control" placeholder="Your Name"
+                            x-model="$store.customerStore.partner.name"
+                            x-init="$store.customerStore.partner.name = '{{data.customer_id.name if data.customer_id else ''}}'">
+                    </div>
+                    <div class="col-md-6 form-group mt-3 mt-md-0">
+                        <input type="email" class="form-control" placeholder="Your Email"
+                            required=""
+                            x-model="$store.customerStore.partner.email"
+                            x-init="$store.customerStore.partner.email = '{{data.customer_id.email if data.customer_id else ''}}'">
+                    </div>
+                </div>
+                <div class="form-group mt-3">
+                    <input type="text" class="form-control" id="phone" placeholder="Phone"
+                        required=""
+                        x-model="$store.customerStore.partner.phone"
+                        x-init="$store.customerStore.partner.phone = '{{data.customer_id.phone if data.customer_id else ''}}'">
+                </div>
+                <div class="text-center">
+                    <button type="submit" @click="$store.customerStore.createData()">Submit</button>
+                </div>
+            </form>
+        </div>
+</main>
+
+<script>
+    document.addEventListener('alpine:init', async () => {
+        Alpine.store('customerStore', {
+            token: '',
+            partner: {
+                name: '',
+                email: '',
+                phone: '',
+            },
+
+            submit(){
+                console.log(this.partner)
+            },
+            
+            async createData(){
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "jsonrpc": "2.0",
+                        "params": {
+                            "token": this.token,
+                            "values": {
+                                name: this.partner.name,
+                                email: this.partner.email,
+                                phone: this.partner.phone,
+                            },
+                        }
+                    })
+                };
+
+                try {
+                    const fetchResponse = await fetch(`/api/rdc/res.partner/create`, settings);
+                    const data = await fetchResponse.json();
+                    console.log(data)
+                    
+                } catch (e) {
+                    return e;
+                }
+            },
+        });
+
+    })
+</script>
+
+
+{% endblock %}

@@ -1,0 +1,813 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Akuntansi / Dashboard -->
+        <record model="ir.module.category" id="module_category_accounting_dashboard">
+            <field name="name">Akuntansi / Dashboard</field>
+            <field name="sequence">3500</field>
+        </record>
+        <record id="group_submenu_account_dashboard_child" model="res.groups">
+            <field name="name">Access Dashboard</field>
+            <field name="category_id" ref="module_category_accounting_dashboard" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_dashboard_analisa_keu" model="res.groups">
+            <field name="name">Access Analisa Keuangan</field>
+            <field name="category_id" ref="module_category_accounting_dashboard" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+
+        <!-- Akuntansi / Pelanggan -> Faktur, Pemasok -> Tagihan, Akuntansi -> Entri Jurnal -->
+        <record model="ir.module.category" id="module_category_accounting_account_move">
+            <field name="name">Akuntansi / (Faktur, Catatan Kredit, Tagihan, Entri Jurnal)</field>
+            <field name="sequence">3501</field>
+        </record>
+        <record id="group_submenu_account_customers_invoices" model="res.groups">
+            <field name="name">Access Read Faktur</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_vendors_bills" model="res.groups">
+            <field name="name">Access Read Bills</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_miscellaneous" model="res.groups">
+            <field name="name">Access Read Entri Jurnal</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_account_vendors_refunds" model="res.groups">
+            <field name="name">Access Read Pemasok Pengembalian</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_submenu_account_customers_credit_notes" model="res.groups">
+            <field name="name">Access Read Pelanggan Credit Notes</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_am_button_button_create_edit" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_am_button_button_edit" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_am_button_button_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_approve_invoice_overdue" model="res.groups">
+            <field name="name">Access Button Approve Faktur Overdue</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_am_button_action_post" model="res.groups">
+            <field name="name">Access Button Rekam atau Konfirmasi</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_am_button_action_post_discount" model="res.groups">
+            <field name="name">Access Button Rekam atau Konfirmasi Record dengan Diskon</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">11</field>
+        </record>
+        <record id="group_am_button_action_register_payment" model="res.groups">
+            <field name="name">Access Button Buat Pembayaran</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">12</field>
+        </record>
+        <record id="group_am_button_action_view_account_move_reversal" model="res.groups">
+            <field name="name">Access Button Balikan Entri</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">13</field>
+        </record>
+        <record id="group_am_button_action_reverse" model="res.groups">
+            <field name="name">Access Button Tambahkan Catatan Kredit</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">14</field>
+        </record>
+        <record id="group_am_button_button_cancel" model="res.groups">
+            <field name="name">Access Button Batal</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">15</field>
+        </record>
+        <record id="group_am_button_button_cancel_posted_moves" model="res.groups">
+            <field name="name">Access Button Minta Pembatalan EDI</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">16</field>
+        </record>
+        <record id="group_am_button_button_abandon_cancel_posted_posted_moves" model="res.groups">
+            <field name="name">Access Button Batalkan Pembatalan EDI</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">17</field>
+        </record>
+        <record id="group_am_button_button_draft" model="res.groups">
+            <field name="name">Access Button Reset ke Rancangan</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">18</field>
+        </record>
+        <record id="group_am_button_button_set_checked" model="res.groups">
+            <field name="name">Access Button Tetapkan Sebagai Diperiksa</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">19</field>
+        </record>
+        <record id="group_accounting_invoice_button_send_print" model="res.groups">
+            <field name="name">Access Button Send &amp; Print (Faktur dan Pengembalian)</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">20</field>
+        </record>
+        <record id="group_accounting_invoice_button_pratinjau" model="res.groups">
+            <field name="name">Access Button Pratinjau (Faktur dan Pengembalian)</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">21</field>
+        </record>
+        <record id="group_accounting_invoice_button_merge" model="res.groups">
+            <field name="name">Access Button Gabungkan Faktur</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">22</field>
+        </record>
+        <record id="group_accounting_invoice_button_efaktur" model="res.groups">
+            <field name="name">Access Button Unduh e-Faktur</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">23</field>
+        </record>
+        <record id="group_accounting_invoice_button_digitalization" model="res.groups">
+            <field name="name">Access Button Send Bills for Digitalization</field>
+            <field name="category_id" ref="module_category_accounting_account_move" />
+            <field name="sequence">24</field>
+        </record>
+
+
+        <!-- Akuntansi / Pelanggan -> Pembayaran, Pemasok -> Pembayaran -->
+        <record model="ir.module.category" id="module_category_accounting_payment">
+            <field name="name">Akuntansi / (Pelanggan / Pembayaran, Pemasok / Pembayaran)</field>
+            <field name="sequence">3502</field>
+        </record>
+        <record id="group_submenu_account_customers_payments" model="res.groups">
+            <field name="name">Access Read Pelanggan Pembayaran</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_vendors_payments" model="res.groups">
+            <field name="name">Access Read Pemasok Pembayaran</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_payment_button_button_create_edit" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_payment_button_edit" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_payment_button_button_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_payment_button_action_to_approve" model="res.groups">
+            <field name="name">Access Button Request Approval</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_payment_button_action_post" model="res.groups">
+            <field name="name">Access Button Konfirmasi</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_payment_button_action_draft" model="res.groups">
+            <field name="name">Access Button Reset ke Rancangan</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_payment_button_action_cancel" model="res.groups">
+            <field name="name">Access Button Batal</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_payment_button_mark_as_sent" model="res.groups">
+            <field name="name">Access Button Tandai sebagai Terkirim</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_payment_button_unmark_as_sent" model="res.groups">
+            <field name="name">Access Button Unmark as Sent</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">11</field>
+        </record>
+        <record id="group_payment_button_button_open_invoices" model="res.groups">
+            <field name="name">Access Button Lihat Faktur</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">12</field>
+        </record>
+        <record id="group_payment_button_button_open_bills" model="res.groups">
+            <field name="name">Access Button Lihat Bill</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">13</field>
+        </record>
+        <record id="group_payment_button_button_open_statements" model="res.groups">
+            <field name="name">Access Button Lihat Laporan</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">14</field>
+        </record>
+        <record id="group_payment_button_button_open_journal_entry" model="res.groups">
+            <field name="name">Access Button Lihat Entri Jurnal</field>
+            <field name="category_id" ref="module_category_accounting_payment" />
+            <field name="sequence">15</field>
+        </record>
+
+        <!-- Akuntansi / Pelanggan -> Master -->
+        <record model="ir.module.category" id="module_category_accounting_pelanggan_master">
+            <field name="name">Akuntansi / Pelanggan Master</field>
+            <field name="sequence">3503</field>
+        </record>
+        <record id="group_submenu_account_customers_followup" model="res.groups">
+            <field name="name">Access Follow-up Reports</field>
+            <field name="category_id" ref="module_category_accounting_pelanggan_master" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_customers_customers" model="res.groups">
+            <field name="name">Access Pelanggan</field>
+            <field name="category_id" ref="module_category_accounting_pelanggan_master" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_customers_products" model="res.groups">
+            <field name="name">Access Products</field>
+            <field name="category_id" ref="module_category_accounting_pelanggan_master" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_account_customers_efaktur" model="res.groups">
+            <field name="name">Access E-Faktur</field>
+            <field name="category_id" ref="module_category_accounting_pelanggan_master" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_submenu_account_customers_efaktur_list" model="res.groups">
+            <field name="name">Access E-Faktur List</field>
+            <field name="category_id" ref="module_category_accounting_pelanggan_master" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">5</field>
+        </record>
+        
+
+        <!-- Akuntansi / Pemasok / Payment Requisition -->
+        <record model="ir.module.category" id="module_category_accounting_payment_requisition">
+            <field name="name">Akuntansi / Pemasok / Payment Requisition &amp; Payment Requisition Approval</field>
+            <field name="sequence">3504</field>
+        </record>
+        <record id="group_submenu_account_vendors_payment_req" model="res.groups">
+            <field name="name">Access Read Payment Requisition</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_vendors_payment_req_approve" model="res.groups">
+            <field name="name">Access Read Payment Requisition Approval</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_payment_req_button_button_create_edit" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_payment_req_button_button_edit" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_payment_req_button_button_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_payment_req_button_button_confirm" model="res.groups">
+            <field name="name">Access Button Confirm</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_payment_req_button_button_approve_pr" model="res.groups">
+            <field name="name">Access Button Approve (Payment Requisition)</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_payment_req_button_button_approve_pra" model="res.groups">
+            <field name="name">Access Button Approve (Payment Requisition Approval)</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_payment_req_button_button_refuse_pr" model="res.groups">
+            <field name="name">Access Button Refuse (Payment Requisition)</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_payment_req_button_button_set_draft" model="res.groups">
+            <field name="name">Access Button Reset to Draft</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_payment_req_button_button_cancel" model="res.groups">
+            <field name="name">Access Button Cancel</field>
+            <field name="category_id" ref="module_category_accounting_payment_requisition" />
+            <field name="sequence">11</field>
+        </record>
+
+        <!-- Akuntansi / Pemasok -> Master -->
+        <record model="ir.module.category" id="module_category_accounting_pemasok_master">
+            <field name="name">Akuntansi / Pemasok Master</field>
+            <field name="sequence">3505</field>
+        </record>
+        <record id="group_submenu_account_vendors_expense_emp" model="res.groups">
+            <field name="name">Access Pengeluaran Karyawan</field>
+            <field name="category_id" ref="module_category_accounting_pemasok_master" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_vendors_products" model="res.groups">
+            <field name="name">Access Products</field>
+            <field name="category_id" ref="module_category_accounting_pemasok_master" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_vendors_vendors" model="res.groups">
+            <field name="name">Access Pemasok</field>
+            <field name="category_id" ref="module_category_accounting_pemasok_master" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+
+        <!-- Akuntansi / Akuntansi / Jurnal-jurnal -->
+        <record model="ir.module.category" id="module_category_accounting_jurnal_jurnal">
+            <field name="name">Akuntansi / Akuntansi / Jurnal-jurnal</field>
+            <field name="sequence">3506</field>
+        </record>
+        <record id="group_submenu_account_journals_sales" model="res.groups">
+            <field name="name">Access Penjualan</field>
+            <field name="category_id" ref="module_category_accounting_jurnal_jurnal" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_journals_purchase" model="res.groups">
+            <field name="name">Access Pembelian</field>
+            <field name="category_id" ref="module_category_accounting_jurnal_jurnal" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_journals_bankandcash" model="res.groups">
+            <field name="name">Access Bank and Cash</field>
+            <field name="category_id" ref="module_category_accounting_jurnal_jurnal" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_account_journals_miscellaneous" model="res.groups">
+            <field name="name">Access Lain-lain</field>
+            <field name="category_id" ref="module_category_accounting_jurnal_jurnal" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Akuntansi / Akuntansi / Ledgers -->
+        <record model="ir.module.category" id="module_category_accounting_ledgers">
+            <field name="name">Akuntansi / Akuntansi / Ledgers</field>
+            <field name="sequence">3507</field>
+        </record>
+        <record id="group_submenu_account_ledgers_gl" model="res.groups">
+            <field name="name">Access Buku Besar</field>
+            <field name="category_id" ref="module_category_accounting_ledgers" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_ledgers_pl" model="res.groups">
+            <field name="name">Access Buku Besar Mitra</field>
+            <field name="category_id" ref="module_category_accounting_ledgers" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+
+        <!-- Akuntansi / Akuntansi / Management -->
+        <record model="ir.module.category" id="module_category_accounting_management">
+            <field name="name">Akuntansi / Akuntansi / Management Master</field>
+            <field name="sequence">3508</field>
+        </record>
+        <record id="group_submenu_account_management_automatic_transfers" model="res.groups">
+            <field name="name">Access Automatic Transfers</field>
+            <field name="category_id" ref="module_category_accounting_management" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_management_asset_category" model="res.groups">
+            <field name="name">Access Asset Category</field>
+            <field name="category_id" ref="module_category_accounting_management" />
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_management_asset_location" model="res.groups">
+            <field name="name">Access Asset Location</field>
+            <field name="category_id" ref="module_category_accounting_management" />
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_account_management_asset_merek" model="res.groups">
+            <field name="name">Access Asset Merek</field>
+            <field name="category_id" ref="module_category_accounting_management" />
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_submenu_account_management_asset_correction" model="res.groups">
+            <field name="name">Access Asset Correction</field>
+            <field name="category_id" ref="module_category_accounting_management" />
+            <field name="sequence">5</field>
+        </record>
+        
+        <!-- Akuntansi / Akuntansi / Management / Aktiva, Penangguhan Pendapatan, Pengeluarna yang Ditangguhkan -->
+        <record model="ir.module.category" id="module_category_accounting_asset">
+            <field name="name">Akuntansi / Akuntansi / Management / (Aktiva, Penangguhan Pendapatan, Pengeluarna yang Ditangguhkan)</field>
+            <field name="sequence">3509</field>
+        </record>
+        <record id="group_submenu_account_management_assets" model="res.groups">
+            <field name="name">Access Read Aktiva</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_management_deff_revenues" model="res.groups">
+            <field name="name">Access Read Penangguhan Pendapatan</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_management_deff_expenses" model="res.groups">
+            <field name="name">Access Read Pengeluaran yang Ditangguhkan</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_asset_button_button_create_edit" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_asset_button_button_edit" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_asset_button_button_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_approve_asset_dispose" model="res.groups">
+            <field name="name">Access Button Approve Dispose Asset</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_approve_asset_change_location" model="res.groups">
+            <field name="name">Access Button Approve Change Location</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_asset_button_validate" model="res.groups">
+            <field name="name">Access Button Konfirmasi</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_asset_button_compute_depreciation_board" model="res.groups">
+            <field name="name">Access Button Hitung Penyusutan</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_asset_button_action_set_to_close" model="res.groups">
+            <field name="name">Access Button Jual atau Buang</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">11</field>
+        </record>
+        <record id="group_asset_button_action_wizard_move_location" model="res.groups">
+            <field name="name">Access Button Move Location</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">12</field>
+        </record>
+        <record id="group_asset_button_set_to_draft" model="res.groups">
+            <field name="name">Access Button Set ke Rancangan</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">13</field>
+        </record>
+        <record id="group_asset_button_set_to_running" model="res.groups">
+            <field name="name">Access Button Tetapkan menjadi Running</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">14</field>
+        </record>
+        <record id="group_asset_button_action_asset_pause" model="res.groups">
+            <field name="name">Access Button Pause Depreciation</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">15</field>
+        </record>
+        <record id="group_asset_button_resume_after_pause" model="res.groups">
+            <field name="name">Access Button Lanjutkan Depresiasi</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">16</field>
+        </record>
+        <record id="group_asset_button_action_asset_modify" model="res.groups">
+            <field name="name">Access Button Penyusutan Bulanan</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">17</field>
+        </record>
+        <record id="group_asset_button_action_save_model" model="res.groups">
+            <field name="name">Access Button Save Category</field>
+            <field name="category_id" ref="module_category_accounting_asset" />
+            <field name="sequence">18</field>
+        </record>
+        
+        <!-- Akuntansi / Akuntansi / Tindakan -->
+        <record model="ir.module.category" id="module_category_accounting_tindakan">
+            <field name="name">Akuntansi / Akuntansi / Tindakan</field>
+            <field name="sequence">3510</field>
+        </record>
+        <record id="group_submenu_account_actions_reconcilliation" model="res.groups">
+            <field name="name">Access Rekonsiliasi</field>
+            <field name="category_id" ref="module_category_accounting_tindakan" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_actions_tax_adjustment" model="res.groups">
+            <field name="name">Access Penyesuaian Pajak</field>
+            <field name="category_id" ref="module_category_accounting_tindakan" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_actions_lock_dates" model="res.groups">
+            <field name="name">Access Kunci Tanggal</field>
+            <field name="category_id" ref="module_category_accounting_tindakan" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+
+        <!-- Akuntansi / Laporan -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'account_reports_legal_statements_menu')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <!-- laba rugi -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'account_financial_html_report_menu_1')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <!-- lembar saldo -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'account_financial_html_report_menu_2')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <!-- ringkasan eksekutif -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'account_financial_html_report_menu_3')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <!-- pernyataan aliran kas -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'ir.ui.menu'), ('name', '=', 'menu_action_account_report_cash_flow')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record model="ir.module.category" id="module_category_accounting_report">
+            <field name="name">Akuntansi / Laporan</field>
+            <field name="sequence">3511</field>
+        </record>
+        <record id="group_submenu_account_reporting_gs_pl" model="res.groups">
+            <field name="name">Access Laba dan Rugi</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_reporting_gs_bs" model="res.groups">
+            <field name="name">Access Lembar Saldo</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_reporting_gs_executive_summary" model="res.groups">
+            <field name="name">Access Ringkasan Eksekutif</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_account_reporting_gs_cashflow" model="res.groups">
+            <field name="name">Access Pernyataan Aliran Kas</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_submenu_account_reporting_partner_ledger" model="res.groups">
+            <field name="name">Access Buku Besar Mitra</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_submenu_account_reporting_partner_ar" model="res.groups">
+            <field name="name">Access Piutang Seusia</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_submenu_account_reporting_partner_ap" model="res.groups">
+            <field name="name">Access Utang Seusia</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_submenu_account_reporting_audit_gl" model="res.groups">
+            <field name="name">Access Buku Besar</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_submenu_account_reporting_audit_tb" model="res.groups">
+            <field name="name">Access Neraca Saldo</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_submenu_account_reporting_audit_cj" model="res.groups">
+            <field name="name">Access Jurnal yang digabung</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_submenu_account_reporting_audit_tax" model="res.groups">
+            <field name="name">Access Laporan Pajak</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">11</field>
+        </record>
+        <record id="group_submenu_account_reporting_audit_journals" model="res.groups">
+            <field name="name">Access Audit Jurnal</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">12</field>
+        </record>
+        <record id="group_submenu_account_reporting_managements_invoice" model="res.groups">
+            <field name="name">Access Analisis Faktur</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">13</field>
+        </record>
+        <record id="group_submenu_account_reporting_managements_analytic" model="res.groups">
+            <field name="name">Access Analytic Report</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">14</field>
+        </record>
+        <record id="group_submenu_account_reporting_managements_gainloss" model="res.groups">
+            <field name="name">Access Kerugian Mata Uang yang Belum Direalisasi</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">15</field>
+        </record>
+        <record id="group_submenu_account_reporting_managements_depreciation" model="res.groups">
+            <field name="name">Access Jadwal Depresiasi</field>
+            <field name="category_id" ref="module_category_accounting_report" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">16</field>
+        </record>
+
+        <!-- Akuntansi / Konfigurasi -->
+        <record model="ir.module.category" id="module_category_accounting_config">
+            <field name="name">Akuntansi / Konfigurasi</field>
+            <field name="sequence">3512</field>
+        </record>
+        <record id="group_submenu_account_config_settings" model="res.groups">
+            <field name="name">Access Pengaturan</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_account_config_inv_terms" model="res.groups">
+            <field name="name">Access Syarat Pembayaran</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_account_config_inv_followup" model="res.groups">
+            <field name="name">Access Tingkatan Tindak Lanjut</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_account_config_inv_incoterms" model="res.groups">
+            <field name="name">Access Incoterm</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_accounting_config_tambahkan_akun_bank" model="res.groups">
+            <field name="name">Access Tambahkan Akun Bank</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_accounting_config_model_rekonsiliasi" model="res.groups">
+            <field name="name">Access Model Rekonsiliasi</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_accounting_config_sinkronisasi_daring" model="res.groups">
+            <field name="name">Access Sinkronisasi Daring</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_accounting_config_coa" model="res.groups">
+            <field name="name">Access Bagan Akun</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_accounting_config_tax" model="res.groups">
+            <field name="name">Access Pajak</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_accounting_config_journal" model="res.groups">
+            <field name="name">Access Jurnal-jurnal</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_accounting_config_currency" model="res.groups">
+            <field name="name">Access Mata Uang</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">11</field>
+        </record>
+        <record id="group_accounting_config_posisi_fiskal" model="res.groups">
+            <field name="name">Access Posisi Fiskal</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">12</field>
+        </record>
+        <record id="group_accounting_config_journal_groups" model="res.groups">
+            <field name="name">Access Journal Groups</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">13</field>
+        </record>
+        <record id="group_accounting_config_coa_type" model="res.groups">
+            <field name="name">Access Tipe Akun</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">14</field>
+        </record>
+        <record id="group_accounting_config_penerima_pembayaran" model="res.groups">
+            <field name="name">Access Penerima Pembayaran</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">15</field>
+        </record>
+        <record id="group_accounting_config_model_deffered_revenue" model="res.groups">
+            <field name="name">Access Model Pendapatan yang Ditangguhkan</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">16</field>
+        </record>
+        <record id="group_accounting_config_kategori_produk" model="res.groups">
+            <field name="name">Access Kategori Produk</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">17</field>
+        </record>
+        <record id="group_accounting_config_model_deffered_expense" model="res.groups">
+            <field name="name">Access Model Pengeluaran yang Ditangguhkan</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="sequence">18</field>
+        </record>
+        <record id="group_submenu_account_config_loa" model="res.groups">
+            <field name="name">Access Level of Approval</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">19</field>
+        </record>
+        <record id="group_submenu_account_config_p_method" model="res.groups">
+            <field name="name">Access Payment method</field>
+            <field name="category_id" ref="module_category_accounting_config" />
+            <field name="implied_ids" eval="False"/>
+            <field name="sequence">20</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo noupdate="1">
+    <record model="ir.cron" id="cron_generate_appraisal">
+        <field name='name'>Generate Appraisal Employees</field>
+        <field name='interval_number'>12</field>
+        <field name='interval_type'>months</field>
+        <field name="numbercall">-1</field>
+        <field name="active">True</field>
+        <field name="doall" eval="False" />
+        <field name="model_id" ref="dym_performance_appraisal.model_performance_appraisal_job_classification" />
+        <field name="state">code</field>
+        <field name="code">model.cron_generate_performance_emp_every_year()</field>
+    </record>
+</odoo>

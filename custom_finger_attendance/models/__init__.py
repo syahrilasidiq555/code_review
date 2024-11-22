@@ -1,0 +1,1 @@
+from . import finger_attendance_config

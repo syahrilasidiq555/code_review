@@ -1,0 +1,137 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- TREE VIEW -->
+    <record model="ir.ui.view" id="action_report_purchase_order_tree_view">
+        <field name="name">action_report_purchase_order_tree_view</field>
+        <field name="model">report.purchase.order.custom</field>
+        <field name="arch" type="xml">
+            <tree string="" create="false">
+                <field name="purchase_request_lines_date"/>
+                <field name="purchase_request_lines_name"/>
+                <field name="purchase_request_lines_qty" />
+
+                <field name="date_order" />
+                <field name="purchase_id" />
+                <field name="product_qty" />
+                <field name="partner_id" />
+                <field name="default_code" />
+                <field name="pol_description" />
+                <field name="project_id" />
+                <field name="end_customer_id" />
+                <field name="date_planned" />
+
+                <field name="move_ids_date" />
+                <field name="qty_received"/>
+                <field name="move_ids_name" />
+
+                <field name="invoice_lines_date" />
+                <field name="invoice_lines_name" />
+                <field name="receive_status" />
+            </tree> 
+        </field>
+    </record>
+
+    <!-- SEARCH VIEW -->
+    <record id="action_report_purchase_order_search_view" model="ir.ui.view">
+        <field name="name">action_report_purchase_order_search_view</field>
+        <field name="model">report.purchase.order.custom</field>
+        <field name="arch" type="xml">
+            <search string="Search Data...">
+                <field name="purchase_id"/>
+                <field name="purchase_line_id"/>
+                <field name="partner_id" />
+                <field name="product_id" />
+                <field name="project_id" />
+                <field name="end_customer_id" />
+                <field name="purchase_request_lines_name" />
+                <field name="move_ids_name" />
+                <field name="invoice_lines_name" />
+            </search>
+        </field>
+    </record>
+
+    <!-- FORM VIEW -->
+    <record id="action_report_purchase_order_form_view" model="ir.ui.view">
+        <field name="name">action_report_purchase_order_form_view</field>
+        <field name="model">report.purchase.order.custom</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Form">
+                <header>
+                    <field name="purchase_state" widget="statusbar" statusbar_visible="draft,sent,purchase" />
+                </header>
+                <sheet>
+                <group name="head">
+                    <group name="left">
+                        <field name="purchase_id" />
+                        <field name="date_order" />
+                        <field name="partner_id" />
+                        <field name="project_id" />
+                        <field name="end_customer_id" />
+                    </group>
+                    <group name="right">
+                        <field name="purchase_line_id" />
+                        <field name="date_planned" />
+                        <field name="default_code" />
+                        <field name="pol_description" />
+                    </group>
+                </group>
+                <notebook>
+                    <page name="pr_lines" string="Purchase Request(s)">
+                        <field name="purchase_request_lines">
+                            <tree order="date_required desc">
+                                <field name="request_id" />
+                                <field name="date_required" />
+                                <field name="product_id" />
+                                <field name="name" />
+                                <field name="product_qty" />
+                                <field name="request_state" />
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="move_lines" string="Stock Movement(s)">
+                        <field name="move_ids">
+                            <tree order="date desc">
+                                <field name="reference" />
+                                <field name="product_id" />
+                                <field name="product_uom_qty" />
+                                <field name="product_qty" />
+                                <field name="date" />
+                                <field name="location_id" />
+                                <field name="location_dest_id" />
+                                <field name="state" />
+                            </tree>
+                        </field>
+                    </page>
+                    <page name="bill_lines" string="Bill(s)">
+                        <field name="invoice_lines">
+                            <tree order="date desc">
+                                <field name="move_name" />
+                                <field name="date" />
+                                <field name="product_id" />
+                                <field name="name" />
+                                <field name="quantity" />
+                                <field name="parent_state" />
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+            </sheet>
+            </form>
+        </field>
+    </record>
+    
+
+    <record model="ir.actions.act_window" id="action_report_purchase_order_custom">
+        <field name="name">Report Purchase</field>
+        <field name="res_model">report.purchase.order.custom</field>
+        <field name="view_mode">tree,form</field>
+        <field name="context">{'create':False, 'edit':False, 'delete':False}</field>
+    </record>
+
+    <menuitem
+        id="report_purchase_order_menu"
+        name="Purchase Order Line Detail"
+        action="action_report_purchase_order_custom"
+        parent="purchase.purchase_report_main"
+        sequence="3" />
+</odoo>

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="res_partner_customer_id_form_wizard" model="ir.ui.view">
+            <field name="name">res_partner_customer_id_form_wizard</field>
+            <field name="model">res.partner.customerid.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Move Location">
+                    <div class="oe_title">
+                        <h1>
+                            <field name="partner_id" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <group>
+                            <field name="customer_id" readonly="1"/>
+                            <field name="customer_id_new"/>
+                        </group>
+                    </group>
+                    <footer>
+                        <button name="gaskeun" type="object" string="Confirm" class="oe_highlight"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

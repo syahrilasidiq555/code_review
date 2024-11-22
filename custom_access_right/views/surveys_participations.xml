@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="survey_user_input_view_tree_remove_crud" model="ir.ui.view">
+        <field name="name">survey_user_input_view_tree_remove_crud</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="survey_user_input_view_tree_delete" model="ir.ui.view">
+        <field name="name">survey_user_input_view_tree_delete</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_participations_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="survey_user_input_view_form_remove_crud" model="ir.ui.view">
+        <field name="name">survey_user_input_view_form_remove_crud</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="survey_user_input_view_form_update" model="ir.ui.view">
+        <field name="name">survey_user_input_view_form_update</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_participations_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="survey_user_input_view_form_delete" model="ir.ui.view">
+        <field name="name">survey_user_input_view_form_delete</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_participations_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="survey_user_input_view_form_access" model="ir.ui.view">
+        <field name="name">survey_user_input_view_form_access</field>
+        <field name="model">survey.user_input</field>
+        <field name="inherit_id" ref="survey.survey_user_input_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_resend']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_participations_access_button_resend</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_print_answers']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_participations_access_button_print</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- MENU ITEM -->
+    <record id="survey.menu_survey_type_form1" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_participations_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

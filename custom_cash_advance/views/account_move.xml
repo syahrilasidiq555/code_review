@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- FORM VIEW -->
+        <record id="account_customer_invoice_inherit_pos" model="ir.ui.view">
+            <field name="name">account_customer_invoice_inherit_pos</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="custom_sale_order.account_customer_invoice_inherit"/>
+            <field name="arch" type="xml">
+                <group name="other_info" position="inside">
+                    <field name="cash_advance_id" attrs="{'invisible':[('cash_advance_id','=',False)]}"/>
+                </group>
+            </field>
+        </record>
+    </data>
+</odoo>

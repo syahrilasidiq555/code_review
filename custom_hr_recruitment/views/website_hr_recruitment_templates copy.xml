@@ -1,0 +1,1602 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<template id="default_website_description">
+    <!-- Description text and ratings -->
+    <section class="pt32">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 pb32">
+                    <p id="requirements" class="lead">
+                        As an employee of our company, you will <b>collaborate with each department
+                        to create and deploy disruptive products.</b> Come work at a growing company
+                        that offers great benefits with opportunities to moving forward and learn
+                        alongside accomplished leaders. We're seeking an experienced and outstanding
+                        member of staff.
+                        <br/><br/>
+                        This position is both <b>creative and rigorous</b> by nature you need to think
+                        outside the box. We expect the candidate to be proactive and have a "get it done"
+                        spirit. To be successful, you will have solid solving problem skills.
+                    </p>
+                </div>
+                <!-- <div class="col-lg-3 offset-lg-1 pb32">
+                    <div class="s_rating pb8" data-vcss="001" data-icon="fa-star" data-snippet="s_rating">
+                        <h6 class="s_rating_title">Customer Relationship</h6>
+                        <div class="s_rating_icons o_not_editable">
+                            <span class="s_rating_active_icons text-primary">
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                            </span>
+                            <span class="s_rating_inactive_icons text-primary">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="s_rating pb8" data-vcss="001" data-icon="fa-star" data-snippet="s_rating">
+                        <h6 class="s_rating_title">Personal Evolution</h6>
+                        <div class="s_rating_icons o_not_editable">
+                            <span class="s_rating_active_icons text-primary">
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                            </span>
+                            <span class="s_rating_inactive_icons text-primary">
+                            </span>
+                        </div>
+                    </div>
+                    <div class="s_rating pb8" data-vcss="001" data-icon="fa-star" data-snippet="s_rating">
+                        <h6 class="s_rating_title">Autonomy</h6>
+                        <div class="s_rating_icons o_not_editable">
+                            <span class="s_rating_active_icons text-primary">
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                            </span>
+                            <span class="s_rating_inactive_icons text-primary">
+                                <i class="fa fa-star-o"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="s_rating pb8" data-vcss="001" data-icon="fa-star" data-snippet="s_rating">
+                        <h6 class="s_rating_title">Administrative Work</h6>
+                        <div class="s_rating_icons o_not_editable">
+                            <span class="s_rating_active_icons text-primary">
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                            </span>
+                            <span class="s_rating_inactive_icons text-primary">
+                                <i class="fa fa-star-o"/>
+                                <i class="fa fa-star-o"/>
+                                <i class="fa fa-star-o"/>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="s_rating pb8" data-vcss="001" data-icon="fa-star" data-snippet="s_rating">
+                        <h6 class="s_rating_title">Technical Expertise</h6>
+                        <div class="s_rating_icons o_not_editable">
+                            <span class="s_rating_active_icons text-primary">
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                                <i class="fa fa-star"/>
+                            </span>
+                            <span class="s_rating_inactive_icons text-primary">
+                            </span>
+                        </div>
+                    </div>
+                </div> -->
+            </div>
+        </div>
+    </section>
+    <!-- Responsabilities, Must Have and Nice to have -->
+    <!-- <section class="s_comparisons pt24 pb24 bg-200" data-snippet="s_comparisons">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-4 s_col_no_bgcolor pt16 pb16" data-name="Box">
+                    <div class="card bg-primary">
+                        <h4 class="card-header">Responsibilities</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Lead the entire sales cycle</li>
+                            <li class="list-group-item">Achieve monthly sales objectives</li>
+                            <li class="list-group-item">Qualify the customer needs</li>
+                            <li class="list-group-item">Negotiate and contract</li>
+                            <li class="list-group-item">Master demos of our software</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 s_col_no_bgcolor pt16 pb16" data-name="Box">
+                    <div class="card bg-primary">
+                        <h4 class="card-header">Must Have</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Bachelor Degree or Higher</li>
+                            <li class="list-group-item">Passion for software products</li>
+                            <li class="list-group-item">Perfect written English</li>
+                            <li class="list-group-item">Highly creative and autonomous</li>
+                            <li class="list-group-item">Valid work permit for Belgium</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="col-lg-4 s_col_no_bgcolor pt16 pb16" data-name="Box">
+                    <div class="card bg-primary">
+                        <h4 class="card-header">Nice to have</h4>
+                        <ul class="list-group list-group-flush">
+                            <li class="list-group-item">Experience in writing online content</li>
+                            <li class="list-group-item">Additional languages</li>
+                            <li class="list-group-item">Google Adwords experience</li>
+                            <li class="list-group-item">Strong analytical skills</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- What's great -->
+    <!-- <section class="pt40">
+        <div class="container">
+            <h2>What's great in the job?</h2>
+            <br/>
+            <div class="row">
+                <div class="col-lg-8 pb40">
+                    <ul class="lead">
+                        <li>Great team of smart people, in a friendly and open culture</li>
+                        <li>No dumb managers, no stupid tools to use, no rigid working hours</li>
+                        <li>No waste of time in enterprise processes, real responsibilities and autonomy</li>
+                        <li>Expand your knowledge of various business industries</li>
+                        <li>Create content that will help our users on a daily basis</li>
+                        <li>Real responsibilities and challenges in a fast evolving company</li>
+                    </ul>
+                </div>
+                <div class="col-lg-3 offset-lg-1 pb40">
+                    <div>
+                        <h5>Our Product</h5>
+                        <p>Discover our products.</p>
+                        <p><a href="/" class="btn btn-primary" target="_blank"><small><b>READ</b></small></a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- What we offer -->
+    <!-- <section class="s_features pt40 pb40 bg-200" data-name="Features" data-snippet="s_features">
+        <div class="container">
+            <h2>What We Offer</h2>
+            <br/>
+            <p class="lead">
+                Each employee has a chance to see the impact of his work.
+                You can make a real contribution to the success of the company.
+                <br/>
+                Several activities are often organized all over the year, such as weekly
+                sports sessions, team building events, monthly drink, and much more
+            </p>
+            <div class="row pt16">
+                <div class="col-lg-3 text-center pt16 pb32">
+                    <i class="fa fa-2x fa-gift rounded-circle bg-primary m-3"></i>
+                    <h3>Perks</h3>
+                    <p>A full-time position <br/>Attractive salary package.</p>
+                </div>
+                <div class="col-lg-3 text-center pt16 pb32">
+                    <i class="fa fa-2x fa-bar-chart rounded-circle bg-primary m-3"></i>
+                    <h3>Trainings</h3>
+                    <p>12 days / year, including <br/>6 of your choice.</p>
+                </div>
+                <div class="col-lg-3 text-center pt16 pb32">
+                    <i class="fa fa-2x fa-futbol-o rounded-circle bg-primary m-3"></i>
+                    <h3>Sport Activity</h3>
+                    <p>Play any sport with colleagues, <br/>the bill is covered.</p>
+                </div>
+                <div class="col-lg-3 text-center pt16 pb32">
+                    <i class="fa fa-2x fa-coffee rounded-circle bg-primary m-3"></i>
+                    <h3>Eat &amp; Drink</h3>
+                    <p>Fruit, coffee and <br/>snacks provided.</p>
+                </div>
+            </div>
+        </div>
+    </section> -->
+    <!-- Photos -->
+    <!-- <section class="pt24 pb16">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12 col-lg-6 mt16 mb16">
+                    <img alt="" class="img img-fluid" src="/website_hr_recruitment/static/src/img/job_image_3.jpg"/>
+                </div>
+                <div class="col-md-6 col-lg-3 mt16 mb16">
+                    <img alt="" class="img img-fluid" src="/website_hr_recruitment/static/src/img/job_image_2.jpg"/>
+                </div>
+                <div class="col-md-6 col-lg-3 mt16 mb16">
+                    <img alt="" class="img img-fluid" src="/website_hr_recruitment/static/src/img/job_image_4.jpg"/>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6 col-lg-3 mt16 mb16">
+                    <img alt="" class="img img-fluid" src="/website_hr_recruitment/static/src/img/job_image_6.jpg"/>
+                </div>
+                <div class="col-md-6 col-lg-3 mt16 mb16">
+                    <img alt="" class="img img-fluid" src="/website_hr_recruitment/static/src/img/job_image_5.jpg"/>
+                </div>
+                <div class="col-md-12 col-lg-6 mt16 mb16">
+                    <img alt="" class="img img-fluid" src="/website_hr_recruitment/static/src/img/job_image_1.jpg"/>
+                </div>
+            </div>
+        </div>
+    </section> -->
+</template>
+
+<template id="applicant_response" name="response">
+    <t t-call="website.layout">
+        <t t-set="additional_title">Apply Job</t>
+        <div id="wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-12">
+                        <t t-esc="data"/>   
+                        <t t-esc="email"/>   
+                    </div>                      
+                </div>
+            </div>
+        </div>
+    </t>
+</template>
+
+<template id="apply_job">
+    <!-- <t t-call="custom_hr_recruitment.recruitment_frontend_layout"> -->
+    <t t-call="website.layout">
+        
+        <t t-set="additional_title">Apply Job</t>
+
+        <div id="wrap"  class="container" >
+            <h1 class="text-center mt-2">
+                Formulir Lamaran Kerja
+            </h1>
+            <h2 t-if="job" class="text-center text-muted">
+                <span t-field="job.name"/>
+            </h2>
+
+            <span class="hidden" t-att-data-values="{'department_id': job and job.department_id.id or '', 'job_id': job and job.id or ''}" />
+            <div id="jobs_section">
+                <section >
+                    <div class="container">              
+                        
+                        <form action="/applicant/submit" method="post" enctype="multipart/form-data" class="o_mark_required" >
+                            <input type="hidden" name="csrf_token" t-att-value="request.csrf_token()"/>
+                            <div class="s_website_form_rows row s_col_no_bgcolor">
+                                <!-- DATA PERSONAL -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">I. Data Personal</h4>                         
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Nama Lengkap</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="partner_name" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Nama Panggilan</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="nama_panggilan" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Jenis Kelamin</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="jenis_kelamin" required="True">
+                                                <option value="L">Laki-laki</option>
+                                                <option value="P">Perempuan</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Tempat Lahir</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="tempat_lahir" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Tanggal Lahir</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="date" class="form-control s_website_form_input" name="tanggal_lahir" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Agama</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="agama" required="True">
+                                                <option value="islam">Islam</option>
+                                                <option value="kristen">Kristen</option>
+                                                <option value="Katolik">Katolik</option>
+                                                <option value="hindu">Hindu</option>
+                                                <option value="buddha">Buddha</option>
+                                                <option value="lainnya">Lainnya</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">No. KTP</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="no_ktp" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Kewarganegaraan</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="kewarganegaraan" required="True">
+                                                <option value="indonesia">Indonesia</option>
+                                                <option value="asing">Asing</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Alamat Tetap</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="alamat_tetap" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Kota</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="kota_tetap" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Kode POS</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="kode_pos_tetap" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Alamat Sekarang</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="alamat_sekarang" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Kota</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="kota_sekarang" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Kode POS</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="kode_pos_sekarang" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">No. Telepon</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="partner_phone"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">No. Handphone</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="partner_mobile" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Email</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="email" class="form-control s_website_form_input" name="email_from" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">No. SIM A</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="no_sim_a"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">No. SIM B1</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="no_sim_b1"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">No. SIM B2</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="no_sim_b2"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">No. SIM C</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="text" class="form-control s_website_form_input" name="no_sim_c"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Gol. Darah</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="gol_darah" required="True">
+                                                <option value="A">A</option>
+                                                <option value="B">B</option>
+                                                <option value="O">O</option>
+                                                <option value="AB">AB</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Berat Badan (Kg)</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="number" step="0.01" class="form-control s_website_form_input" name="berat_badan"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Tinggi Badan (Cm)</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="number" step="0.01" class="form-control s_website_form_input" name="tinggi_badan"/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Status Pernikahan</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="status_pernikahan" required="True">
+                                                <option value="lajang">Lajang</option>
+                                                <option value="menikah">Menikah</option>
+                                                <option value="bercerai">Bercerai</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                                <!-- PENDIDIKAN -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">II. Pendidikan</h4>                         
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Pendidikan Formal</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="table_pendidikan_formal_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="14%" style="padding: 10px 0 10px 0px;" class="text-center">Jenis Pendidikan</th>
+                                                        <th width="15%" style="padding: 10px 0 10px 0px;" class="text-center">Nama Sekolah</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Jurusan</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Tahun Mulai</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Tahun Akhir</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Ijazah</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">IPK</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Kota</th>
+                                                        <th width="2%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;">
+                                                            <select class="form-control s_website_form_input" name="pendidikan_formal_ids__pendidikan" required="True" style="font-size: 14px;">
+                                                                <option value="SD">SD</option>
+                                                                <option value="SMP">SMP</option>
+                                                                <option value="SMA">SMA</option>
+                                                                <option value="S1">S1</option>
+                                                                <option value="S2">S2</option>
+                                                                <option value="S3">S3</option>
+                                                            </select>
+                                                        </td>
+                                                        <td style="padding: unset;"><input name="pendidikan_formal_ids__nama_sekolah" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pendidikan_formal_ids__jurusan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pendidikan_formal_ids__tahun_mulai" required="" class="form-control" type="number" style="padding: unset;padding-left: 5px;font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pendidikan_formal_ids__tahun_akhir" required="" class="form-control" type="number" style="padding: unset;padding-left: 5px;font-size: 14px;"/></td>
+                                                        <td style="padding: unset;">
+                                                            <select class="form-control s_website_form_input" name="pendidikan_formal_ids__ijazah" required="True" style="font-size: 14px;">
+                                                                <option value="ada">Ada</option>
+                                                                <option value="tidak_ada">Tidak Ada</option>
+                                                            </select>
+                                                        </td>
+                                                        <td style="padding: unset;"><input name="pendidikan_formal_ids__ipk" step="0.01" required="" class="form-control" type="number" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pendidikan_formal_ids__kota" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_pendidikan_formal_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Pendidikan Non Formal</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="table_pendidikan_nonformal_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="14%" style="padding: 10px 0 10px 0px;" class="text-center">Seminar / Kursus / Training</th>
+                                                        <th width="15%" style="padding: 10px 0 10px 0px;" class="text-center">Lembaga Pendidikan</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Tahun Mulai</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Tahun Akhir</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Ijazah</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Tingkat</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Kota</th>
+                                                        <th width="2%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;"><input name="pendidikan_nonformal_ids__courses" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pendidikan_nonformal_ids__lembaga_pendidikan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pendidikan_nonformal_ids__tahun_mulai" required="" class="form-control" type="number" style="padding: unset;padding-left: 5px;font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pendidikan_nonformal_ids__tahun_akhir" required="" class="form-control" type="number" style="padding: unset;padding-left: 5px;font-size: 14px;"/></td>
+                                                        <td style="padding: unset;">
+                                                            <select class="form-control s_website_form_input" name="pendidikan_nonformal_ids__ijazah" required="True" style="font-size: 14px;">
+                                                                <option value="ada">Ada</option>
+                                                                <option value="tidak_ada">Tidak Ada</option>
+                                                            </select>
+                                                        </td>
+                                                        <td style="padding: unset;"><input name="pendidikan_nonformal_ids__tingkat" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pendidikan_nonformal_ids__kota" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_pendidikan_nonformal_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- ORGANISASI -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">III. Organisasi</h4>                         
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Organisasi</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="table_organization_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="25%" style="padding: 10px 0 10px 0px;" class="text-center">Nama Organisasi</th>
+                                                        <th width="25%" style="padding: 10px 0 10px 0px;" class="text-center">Jenis Kegiatan</th>
+                                                        <th width="25%" style="padding: 10px 0 10px 0px;" class="text-center">Jabatan</th>
+                                                        <th width="23%" style="padding: 10px 0 10px 0px;" class="text-center">Tahun</th>
+                                                        <th width="2%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;"><input name="organization_ids__name" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="organization_ids__jenis_kegiatan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="organization_ids__position" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="organization_ids__tahun" required="" class="form-control" type="number" style="padding: unset;padding-left: 5px;font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_organization_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Di pendidikan manakah Saudara merasa paling puas dengan prestasi yang dicapai dan apa sebabnya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="pendidikan_terpuas" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Di pendidikan manakah Saudara merasa paling tidak puas dan apa sebabnya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="pendidikan_tertidakpuas" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Siapa yang membiayai pendidikan saudara selama ini?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="pendidikan_pembiaya" required=""/>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <!-- Keluarga -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">IV. Keluarga</h4>                         
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Keluarga</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="table_family" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Status</th>
+                                                        <th width="14%" style="padding: 10px 0 10px 0px;" class="text-center">Nama Lengkap</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Tempat Lahir</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Tanggal Lahir</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">No. Handphone</th>
+                                                        <th width="15%" style="padding: 10px 0 10px 0px;" class="text-center">Alamat</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Pendidikan</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Pekerjaan</th>
+                                                        <th width="2%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <tr class="input_data">
+                                                        <td style="padding: unset;"><p class="my-1" style="font-weight: bold; text-align: center; vertical-align: middle; margin-bottom: 0;">Ayah</p></td>
+                                                        <td style="padding: unset;"><input name="ayah_nama_lengkap" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ayah_tempat_lahir" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ayah_tanggal_lahir" required="" readonly="" class="form-control usedatepicker" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ayah_no_handphone" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ayah_alamat" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ayah_pendidikan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ayah_pekerjaan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"></td>
+                                                    </tr>
+                                                    <tr class="input_data">
+                                                        <td style="padding: unset;"><p class="my-1" style="font-weight: bold; text-align: center; vertical-align: middle; margin-bottom: 0;">Ibu</p></td>
+                                                        <td style="padding: unset;"><input name="ibu_nama_lengkap" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ibu_tempat_lahir" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ibu_tanggal_lahir" required="" readonly="" class="form-control usedatepicker" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ibu_no_handphone" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ibu_alamat" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ibu_pendidikan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="ibu_pekerjaan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"></td>
+                                                    </tr>
+                                                    <tr class="input_data">
+                                                        <td style="padding: unset;">
+                                                            <select class="form-control s_website_form_input" name="jenis_pasangan" required="True" style="font-size: 14px;text-align: center;font-weight: bold;">
+                                                                <option value="istri">Istri</option>
+                                                                <option value="suami">Suami</option>
+                                                            </select>
+                                                        </td>
+                                                        <td style="padding: unset;"><input name="pasangan_nama_lengkap" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pasangan_tempat_lahir" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pasangan_tanggal_lahir" required="" readonly="" class="form-control usedatepicker" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pasangan_no_handphone" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pasangan_alamat" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pasangan_pendidikan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="pasangan_pekerjaan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Anak</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="table_anak_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="14%" style="padding: 10px 0 10px 0px;" class="text-center">Nama Anak</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Tempat Lahir</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Tanggal Lahir</th>
+                                                        <th width="15%" style="padding: 10px 0 10px 0px;" class="text-center">Jenis Kelamin</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">No. Handphone</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Pendidikan</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Pekerjaan</th>
+                                                        <th width="2%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;"><input name="anak_ids__name" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="anak_ids__tempat_lahir" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="anak_ids__tanggal_lahir" required="" readonly="" class="form-control usedatepicker" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;">
+                                                        <select class="form-control s_website_form_input" name="anak_ids__jenis_kelamin" required="True" style="font-size: 14px;text-align: center;font-weight: bold;">
+                                                            <option value="L">Laki-laki</option>
+                                                            <option value="P">Perempuan</option>
+                                                        </select>
+                                                        </td>
+                                                        <td style="padding: unset;"><input name="anak_ids__no_handphone" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="anak_ids__pendidikan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="anak_ids__pekerjaan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_anak_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Saudara Kandung</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="table_saudara_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="14%" style="padding: 10px 0 10px 0px;" class="text-center">Nama</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">Tempat Lahir</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Tanggal Lahir</th>
+                                                        <th width="15%" style="padding: 10px 0 10px 0px;" class="text-center">Jenis Kelamin</th>
+                                                        <th width="11%" style="padding: 10px 0 10px 0px;" class="text-center">No. Handphone</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Pendidikan</th>
+                                                        <th width="12%" style="padding: 10px 0 10px 0px;" class="text-center">Pekerjaan</th>
+                                                        <th width="2%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;"><input name="saudara_ids__name" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="saudara_ids__tempat_lahir" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="saudara_ids__tanggal_lahir" required="" readonly="" class="form-control usedatepicker" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;">
+                                                        <select class="form-control s_website_form_input" name="saudara_ids__jenis_kelamin" required="True" style="font-size: 14px;text-align: center;font-weight: bold;">
+                                                            <option value="L">Laki-laki</option>
+                                                            <option value="P">Perempuan</option>
+                                                        </select>
+                                                        </td>
+                                                        <td style="padding: unset;"><input name="saudara_ids__no_handphone" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="saudara_ids__pendidikan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="saudara_ids__pekerjaan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_saudara_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apakah Saudara masih mendapat bantuan?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="is_saudara_masih_dibantu" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Bila "YA" dari siapa?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="saudara_bantuan_dari" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Jenis Bantuan dan Bentuknya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="jenis_bentuk_bantuan" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apakah Saudara mempunyai tanggungan lain selain istri dan anak Saudara sendiri?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="is_tanggungan_lain" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Bila "YA" siapa dan berapa besarnya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="tanggungan_lain" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apakah Saudara pernah meninggalkan keluarga?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="is_meninggalkan_keluarga" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Untuk keperluan apa dan berapa lama?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="keperluan_meninggalkan_keluarga" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Rumah tempat tinggal Saudara saat ini, apakah:</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control s_website_form_input" name="rumah_tinggal" required="True">
+                                                <option value="pribadi">Rumah Pribadi</option>
+                                                <option value="keluarga">Rumah Keluarga Istri / Suami</option>
+                                                <option value="orang_tua">Rumah Orang Tua</option>
+                                                <option value="kontrakan">Rumah Kontrakan</option>
+                                                <option value="kost">Pondokan / Kost</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Pengalaman Kerja -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">V. Pengalaman Kerja</h4>                         
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Pengalaman Kerja (Urutkan pengalaman kerja anda dimulai dari yang terakhir)</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12 mb-3">
+                                            <div id="tbl_work_experience_ids" style="border: 1px solid #DEE2E6;">
+                                                <!-- <div class="col-sm-12 py-2" style="border-bottom: 1px solid #DEE2E6;">
+                                                    <div class="row">
+                                                        <div class="col-sm-6">
+                                                            <div class="mb-2">
+                                                                <label for="work_experience_ids__name" class="form-label">Nama Perusahaan</label>
+                                                                <input type="text" required="true" class="form-control" id="work_experience_ids__name" name="work_experience_ids__name" />
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="work_experience_ids__alamat" class="form-label">Alamat lengkap &amp; No Telepon</label>
+                                                                <input type="text" required="true" class="form-control" id="work_experience_ids__alamat" name="work_experience_ids__alamat" />
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="work_experience_ids__jobdesk" class="form-label">Tugas &amp; Tanggung Jawab</label>
+                                                                <textarea required="true" class="form-control" id="work_experience_ids__jobdesk" name="work_experience_ids__jobdesk" rows="6"></textarea>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-sm-6">
+                                                            <div class="row">
+                                                                <div class="col-sm-6 mb-2">
+                                                                    <label for="work_experience_ids__mulai" class="form-label">Mulai</label>
+                                                                    <input type="date" required="true" class="form-control" id="work_experience_ids__mulai" name="work_experience_ids__mulai" />
+                                                                </div>
+                                                                <div class="col-sm-6 mb-2">
+                                                                    <label for="work_experience_ids__selesai" class="form-label">Sampai</label>
+                                                                    <input type="date" required="true" class="form-control" id="work_experience_ids__selesai" name="work_experience_ids__selesai"/>
+                                                                </div>
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="work_experience_ids__jabatan" class="form-label">Jabatan</label>
+                                                                <input type="text" required="true" class="form-control" id="work_experience_ids__jabatan" name="work_experience_ids__jabatan" />
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="work_experience_ids__salary" class="form-label">Gaji</label>
+                                                                <input type="number" step="0.01" required="true" class="form-control" id="work_experience_ids__salary" name="work_experience_ids__salary" />
+                                                            </div>
+                                                            <div class="mb-2">
+                                                                <label for="work_experience_ids__alasan_keluar" class="form-label">Alasan Keluar</label>
+                                                                <textarea required="true" class="form-control" id="work_experience_ids__alasan_keluar" name="work_experience_ids__alasan_keluar" rows="3"></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="row">
+                                                        <div class="col-sm-6 work_experience_ids_delete" style="color: red; cursor:pointer;"><i class="fa fa-trash"></i> Delete</div>
+                                                    </div>
+                                                </div> -->
+                                                <div class="col-sm-12 py-2 tbl_work_experience_ids_add_line" style="cursor:pointer;"><b style="font-size: 14px;">Add working experience</b></div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Berapa banyak bawahan yang pernah Saudara pimpin?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="number" class="form-control s_website_form_input" name="jumlah_bawahan" required=""/>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apakah saudara pernah melakukan perubahan/pembaharuan di perusahaan tertentu?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="is_buat_pembaharuan" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Bila "YA" perubahan/pembaharuan apa?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="pembaharuan_dibuat" required=""/>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Kemampuan Berbahasa -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">VI. Kemampuan Berbahasa</h4>                         
+                                    </div>
+                                    <div class="row mb-2">
+                                        <div class="col-sm-6">
+                                            <label class="form-label">Bahasa Asing</label>
+                                            <table class="table table-bordered" id="table_foreign_language_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="65%" style="padding: 10px 0 10px 0px;" class="text-center">Nama</th>
+                                                        <th width="31%" style="padding: 10px 0 10px 0px;" class="text-center">Tingkat</th>
+                                                        <th width="4%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;"><input name="foreign_language_ids__name" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;">
+                                                        <select class="form-control s_website_form_input" name="foreign_language_ids__tingkat" required="True" style="font-size: 14px;text-align: center;font-weight: bold;">
+                                                            <option value="aktif">Aktif</option>
+                                                            <option value="pasif">Pasif</option>
+                                                        </select>
+                                                        </td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_foreign_language_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <label class="form-label">Bahasa Daerah</label>
+                                            <table class="table table-bordered" id="table_local_language_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="65%" style="padding: 10px 0 10px 0px;" class="text-center">Nama</th>
+                                                        <th width="31%" style="padding: 10px 0 10px 0px;" class="text-center">Tingkat</th>
+                                                        <th width="4%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;"><input name="local_language_ids__name" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;">
+                                                        <select class="form-control s_website_form_input" name="local_language_ids__tingkat" required="True" style="font-size: 14px;text-align: center;font-weight: bold;">
+                                                            <option value="aktif">Aktif</option>
+                                                            <option value="pasif">Pasif</option>
+                                                        </select>
+                                                        </td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_local_language_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Keterampilan -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">VII. Keterampilan</h4>                         
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Keterampilan</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="table_skill_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="65%" style="padding: 10px 0 10px 0px;" class="text-center">Jenis Keterampilan</th>
+                                                        <th width="33%" style="padding: 10px 0 10px 0px;" class="text-center">Tingkatan</th>
+                                                        <th width="2%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;"><input name="skill_ids__name" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;">
+                                                        <select class="form-control s_website_form_input" name="skill_ids__tingkat" required="True" style="font-size: 14px;text-align: center;font-weight: bold;">
+                                                            <option value="baik_sekali">Baik Sekali</option>
+                                                            <option value="baik">Baik</option>
+                                                            <option value="cukup">Cukup</option>
+                                                            <option value="kurang">Kurang</option>
+                                                        </select>
+                                                        </td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_skill_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Minat dan Konsep Diri -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">VII. Minat dan Konsep Diri</h4>                         
+                                    </div>
+
+                                    <!-- <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Jabatan apa yang Saudara lamar?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="text" class="form-control s_website_form_input" name="jabatan_dilamar" readonly=""/>
+                                        </div>
+                                    </div> -->
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Mengapa ingin bekerja pada jabatan tersebut?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="mengapa_melamar"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apa yang Saudara ketahui tentang jabatan tersebut?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="yg_diketahui_dr_jabatan"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apa Saudara beresedia ditempatkan pd jabatan lain?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="is_dipindah_jabatan" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Bila "YA" apa alasannya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="alasan_pindah_jabatan"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Lingkungan kerja apa yang Saudara senangi?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <select class="form-control s_website_form_input" name="lingkungan_disenangi" required="True">
+                                                <option value="gudang">Gudang</option>
+                                                <option value="kantor">Kantor</option>
+                                                <option value="lapangan">Lapangan</option>
+                                                <option value="laboratorium">Laboratorium</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apa sebabnya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="alasan_lingkungan_tsb"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apa cita-cita hidup Saudara?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="cita2"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apa Hobi / Kegemaran Saudara?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="kegemaran"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Bagaimana Saudra mengisi waktu luang Saudara?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="kegiatan_luang"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Sebutkan 3 (tiga) kelebihan Saudara (Sifat/Karakter)?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="kelebihan"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Sebutkan 3 (tiga) kekurangan Saudara (Sifat/Karakter)?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="kekurangan"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Riwayat Kesehatan -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">IX. Riwayat Kesehatan</h4>                         
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apakah Saudara pernah menderita sakit keras?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="pernah_sakit_keras" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Jika "YA" Sakit apa, berapa lama dan apa akibatnya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="sakit_keras_apa"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apakah kesehatan keluarga baik-baik saja?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="kesehatan_keluarga_baik" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Jika "TIDAK", siapa yang kerap mendapat gangguan sakit dan sakit apa?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="keluarga_sakit_apa"></textarea>
+                                        </div>
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apakah Saudara pernah mengalamai kecelakaan berat?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="pernah_kecelakaan" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Bila "YA", kecelakaan apa, kapan dan apa akibatnya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <textarea class="form-control s_website_form_input" required="true" name="kecelakaan_apa"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Lain-lain -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">X. Lain-lain</h4>                         
+                                    </div>
+
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Berapa Gaji minimal yang Saudara Harapkan?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <input type="number" step="0.01" required="true" class="form-control" name="harapan_gaji" />
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Fasilitas apa yang Saudara harapkan disamping Gaji?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="harapan_fasilitas"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Kapan Saudara dapat mulai bekerja?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="kesiapan_bekerja"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Bersediakan Saudara ditempatkan di cabang kami di luar kota bandung?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="bersedia_diluar_bdg" required="True">
+                                                <option value="True">Ya</option>
+                                                <option value="False">Tidak</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Bila "TIDAK", mengapa?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="alasan_tidak_diluar_bdg"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Mengapa Saudara ingin bergabung dengan PT Bandung Indah Gemilang? Jelaskan alasan Saudara!</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="alasan_bekerja_disini"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Apakah Saudara sudah pernah melamar di perusahaan kami sebelumnya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="sudah_pernah_melamar" required="True">
+                                                <option value="True">Sudah</option>
+                                                <option value="False">Belum</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Kalau "SUDAH", kapan dan untuk jabatan apa?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="kapan_melamar"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Kendaraan apa yang Saudara miliki saat ini?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="kendaraan"></textarea>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Pernahkan Saudara mengikuti psikotest sebelumnya?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <select class="form-control s_website_form_input" name="pernah_psikotest" required="True">
+                                                <option value="True">Pernah</option>
+                                                <option value="False">Belum</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-3">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Jika "PERNAH", kapan dan dimana?</span>
+                                            <span class="text-danger"> *</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <textarea class="form-control s_website_form_input" required="true" name="terakhir_psikotest"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Referensi -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">X. Referensi</h4>                         
+                                    </div>
+
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Adakah kenalan atau family Saudara yang berkerja di PT Bandung Indah Gemilang?</span>
+                                        </label>
+                                        <div class="col-sm-6">
+                                            <div class="row mb-2 px-3">
+                                                <label class="form-label">Nama</label>
+                                                <input type="text" class="form-control" name="nama_kenalan1" />
+                                            </div>
+                                            <div class="row mb-2 px-3">
+                                                <label class="form-label">Bagian</label>
+                                                <input type="text" class="form-control" name="bagian_kenalan1" />
+                                            </div>
+                                        </div>
+                                        <div class="col-sm-6">
+                                            <div class="row mb-2 px-3">
+                                                <label class="form-label">Nama</label>
+                                                <input type="text" class="form-control" name="nama_kenalan2" />
+                                            </div>
+                                            <div class="row mb-2 px-3">
+                                                <label class="form-label">Bagian</label>
+                                                <input type="text" class="form-control" name="bagian_kenalan2" />
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="row mb-2">
+                                        <label class="col-form-label col-sm-12 s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Sebutkan nama orang-orang yang Saudara kenal di luar perusahaan kami:</span>
+                                        </label>
+                                        <div class="col-sm-12">
+                                            <table class="table table-bordered" id="table_reference_ids" style="font-size: 14px;" data-question-type="table">
+                                                <thead>
+                                                    <tr>
+                                                        <th width="25%" style="padding: 10px 0 10px 0px;" class="text-center">Nama</th>
+                                                        <th width="25%" style="padding: 10px 0 10px 0px;" class="text-center">Nama Perusahaan</th>
+                                                        <th width="23%" style="padding: 10px 0 10px 0px;" class="text-center">Jabatan</th>
+                                                        <th width="25%" style="padding: 10px 0 10px 0px;" class="text-center">Alamat</th>
+                                                        <th width="2%" style="padding: 10px 0 10px 0px;    border-left: unset !important;" class="text-center"></th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody>
+                                                    <!-- <tr class="input_data">
+                                                        <td style="padding: unset;"><input name="reference_ids__name" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="reference_ids__nama_perusahaan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="reference_ids__jabatan" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;"><input name="reference_ids__alamat" required="" class="form-control" type="text" style="font-size: 14px;"/></td>
+                                                        <td style="padding: unset;" class="text-center"><i class="fa fa-trash" style="cursor:pointer;"></i></td>
+                                                    </tr> -->
+                                                    <tr class="table_reference_ids_add_line" style="cursor:pointer;">
+                                                        <td colspan="8"><b>Add a line</b></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    
+                                </div>
+
+                                <!-- Upload File -->
+                                <div class="form-group col-md-12">
+                                    <div class="row mb-2">
+                                        <h4 style="font-weight:bold;">XI. Upload File</h4>                         
+                                    </div>
+
+                                    <div class="form-group col-md-auto s_website_form_custom">
+                                        <div class="row">
+                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                <span class="s_website_form_label_content">CV</span>
+                                                <span class="text-danger"> *</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="file" class="form-control s_website_form_input" accept="image/*,application/pdf" required="" name="cv"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-auto s_website_form_custom">
+                                        <div class="row">
+                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                <span class="s_website_form_label_content">Ijazah</span>
+                                                <span class="text-danger"> *</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="file" class="form-control s_website_form_input" accept="image/*,application/pdf" required="" name="ijazah"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-auto s_website_form_custom">
+                                        <div class="row">
+                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                <span class="s_website_form_label_content">ktp</span>
+                                                <span class="text-danger"> *</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="file" class="form-control s_website_form_input" accept="image/*,application/pdf" required="" name="ktp"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group col-md-auto s_website_form_custom">
+                                        <div class="row">
+                                            <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                                <span class="s_website_form_label_content">npwp</span>
+                                                <span class="text-danger"> *</span>
+                                            </label>
+                                            <div class="col-sm">
+                                                <input type="file" class="form-control s_website_form_input" required="" name="npwp"/>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="form-group row form-field">
+                                        <div>
+                                            <label>
+                                                <input type="checkbox" class="o_website_form_input" name="is_setuju" value="True" required=""/>
+                                                <span class="s_website_form_label_content">Keterangan yang saya berikan ini saya buat dengan sebenarnya tanpa ada paksaan atau tekanan dari pihak manapun, apabila di kemudian hari terbukti tidak benar, saya bersedia menerima sanksi / tindakan dari Perusahaan berupa pemutusan hubungan kerja secara sepihak oleh Perusahaan tanpa harus membayar kompensasi apapun untuk diri saya dan saya bersedia untuk dituntut secara hukum karena saya telah memberikan informasi yang tidak benar (palsu) kepada Perusahaan.</span>
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+
+                                <div class="form-group col-md-12" style="display:none">
+                                    <div class="row">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Job</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="hidden" class="form-control s_website_form_input" readonly="" name="job_id" t-att-value="job and job.id or ''"/>
+                                        </div>
+                                    </div>
+                                </div> 
+                                <div class="form-group col-md-12 s_website_form_field" style="display:none">
+                                    <div class="row">
+                                        <label class="col-form-label col-sm-auto s_website_form_label" style="width: 200px">
+                                            <span class="s_website_form_label_content">Department</span>
+                                        </label>
+                                        <div class="col-sm">
+                                            <input type="hidden" class="form-control s_website_form_input" readonly="" name="department_id" t-att-value="job and job.department_id.id or ''"/>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12 " >
+                                    <button type="submit" class="btn btn-primary btn-lg s_website_form_send">Kirim</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </section>
+            </div>
+            <div class="oe_structure mt-2"/>
+        </div>
+    </t>
+</template>
+
+<!-- <template id="recruitment_frontend_layout" name="Custom Recruitment Frontend Layout" inherit_id="website.layout" primary="True">
+    <xpath expr="//head/script[last()]" position="after">
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/@alpinejs/mask@3.x.x/dist/cdn.min.js" />
+        <script defer="defer" src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js" />
+        
+    </xpath>
+</template> -->
+</odoo>

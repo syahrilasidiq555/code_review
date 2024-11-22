@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{{description}}">
+    <title>{% block title %} Odoo - RDC {% endblock %}</title>
+    <link href="/custom_web_rdc/static/src/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Krub:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    
+    <link href="/custom_web_rdc/static/src/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
+    <link href="/custom_web_rdc/static/src/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
+    {% block css_assets %}{% endblock %}
+    <link href="/custom_web_rdc/static/src/css/style.css" rel="stylesheet">
+
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.3/dist/cdn.min.js"></script>
+
+</head>
+
+
+<body>
+    <header id="header" class="fixed-top" x-data x-init>
+        <div class="container d-flex align-items-center justify-content-between">
+
+            <a href="/" class="logo">
+                <img src="https://rumahdukacarolus.com/cfind/source/thumb/images/cover_w168_h166_logo.png"
+                    class="img img-fluid" alt="Rumah Duka Carolus" class="img-fluid">
+                <!-- <img src="assets/img/logo.png" alt="" class="img-fluid"> -->
+            </a>
+
+            <nav id="navbar" class="navbar">
+                <ul>
+                    <li><a class="nav-link scrollto" 
+                        x-bind:class="location.pathname == '/' ? 'active' : ''"
+                        x-bind:href="location.pathname == '/' ? '#hero' : '/'">Home</a></li>
+                    <li class="dropdown"><a class="nav-link scrollto" x-bind:href="location.pathname == '/' ? '#about-us' : '/#about-us'"><span>About Us</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a x-bind:href="location.pathname == '/' ? '#about-us' : '/#about-us'">About Us</a></li>
+                            <li><a x-bind:href="location.pathname == '/' ? '#about-us' : '/#about-us'">Visi</a></li>
+                            <li><a x-bind:href="location.pathname == '/' ? '#about-us' : '/#about-us'">Misi</a></li>
+                        </ul>
+                    </li>
+                    <li class="dropdown"><a class="nav-link scrollto" x-bind:href="location.pathname == '/' ? '#services' : '/#services'"><span>Services</span> <i class="bi bi-chevron-down"></i></a>
+                        <ul>
+                            <li><a x-bind:href="location.pathname == '/' ? '#services' : '/#services'">Persemayaman</a></li>
+                            <li><a x-bind:href="location.pathname == '/' ? '#services' : '/#services'">Columbarium</a></li>
+                            <li><a x-bind:href="location.pathname == '/' ? '#services' : '/#services'">Krematorium</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="nav-link scrollto" x-bind:href="location.pathname == '/' ? '#facility' : '/#facility'">Facility</a></li>
+                    <li><a class="nav-link scrollto" x-bind:href="location.pathname == '/' ? '#information' : '/#information'">Information</a></li>
+                    <li><a class="nav-link scrollto" x-bind:href="location.pathname == '/' ? '#contact' : '/#contact'">Contact Us</a></li>
+                    
+                    {% if not user %}
+                    <li><a href="/web/login" class="nav-link" x-bind:class="location.pathname == '/web/login' ? 'active' : ''">Sign In</a></li>
+                    {% else %}
+                        <li class="dropdown">
+                            <a href="#"><span>Dashboard</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                <li><a href="/dashboard/acara">Dashboard Acara</a></li>
+                                <li><a href="/dashboard/columbarium">Dashboard Columbarium</a></li>
+                                <li><a href="/dashboard/semayam">Dashboard Ruang Semayam</a></li>
+                            </ul>
+                        </li>
+                        <li class="dropdown">
+                            <a href="#"><span>{{user.name}}</span> <i class="bi bi-chevron-down"></i></a>
+                            <ul>
+                                {% if not user.share %}
+                                    <li><a class="dropdown-item" href="/web">Admin Panel</a></li>
+                                {% endif %}
+                                <li><a href="#">My Account</a></li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li><a class="dropdown-item" href="/web/session/logout?redirect=/">Logout</a></li>
+                            </ul>
+                        </li>
+                    {% endif %}
+
+                    </li>
+                </ul>
+                <i class="bi bi-list mobile-nav-toggle"></i>
+
+            </nav>
+
+        </div>
+    </header>
+    
+    {% block content %}
+    {% endblock %}
+
+    <footer id="footer" x-data x-init>
+        <div class="footer-top">
+            <div class="container">
+                <div class="row">
+
+                    <div class="col-lg-3 col-md-6 footer-contact">
+                        <h3>Rumah Duka Carolus</h3>
+                        <p>
+                            Jl. Salemba Raya No.41, RT.3/RW.5<br> 
+                            Paseban, Kec. Senen, Kota Jakarta Pusat, 10440 <br>
+                            Daerah Khusus Ibukota Jakarta<br>
+                            <strong>Phone:</strong> (021) 3920759<br>
+                            <strong>Email:</strong> info@example.com<br>
+                        </p>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Useful Links</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a class="scrollto" x-bind:href="location.pathname == '/' ? '#hero' : '/'">Home</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a class="scrollto" x-bind:href="location.pathname == '/' ? '#about-us' : '/#about-us'">About us</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a class="scrollto" x-bind:href="location.pathname == '/' ? '#services' : '/#services'">Services</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a class="scrollto" x-bind:href="location.pathname == '/' ? '#facility' : '/#facility'">Facility</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a class="scrollto" x-bind:href="location.pathname == '/' ? '#contact' : '/#contact'">Contact Us</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Services</h4>
+                        <ul>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Persemayaman</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Columbarium</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Krematorium</a></li>
+                            <li><i class="bx bx-chevron-right"></i> <a href="#">Others</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="col-lg-3 col-md-6 footer-links">
+                        <h4>Our Social Networks</h4>
+                        <p>Cras fermentum odio eu feugiat lide par naso tierra videa magna derita valies</p>
+                        <div class="social-links mt-3">
+                            <a href="#" class="twitter"><i class="bx bxl-twitter"></i></a>
+                            <a href="#" class="facebook"><i class="bx bxl-facebook"></i></a>
+                            <a href="#" class="instagram"><i class="bx bxl-instagram"></i></a>
+                            <a href="#" class="google-plus"><i class="bx bxl-skype"></i></a>
+                            <a href="#" class="linkedin"><i class="bx bxl-linkedin"></i></a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+        <div class="container py-4">
+            <div class="copyright">
+                © Copyright <strong><span>DSI</span></strong>. All Rights Reserved
+            </div>
+            <div class="credits">
+                Designed by <a href="https://DwidasaSamsaraIndonesia.com/">DwidasaSamsaraIndonesia</a>
+            </div>
+        </div>
+    </footer>
+    <script src="/custom_web_rdc/static/src/vendor/bootstrap/js/bootstrap.bundle.min.js" ></script>
+    <!-- Template Main JS File -->
+    <script src="/custom_web_rdc/static/src/js/main.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <record id="dms.menu_dms_settings_general" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_general_setting'))]" />
+    </record>
+    <record id="dms.menu_dms_tag" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_tags'))]" />
+    </record>
+    <record id="dms.menu_dms_category" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_categories'))]" />
+    </record>
+    <record id="dms.menu_dms_category" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_categories'))]" />
+    </record>
+    <record id="dms.menu_dms_storage" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_storages'))]" />
+    </record>
+    <record id="dms.menu_dms_file_migration" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_migration'))]" />
+    </record>
+    <record id="dms.menu_dms_access_groups" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_configuration_access_group'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

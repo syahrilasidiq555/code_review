@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- INHERIT FORM VIEW -->
+    <record id="view_picking_form_inherit" model="ir.ui.view">
+        <field name="name">view_picking_form_inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="stock.view_picking_form"/>
+        <field name="arch" type="xml">
+            <!-- add approval button -->
+            <xpath expr="//button[@name='button_validate'][1]" position="attributes">
+                <attribute name="invisible">state in ('draft', 'confirmed', 'done', 'cancel', 'rejected', 'to approve')</attribute>
+            </xpath>
+            <xpath expr="//button[@name='button_validate'][2]" position="attributes">
+                <attribute name="invisible">state in ('waiting', 'assigned', 'done', 'cancel', 'rejected','to approve')</attribute>
+            </xpath>
+
+            <xpath expr="//button[@name='button_validate']" position="after">
+                <button name="button_approve" type="object" string="Approve" class="oe_highlight"
+                    invisible="not is_user_approve_now"
+                    confirm="Are you sure?"/>
+                <button name="button_reject" type="object" string="Reject" 
+                    invisible="not is_user_approve_now"
+                    confirm="Are you sure?"/>
+                <button name="button_draft" type="object" string="Set to Draft" 
+                    invisible="state != 'rejected'"
+                    confirm="Are you sure?"/>
+            </xpath>
+
+            <xpath expr="//field[@name='picking_type_id']" position="after">
+                <field name="loa_type"
+                    readonly="state not in ('draft','assigned')"
+                    required="state == 'draft' and picking_type_code in ('internal','outgoing')"
+                    invisible="picking_type_code not in ('internal','outgoing')"
+                    options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"
+                    force_save="1"/>
+            </xpath>
+
+            
+            <!-- add approval information -->
+            <xpath expr="//notebook" position="inside">
+                <page name="approval_information" string="Approval Information" invisible="not loa_type">
+                    <group>
+                        <field name="next_approve_user_id"/>
+                        <field name="is_user_approve_now" invisible="1"/>
+                        <!-- <field name="is_amount" readonly="1" force_save="1"/>
+                        <field name="from_amount" readonly="1" force_save="1"/>
+                        <field name="to_amount" readonly="1" force_save="1"/> -->
+                    </group>
+                    <field name="approval_info_ids" readonly="1" force_save="1">
+                        <tree>
+                            <field name="sequence" optional="hide"/>
+                            <field name="loa_id" optional="hide"/>
+                            <field name="model_id" optional="hide"/>
+                            <field name="trx_id" invisible="True"/>
+                            <field name="description"/>
+                            <field name="user_id"/>
+                            <!-- <field name="job_id"/> -->
+                            <field name="is_approve"/>
+                            <field name="approve_user_id"/>
+                            <field name="approve_date"/>
+                            <field name="sign_signature" invisible="True"/>
+                        </tree>
+                        <form>
+                            <group name="head">
+                                <group name="left">
+                                    <field name="sequence" />
+                                    <field name="loa_id" />
+                                    <field name="model_id" />
+                                    <field name="description"/>
+                                </group>
+                                <group name="right">
+                                    <field name="user_id"/>
+                                    <!-- <field name="job_id"/> -->
+                                    <field name="is_approve"/>
+                                    <field name="approve_user_id"/>
+                                    <field name="approve_date"/>
+                                    <field name="sign_signature" widget="signature"/>
+                                </group>
+                                
+                            </group>
+                        </form>
+                    </field>
+                </page>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- INHERIT TREE VIEW -->
+    <!-- <record id="purchase_order_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_tree_inherit</field>
+        <field name="model">stock.picking</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="inside">
+                <header>
+                    <button name="button_multi_approve" type="object" string="Approve" confirm="Are you sure?"/>
+                    <button name="button_multi_reject" type="object" string="Reject" confirm="Are you sure?"/>
+                </header>
+            </xpath>
+        </field>
+    </record> -->
+
+</odoo>

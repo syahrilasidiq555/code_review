@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates xml:space="preserve">
+    <t t-inherit="point_of_sale.ClientLine" t-inherit-mode="extension" owl="1">
+        <xpath expr="//td[3]" position="attributes">
+            <attribute name="style">display:none;</attribute>
+        </xpath>
+        <xpath expr="//td[@class='client-line-email']" position="attributes">
+            <attribute name="style">display:none;</attribute>
+        </xpath>
+
+        <xpath expr="//td[@class='client-line-email']" position="after">
+            <td class="client-line-ruangan">
+                <t t-esc="props.partner.ruangan_id[1] or ''" />
+                <span t-if="highlight"><br/></span>
+            </td>
+            <td class="client-line-penanggungjawab">
+                <t t-esc="props.partner.penanggungjawab or ''" />
+                <span t-if="highlight"><br/></span>
+            </td>
+            <!-- <td class="client-line-tanggal_kedatangan">
+                <t t-esc="props.partner.tanggal_kedatangan or ''" />
+                <span t-if="highlight"><br/></span>
+            </td> -->
+        </xpath>
+    </t>
+
+</templates>

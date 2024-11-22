@@ -1,0 +1,409 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="email_template_data_applicant_psychotest" model="mail.template">
+            <field name="name">Applicant: Psychotest</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="subject">Your Job Application: {{ object.job_id.name }}</field>
+            <field name="email_to">{{ (not object.partner_id and object.email_from or '') }}</field>
+            <field name="partner_to">{{ object.partner_id.id or '' }}</field>
+            <field name="body_html" type="html">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="background-color: white; border-collapse: collapse; margin-left: 20px;">
+    <tr>
+        <td valign="top" style="padding: 0px 10px;">
+            <div style="text-align: center">
+                <h2>Congratulations!</h2>
+                <div style="color:grey;">Your resume has been positively reviewed.</div>
+                <img src="/hr_recruitment/static/src/img/congratulations.png" alt="Congratulations!" style="width:175px;margin:20px 0;"/>
+            </div>
+            <div style="font-size: 13px; margin: 0px; padding: 0px;">
+                We confirm, your application has been short listed for a call or an Psychology Test.
+                <br/><br/>
+                <div t-if="'website_url' in object.job_id and object.job_id.website_url" style="padding: 16px 8px 16px 8px;">
+                    <a t-att-href="object.job_id.website_url"
+                        style="background-color: #875a7b; text-decoration: none; color: #fff; padding: 8px 16px 8px 16px; border-radius: 5px;">Job Description</a>
+                </div>
+
+                <t t-if="object.user_id">
+                    You will soon be contacted by:
+                    <table>
+                        <tr>
+                            <td width="75">
+                                <img t-attf-src="/web/image/res.users/{{ object.user_id.id }}/avatar_128" alt="Avatar" style="vertical-align:baseline; width: 64px; height: 64px; object-fit: cover;" />
+                            </td>
+                            <td>
+                                <strong t-out="object.user_id.name or ''">HR</strong><br/>
+                                <span>Email: <t t-out="object.user_id.email or ''">hr@big.co.id</t></span><br/>
+                                <!-- <span>Phone: <t t-out="object.user_id.phone or ''">+1 650-123-4567</t></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                    <br/><br/>
+                </t>
+                See you soon,
+                <div style="font-size: 11px; color: grey;">
+                    -- <br/>
+                    The HR Team
+                    <t t-if="'website_url' in object.job_id and hasattr(object.job_id, 'website_url') and object.job_id.website_url">
+                        Discover <a href="/jobs" style="text-decoration:none;color:#717188;">all our jobs</a>.<br/>
+                    </t>
+                </div>
+
+                <hr width="97%" style="background-color: rgb(204,204,204); border: medium none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;"/>
+                <h3 style="color:#9A6C8E;"><strong>What is the next step?</strong></h3>
+                We usually <strong>answer applications within a few days</strong>.
+                <br/><br/>
+                The next step is either a call or a meeting in our offices.
+                <br/>
+                Feel free to <strong>contact us if you want a faster
+                feedback</strong> or if you don't get news from us
+                quickly enough (just reply to this email).
+                <br/>
+
+                <hr width="97%" style="background-color: rgb(204,204,204); border: medium none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 17px 0px 16px 0px;"/>
+                <t t-set="location" t-value="''"/>
+                <t t-if="object.job_id.address_id.name">
+                    <strong t-out="object.job_id.address_id.name or ''">Teksa SpA</strong><br/>
+                </t>
+                <t t-if="object.job_id.address_id.street">
+                    <t t-out="object.job_id.address_id.street or ''">Puerto Madero 9710</t><br/>
+                    <t t-set="location" t-value="object.job_id.address_id.street"/>
+                </t>
+                <t t-if="object.job_id.address_id.street2">
+                    <t t-out="object.job_id.address_id.street2 or ''">Of A15, Santiago (RM)</t><br/>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.street2)"/>
+                </t>
+                <t t-if="object.job_id.address_id.city">
+                    <t t-out="object.job_id.address_id.city or ''">Pudahuel</t>,
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.city)"/>
+                </t>
+                <t t-if="object.job_id.address_id.state_id.name">
+                    <t t-out="object.job_id.address_id.state_id.name or ''">C1</t>,
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.state_id.name)"/>
+                </t>
+                <t t-if="object.job_id.address_id.zip">
+                    <t t-out="object.job_id.address_id.zip or ''">98450</t>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.zip)"/>
+                </t>
+                <br/>
+                <t t-if="object.job_id.address_id.country_id.name">
+                    <t t-out="object.job_id.address_id.country_id.name or ''">Argentina</t><br/>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.country_id.name)"/>
+                </t>
+                <br/>
+            </div>
+        </td>
+    </tr>
+</table></field>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">{{ object.partner_id.lang or '' }}</field>
+        </record>
+
+
+
+
+
+        <record id="email_template_data_applicant_hr_interview" model="mail.template">
+            <field name="name">Applicant: HR Interview</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="subject">Your Job Application: {{ object.job_id.name }}</field>
+            <field name="email_to">{{ (not object.partner_id and object.email_from or '') }}</field>
+            <field name="partner_to">{{ object.partner_id.id or '' }}</field>
+            <field name="body_html" type="html">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="background-color: white; border-collapse: collapse; margin-left: 20px;">
+    <tr>
+        <td valign="top" style="padding: 0px 10px;">
+            <div style="text-align: center">
+                <h2>Congratulations!</h2>
+                <div style="color:grey;">Your resume has been positively reviewed.</div>
+                <img src="/hr_recruitment/static/src/img/congratulations.png" alt="Congratulations!" style="width:175px;margin:20px 0;"/>
+            </div>
+            <div style="font-size: 13px; margin: 0px; padding: 0px;">
+                We confirm, your application has been short listed for a call or an HR Interview.
+                <br/><br/>
+                <div t-if="'website_url' in object.job_id and object.job_id.website_url" style="padding: 16px 8px 16px 8px;">
+                    <a t-att-href="object.job_id.website_url"
+                        style="background-color: #875a7b; text-decoration: none; color: #fff; padding: 8px 16px 8px 16px; border-radius: 5px;">Job Description</a>
+                </div>
+
+                <t t-if="object.user_id">
+                    You will soon be contacted by:
+                    <table>
+                        <tr>
+                            <td width="75">
+                                <img t-attf-src="/web/image/res.users/{{ object.user_id.id }}/avatar_128" alt="Avatar" style="vertical-align:baseline; width: 64px; height: 64px; object-fit: cover;" />
+                            </td>
+                            <td>
+                                <strong t-out="object.user_id.name or ''">HR</strong><br/>
+                                <span>Email: <t t-out="object.user_id.email or ''">hr@big.co.id</t></span><br/>
+                                <!-- <span>Phone: <t t-out="object.user_id.phone or ''">+1 650-123-4567</t></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                    <br/><br/>
+                </t>
+                See you soon,
+                <div style="font-size: 11px; color: grey;">
+                    -- <br/>
+                    The HR Team
+                    <t t-if="'website_url' in object.job_id and hasattr(object.job_id, 'website_url') and object.job_id.website_url">
+                        Discover <a href="/jobs" style="text-decoration:none;color:#717188;">all our jobs</a>.<br/>
+                    </t>
+                </div>
+
+                <hr width="97%" style="background-color: rgb(204,204,204); border: medium none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;"/>
+                <h3 style="color:#9A6C8E;"><strong>What is the next step?</strong></h3>
+                We usually <strong>answer applications within a few days</strong>.
+                <br/><br/>
+                The next step is either a call or a meeting in our offices.
+                <br/>
+                Feel free to <strong>contact us if you want a faster
+                feedback</strong> or if you don't get news from us
+                quickly enough (just reply to this email).
+                <br/>
+
+                <hr width="97%" style="background-color: rgb(204,204,204); border: medium none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 17px 0px 16px 0px;"/>
+                <t t-set="location" t-value="''"/>
+                <t t-if="object.job_id.address_id.name">
+                    <strong t-out="object.job_id.address_id.name or ''">Teksa SpA</strong><br/>
+                </t>
+                <t t-if="object.job_id.address_id.street">
+                    <t t-out="object.job_id.address_id.street or ''">Puerto Madero 9710</t><br/>
+                    <t t-set="location" t-value="object.job_id.address_id.street"/>
+                </t>
+                <t t-if="object.job_id.address_id.street2">
+                    <t t-out="object.job_id.address_id.street2 or ''">Of A15, Santiago (RM)</t><br/>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.street2)"/>
+                </t>
+                <t t-if="object.job_id.address_id.city">
+                    <t t-out="object.job_id.address_id.city or ''">Pudahuel</t>,
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.city)"/>
+                </t>
+                <t t-if="object.job_id.address_id.state_id.name">
+                    <t t-out="object.job_id.address_id.state_id.name or ''">C1</t>,
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.state_id.name)"/>
+                </t>
+                <t t-if="object.job_id.address_id.zip">
+                    <t t-out="object.job_id.address_id.zip or ''">98450</t>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.zip)"/>
+                </t>
+                <br/>
+                <t t-if="object.job_id.address_id.country_id.name">
+                    <t t-out="object.job_id.address_id.country_id.name or ''">Argentina</t><br/>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.country_id.name)"/>
+                </t>
+                <br/>
+            </div>
+        </td>
+    </tr>
+</table></field>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">{{ object.partner_id.lang or '' }}</field>
+        </record>
+
+
+
+        <record id="email_template_data_applicant_user_interview" model="mail.template">
+            <field name="name">Applicant: User Interview</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="subject">Your Job Application: {{ object.job_id.name }}</field>
+            <field name="email_to">{{ (not object.partner_id and object.email_from or '') }}</field>
+            <field name="partner_to">{{ object.partner_id.id or '' }}</field>
+            <field name="body_html" type="html">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="background-color: white; border-collapse: collapse; margin-left: 20px;">
+    <tr>
+        <td valign="top" style="padding: 0px 10px;">
+            <div style="text-align: center">
+                <h2>Congratulations!</h2>
+                <div style="color:grey;">Your resume has been positively reviewed.</div>
+                <img src="/hr_recruitment/static/src/img/congratulations.png" alt="Congratulations!" style="width:175px;margin:20px 0;"/>
+            </div>
+            <div style="font-size: 13px; margin: 0px; padding: 0px;">
+                We confirm, your application has been short listed for a call or an User Interview.
+                <br/><br/>
+                <div t-if="'website_url' in object.job_id and object.job_id.website_url" style="padding: 16px 8px 16px 8px;">
+                    <a t-att-href="object.job_id.website_url"
+                        style="background-color: #875a7b; text-decoration: none; color: #fff; padding: 8px 16px 8px 16px; border-radius: 5px;">Job Description</a>
+                </div>
+
+                <t t-if="object.user_id">
+                    You will soon be contacted by:
+                    <table>
+                        <tr>
+                            <td width="75">
+                                <img t-attf-src="/web/image/res.users/{{ object.user_id.id }}/avatar_128" alt="Avatar" style="vertical-align:baseline; width: 64px; height: 64px; object-fit: cover;" />
+                            </td>
+                            <td>
+                                <strong t-out="object.user_id.name or ''">HR</strong><br/>
+                                <span>Email: <t t-out="object.user_id.email or ''">hr@big.co.id</t></span><br/>
+                                <!-- <span>Phone: <t t-out="object.user_id.phone or ''">+1 650-123-4567</t></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                    <br/><br/>
+                </t>
+                See you soon,
+                <div style="font-size: 11px; color: grey;">
+                    -- <br/>
+                    The HR Team
+                    <t t-if="'website_url' in object.job_id and hasattr(object.job_id, 'website_url') and object.job_id.website_url">
+                        Discover <a href="/jobs" style="text-decoration:none;color:#717188;">all our jobs</a>.<br/>
+                    </t>
+                </div>
+
+                <hr width="97%" style="background-color: rgb(204,204,204); border: medium none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;"/>
+                <h3 style="color:#9A6C8E;"><strong>What is the next step?</strong></h3>
+                We usually <strong>answer applications within a few days</strong>.
+                <br/><br/>
+                The next step is either a call or a meeting in our offices.
+                <br/>
+                Feel free to <strong>contact us if you want a faster
+                feedback</strong> or if you don't get news from us
+                quickly enough (just reply to this email).
+                <br/>
+
+                <hr width="97%" style="background-color: rgb(204,204,204); border: medium none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 17px 0px 16px 0px;"/>
+                <t t-set="location" t-value="''"/>
+                <t t-if="object.job_id.address_id.name">
+                    <strong t-out="object.job_id.address_id.name or ''">Teksa SpA</strong><br/>
+                </t>
+                <t t-if="object.job_id.address_id.street">
+                    <t t-out="object.job_id.address_id.street or ''">Puerto Madero 9710</t><br/>
+                    <t t-set="location" t-value="object.job_id.address_id.street"/>
+                </t>
+                <t t-if="object.job_id.address_id.street2">
+                    <t t-out="object.job_id.address_id.street2 or ''">Of A15, Santiago (RM)</t><br/>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.street2)"/>
+                </t>
+                <t t-if="object.job_id.address_id.city">
+                    <t t-out="object.job_id.address_id.city or ''">Pudahuel</t>,
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.city)"/>
+                </t>
+                <t t-if="object.job_id.address_id.state_id.name">
+                    <t t-out="object.job_id.address_id.state_id.name or ''">C1</t>,
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.state_id.name)"/>
+                </t>
+                <t t-if="object.job_id.address_id.zip">
+                    <t t-out="object.job_id.address_id.zip or ''">98450</t>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.zip)"/>
+                </t>
+                <br/>
+                <t t-if="object.job_id.address_id.country_id.name">
+                    <t t-out="object.job_id.address_id.country_id.name or ''">Argentina</t><br/>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.country_id.name)"/>
+                </t>
+                <br/>
+            </div>
+        </td>
+    </tr>
+</table></field>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">{{ object.partner_id.lang or '' }}</field>
+        </record>
+
+
+        <record id="email_template_data_applicant_offering" model="mail.template">
+            <field name="name">Applicant: Offering</field>
+            <field name="model_id" ref="hr_recruitment.model_hr_applicant"/>
+            <field name="subject">Your Job Application: {{ object.job_id.name }}</field>
+            <field name="email_to">{{ (not object.partner_id and object.email_from or '') }}</field>
+            <field name="partner_to">{{ object.partner_id.id or '' }}</field>
+            <field name="body_html" type="html">
+<table border="0" cellpadding="0" cellspacing="0" width="590" style="background-color: white; border-collapse: collapse; margin-left: 20px;">
+    <tr>
+        <td valign="top" style="padding: 0px 10px;">
+            <div style="text-align: center">
+                <h2>Congratulations!</h2>
+                <div style="color:grey;">Your resume has been positively reviewed.</div>
+                <img src="/hr_recruitment/static/src/img/congratulations.png" alt="Congratulations!" style="width:175px;margin:20px 0;"/>
+            </div>
+            <div style="font-size: 13px; margin: 0px; padding: 0px;">
+                We just reviewed your interview, and it caught our attention. As we think you might be great for the position, your application has been short listed for a call or an offering proposal for <t t-out="object.job_id.name or 'this'"/> position. If you wish, we hope you complete application form in the url below.
+                <br/><br/>
+                <div t-if="object.url_form" style="padding: 16px 8px 16px 8px;">
+                    <a t-att-href="object.url_form"
+                        style="background-color: #875a7b; text-decoration: none; color: #fff; padding: 8px 16px 8px 16px; border-radius: 5px;">Application Form</a>
+                </div>
+                <!-- <div t-if="'website_url' in object.job_id and object.job_id.website_url" style="padding: 16px 8px 16px 8px;">
+                    <a t-att-href="object.job_id.website_url"
+                        style="background-color: #875a7b; text-decoration: none; color: #fff; padding: 8px 16px 8px 16px; border-radius: 5px;">Job Description</a>
+                </div> -->
+
+                <t t-if="object.user_id">
+                    You will soon be contacted by:
+                    <table>
+                        <tr>
+                            <td width="75">
+                                <img t-attf-src="/web/image/res.users/{{ object.user_id.id }}/avatar_128" alt="Avatar" style="vertical-align:baseline; width: 64px; height: 64px; object-fit: cover;" />
+                            </td>
+                            <td>
+                                <strong t-out="object.user_id.name or ''">HR</strong><br/>
+                                <span>Email: <t t-out="object.user_id.email or ''">hr@big.co.id</t></span><br/>
+                                <!-- <span>Phone: <t t-out="object.user_id.phone or ''">+1 650-123-4567</t></span> -->
+                            </td>
+                        </tr>
+                    </table>
+                    <br/><br/>
+                </t>
+                See you soon,
+                <div style="font-size: 11px; color: grey;">
+                    -- <br/>
+                    The HR Team
+                    <t t-if="'website_url' in object.job_id and hasattr(object.job_id, 'website_url') and object.job_id.website_url">
+                        Discover <a href="/jobs" style="text-decoration:none;color:#717188;">all our jobs</a>.<br/>
+                    </t>
+                </div>
+
+                <hr width="97%" style="background-color: rgb(204,204,204); border: medium none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 16px 0px 16px 0px;"/>
+                <h3 style="color:#9A6C8E;"><strong>What is the next step?</strong></h3>
+                We usually <strong>answer applications within a few days</strong>.
+                <br/><br/>
+                The next step is either a call or a meeting in our offices.
+                <br/>
+                Feel free to <strong>contact us if you want a faster
+                feedback</strong> or if you don't get news from us
+                quickly enough (just reply to this email).
+                <br/>
+
+                <hr width="97%" style="background-color: rgb(204,204,204); border: medium none; clear: both; display: block; font-size: 0px; min-height: 1px; line-height: 0; margin: 17px 0px 16px 0px;"/>
+                <t t-set="location" t-value="''"/>
+                <t t-if="object.job_id.address_id.name">
+                    <strong t-out="object.job_id.address_id.name or ''">Teksa SpA</strong><br/>
+                </t>
+                <t t-if="object.job_id.address_id.street">
+                    <t t-out="object.job_id.address_id.street or ''">Puerto Madero 9710</t><br/>
+                    <t t-set="location" t-value="object.job_id.address_id.street"/>
+                </t>
+                <t t-if="object.job_id.address_id.street2">
+                    <t t-out="object.job_id.address_id.street2 or ''">Of A15, Santiago (RM)</t><br/>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.street2)"/>
+                </t>
+                <t t-if="object.job_id.address_id.city">
+                    <t t-out="object.job_id.address_id.city or ''">Pudahuel</t>,
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.city)"/>
+                </t>
+                <t t-if="object.job_id.address_id.state_id.name">
+                    <t t-out="object.job_id.address_id.state_id.name or ''">C1</t>,
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.state_id.name)"/>
+                </t>
+                <t t-if="object.job_id.address_id.zip">
+                    <t t-out="object.job_id.address_id.zip or ''">98450</t>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.zip)"/>
+                </t>
+                <br/>
+                <t t-if="object.job_id.address_id.country_id.name">
+                    <t t-out="object.job_id.address_id.country_id.name or ''">Argentina</t><br/>
+                    <t t-set="location" t-value="'%s, %s' % (location, object.job_id.address_id.country_id.name)"/>
+                </t>
+                <br/>
+            </div>
+        </td>
+    </tr>
+</table></field>
+            <field name="auto_delete" eval="True"/>
+            <field name="lang">{{ object.partner_id.lang or '' }}</field>
+        </record>
+
+
+    </data>
+</odoo>

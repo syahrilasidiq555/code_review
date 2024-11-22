@@ -1,0 +1,210 @@
+{% extends 'layouts/main_background.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css">
+<style>
+    [x-cloak] {
+        display: none !important
+    }
+    
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        min-height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* overflow: auto; */
+    }
+</style>
+
+{% endblock %}
+
+{% block js_assets %}
+<script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script>
+{% endblock %}
+
+
+{% block content %}
+{% set attendance_type_selection = attendance_fields['attendance_type']['selection'] | dict %}
+{% set state_selection = attendance_fields['state']['selection'] | dict %}
+
+<div class="pt-lg-3 px-lg-5 pt-md-2 px-md-4 p-2" x-init="$store.attendance_list" x-cloak>
+    {{breadcrumb(paths = [{'href':'/portals/home','name':'Home'}], active = title)}}
+    <div class="card shadow">
+        <div class="card-header py-3">
+            <h6 class="m-0 font-weight-bold text-primary">
+                <a href="/portals/attendance/create" class="btn btn-primary">Create</a>
+            </h6>
+        </div>
+        <div class="card-body">
+            <!-- ALERT -->
+            <div class="row mb-3" x-show="$store.attendance_list.alert.show"  x-transition>
+                <div :class="$store.attendance_list.alert.class" class="alert d-flex align-items-center" >
+                    <div>
+                        <span x-text="$store.attendance_list.alert.message"></span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="table-responsive">
+                <table class="table table-bordered" id="attendance_table" width="100%" cellspacing="0">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>Employee</th>
+                            <th>Location</th>
+                            <!-- <th>Attendance Type</th> -->
+                            <th>Attendance Type</th>
+                            <th>Project Customer</th>
+                            <th>Task</th>
+                            <th>Description  / WFH Reason</th>
+                            <th>Approver</th>
+                            <th>PM / Leader</th>
+                            <th>Check In</th>
+                            <th>Check Out</th>
+                            <th>Worked Hours</th>
+                            <th>State</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% set index = namespace(i=1) %}
+                        {% for ex in attendance_list %}
+                            <tr class="attendance_{{ex.id}}">
+                                <td>{{index.i}}</td>
+                                {% set index.i = index.i + 1 %}
+                                <td>{{ex.employee_id.name}}</td>
+                                <td>{{ex.employee_id.work_location_id.name if ex.employee_id.work_location_id else ''}}</td>
+                                <!-- <td>{{attendance_type_selection[ex.attendance_type]}}</td> -->
+                                <td>{{ex.attendance_type_id.name if ex.attendance_type_id else ''}}</td>
+                                <td>{{ex.partner_id.name if ex.partner_id else ''}}</td>
+                                <td>{{ex.task if ex.task else ''}}</td>
+                                <td>{{ex.description if ex.description else ''}}</td>
+                                <td>{{ex.approver_id.name if ex.approver_id else ''}}</td>
+                                <td>{{ex.pm_leader_id.name if ex.pm_leader_id else ''}}</td>
+                                <td>
+                                    {% if ex.check_in %}
+                                        {{(ex.check_in|date_indonesia).strftime("%d %b %Y %H:%M")}}
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    {% if ex.check_out %}
+                                        {{(ex.check_out|date_indonesia).strftime("%d %b %Y %H:%M")}}
+                                    {% endif %}
+                                </td>
+                                <td>{{ex.worked_hours|round(2)}} Hour</td>
+                                <td>
+                                    {% if ex.state in ['draft'] %}
+                                        <p  class="btn btn-primary btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">{{state_selection[ex.state]}}</p>
+                                    {% elif ex.state in ['approved'] %}
+                                        <p  class="btn btn-success btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">{{state_selection[ex.state]}}</p>
+                                        {% elif ex.state in ['reject'] %}
+                                        <p  class="btn btn-danger btn-sm" style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">{{state_selection[ex.state]}}</p>
+                                    {% endif %}
+                                </td>
+                                <td>
+                                    <div class="btn-group">
+                                        {% if ex.attendance_type_id.regular != True %}
+                                        <a href="/portals/attendance/{{ex.id}}" class="btn btn-sm btn-outline-primary">View</a>
+                                        {% endif %}
+                                        {% if not ex.check_in and ex.state == 'draft' %}
+                                            <button @click="$store.attendance_list.actionDelete({{ex.id}})" class="btn btn-sm btn-outline-danger">Delete</button>
+                                        {% endif %}
+                                    </div>
+                                    
+                                </td>
+                            </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<script>
+
+    document.addEventListener('alpine:init', async () => {
+        let table = new DataTable('#attendance_table',{
+            "columnDefs": [
+                { "orderable": true, "targets": [0, 2, 3, 4, 5] },
+                { "orderable": false, "targets": [1, 7] }
+            ]
+        });
+        
+
+        Alpine.store('attendance_list', {
+            alert: {
+                show: false,
+                message: 'ini alert message',
+                iconHref: "#check-circle-fill",
+                class: 'alert-success',
+            },
+            async actionDelete(id){
+                isConfirmed = confirm('are you sure want to delete this?')
+                if (!isConfirmed) {
+                    return
+                }
+
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "jsonrpc": "2.0",
+                        "params": {}
+                    })
+                };
+
+                try {
+                    const fetchResponse = await fetch(`/portals/hr_attendance/delete/${id}`, settings);
+                    const data = await fetchResponse.json();
+                    if (data.result.status != 'success') {
+                        // console.log(data)
+                        this.alert.message = data.result.message
+                        this.alert.class = 'alert-danger'
+                        this.alert.show = true
+                        window.setTimeout(function(){this.alert.show = false},500)
+                    }
+                    else {
+                        // console.log(data)
+                        this.alert.message = data.result.message
+                        this.alert.class = 'alert-success'
+                        this.alert.show = true
+
+                        // remove deleted row
+                        attendance_row = document.querySelector(`.attendance_${id}`)
+                        window.setTimeout(function(){attendance_row.remove()},500)
+                        
+                    }
+                    
+                } catch (e) {
+                    return e;
+                }
+                }
+            
+        });
+
+
+    })
+
+</script>
+
+{% endblock %}

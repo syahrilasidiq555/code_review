@@ -1,0 +1,371 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <menuitem id="menu_all_module_configuration" 
+            name="Konfigurasi Modul" 
+            parent="base.menu_administration" 
+            sequence="100"/>
+
+        <menuitem id='calendar_submenu_reminders' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Reminders' 
+            sequence='10610' action='calendar.action_calendar_alarm'/>
+        <menuitem id='menu_partner_category_form' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Contact Tags' 
+            sequence='1131' action='base.action_partner_category_form'/>
+        <menuitem id='menu_partner_title_contact' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Contact Titles' 
+            sequence='1133' action='base.action_partner_title_contact'/>
+        <menuitem id='res_partner_industry_menu' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Industries' 
+            sequence='1134' action='base.res_partner_industry_action'/>
+        <menuitem id='menu_localisation' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Localization' 
+            sequence='1135' />"
+        <menuitem id='menu_country_partner' 
+            parent='custom_access_right.menu_localisation' 
+            name='Countries' 
+            sequence='1171' action='base.action_country'/>
+        <menuitem id='menu_country_group' 
+            parent='custom_access_right.menu_localisation' 
+            name='Country Group' 
+            sequence='1173' action='base.action_country_group'/>
+        <menuitem id='menu_country_state_partner' 
+            parent='custom_access_right.menu_localisation' 
+            name='Fed. States' 
+            sequence='1172' action='base.action_country_state'/>
+        <menuitem id='menu_config_bank_accounts' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Bank Accounts' 
+            sequence='1136' />"
+        <menuitem id='menu_action_res_bank_form' 
+            parent='custom_access_right.menu_config_bank_accounts' 
+            name='Banks' 
+            sequence='1211' action='base.action_res_bank_form'/>
+        <menuitem id='menu_action_res_partner_bank_form' 
+            parent='custom_access_right.menu_config_bank_accounts' 
+            name='Bank Accounts' 
+            sequence='1212' action='base.action_res_partner_bank_account_form'/>
+        <menuitem id='menu_crm_config_opportunity' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Opportunities' 
+            sequence='2091' />"
+        <menuitem id='crm_team_config' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Sales Teams' 
+            sequence='2095' action='sales_team.crm_team_action_config'/>
+        <menuitem id='crm_team_member_config' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Teams Members' 
+            sequence='2096' action='sales_team.crm_team_member_action'/>
+        <menuitem id='crm_team_menu_config_activity_types' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Activity Types' 
+            sequence='20910' action='sales_team.mail_activity_type_action_config_sales'/>
+        <menuitem id='crm_recurring_plan_menu_config' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Recurring Plans' 
+            sequence='20912' action='crm.crm_recurring_plan_action'/>
+        <menuitem id='menu_crm_config_lead' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Pipeline' 
+            sequence='20915' />"
+        <menuitem id='menu_crm_lead_stage_act' 
+            parent='custom_access_right.menu_crm_config_lead' 
+            name='Stages' 
+            sequence='2160' action='crm.crm_stage_action'/>
+        <menuitem id='menu_crm_lead_categ' 
+            parent='custom_access_right.menu_crm_config_lead' 
+            name='Tags' 
+            sequence='2161' action='sales_team.sales_team_crm_tag_action'/>
+        <menuitem id='menu_crm_lost_reason' 
+            parent='custom_access_right.menu_crm_config_lead' 
+            name='Lost Reasons' 
+            sequence='2166' action='crm.crm_lost_reason_action'/>
+        <menuitem id='menu_warehouse_config' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Warehouse Management' 
+            sequence='2231' />"
+        <menuitem id='menu_product_in_config_stock' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Products' 
+            sequence='2234' />"
+        <menuitem id='menu_wms_barcode_nomenclature_all' 
+            parent='custom_access_right.menu_product_in_config_stock' 
+            name='Barcode Nomenclatures' 
+            sequence='22550' action='barcodes.action_barcode_nomenclature_form'/>
+        <menuitem id='product_uom_menu' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Units of Measures' 
+            sequence='2235' />"
+        <menuitem id='menu_product_category_config_stock' 
+            parent='custom_access_right.menu_product_in_config_stock' 
+            name='Product Categories' 
+            sequence='2252' action='product.product_category_action_form'/>
+        <menuitem id='menu_attribute_action' 
+            parent='custom_access_right.menu_product_in_config_stock' 
+            name='Attributes' 
+            sequence='2254' action='product.attribute_action'/>
+        <menuitem id='menu_stock_uom_categ_form_action' 
+            parent='custom_access_right.product_uom_menu' 
+            name='UoM Categories' 
+            sequence='2275' action='uom.product_uom_categ_form_action'/>
+        <menuitem id='menu_stock_unit_measure_stock' 
+            parent='custom_access_right.menu_product_in_config_stock' 
+            name='Units of Measure' 
+            sequence='22535' />"
+        <menuitem id='menu_stock_uom_form_action' 
+            parent='custom_access_right.product_uom_menu' 
+            name='UoM' 
+            sequence='22735' action='uom.product_uom_form_action'/>
+        <menuitem id='menu_putaway' 
+            parent='custom_access_right.menu_warehouse_config' 
+            name='Putaway Rules' 
+            sequence='2248' action='stock.action_putaway_tree'/>
+        <menuitem id='menu_product_packagings' 
+            parent='custom_access_right.menu_product_in_config_stock' 
+            name='Product Packagings' 
+            sequence='22510' action='product.action_packaging_view'/>
+        <menuitem id='menu_action_location_form' 
+            parent='custom_access_right.menu_warehouse_config' 
+            name='Locations' 
+            sequence='2242' action='stock.action_location_form'/>
+        <menuitem id='menu_routes_config' 
+            parent='custom_access_right.menu_warehouse_config' 
+            name='Routes' 
+            sequence='2243' action='stock.action_routes_form'/>
+        <menuitem id='menu_action_warehouse_form' 
+            parent='custom_access_right.menu_warehouse_config' 
+            name='Warehouses' 
+            sequence='2241' action='stock.action_warehouse_form'/>
+        <menuitem id='menu_pickingtype' 
+            parent='custom_access_right.menu_warehouse_config' 
+            name='Operations Types' 
+            sequence='2245' action='stock.action_picking_type_list'/>
+        <menuitem id='menu_reordering_rules_config' 
+            parent='custom_access_right.menu_product_in_config_stock' 
+            name='Reordering Rules' 
+            sequence='22510' action='stock.action_orderpoint'/>
+        <menuitem id='menu_storage_categoty_config' 
+            parent='custom_access_right.menu_warehouse_config' 
+            name='Storage Categories' 
+            sequence='2246' action='stock.action_storage_category'/>
+        <menuitem id='menu_storage_categoty_capacity_config' 
+            parent='custom_access_right.menu_warehouse_config' 
+            name='Storage Category Capacity' 
+            sequence='2247' action='stock.action_storage_category_capacity'/>
+        <menuitem id='menu_action_rules_form' 
+            parent='custom_access_right.menu_warehouse_config' 
+            name='Rules' 
+            sequence='2244' action='stock.action_rules_form'/>
+        <menuitem id='menu_delivery' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Delivery' 
+            sequence='22350' />"
+        <menuitem id='menu_packaging_types' 
+            parent='custom_access_right.menu_delivery' 
+            name='Package Types' 
+            sequence='26010' action='stock.action_package_type_view'/>
+        <menuitem id='menu_website_add_features' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Apps' 
+            sequence='26920' action='website.action_website_add_features'/>
+        <menuitem id='menu_website_websites_list' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Websites' 
+            sequence='26910' action='website.action_website_list'/>
+        <menuitem id='menu_website_pages_list' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Pages' 
+            sequence='26930' action='website.action_website_pages_list'/>
+        <menuitem id='menu_website_menu_list' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Menus' 
+            sequence='26945' action='website.action_website_menu'/>
+        <menuitem id='menu_website_rewrite' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Redirects' 
+            sequence='26930' action='website.action_website_rewrite_list'/>
+        <menuitem id='menu_product_pricelist_action2_purchase' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Vendor Pricelists' 
+            sequence='2901' action='product.product_supplierinfo_type_action'/>
+        <menuitem id='menu_product_in_config_purchase' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Products' 
+            sequence='29030' />"
+        <menuitem id='menu_product_attribute_action' 
+            parent='custom_access_right.menu_product_in_config_purchase' 
+            name='Product Attributes' 
+            sequence='2921' action='product.attribute_action'/>
+        <menuitem id='menu_product_category_config_purchase' 
+            parent='custom_access_right.menu_product_in_config_purchase' 
+            name='Product Categories' 
+            sequence='2923' action='product.product_category_action_form'/>
+        <menuitem id='menu_unit_of_measure_in_config_purchase' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Units of Measures' 
+            sequence='29040' />"
+        <menuitem id='menu_purchase_uom_form_action' 
+            parent='custom_access_right.menu_unit_of_measure_in_config_purchase' 
+            name='Units of Measure' 
+            sequence='2955' action='uom.product_uom_form_action'/>
+        <menuitem id='menu_purchase_uom_categ_form_action' 
+            parent='custom_access_right.menu_unit_of_measure_in_config_purchase' 
+            name='Units of Measure Categories' 
+            sequence='29510' action='uom.product_uom_categ_form_action'/>
+        <menuitem id='crm_menu_lead_generation' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Lead Generation' 
+            sequence='20920' />"
+        <menuitem id='crm_iap_lead_mining_request_menu_action' 
+            parent='custom_access_right.crm_menu_lead_generation' 
+            name='Lead Mining Requests' 
+            sequence='3290' action='crm_iap_mine.crm_iap_lead_mining_request_action'/>
+        <menuitem id='sales_team_config' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Sales Teams' 
+            sequence='3382' action='sales_team.crm_team_action_config'/>
+        <menuitem id='menu_sales_config' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Sales Orders' 
+            sequence='3384' />"
+        <menuitem id='menu_tag_config' 
+            parent='custom_access_right.menu_sales_config' 
+            name='Tags' 
+            sequence='3402' action='sales_team.sales_team_crm_tag_action'/>
+        <menuitem id='prod_config_main' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Products' 
+            sequence='3385' />"
+        <menuitem id='next_id_16' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Units of Measure' 
+            sequence='3386' />"
+        <menuitem id='menu_product_uom_form_action' 
+            parent='custom_access_right.next_id_16' 
+            name='Units of Measure' 
+            sequence='3477' action='uom.product_uom_form_action'/>
+        <menuitem id='menu_product_uom_categ_form_action' 
+            parent='custom_access_right.next_id_16' 
+            name='Units of Measure Categories' 
+            sequence='3478' action='uom.product_uom_categ_form_action'/>
+        <menuitem id='sale_menu_config_activity_type' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Activity Types' 
+            sequence='33810' action='sale.mail_activity_type_action_config_sale'/>
+        <menuitem id='sale_order_template_menu' 
+            parent='custom_access_right.menu_sales_config' 
+            name='Quotation Templates' 
+            sequence='3401' action='sale_management.sale_order_template_action'/>
+        <menuitem id='menu_product_attribute_action' 
+            parent='custom_access_right.prod_config_main' 
+            name='Attributes' 
+            sequence='3451' action='product.attribute_action'/>
+        <menuitem id='res_partner_jenazah_menu' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Jenazah' 
+            sequence='44410' action='custom_sale_order.res_partner_jenazah_tree_action'/>
+        <menuitem id='pos_menu_products_configuration' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Products' 
+            sequence='39911' />"
+        <menuitem id='menu_action_tax_form_open' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Taxes' 
+            sequence='39940' action='account.action_tax_form'/>
+        <menuitem id='menu_pos_payment_method' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Payment Methods' 
+            sequence='3993' action='point_of_sale.action_pos_payment_method_form'/>
+        <menuitem id='menu_pos_config_pos' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Point of Sale' 
+            sequence='3991' action='point_of_sale.action_pos_config_pos'/>
+        <menuitem id='menu_products_pos_category' 
+            parent='custom_access_right.pos_menu_products_configuration' 
+            name='PoS Product Categories' 
+            sequence='4001' action='point_of_sale.product_pos_category_action'/>
+        <menuitem id='pos_menu_products_attribute_action' 
+            parent='custom_access_right.pos_menu_products_configuration' 
+            name='Attributes' 
+            sequence='4002' action='product.attribute_action'/>
+        <menuitem id='menu_pos_bill' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Coins/Bills' 
+            sequence='3994' action='point_of_sale.action_pos_bill'/>
+        <menuitem id='menu_view_hr_job' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Job Positions' 
+            sequence='4271' action='hr.action_hr_job'/>
+        <menuitem id='menu_human_resources_configuration_employee' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Employee' 
+            sequence='4271' />"
+        <menuitem id='menu_view_employee_category_form' 
+            parent='custom_access_right.menu_human_resources_configuration_employee' 
+            name='Tags' 
+            sequence='4291' action='hr.open_view_categ_form'/>
+        <menuitem id='menu_hr_department_tree' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Departments' 
+            sequence='4272' action='hr.hr_department_tree_action'/>
+        <menuitem id='menu_hr_work_location_tree' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Work Locations' 
+            sequence='4275' action='hr.hr_work_location_action'/>
+        <menuitem id='menu_hr_departure_reason_tree' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Departure Reasons' 
+            sequence='4275' action='hr.hr_departure_reason_action'/>
+        <menuitem id='menu_config_plan' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Activity Planning' 
+            sequence='427100' />"
+        <menuitem id='menu_config_plan_types' 
+            parent='custom_access_right.menu_config_plan' 
+            name='Planning Types' 
+            sequence='43599' action='hr.hr_plan_activity_type_action'/>
+        <menuitem id='menu_config_plan_plan' 
+            parent='custom_access_right.menu_config_plan' 
+            name='Plans' 
+            sequence='435100' action='hr.hr_plan_action'/>
+        <menuitem id='res_hospital_menu' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Rumah Sakit' 
+            sequence='44420' action='custom_web_rdc.res_hospital_action'/>
+        <menuitem id='bundle_product_rdc_menu' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Produk Paket' 
+            sequence='44420' action='custom_sale_order.ni_bundle_product_template_action'/>
+        <menuitem id='master_tarif_ambulance_menu' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Tarif Ambulance' 
+            sequence='33821' action='custom_sale_order.master_tarif_ambulance_action'/>
+        <menuitem id='jadwal_ruangdoa_menu' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Jadwal Ruang Doa' 
+            sequence='33820' action='custom_sale_order.jadwal_ruangdoa_action'/>
+        <menuitem id='res_pemakaman_menu' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Pemakaman' 
+            sequence='44415' action='custom_sale_order.res_pemakaman_action'/>
+        <menuitem id='menu_human_resources_configuration_contract' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Contracts' 
+            sequence='4273' />"
+        <menuitem id='menu_hr_product' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Expense Products' 
+            sequence='49710' action='hr_expense.hr_expense_product'/>
+        <menuitem id='hr_expense_menu_config_activity_type' 
+            parent='custom_access_right.menu_all_module_configuration' 
+            name='Activity Types' 
+            sequence='49710' action='hr_expense.mail_activity_type_action_config_hr_expense'/>
+
+    </data>
+</odoo>

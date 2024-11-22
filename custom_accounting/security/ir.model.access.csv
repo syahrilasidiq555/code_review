@@ -1,0 +1,3 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_revaluasi_kurs,account.revaluasi.kurs,custom_accounting.model_revaluasi_kurs,account.group_account_invoice,1,1,1,1
+access_revaluasi_kurs_line,account.revaluasi.kurs.line,custom_accounting.model_revaluasi_kurs_line,account.group_account_invoice,1,1,1,1

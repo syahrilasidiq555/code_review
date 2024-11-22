@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data >
+        <!-- <record id="employee_only_see_his_department" model="ir.rule">
+            <field name="name">Employees : Only employee with same department</field>
+            <field name="model_id" ref="hr.model_hr_employee_public"/>
+            <field name="domain_force">
+                [('department_id', '=', user.employee_id.department_id.id)]
+            </field>
+        </record>
+
+        <record id="employee_see_all" model="ir.rule">
+            <field name="name">Employees : See All</field>
+            <field name="model_id" ref="hr.model_hr_employee_public"/>
+            <field name="domain_force">
+                [(1, '=', 1)]
+            </field>
+            <field name="groups" eval="[(4, ref('hr.group_hr_user'))]" />
+        </record> -->
+
+
+
+
+        <!-- PAYSLIP -->
+        <!-- inherit existing -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'om_hr_payroll'), ('name', '=', 'hr_payslip_rule_manager')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record id="om_hr_payroll.hr_payslip_rule_manager" model="ir.rule">
+            <field name="active">False</field>
+        </record>
+
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('module', '=', 'om_hr_payroll'), ('name', '=', 'hr_payroll_rule_officer')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+
+        <record id="om_hr_payroll.hr_payroll_rule_officer" model="ir.rule">
+            <field name="active">False</field>
+        </record>
+
+
+
+        <!-- RULE P1 P2 -->
+        <record id="payslip_rule_global_own" model="ir.rule">
+            <field name="name">Payslip : See own salary</field>
+            <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+            <field name="domain_force">
+                [ ('employee_id.user_id', '=', user.id)]
+            </field>
+            <field name="groups" eval="[(4, ref('base.group_user'))]" />
+        </record>
+        <record id="payslip_rule_p1" model="ir.rule">
+            <field name="name">Payslip : Can only see Worker and Admin(3 month)</field>
+            <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+            <field name="domain_force">
+                ['|',('is_gaji_probation', '=', True),('is_worker_payslip', '=', True)]
+            </field>
+            <field name="groups" eval="[(4, ref('custom_access_right.group_submenu_payslip_access_rule_p1'))]" />
+        </record>
+        <record id="payslip_rule_p2" model="ir.rule">
+            <field name="name">Payslip : See All</field>
+            <field name="model_id" ref="om_hr_payroll.model_hr_payslip"/>
+            <field name="domain_force">
+                [(1, '=', 1)]
+            </field>
+            <field name="groups" eval="[(4, ref('custom_access_right.group_submenu_payslip_access_rule_p2'))]" />
+        </record>
+    </data>
+</odoo>

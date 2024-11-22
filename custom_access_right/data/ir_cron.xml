@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <record id="update_user_group_view" model="ir.cron">
+            <field name="name">Update User Group View</field>
+            <field name="model_id" ref="base.model_res_groups"/>
+            <field name="state">code</field>
+            <field name="code">model._update_user_groups_view()</field>
+            <field name="user_id" ref="base.user_admin" />
+            <field name="interval_number">1</field>
+            <field name="interval_type">hours</field>
+            <field name="numbercall">-1</field>
+            <field name="priority">5</field>
+            <field name="active" eval="True" />
+            <field name="doall" eval="False"/>
+        </record>
+    </data>
+</odoo>

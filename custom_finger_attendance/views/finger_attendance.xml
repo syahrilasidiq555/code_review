@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- TREE -->
+    <record id="finger_attendance_config_tree" model="ir.ui.view">
+        <field name="name">finger_attendance_config_tree</field>
+        <field name="model">finger.attendance.config</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="name" />
+                <field name="destination" />
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- SEARCH -->
+    <record id="finger_attendance_config_search" model="ir.ui.view">
+        <field name="name">finger_attendance_config_search</field>
+        <field name="model">finger.attendance.config</field>
+        <field name="arch" type="xml">
+            <search string="Search Data...">
+                <field name="name"/>
+                <field name="destination" />
+            </search>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+    <record id="finger_attendance_config_form" model="ir.ui.view">
+        <field name="name">finger_attendance_config_form</field>
+        <field name="model">finger.attendance.config</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Form">
+                <header>
+                    <button string="Test Connection" type="object" name="action_test_connection" />
+                    <button string="Generate Attendance" type="object" name="action_generate_attendance_by_date"/>
+                    <!-- <button string="Read .txt" type="object" name="action_read_text_file" /> -->
+                </header>
+                <sheet>
+                <group name="head">
+                    <group name="left">
+                        <field name="name" />
+                        <field name="destination" />
+                        <field name="absen_loc" />
+                        <field name="file_method" />
+                        <field name="copy_destination" 
+                            attrs="{'required':[('file_method','=','copy')], 'invisible':[('file_method','!=','copy')]}"/>
+                        <field name="driver" />
+                        <field name="username" />
+                        <field name="password" password="1" />
+                    </group>
+                </group>
+
+                <notebook>
+                    <page string="Audit Trail">
+                        <group string="Audit Trail">
+                            <group>
+                                <field name="create_uid" readonly="1"/>
+                                <field name="create_date" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="last_generated" readonly="1" force_save="1" />
+                                <field name="write_uid" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids"/>	
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+            </form>
+        </field>
+    </record>
+
+
+    
+    
+    <record id="finger_attendance_config_action" model="ir.actions.act_window">
+        <field name="name">Finger Attendance Configuration</field>
+        <field name="res_model">finger.attendance.config</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Add new Finger Attendance Configuration
+            </p><p>
+            With just a quick glance on the Odoo screen, you
+            can easily find all the information you need.
+            </p>
+        </field>
+    </record>
+
+
+    <menuitem 
+        id="attendance_configuration"
+        name="Configuration"
+        parent="hr_attendance.menu_hr_attendance_root"
+        sequence="99"/>
+
+
+    <record id="hr_attendance.menu_hr_attendance_settings" model="ir.ui.menu">
+        <field name="sequence">1</field>
+        <field name="name">Settings</field>
+        <field name="parent_id" ref="attendance_configuration"  />
+    </record>
+
+    <menuitem 
+        id="finger_attendance_config_submenu"
+        name="Finger Attendance Configuration"
+        parent="attendance_configuration"
+        sequence="30"
+        action="finger_attendance_config_action"/>
+</odoo>

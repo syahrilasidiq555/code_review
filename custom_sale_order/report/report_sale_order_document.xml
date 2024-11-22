@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- INHERIT PRINT SO -->
+        <template id="report_saleorder_document_inherited" inherit_id="sale.report_saleorder_document">
+            <!-- hanya tampilkan data yang qtynya >= 1 -->
+            <t t-foreach="doc.order_line" position="attributes">
+                <attribute name="t-foreach">doc.order_line.filtered(lambda x : x.product_uom_qty &gt;= 1)</attribute>     
+            </t>
+        </template>
+
+    </data>
+</odoo>

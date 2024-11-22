@@ -1,0 +1,95 @@
+<odoo>
+    <data>
+
+        <record id='ni_bundle_wizard_view_form' model='ir.ui.view'>
+            <field name="name">bundle_wizard_view_form</field>
+            <field name="model">bundle.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Contract logs">
+                    <group>
+                        <group name="left">
+                            <field name="ni_pack_name" domain="[('ni_is_product_pack','=',True)]" options="{'no_quick_create':True,'no_create_edit':True, 'no_open':True, 'no_create':True}" />
+                            <field name="template_ruang_semayam_id" invisible="1" />
+                            <!-- <field name="ruang_semayam_id" options="{'no_quick_create':True,'no_create_edit':True, 'no_open':True, 'no_create':True}" 
+                                domain="[('product_tmpl_id','=',template_ruang_semayam_id)]"
+                                attrs="{'invisible':[('template_ruang_semayam_id','=',False)]}"/> -->
+                            <field name="ruang_semayam_id" options="{'no_quick_create':True,'no_create_edit':True, 'no_open':True, 'no_create':True}" 
+                                attrs="{'invisible':[('template_ruang_semayam_id','=',False)]}"/>
+                            <label for="pickup_date" string="Tanggal" attrs="{'invisible':[('template_ruang_semayam_id','=',False)]}"/>
+                            <div class="o_row" style="min-width: 300px!important;" attrs="{'invisible':[('template_ruang_semayam_id','=',False)]}">
+                                <field name="pickup_date" widget="daterange" options="{'related_end_date': 'return_date'}" />
+                                <span> to </span>
+                                <field name="return_date" widget="daterange" options="{'related_start_date': 'pickup_date'}" />
+                            </div>
+                            <field name="rental_status" invisible="1"/>
+                            <field name="other_cust_pickup_date" invisible="1" />
+                            <field name="other_cust_return_date" invisible="1" />
+                            <field name="rental_status_detail" attrs="{'invisible':[('template_ruang_semayam_id','=',False)]}"/>
+
+                            <field name="pelebaran_ruangan" attrs="{'invisible':[('template_ruang_semayam_id','=',False)]}"/>
+                            <field name="jumlah_voucher_parkir" />
+                            <field name="rel_list_price" widget="monetary" options="{'currency_field': 'rel_currency_id', 'field_digits': True}"/>
+                            <field name="rel_currency_id" invisible="1" />
+                        </group>
+                        <group name="right">
+                            <field name="ni_quantity" invisible="1"/>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="product_list" string="List Produk">
+                            <notebook>
+                                <page name="sale" string="Sales" attrs="{'invisible': [('product_ids','=',[])]}">
+                                    <field name="product_ids" mode="tree" >
+                                        <tree editable="bottom" create="false" delete="false">
+                                            <field name="product_id" readonly="1" force_save="1"/>
+                                            <field name="product_variant_count" invisible="1" />
+                                            <field name="variant_id" options="{'no_quick_create':True,'no_create_edit':True, 'no_open':True, 'no_create':True}" 
+                                                attrs="{'readonly':[('product_variant_count','&lt;=',1)]}" />
+                                            <field name="is_konsinyasi" readonly="1" force_save="1"/>
+                                            <field name="qty" readonly="1" force_save="1"/>
+                                            <field name="price" readonly="1" force_save="1" optional="hide"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page name="rent" string="Rental" attrs="{'invisible': [('product_rent_ids','=',[])]}">
+                                    <field name="product_rent_ids" mode="tree">
+                                        <tree create="false" delete="false" editable="bottom" >
+                                            <field name="product_id" readonly="1" force_save="1"/>
+                                            <field name="product_variant_count" invisible="1" />
+                                            <field name="variant_id" options="{'no_quick_create':True,'no_create_edit':True, 'no_open':True, 'no_create':True}" 
+                                                attrs="{'readonly':[('product_variant_count','&lt;=',1)]}" />
+                                            <field name="is_konsinyasi" invisible="1"/>
+                                            <field name="qty" readonly="1" force_save="1"/>
+                                            <field name="rent_duration" readonly="1" force_save="1" optional="hide" />
+                                            <field name="rent_unit" readonly="1" force_save="1" optional="hide" />
+                                            <field name="price_default" readonly="1" force_save="1" invisible="1" />
+                                            <field name="pickup_date" widget="daterange" options="{'related_end_date': 'return_date'}"/>
+                                            <field name="return_date" widget="daterange" options="{'related_start_date': 'pickup_date'}"/>
+                                            <field name="price" readonly="1" force_save="1" optional="hide"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                                <page name="accessories" string="Aksesoris" attrs="{'invisible':[('ni_pack_name','=',False)]}">
+                                    <field name="product_accesories_ids" mode="tree">
+                                        <tree editable="bottom">
+                                            <field name="product_id" domain="[('sale_ok','=',True)]" options="{'no_quick_create':True, 'no_create_edit':True, 'no_open':True, 'no_create':True}"/>
+                                            <field name="list_price" />
+                                            <field name="qty" />
+                                            <field name="price" optional="show"/>
+                                        </tree>
+                                    </field>
+                                </page>
+                            </notebook>
+                        </page>
+                    </notebook>
+                    <footer>
+                        <button name="add_pack" class="btn-primary" type="object" string="Konfirmasi"/>
+                        <button string="Batal" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

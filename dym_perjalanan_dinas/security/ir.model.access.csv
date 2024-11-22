@@ -1,0 +1,8 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_perjalanan_dinas_user,dym.perjalanan.dinas,model_dym_perjalanan_dinas,,1,1,1,1
+
+access_perjalanan_dinas_rincian_transportasi,perjalanan_dinas_rincian_transportasi,model_perjalanan_dinas_rincian_transportasi,,1,1,1,1
+access_perjalanan_dinas_rincian_akomodasi,perjalanan_dinas_rincian_akomodasi,model_perjalanan_dinas_rincian_akomodasi,,1,1,1,1
+access_perjalanan_dinas_rincian_lain,perjalanan_dinas_rincian_lain,model_perjalanan_dinas_rincian_lain,,1,1,1,1
+
+access_perjalanan_dinas_approval_user,dym.perjalanan.dinas.approval,model_perjalanan_dinas_approval_line,,1,1,1,1

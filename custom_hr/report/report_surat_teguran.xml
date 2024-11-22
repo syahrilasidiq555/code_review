@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="paper_teguran_att" model="report.paperformat">
+            <field name="name">Teguran Attendance</field>
+            <field name="default" eval="True"/>
+            <field name="orientation">Portrait</field>
+            <field name="format">custom</field>
+            <field name="page_height">215</field>
+            <field name="page_width">139</field>
+            <field name="margin_top">5</field>
+            <field name="margin_bottom">8</field>
+            <field name="margin_left">2</field>
+            <field name="margin_right">2</field>
+            <field name="header_line" eval="False"/>
+            <field name="header_spacing">23</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <report
+            id="report_dym_teguran_attendance"
+            string="Teguran Attendance"
+            model="dym.teguran.attendance"
+            report_type="qweb-pdf"
+            name="dym_teguran_attendance.report_teguran_attendance_template"
+            menu="False"
+            file="dym_teguran_attendance.report_teguran_attendance_template"
+        />
+    </data>
+</odoo>

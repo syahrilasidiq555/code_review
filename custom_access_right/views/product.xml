@@ -1,0 +1,659 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <!-- ACCESS VIEW AMOUNT -->
+        <!-- PRODUCT TEMPLATE -->
+        <record id="product_template_form_view_inherit_view" model="ir.ui.view">
+            <field name="name">product_template_form_view_inherit_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='uom_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='uom_po_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='categ_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='product_location_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='property_stock_production']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='property_stock_inventory']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='property_account_income_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='property_account_expense_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='property_account_creditor_price_difference']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath>
+                <!-- <xpath expr="//field[@name='account_penangguhan_id']" position="attributes">
+                    <attribute name="options">{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True}</attribute>
+                </xpath> -->
+
+                
+
+                <!-- field list price -->
+                <xpath expr="//label[@for='list_price']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+                <xpath expr="//div[@name='pricing']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+
+                <!-- field modal -->
+                <xpath expr="//label[@for='standard_price']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+                <xpath expr="//div[@name='standard_price_uom']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+
+                <!-- field tax -->
+                <xpath expr="//field[@name='taxes_id']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+
+
+                <!-- field rental pricing -->
+                <xpath expr="//field[@name='rental_pricing_ids']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='extra_hourly']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='extra_daily']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+
+                
+            </field>
+        </record>
+
+        <!-- ACCESS VIEW BUTTON -->
+        <!-- PRODUCT TEMPLATE -->
+        <record id="product_template_only_form_view_button_inherit_view" model="ir.ui.view">
+            <field name="name">product_template_only_form_view_button_inherit_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_only_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_update_quantity_on_hand']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_update_quantity_on_hand</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(stock.action_product_replenish)d']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_product_replenish</attribute>
+                </xpath>
+
+
+                <xpath expr="//button[@name='open_pricelist_rules']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_open_pricelist_rules</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_open_quants']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_open_quants</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_product_tmpl_forecast_report']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_product_tmpl_forecast_report</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_stock_move_lines']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_stock_move_lines</attribute>
+                </xpath>
+                <!-- <xpath expr="//button[@name='action_view_rentals']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_rentals</attribute>
+                </xpath> -->
+                <xpath expr="//button[@name='action_view_po']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_po</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_sales']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_sales</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_view_orderpoints'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inv_product_button_aturan_order</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_orderpoints'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inv_product_button_aturan_order</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_view_related_putaway_rules']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inv_product_button_peraturan_penyimpanan</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="product_template_only_form_view_rental_button_inherit_view" model="ir.ui.view">
+            <field name="name">product_template_only_form_view_rental_button_inherit_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="sale_renting.product_template_form_view_rental_gantt"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_rentals']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_rentals</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- PRODUCT PRODUCT -->
+        <record id="product_normal_form_view_inherit_view" model="ir.ui.view">
+            <field name="name">product_normal_form_view_inherit_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_normal_form_view"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//button[@name='action_update_quantity_on_hand']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_update_quantity_on_hand</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(stock.action_product_replenish)d']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_product_replenish</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='open_pricelist_rules']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_open_pricelist_rules</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_open_quants']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_open_quants</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_product_forecast_report']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_product_tmpl_forecast_report</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_stock_move_lines']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_stock_move_lines</attribute>
+                </xpath>
+                <!-- <xpath expr="//button[@name='action_view_rentals']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_rentals</attribute>
+                </xpath> -->
+                <xpath expr="//button[@name='action_view_po']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_po</attribute>
+                </xpath>
+                <!-- <xpath expr="//button[@name='action_view_sales']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_sales</attribute>
+                </xpath> -->
+
+                <xpath expr="//button[@name='action_view_orderpoints'][1]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inv_product_button_aturan_order</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_view_orderpoints'][2]" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inv_product_button_aturan_order</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_view_related_putaway_rules']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inv_product_button_peraturan_penyimpanan</attribute>
+                </xpath>
+
+            </field>
+        </record>
+
+        <record id="sale_product_normal_form_view_inherit_view" model="ir.ui.view">
+            <field name="name">sale_product_normal_form_view_inherit_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="sale.product_form_view_sale_order_button"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_sales']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_sales</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <record id="product_normal_form_view_rental_inherit_view" model="ir.ui.view">
+            <field name="name">product_normal_form_view_rental_inherit_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="sale_renting.product_product_form_view_rental_gantt"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_rentals']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_product_button_action_view_rentals</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- ACCESS VIEW AMOUNT -->
+        <!-- product template tree -->
+        <record id="product_template_tree_view_inherit_view" model="ir.ui.view">
+            <field name="name">product_template_tree_view_inherit_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="arch" type="xml">
+                <!-- field list price -->
+                <xpath expr="//field[@name='list_price']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- product product tree -->
+        <record id="product_product_tree_view_inherit_view" model="ir.ui.view">
+            <field name="name">product_product_tree_view_inherit_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='lst_price']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='standard_price']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- product template kanban -->
+        <record id="product_template_kanban_view_inherit_view" model="ir.ui.view">
+            <field name="name">product_template_kanban_view_inherit_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@name='product_lst_price']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- product product kanban -->
+        <record id="product_kanban_view_inherit_view" model="ir.ui.view">
+            <field name="name">product_kanban_view_inherit_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//div[@class='oe_kanban_details']/ul" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- seller_ids table inside product template -->
+        <record id="product_supplierinfo_tree_view_inherit" model="ir.ui.view">
+            <field name="name">product_supplierinfo_tree_view_inherit</field>
+            <field name="model">product.supplierinfo</field>
+            <field name="inherit_id" ref="product.product_supplierinfo_tree_view"/>
+            <field name="arch" type="xml">
+                <!-- field seller_ids -->
+                <xpath expr="//field[@name='price']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+                <xpath expr="//field[@name='currency_id']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_inventory_view_amount</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <!-- REMOVE CRUD in FORM-->
+        <!-- PRODUCT TEMPLATE -->
+        <record id="product_template_form_view_remove_crud" model="ir.ui.view">
+            <field name="name">product_template_form_view_remove_crud</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <!-- PRODUCT TEMPLATE -->
+        <record id="product_template_tree_view_remove_crud" model="ir.ui.view">
+            <field name="name">product_template_tree_view_remove_crud</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- PRODUCT PRODUCT -->
+        <record id="product_product_tree_view_remove_crud" model="ir.ui.view">
+            <field name="name">product_product_tree_view_remove_crud</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in Kanban-->
+        <!-- PRODUCT TEMPLATE -->
+        <record id="product_template_kanban_view_remove_crud" model="ir.ui.view">
+            <field name="name">product_template_kanban_view_remove_crud</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- PRODUCT PRODUCT -->
+        <record id="product_kanban_view_remove_crud" model="ir.ui.view">
+            <field name="name">product_kanban_view_remove_crud</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+
+        <!-- IN FORM VIEW -->
+        <!-- PRODUCT TEMPLATE -->
+        <record id="view_product_template_form_create" model="ir.ui.view">
+            <field name="name">view_product_template_form_create</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_product_template_form_edit" model="ir.ui.view">
+            <field name="name">view_product_template_form_edit</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_update'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_product_template_form_delete" model="ir.ui.view">
+            <field name="name">view_product_template_form_delete</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- IN TREE VIEW -->
+        <!-- PRODUCT TEMPLATE -->
+        <record id="view_product_template_tree_create" model="ir.ui.view">
+            <field name="name">view_product_template_tree_create</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_product_template_tree_delete" model="ir.ui.view">
+            <field name="name">view_product_template_tree_delete</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- PRODUCT PRODUCT -->
+        <record id="view_product_product_tree_create" model="ir.ui.view">
+            <field name="name">view_product_product_tree_create</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_product_product_tree_delete" model="ir.ui.view">
+            <field name="name">view_product_product_tree_delete</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- IN KANBAN VIEW -->
+        <!-- PRODUCT TEMPLATE -->
+        <record id="view_product_template_kanban_create" model="ir.ui.view">
+            <field name="name">view_product_template_kanban_create</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_product_template_kanban_delete" model="ir.ui.view">
+            <field name="name">view_product_template_kanban_delete</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- PRODUCT PRODUCT -->
+        <record id="view_product_product_kanban_create" model="ir.ui.view">
+            <field name="name">view_product_product_kanban_create</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_product_product_kanban_delete" model="ir.ui.view">
+            <field name="name">view_product_product_kanban_delete</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_product_template_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- MENU ITEM -->
+        <record id="stock.menu_product_variant_config_stock" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_product_template_read'))]" />
+        </record>
+        <record id="stock.product_product_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_product_template_read'))]" />
+        </record>
+        <record id="custom_sale_order.ni_bundle_product_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_product_template_read'))]" />
+        </record>
+
+
+
+        <!-- VIEW CREATE and EDIT in FORM-->
+        <!-- <record id="product_template_form_view_create_edit_view" model="ir.ui.view">
+            <field name="name">product_template_form_view_create_edit_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW CREATE and EDIT in tree-->
+        <!-- <record id="product_template_tree_view_create_edit_view" model="ir.ui.view">
+            <field name="name">product_template_tree_view_create_edit_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW CREATE and EDIT in tree-->
+        <!-- <record id="product_product_tree_view_create_edit_view" model="ir.ui.view">
+            <field name="name">product_product_tree_view_create_edit_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW CREATE and EDIT in kanban-->
+        <!-- <record id="product_template_kanban_view_create_edit_view" model="ir.ui.view">
+            <field name="name">product_template_kanban_view_create_edit_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW CREATE and EDIT in kanban-->
+        <!-- <record id="product_kanban_view_create_edit_view" model="ir.ui.view">
+            <field name="name">product_kanban_view_create_edit_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_create_edit'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">true</attribute>
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW delete in FORM-->
+        <!-- <record id="product_template_form_view_delete_view" model="ir.ui.view">
+            <field name="name">product_template_form_view_delete_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_form_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW delete in tree-->
+        <!-- <record id="product_template_tree_view_delete_view" model="ir.ui.view">
+            <field name="name">product_template_tree_view_delete_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_tree_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW delete in tree-->
+        <!-- <record id="product_product_tree_view_delete_view" model="ir.ui.view">
+            <field name="name">product_product_tree_view_delete_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_product_tree_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW delete in kanban-->
+        <!-- <record id="product_template_kanban_view_delete_view" model="ir.ui.view">
+            <field name="name">product_template_kanban_view_delete_view</field>
+            <field name="model">product.template</field>
+            <field name="inherit_id" ref="product.product_template_kanban_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- VIEW delete in kanban-->
+        <!-- <record id="product_kanban_view_delete_view" model="ir.ui.view">
+            <field name="name">product_kanban_view_delete_view</field>
+            <field name="model">product.product</field>
+            <field name="inherit_id" ref="product.product_kanban_view"/>
+            <field name="groups_id" eval="[(4,ref('custom_access_right.group_master_product_button_button_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> -->
+
+    </data>
+</odoo>

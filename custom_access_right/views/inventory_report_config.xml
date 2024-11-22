@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- MENU ITEM -->
+        <!-- LAPORAN -->
+        <record id="stock_enterprise.stock_dashboard_menuitem" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_report_analisis_gudang_read'))]" />
+        </record>
+        <record id="stock.menu_valuation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_report_stok_persediaan_read'))]" />
+        </record>
+        <record id="stock.menu_forecast_inventory" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_report_forecast_inv_read'))]" />
+        </record>
+        <record id="stock_account.menu_valuation" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_report_penilaian_stok_read'))]" />
+        </record>
+        <record id="stock.stock_move_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_report_pergerakan_stok_read'))]" />
+        </record>
+        <record id="stock.stock_move_line_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_report_pergerakan_prod_read'))]" />
+        </record>
+
+        <!-- KONFIGURASI -->
+        <record id="stock.menu_stock_general_settings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_pengaturan_read'))]" />
+        </record>
+        <record id="stock.menu_action_warehouse_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_gudang_read'))]" />
+        </record>
+        <record id="stock.menu_action_location_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_lokasi_read'))]" />
+        </record>
+        <record id="stock.menu_routes_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_rute_read'))]" />
+        </record>
+        <record id="stock.menu_action_rules_form" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_aturan_read'))]" />
+        </record>
+        <record id="stock.menu_pickingtype" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_tipe_operasi_read'))]" />
+        </record>
+        <record id="stock.menu_storage_categoty_capacity_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_kateg_storage_read'))]" />
+        </record>
+        <record id="stock.menu_putaway" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_peraturan_penyimpanan_read'))]" />
+        </record>
+        <record id="stock.menu_product_category_config_stock" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_kategori_prod_read'))]" />
+        </record>
+        <record id="stock.menu_attribute_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_atribut_read'))]" />
+        </record>
+        <record id="stock.menu_reordering_rules_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_aturan_order_read'))]" />
+        </record>
+        <record id="stock.menu_wms_barcode_nomenclature_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_barcode_nomenclature_read'))]" />
+        </record>
+        <record id="stock.menu_stock_uom_categ_form_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_config_categ_satuan_read'))]" />
+        </record>
+    </data>
+</odoo>

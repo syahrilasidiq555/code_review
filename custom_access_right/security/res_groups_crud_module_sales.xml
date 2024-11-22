@@ -1,0 +1,242 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Order , Penawaran -->
+        <record model="ir.module.category" id="module_category_sales_order">
+            <field name="name">Sales &amp; Rental / Order , Penawaran</field>
+            <field name="sequence">2500</field>
+        </record>        
+        <record id="group_sales_order_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_sales_order"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_sales_order_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_category_sales_order"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_sales_order_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_sales_order"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_sales_order_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_sales_order"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_sale_button_buat_faktur" model="res.groups">
+            <field name="name">Button Buat Faktur</field>
+            <field name="category_id" ref="module_category_sales_order" />
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_sale_button_co_r_semayam" model="res.groups">
+            <field name="name">Button Checkout Ruang Semayam</field>
+            <field name="category_id" ref="module_category_sales_order" />
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_sale_button_kirim_email" model="res.groups">
+            <field name="name">Button Kirim Email</field>
+            <field name="category_id" ref="module_category_sales_order" />
+            <field name="sequence">7</field>
+        </record>
+
+        <!-- Order -->
+        <record model="ir.module.category" id="module_category_sales_ordersub">
+            <field name="name">Sales / Order</field>
+            <field name="sequence">2501</field>
+        </record>        
+        <record id="group_sales_order_pelanggan_read" model="res.groups">
+            <field name="name">Access Pelanggan</field>
+            <field name="category_id" ref="module_category_sales_ordersub"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_sales_order_penjualan_tim_read" model="res.groups">
+            <field name="name">Access Penjualan Tim</field>
+            <field name="category_id" ref="module_category_sales_ordersub"/>            
+            <field name="sequence">2</field>
+        </record>
+
+        <!-- Voucher Parkir -->
+        <record model="ir.module.category" id="module_category_sales_voucher_parkir">
+            <field name="name">Sales / Order / Voucher Parkir</field>
+            <field name="sequence">2502</field>
+        </record>        
+        <record id="group_sales_voucher_parkir_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_sales_voucher_parkir"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_sales_voucher_parkir_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_category_sales_voucher_parkir"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_sales_voucher_parkir_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_sales_voucher_parkir"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_sales_voucher_parkir_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_sales_voucher_parkir"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Sales / Siap Difakturkan -->
+        <record model="ir.module.category" id="module_category_sales_ready_faktur">
+            <field name="name">Sales / Siap Difakturkan</field>
+            <field name="sequence">2503</field>
+        </record>        
+        <record id="group_sales_order_ready_faktur_read" model="res.groups">
+            <field name="name">Access Order Siap Difakturkan</field>
+            <field name="category_id" ref="module_category_sales_ready_faktur"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_sales_order_order_upsell_read" model="res.groups">
+            <field name="name">Access Order Penjualan untuk Upsell</field>
+            <field name="category_id" ref="module_category_sales_ready_faktur"/>            
+            <field name="sequence">2</field>
+        </record>
+
+        <!-- Sales / Produk -->
+        <record model="ir.module.category" id="module_category_sales_product">
+            <field name="name">Sales / Produk</field>
+            <field name="sequence">2504</field>
+        </record>        
+        <record id="group_sales_order_product_read" model="res.groups">
+            <field name="name">Access Produk</field>
+            <field name="category_id" ref="module_category_sales_product"/>    
+            <field name="sequence">1</field>        
+        </record>
+        <record id="group_sales_order_product_varian_read" model="res.groups">
+            <field name="name">Access Varian Produk</field>
+            <field name="category_id" ref="module_category_sales_product"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_sales_order_pricelist_read" model="res.groups">
+            <field name="name">Access Daftar Harga</field>
+            <field name="category_id" ref="module_category_sales_product"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_sales_order_bundle_product_read" model="res.groups">
+            <field name="name">Access Produk Paket</field>
+            <field name="category_id" ref="module_category_sales_product"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Sales / Laporan -->
+        <record model="ir.module.category" id="module_category_sales_report">
+            <field name="name">Sales / Laporan</field>
+            <field name="sequence">2505</field>
+        </record>        
+        <record id="group_sales_order_dashboard_rep_read" model="res.groups">
+            <field name="name">Access Dashboard</field>
+            <field name="category_id" ref="module_category_sales_report"/>  
+            <field name="sequence">1</field>          
+        </record>
+        <record id="group_sales_order_penjualan_rep_read" model="res.groups">
+            <field name="name">Access Penjualan</field>
+            <field name="category_id" ref="module_category_sales_report"/>            
+            <field name="sequence">2</field>
+        </record>
+
+
+        <!-- Sales / Konfigurasi -->
+        <record model="ir.module.category" id="module_category_sales_config">
+            <field name="name">Sales / Konfigurasi</field>
+            <field name="sequence">2506</field>
+        </record>        
+        <record id="group_sales_order_pengaturan_read" model="res.groups">
+            <field name="name">Access Pengaturan</field>
+            <field name="category_id" ref="module_category_sales_config"/>    
+            <field name="sequence">1</field>        
+        </record>
+        <record id="group_sales_order_penjualan_tim_config_read" model="res.groups">
+            <field name="name">Access Penjualan Tim</field>
+            <field name="category_id" ref="module_category_sales_config"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_sales_order_label_read" model="res.groups">
+            <field name="name">Access Label</field>
+            <field name="category_id" ref="module_category_sales_config"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_sales_order_atribut_read" model="res.groups">
+            <field name="name">Access Atribut</field>
+            <field name="category_id" ref="module_category_sales_config"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_sales_order_uom_read" model="res.groups">
+            <field name="name">Access Kategori Satuan Ukuran</field>
+            <field name="category_id" ref="module_category_sales_config"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_sales_order_activity_read" model="res.groups">
+            <field name="name">Access Jenis Aktivitas</field>
+            <field name="category_id" ref="module_category_sales_config"/>            
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_sales_order_ruangdoa_read" model="res.groups">
+            <field name="name">Access Jadwal Ruang Doa</field>
+            <field name="category_id" ref="module_category_sales_config"/>            
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_sales_order_tarif_ambulance_read" model="res.groups">
+            <field name="name">Access Tarif Ambulance</field>
+            <field name="category_id" ref="module_category_sales_config"/>            
+            <field name="sequence">8</field>
+        </record>
+        
+
+        <!-- Rental / Order -->
+        <record model="ir.module.category" id="module_category_rental_ordersub">
+            <field name="name">Rental / Order</field>
+            <field name="sequence">3001</field>
+        </record>        
+        <record id="group_rental_order_pelanggan_read" model="res.groups">
+            <field name="name">Access Pelanggan</field>
+            <field name="category_id" ref="module_category_rental_ordersub"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_rental_order_pickup_read" model="res.groups">
+            <field name="name">Access Pickup</field>
+            <field name="category_id" ref="module_category_rental_ordersub"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_rental_order_retur_read" model="res.groups">
+            <field name="name">Access Retur</field>
+            <field name="category_id" ref="module_category_rental_ordersub"/>            
+            <field name="sequence">3</field>
+        </record>
+
+
+        <!-- Rental / Jadwal , Produk, Laporan -->
+        <record model="ir.module.category" id="module_category_rental_schedule_product">
+            <field name="name">Rental / Jadwal , Produk, Laporan</field>
+            <field name="sequence">3002</field>
+        </record>        
+        <record id="group_rental_order_schedule_read" model="res.groups">
+            <field name="name">Access Jadwal</field>
+            <field name="category_id" ref="module_category_rental_schedule_product"/>   
+            <field name="sequence">1</field>         
+        </record>
+        <record id="group_rental_order_product_read" model="res.groups">
+            <field name="name">Access Product</field>
+            <field name="category_id" ref="module_category_rental_schedule_product"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_rental_order_report_read" model="res.groups">
+            <field name="name">Access Laporan</field>
+            <field name="category_id" ref="module_category_rental_schedule_product"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_rental_order_config_read" model="res.groups">
+            <field name="name">Access Konfigurasi</field>
+            <field name="category_id" ref="module_category_rental_schedule_product"/>            
+            <field name="sequence">4</field>
+        </record>
+
+    </data>
+</odoo>

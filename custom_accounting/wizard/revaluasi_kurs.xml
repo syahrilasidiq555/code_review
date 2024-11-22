@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="revaluasi_kurs_form_wizard" model="ir.ui.view">
+            <field name="name">revaluasi_kurs_form_wizard</field>
+            <field name="model">revaluasi.kurs</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <group>
+                                <field name="ref"/>
+                                <field name="label"/>
+                                <!-- <field name="date"/> -->
+                                <label for="month" string="Periode"/>
+                                <div class="o_row">
+                                    <field name="month" string="Periode"/>
+                                    <field name="year" widget="char"/>
+                                </div>
+                                <field name="journal_id"/>
+                            </group>
+                            <group>
+                                <field name="account_ids" widget="many2many_tags"/>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Currency and Account">
+                                <field name="revaluasi_line">
+                                    <tree editable="bottom">
+                                        <field name="currency_id"/>
+                                        <field name="rate_kurs"/>
+                                        <field name="realized_account_id"/>
+                                        <field name="unrealized_account_id"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <footer>
+                        <button string="Save and View Journal" name="action_confirm" type="object" class="btn-primary"/>
+                        <!-- <button string="Synchronize Rate Journal" name="convert_journal_amount_to_curr" type="object" class="btn-danger"/> -->
+                        <button string="Cancel" class="btn-secondary" special="cancel"/>
+                    </footer>
+               </form>
+            </field>
+        </record>
+
+        <record id="revaluasi_kurs_action" model="ir.actions.act_window">
+            <field name="name">Currency Exchange Rate</field>
+            <field name="res_model">revaluasi.kurs</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="revaluasi_kurs_form_wizard"/>
+            <field name="target">new</field>
+        </record>
+
+        <menuitem
+            id="menu_revaluasi_kurs"
+            name="Currency Exchange Rate"
+            action="revaluasi_kurs_action"
+            parent="account.menu_finance_entries_actions"
+            sequence="56"/>
+
+    </data>
+</odoo>

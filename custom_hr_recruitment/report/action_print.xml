@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!-- Copyright 2018-2019 ForgeFlow, S.L.
+     License LGPL-3.0 or later (https://www.gnu.org/licenses/lgpl-3.0) -->
+<odoo>
+
+    <record id="action_report_fpsk" model="ir.actions.report">
+        <field name="name">Form Permintaan Karyawan</field>
+        <field name="model">big.fpk</field>
+        <field name="report_type">qweb-pdf</field>
+        <field name="report_name">custom_hr_recruitment.print_fpk_template</field>
+        <field name="report_file">custom_hr_recruitment.print_fpk_template</field>
+        <field name="paperformat_id" ref="custom_hr.format_kertas_a4_custom_hr"/>  
+    </record>
+</odoo>

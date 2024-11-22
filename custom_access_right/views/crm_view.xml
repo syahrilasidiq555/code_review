@@ -1,0 +1,326 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Saluranku & Aktivitas Saya & Prospek -->
+        <!-- REMOVE CRUD in FORM-->
+        <record id="crm_lead_view_form_remove_crud" model="ir.ui.view">
+            <field name="name">crm_lead_view_form_remove_crud</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- REMOVE CRUD in TREE-->
+        <record id="crm_case_tree_view_oppor_remove_crud" model="ir.ui.view">
+            <field name="name">crm_case_tree_view_oppor_remove_crud</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="crm_lead_view_list_activities_remove_crud" model="ir.ui.view">
+            <field name="name">crm_lead_view_list_activities_remove_crud</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_list_activities"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="crm_case_tree_view_leads_remove_crud" model="ir.ui.view">
+            <field name="name">crm_case_tree_view_leads_remove_crud</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        
+        <!-- REMOVE CRUD in Kanban-->
+        <record id="crm_case_kanban_view_leads_remove_crud" model="ir.ui.view">
+            <field name="name">crm_case_kanban_view_leads_remove_crud</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="view_crm_lead_kanban_remove_crud" model="ir.ui.view">
+            <field name="name">view_crm_lead_kanban_remove_crud</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_lead_kanban"/>
+            <field name="priority" eval="1" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">                    
+                    <attribute name="edit">false</attribute>
+                    <attribute name="create">false</attribute>
+                    <attribute name="delete">false</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+
+        <!-- IN TREE VIEW Create -->
+        <record id="crm_case_tree_view_oppor_inherit_create" model="ir.ui.view">
+            <field name="name">crm_case_tree_view_oppor_inherit_create</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+        <record id="crm_lead_view_list_activities_inherit_create" model="ir.ui.view">
+            <field name="name">crm_lead_view_list_activities_inherit_create</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_list_activities"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="crm_case_tree_view_leads_inherit_create" model="ir.ui.view">
+            <field name="name">crm_case_tree_view_leads_inherit_create</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+
+        <!-- IN TREE VIEW Delete -->
+        <record id="crm_case_tree_view_oppor_inherit_delete" model="ir.ui.view">
+            <field name="name">crm_case_tree_view_oppor_inherit_delete</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_oppor"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+        <record id="crm_lead_view_list_activities_inherit_delete" model="ir.ui.view">
+            <field name="name">crm_lead_view_list_activities_inherit_delete</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_list_activities"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+        <record id="crm_case_tree_view_leads_inherit_delete" model="ir.ui.view">
+            <field name="name">crm_case_tree_view_leads_inherit_delete</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_tree_view_leads"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//tree" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+        
+
+        <!-- IN FORM VIEW -->
+        <record id="crm_lead_view_form_inherit_create" model="ir.ui.view">
+            <field name="name">crm_lead_view_form_inherit_create</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+        <record id="crm_lead_view_form_inherit_delete" model="ir.ui.view">
+            <field name="name">crm_lead_view_form_inherit_delete</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_delete'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="delete">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+        <record id="crm_lead_view_form_inherit_update" model="ir.ui.view">
+            <field name="name">crm_lead_view_form_inherit_update</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_update'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//form" position="attributes">
+                    <attribute name="edit">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+
+        <!-- IN FORM VIEW BUTTON -->
+        <record id="crm_lead_view_form_inherit_access_button" model="ir.ui.view">
+            <field name="name">crm_lead_view_form_inherit_access_button</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_set_won_rainbowman']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_crm_penjualan_button_won</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_set_lost']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_crm_penjualan_button_lost</attribute>
+                </xpath>
+                <xpath expr="//button[@name='%(crm.crm_lead_lost_action)d']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_crm_penjualan_button_lost</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="crm_sale_case_form_view_oppor_inherit_access_button" model="ir.ui.view">
+            <field name="name">crm_sale_case_form_view_oppor_inherit_access_button</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sale_crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_sale_quotations_new']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_crm_penjualan_button_new_quotation</attribute>
+                </xpath>
+            </field>
+        </record>
+        <record id="crm_rental_case_form_view_oppor_inherit_access_button" model="ir.ui.view">
+            <field name="name">crm_rental_case_form_view_oppor_inherit_access_button</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="sale_renting_crm.crm_case_form_view_oppor"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_rental_quotations_new']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_crm_penjualan_button_new_rental</attribute>
+                </xpath>
+            </field>
+        </record>
+        
+        <!-- IN KANBAN VIEW -->
+        <record id="crm_case_kanban_view_leads_inherit_create" model="ir.ui.view">
+            <field name="name">crm_case_kanban_view_leads_inherit_create</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_case_kanban_view_leads"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+        <record id="view_crm_lead_kanban_inherit_create" model="ir.ui.view">
+            <field name="name">view_crm_lead_kanban_inherit_create</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.view_crm_lead_kanban"/>
+            <field name="groups_id" eval="[(4,ref('group_crm_penjualan_create'))]" />
+            <field name="arch" type="xml">
+                <xpath expr="//kanban" position="attributes">
+                    <attribute name="create">true</attribute>
+                </xpath>
+            </field>
+        </record> 
+
+        <!-- =============================================== -->
+
+        <!-- MENU ITEM TRX -->
+        <record id="crm.menu_crm_opportunities" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_penjualan_read'))]" />
+        </record>
+        <record id="crm.crm_lead_menu_my_activities" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_penjualan_read'))]" />
+        </record>
+        <record id="crm.crm_menu_leads" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_penjualan_read'))]" />
+        </record>
+        <record id="sale_crm.sale_order_menu_quotations_crm" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_quotation_saya'))]" />
+        </record>
+        <record id="crm.sales_team_menu_team_pipeline" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_tim'))]" />
+        </record>
+        <record id="crm.res_partner_menu_customer" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_pelanggan'))]" />
+        </record>
+        <!-- MENU ITEM LAPORAN -->
+        <record id="crm_enterprise.crm_enterprise_dashboard_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_laporan_dashbor'))]" />
+        </record>
+        <record id="crm.crm_menu_forecast" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_laporan_prakiraan'))]" />
+        </record>
+        <record id="crm.crm_opportunity_report_menu_lead" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_laporan_prospek'))]" />
+        </record>
+        <record id="crm.crm_opportunity_report_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_laporan_saluran'))]" />
+        </record>
+        <record id="crm.crm_activity_report_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_laporan_aktivitas'))]" />
+        </record>
+        <!-- MENU ITEM CONF -->
+        <record id="crm.crm_menu_config" model="ir.ui.menu">
+            <field name="action" eval="False" />
+        </record>
+        <record id="crm.crm_config_settings_menu" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_konfigurasi_pengaturan'))]" />
+        </record>
+        <record id="crm.crm_team_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_konfigurasi_penjualan_tim'))]" />
+        </record>
+        <record id="crm.crm_team_member_config" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_konfigurasi_anggota_tim'))]" />
+        </record>
+        <record id="crm.crm_team_menu_config_activity_types" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_konfigurasi_jenis_aktivitas'))]" />
+        </record>
+        <record id="crm.menu_crm_lead_stage_act" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_konfigurasi_tahap'))]" />
+        </record>
+        <record id="crm.menu_crm_lead_categ" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_konfigurasi_label'))]" />
+        </record>
+        <record id="crm.menu_crm_lost_reason" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_konfigurasi_alasan_gagal'))]" />
+        </record>
+        <record id="crm_iap_mine.crm_iap_lead_mining_request_menu_action" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0), (4,ref('group_crm_konfigurasi_lead_mining'))]" />
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,76 @@
+<div class="header_body pt-2">
+    <div class="row" style="font-size:14px"> 
+        <div class="col-8 py-2">
+            <h5><b>Deskripsi Tagihan</b></h5>
+        </div>
+        <div class="col-4 py-2">
+            <h5><b>Total Tagihan</b></h5>
+        </div>
+    </div>
+    <div class="row p-2 pe-4">
+        <div class="p-1" name="last_month_move_ids">
+            <strong>Bulan Lalu</strong>
+        </div>
+        <table class="table table-sm o_main_table table-borderless" name="invoice_line_table">
+            
+            <tbody class="invoice_tbody">
+                <t t-set="last_month_amount_due" t-value="0"/>
+                <t t-set="pph23_amount" t-value="0"/>
+                <t t-set="last_month_lines" t-value="o.last_month_move_ids"/>
+                <t t-foreach="last_month_lines" t-as="line">
+                    <t t-set="last_month_amount_due" t-value="last_month_amount_due+line.amount_residual"/>
+                    <tr>
+                        <td name="th_name">
+                            <span t-field="line.name"/>
+                        </td>
+                        <!-- <td name="th_date">
+                            <span t-field="line.date"/>
+                        </td> -->
+                        <td name="th_total" class="text-end o_price_total">
+                            <span class="text-nowrap" t-field="line.amount_total">27.00</span>
+                        </td>
+                        <!-- <td name="th_due" class="text-end o_price_total">
+                            <span class="text-nowrap" t-field="line.amount_residual_signed">27.00</span>
+                        </td>
+                        <td name="th_state">
+                            <span t-field="line.state"/>
+                        </td> -->
+                    </tr>
+                    <t t-if="line.invoice_payments_widget">
+                        <t t-foreach="line.invoice_payments_widget['content']" t-as="payment">
+                            <tr>
+                                <td name="th_name">
+                                    <span t-esc="payment['date'].strftime('%d/%m/%Y')"/> - Customer Payment
+                                </td>
+                                <td name="th_total" class="text-end o_price_total">
+                                    <t t-if="payment['amount_foreign_currency']">
+                                        (<span class="text-nowrap" t-esc="payment['amount_foreign_currency']"/>)
+                                    </t>
+                                    <t t-else="">
+                                        (<span class="text-nowrap" t-esc="payment['amount_company_currency']"/>)
+                                    </t>
+                                </td>
+                            </tr>
+                        </t>
+                    </t>
+                    <t t-if="line.tax_totals and line.tax_totals['groups_by_subtotal'] and line.tax_totals['groups_by_subtotal']['Untaxed Amount']">
+                        <t t-foreach="line.tax_totals['groups_by_subtotal']['Untaxed Amount']" t-as="tax_group">
+                            <t t-if="'PPH 23' in tax_group['tax_group_name']">
+                                <t t-set="pph23_amount" t-value="tax_group['tax_group_amount']"/>
+                                <tr>
+                                    <td name="th_name">
+                                        <span t-field="line.invoice_date_due"/> - <span t-esc="tax_group['tax_group_name']" />
+                                    </td>
+                                    <td name="th_total" class="text-end o_price_total">
+                                        (<span class="text-nowrap" t-esc="tax_group['formatted_tax_group_amount']"/>)
+                                    </td>
+                                </tr>
+                            </t>
+                        </t>
+                    </t>
+                </t>
+                
+            </tbody>
+        </table>
+    </div>
+</div>

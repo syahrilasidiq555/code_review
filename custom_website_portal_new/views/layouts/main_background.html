@@ -1,0 +1,29 @@
+{% extends 'layouts/base.html' %}
+
+{% block css_assets %}
+<!-- <style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style> -->
+{% endblock %}
+
+{% block content_layout %}
+<main class="menu_background">
+    {% block content %}
+    {% endblock %}
+</main>
+{% endblock %}

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- PURCHASE REQUEST -->
+    <!-- REMOVE CRUD in FORM-->
+    <record id="res_hospital_form_remove_crud" model="ir.ui.view">
+        <field name="name">res_hospital_form_remove_crud</field>
+        <field name="model">res.hospital</field>
+        <field name="inherit_id" ref="custom_web_rdc.res_hospital_form_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- REMOVE CRUD in TREE-->
+    <record id="res_hospital_tree_view_remove_crud" model="ir.ui.view">
+        <field name="name">res_hospital_tree_view_remove_crud</field>
+        <field name="model">res.hospital</field>
+        <field name="inherit_id" ref="custom_web_rdc.res_hospital_tree_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN FORM -->
+    <record id="res_hospital_form_create_view" model="ir.ui.view">
+        <field name="name">res_hospital_form_create_view</field>
+        <field name="model">res.hospital</field>
+        <field name="inherit_id" ref="custom_web_rdc.res_hospital_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_mst_rumahsakit_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="res_hospital_form_edit_view" model="ir.ui.view">
+        <field name="name">res_hospital_form_edit_view</field>
+        <field name="model">res.hospital</field>
+        <field name="inherit_id" ref="custom_web_rdc.res_hospital_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_mst_rumahsakit_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="res_hospital_form_delete_view" model="ir.ui.view">
+        <field name="name">res_hospital_form_delete_view</field>
+        <field name="model">res.hospital</field>
+        <field name="inherit_id" ref="custom_web_rdc.res_hospital_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_mst_rumahsakit_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN TREE VIEW -->
+    <record id="res_hospital_tree_create_tree" model="ir.ui.view">
+        <field name="name">res_hospital_tree_create_tree</field>
+        <field name="model">res.hospital</field>
+        <field name="inherit_id" ref="custom_web_rdc.res_hospital_tree_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_mst_rumahsakit_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="res_hospital_tree_delete_tree" model="ir.ui.view">
+        <field name="name">res_hospital_tree_delete_tree</field>
+        <field name="model">res.hospital</field>
+        <field name="inherit_id" ref="custom_web_rdc.res_hospital_tree_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_mst_rumahsakit_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- MENU ITEM -->
+    <record id="custom_web_rdc.res_hospital_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_rdc_mst_rumahsakit_read'))]" />
+    </record>
+
+</odoo>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Update Currency Precisison-->
+        <function model="res.currency" name="_set_idr_currency_precission"/>
+    </data>
+</odoo>

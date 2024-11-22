@@ -1,0 +1,257 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- TREE -->
+    <record id="big_overtime_view_tree" model="ir.ui.view">
+        <field name="name">big_overtime_view_tree</field>
+        <field name="model">big.overtime</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="name" />
+                <field name="rel_employee_ids" widget="many2many_tags"/>
+                <field name="rel_department_id"/>
+                <field name="rel_section" />
+                <field name="overtime_date" />
+                <field name="jenis_lembur" />
+                <field name="state" />
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- SEARCH -->
+    <record id="big_overtime_view_search" model="ir.ui.view">
+        <field name="name">big_overtime_view_search</field>
+        <field name="model">big.overtime</field>
+        <field name="arch" type="xml">
+            <search string="Search Data...">
+                <field name="name"/>
+                <field name="rel_department_id"/>
+                <field name="rel_section" />
+            </search>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+    <record id="big_overtime_view_form" model="ir.ui.view">
+        <field name="name">big_overtime_view_form</field>
+        <field name="model">big.overtime</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Form">
+                <header>
+                    <button string="RFA" type="object" states="draft" name="action_rfa" class="oe_highlight" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_rfa"/>
+                    <button string="Manager Approve" type="object" states="rfa" name="action_approve1" class="oe_highlight" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_approve1"/>
+                    <button string="HR Approve" type="object" states="approve1" name="action_approve2" class="oe_highlight" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_approve2"/>
+                    
+                    <button string="Revise" type="object" states="rfa,approve1" name="action_revise" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_revise"/>
+                    <button string="Reject" type="object" states="rfa,approve1" name="action_reject" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_reject"/>
+                    <button string="Cancel" type="object" states="rfa,approve1" name="action_cancel" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_cancel"/>
+                    <button string="Set to Draft" type="object" states="cancel" name="action_draft" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_draft"/>
+                    
+                    <field name="state" widget="statusbar" statusbar_visible="draft,rfa,approve1,approve2" attrs="{'invisible':[('state','in',['cancel','reject'])]}"/>
+                    <field name="state_reject" widget="statusbar" statusbar_visible="reject" attrs="{'invisible':[('state','!=','reject')]}"/>
+                    <field name="state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':[('state','!=','cancel')]}"/>
+                </header>
+                <sheet>
+                <div class="oe_button_box" name="button_box">
+                    <button class="oe_stat_button" type="object" name="action_open_allocations" icon="fa-calendar" 
+                        attrs="{'invisible':[('allocation_count','=',0)]}"
+                        groups="custom_overtime.ovr_button_action_open_allocations">
+                        <field string="Allocation(s)" name="allocation_count" widget="statinfo" modifiers="{&quot;readonly&quot;: true}"/>
+                    </button>
+                </div>
+                <group name="head">
+                    <group name="left">
+                        <field name="overtime_type" attrs="{'readonly':[('id','>=',1)]}" />
+                        
+                        <field name="manager_id" options="{'no_create':True,'no_open':True,'no_edit':True}" 
+                            groups="custom_overtime.ovr_human_resource"/>
+                        <field name="hr_responsible_id" options="{'no_create':True,'no_open':True,'no_edit':True}" 
+                            groups="custom_overtime.ovr_human_resource"/>
+                    </group>
+                </group>
+                <group name="ovt_pribadi" attrs="{'invisible':[('overtime_type','!=','pribadi')]}">
+                    <group string="Employee Detail" name="emp_detail">
+                        <field name="employee_id"
+                            options="{'no_create':True,'no_open':True,'no_edit':True}"
+                            attrs="{'required':[('overtime_type','=','pribadi')], 'readonly':[('state','!=','draft')]}"/>
+                        <field name="nik" />
+                        <field name="job_id" />
+                        <field name="department_id"/>
+                        <field name="section"/>
+                        <field name="work_location_id" />
+                        <field name="is_wonogiri_area" attrs="{'invisible':[('is_wonogiri_area','!=',True)]}" />
+                        <field name="resource_calendar_id" attrs="{'invisible':[('is_wonogiri_area','!=',True)]}" />
+                        <field name="hari_kerja" attrs="{'invisible':[('is_wonogiri_area','!=',True)]}" />
+                    </group>
+                </group>
+
+                <group name="sp_det" >
+                    <group name="sp_ovt" string="SP Overtime">
+                        <field name="kolektif_department_id"
+                            options="{'no_create':True,'no_open':True,'no_edit':True}"
+                            attrs="{'invisible':[('overtime_type','!=','kolektif')], 'required':[('overtime_type','=','kolektif')], 'readonly':[('state','!=','draft')]}" />
+                        <field name="kolektif_section"
+                            options="{'no_create':True,'no_open':True,'no_edit':True}"
+                            attrs="{'invisible':[('overtime_type','!=','kolektif')], 'required':[('overtime_type','=','kolektif')], 'readonly':[('state','!=','draft')]}" />
+                        <field name="overtime_date" required="1"
+                            attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field name="jenis_lembur" 
+                            attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field name="description" 
+                            attrs="{'readonly':[('state','!=','draft')]}"/>
+                    </group>
+                    <group name="detail_ovt" string="Detail Overtime">
+                        <label for="start_date" string="Waktu Lembur"/>
+                        <div class="o_row" style="min-width: 300px!important;">
+                            <field name="start_date" widget="daterange" options="{'related_end_date': 'end_date'}" 
+                                required="1"
+                                attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <span> to </span>
+                            <field name="end_date" widget="daterange" options="{'related_start_date': 'start_date'}" 
+                                required="1"
+                                attrs="{'readonly':[('state','!=','draft')]}"/>
+                        </div>
+                        <field name="is_shift_malam" 
+                            attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <field name="menit_istirahat" 
+                            attrs="{'readonly':[('state','!=','draft')]}"/>
+                        <label for="overtime_hours"/>
+                        <div class="o_row" style="width: 100px!important;">
+                            <field name="overtime_hours" widget="float_time"/>
+                            <span> Jam </span>
+                        </div>
+                    </group>
+                </group>
+
+                <group name="ovt_kolektif" attrs="{'invisible':[('overtime_type','!=','kolektif')]}">
+                    <field name="overtime_kolektif_ids" nolabel="1"
+                        attrs="{'readonly':[('state','!=','draft')]}">
+                        <tree editable="bottom" create="0" delete="1">
+                            <field name="employee_id" />
+                            <field name="work_location_id" optional="hide" />
+                            <!-- <field name="is_wonogiri_area" attrs="{'invisible':[('is_wonogiri_area','!=',True)]}" optional="hide" /> -->
+                            <field name="resource_calendar_id" optional="hide" />
+                            <field name="hari_kerja" optional="hide" />
+                            <field name="menit_istirahat" />
+                            <field name="start_date" />
+                            <field name="end_date" />
+                            <field name="overtime_hours" widget="float_time" optional="hide" />
+                            <field name="description" />
+                        </tree>
+                        <form create="0" edit="0" delete="0">
+                            <group string="Overtime Kolektif Detail">
+                                <field name="employee_id" />
+                                <field name="menit_istirahat" />
+                                <label for="start_date" string="Waktu Lembur"/>
+                                <div class="o_row" style="min-width: 300px!important;">
+                                    <field name="start_date" widget="daterange" options="{'related_end_date': 'end_date'}"/>
+                                    <span> to </span>
+                                    <field name="end_date" widget="daterange" options="{'related_start_date': 'start_date'}"/>
+                                </div>
+                                <label for="overtime_hours"/>
+                                <div class="o_row" style="width: 100px!important;">
+                                    <field name="overtime_hours" widget="float_time"/>
+                                    <span> Jam </span>
+                                </div>
+                                <field name="description" />
+                            </group>
+                        </form>
+                    </field>
+                </group>
+
+                <notebook>
+                    <page name="hour_detail" string="Overtime Hour Detail" attrs="{'invisible':['|',('state','=','draft'),('ovr_hour_detail_ids','=',[])]}">
+                        <field name="ovr_hour_detail_ids" readonly="1" force_save="1">
+                            <tree string="" editable="bottom" create="false" edit="false" delete="false" order="employee_id,name">
+                                <field name="employee_id"/>
+                                <field name="name"/>
+                                <field name="code"/>
+                                <field name="number_of_hours" widget="float_time"/>
+                            </tree>
+                            <form >
+                                <group>
+                                    <field name="employee_id"/>
+                                    <field name="name"/>
+                                    <field name="code"/>
+                                    <field name="number_of_hours" widget="float_time"/>
+                                </group>
+                            </form>
+                        </field>
+                    </page>
+                    <page string="Approval and Audit Trail">
+                        <group string="Approval">
+                            <field name="approval_ids" nolabel="1" widget="one2many_list" readonly="1" force_save="1">
+                                <tree string="" editable="bottom" create="false" edit="false" delete="false">
+                                    <field name="state"/>
+                                    <field name="reason"/>
+                                    <field name="pelaksana_id"/>
+                                    <field name="job_id"/>
+                                    <field name="tanggal"/>
+                                </tree>
+                            </field>
+                        </group>
+                        <group string="Audit Trail">
+                            <group>
+                                <field name="create_uid" readonly="1"/>
+                                <field name="create_date" readonly="1"/>
+                            </group>
+                            <group>
+                                <field name="write_uid" readonly="1"/>
+                                <field name="write_date" readonly="1"/>
+                            </group>
+                        </group>
+                    </page>
+                </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids"/>	
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+            </form>
+        </field>
+    </record>
+
+
+    
+    
+    <record id="big_overtime_action" model="ir.actions.act_window">
+        <field name="name">Overtime Management</field>
+        <field name="res_model">big.overtime</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Add new Overtime Management
+            </p><p>
+            With just a quick glance on the Odoo screen, you
+            can easily find all the information you need.
+            </p>
+        </field>
+    </record>
+
+    <menuitem 
+        id="overtime_management_menu"
+        name="Overtime"
+        web_icon="custom_overtime,static/description/icon.png"
+        sequence="80"/>
+
+    <menuitem 
+        id="overtime_management_submenu"
+        name="Overtime"
+        parent="overtime_management_menu"
+        sequence="1"
+        action="big_overtime_action"/>
+
+</odoo>

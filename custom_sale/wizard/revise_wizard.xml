@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="revise_wizard_form_view" model="ir.ui.view">
+            <field name="name">revise_wizard_form_view</field>
+            <field name="model">revise.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <field name="message" nolabel="1" placeholder="Insert message here..."/>
+                    <!-- <field name="incentive_id" invisible="1"/> -->
+                    <field name="data_id" invisible="1"/>
+                    <field name="model_name" invisible="1"/>
+                    <field name="function_name" invisible="1"/>
+                    <field name="function_parameter" invisible="1"/>
+                    <footer>
+                        <button name="btn_continue"  type="object" string="Confirm" class="oe_highlight"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

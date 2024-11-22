@@ -1,0 +1,40 @@
+{% extends 'layouts/main_background.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+
+{% block css_assets %}
+<link rel="stylesheet" href="/custom_website_portal_new/static/css/web.assets_frontend.min.css">
+<style>
+    body, html {
+        height: 100%;
+        margin: 0;
+        overflow: hidden;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+</style>
+{% endblock %}
+
+
+{% block content %}
+<div class="row p-3 mx-3">
+    <div class="alert d-flex align-items-center alert-danger">
+        <div>
+            <span>This user is not linked with Employee, please contact Administrator to access this menu!</span>
+        </div>
+    </div>
+</div>
+
+{% endblock %}

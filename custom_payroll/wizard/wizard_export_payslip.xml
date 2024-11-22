@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="view_payroll_export" model="ir.ui.view">
+        <field name="name">view_payroll_export</field>
+        <field name="model">wizard.export.payslip</field>
+        <field name="type">form</field>
+        <field name="arch" type="xml">
+            <form string="Export Payslip">
+                <sheet>
+                    <group string="">
+                        <field name="company_id" 
+                            options="{'no_quick_create': True, 'no_create_edit' : True, 'no_create': True, 'no_open': True}"
+                            invisible="1"/>
+                        <label for="month" string="Periode"/>
+                        <div class="w-100">
+                            <div class="o_row">
+                                <field name="month"/> - <field name="year"/>
+                            </div>
+                        </div>
+                    </group>
+                </sheet>
+                <footer>
+                    <button name="action_export" type="object" string="Export Report" class="oe_highlight" confirm="Are you sure want to export payslip ?"/>
+                    <!-- <button name="action_download_slip" type="object" string="Download Salary Slip" class="oe_highlight" confirm="Are you sure want to download salary slip ?"/> -->
+                    <button special="cancel" string="Cancel"/>                    
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_view_export_payslip" model="ir.actions.act_window">
+        <field name="name">Export Payslip</field>
+        <field name="res_model">wizard.export.payslip</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_payroll_export"/>
+        <field name="target">new</field>
+    </record>
+
+</odoo>

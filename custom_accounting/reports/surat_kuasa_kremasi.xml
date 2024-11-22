@@ -1,0 +1,517 @@
+<odoo>
+    <data>
+
+        <template id="custom_accounting.print_surat_kuasa_kremasi_template">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_accounting.overdue_print_layout_a5">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">SURAT KUASA KREMASI</h5>
+                                    </div>
+                                    <div class="mx-5">
+                                        <p class="text-left">Yang bertanda tangan dibawah ini : </p> 
+                                        <table class="table">
+                                            <style>
+                                                .borderless td, .borderless th {
+                                                    border: none;
+                                                    padding-left:0;
+                                                    padding-right:0;
+                                                    padding-top:4px;
+                                                    padding-bottom:4px;
+                                                }
+                                            </style> 
+                                            <tbody class='borderless'>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Nama Penanggung jawab</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.name" /></td>
+                                                </tr>
+                                                <!-- <tr>
+                                                    <td class="text-left" style="width:260px!important;">NIK</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.no_ktp"/></td>
+                                                </tr> -->
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Alamat</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.street"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">No. Handphone</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.phone"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Hubungan dengan Almarhum/Mah</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" colspan="3">Dengan ini memberikan kuasa kepada Krematorium Rumah Duka Carolus, Jalan Salemba Raya No 33, Jakarta Pusat 10440, untuk melakukan kremasi atas jenazah :</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Nama Almarhum/Mah</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Alamat</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.street"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Tanggal Meninggal</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-esc="o.jenazah_id.tanggal_kematian.strftime('%d %b %Y %H:%M:%S')"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Asal Jenazah</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.hospital_id.name"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-left my-0">Dokumen Terlampir </p> 
+                                        <ol>
+                                            <li>Fotocopy Surat Keterangan Kematian dari Rumah Sakit / Puskesmas</li>
+                                            <li>Fotocopy KTP Almarhum/Mah</li>
+                                            <li>Fotocopy KTP Penaggung Jawab</li>
+                                            <li>Fotocopy Kartu Keluarga</li>
+                                            <li>Fotocopy Surat Kematian dari Kelurahan / Akte Kematian</li>
+                                            <li>Surat Izin Pengabuan jenazah / Kerangka</li>
+                                        </ol> 
+                                        <p class="text-justify">Penanggung jawab dan/atau Pemberi kuasa, dengan ini menyatakan bahwa dalam tubuh maupun peti jenazah mendiang tidak terdapat bahan atau benda yang berbahaya yang dapat menimbulkan ledakan, barang-barang yang terbuat dari kaca / acrylic / stainless steel, dan ternyata terjadi suatu ledakan yang diakibatkan dari bahan dan benda berbahaya tersebut, maka hal ini menjadi tanggung jawab sepenuhnya dari Penaggung Jawab dan/atau Pemberi kuasa sepenuhnya tidak ada yang dikecualikan. </p> 
+
+                                        <p class="text-justify">Penanggung jawab dan/atau Pemberi kuasa dengan ini membebaskan pihak pengelola Krematorium Rumah Duka Carolus sepenuhnya, apabila dikemudian hari tenyata ada pihak tertentu yang mengajukan keberatan atas pelaksanaan kremasi terhadap jenasah almarhum / almarhumah di Krematorium Rumah Duka Carolus dimaksud. </p> 
+
+                                        <p class="text-left">Demikian Surat Kuasa Kremasi ini dibuat untuk dipergunakan seperlunya.</p> 
+
+                                        <table class="table">
+                                            <tbody class='borderless'>
+                                                <tr style="background-color:transparent;">
+                                                    <td width="75%" style="border-top:none!important; border-right:0!important;">
+                                                    </td>
+                                                    <td width="25%" style="border-top:none!important; border-right:0!important;">
+                                                        <center>
+                                                                <p class="text-left my-0">Jakarta, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y')"/></p> 
+                                                                <p class="text-left my-0">Yang memberi kuasa,</p> 
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <p class="text-center">(...........................................................)</p> 
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+
+        <template id="custom_accounting.print_surat_pernyataan_ahli_waris_kremasi_template">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_accounting.overdue_print_layout_a5">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">SURAT PERNYATAAN</h5>
+                                        <h5 class="">AHLI WARIS UNTUK KREMASI</h5>
+                                    </div>
+                                    <div class="mx-5">
+                                        <p class="text-left">Yang bertanda tangan dibawah ini : </p> 
+                                        <table class="table">
+                                            <style>
+                                                .borderless td, .borderless th {
+                                                    border: none;
+                                                    padding-left:0;
+                                                    padding-right:0;
+                                                    padding-top:2px;
+                                                    padding-bottom:2px;
+                                                }
+                                            </style> 
+                                            <tbody class='borderless'>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Nama Ahli Waris</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Hubungan Dengan Jenazah</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Alamat</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.street"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">No. Telp / HP</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.phone"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <table class="table">
+                                            <tbody class='borderless'>
+                                                <tr>
+                                                    <td class="text-left" colspan="3">Data Jenazah :</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Nama</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Usia</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.usia"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Jenis Kelamin</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.jenis_kelamin"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Agama / Kepercayaan</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.agama"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Alamat</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.street"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Tanggal Meninggal</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-esc="o.jenazah_id.tanggal_kematian.strftime('%d %b %Y %H:%M:%S')"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-left">Dengan ini menyatakan bahwa </p> 
+                                        <ol type="a">
+                                            <li>Para ahli waris menyetujui bahwa jenazah akan dikremasi pada:</li>
+                                            <table class="table ml-4">
+                                                <tbody class='borderless'>
+                                                    <tr>
+                                                        <td class="text-left" style="width:260px!important;">Krematorium</td>
+                                                        <td class="text-center" style="width:50px!important;">:</td>
+                                                        <td class="text-left"></td>
+                                                    </tr>
+                                                    <tr>
+                                                        <td class="text-left" style="width:260px!important;">Pada Tanggal</td>
+                                                        <td class="text-center" style="width:50px!important;">:</td>
+                                                        <td class="text-left">
+                                                            <t t-if="o.jenazah_id.jadwal_kremasi">
+                                                                <b t-esc="o.jenazah_id.jadwal_kremasi.strftime('%d %b %Y %H:%M:%S')"/>
+                                                            </t>
+                                                        </td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                            <li>Para ahli waris menyatakan bahwa Almarhum Meninggal dalam keadaan wajar dan tidak dalam kasus hukum</li>
+                                        </ol> 
+                                        <p class="text-justify">Demikian surat pernyataan ini dibuat dengan sebenarnya dan apabila dikemudian hari terbukti surat pernyataan ini tidak benar dan/atau terjadi penyalahgunaan terkait layanan perizinan dan non perizinan yang diterbitkan maka saya bersedia dituntut sesuai dengan peraturan perundang-undangan yang berlaku dan dokumen yang telah diterbitkan dapat dibatalkan atau batal demi hukum. </p> 
+
+                                        <table class="table">
+                                            <tbody class='borderless'>
+                                                <tr style="background-color:transparent;">
+                                                    <td width="75%" style="border-top:none!important; border-right:0!important;">
+                                                    </td>
+                                                    <td width="25%" style="border-top:none!important; border-right:0!important;">
+                                                        <center>
+                                                                <p class="text-left my-0">Jakarta, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y')"/></p> 
+                                                                <p class="text-left my-0">Yang menyatakan,</p> 
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <p class="text-center">(...........................................................)</p> 
+                                                                <p class="text-center">(jabatan)</p> 
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <ol>
+                                            <li>....................................., ................. (Ahli Waris), (hubungan dengan jenazah)</li>
+                                            <li>....................................., ................. (Ahli Waris), (hubungan dengan jenazah)</li>
+                                            <li>....................................., ................. (Ahli Waris), (hubungan dengan jenazah)</li>
+                                        </ol> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="custom_accounting.print_tanda_terima_abu_template">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_accounting.overdue_print_layout_a5">
+                        <!-- <style>
+                            body {
+                                font-family: serif !important;
+                                letter-spacing: 1px!important;
+                            }
+                            p {
+                                font-family: serif !important;
+                                letter-spacing: 1px!important;
+                            }
+                        </style>  -->
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">TANDA TERIMA ABU JENAZAH</h5>
+                                    </div>
+                                    <div class="mx-5">
+                                        <p class="text-left"><span t-field="o.name"/></p> 
+                                        <t t-if="o.jenazah_id.tanggal_terima_abu">
+                                            <p class="text-left">Keterangan bahwa hari ini <b t-esc="o._translate(o.jenazah_id.tanggal_terima_abu.strftime('%A'))"/> tanggal <b t-esc="o._translate(o.jenazah_id.tanggal_terima_abu.strftime('%d %B %Y'))"/> dengan surat ini kami telah menerima Guci berisi Abu Jenazah </p> 
+                                        </t>
+                                        <t t-else="">
+                                            <p class="text-left">Keterangan bahwa hari ini ............. tanggal ..................... dengan surat ini kami telah menerima Guci berisi Abu Jenazah </p> 
+                                        </t>
+
+                                        
+                                        <table class="table">
+                                            <tbody class='borderless'>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Nama Almarhum/mah</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.jenazah_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Posisi Kotak Abu</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left">
+                                                        <t t-foreach="o.sale_order_id.columbarium_ids" t-as="columbarium">
+                                                            <span t-field="columbarium.display_name"/>, 
+                                                        </t>
+
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Lampiran Dokumen</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"></td>
+                                                </tr>
+                                                <tr>
+                                                    <td colspan="3">
+                                                        <p style="margin-left:20px;"><input type="checkbox" style="margin-right:10px;"/>Copy Akta Kematian Alm/h</p>
+                                                        <p style="margin-left:20px;"><input type="checkbox" style="margin-right:10px;"/>Copy Berita Acara Pengabuan dari Krematorium</p>
+                                                        <p style="margin-left:20px;"><input type="checkbox" style="margin-right:10px;"/>Copy Surat Baptis Alm/h (jika beragama katopk)</p>
+                                                        <p style="margin-left:20px;"><input type="checkbox" style="margin-right:10px;"/>Copy KTP Kedua Penanggung Jawab</p>
+                                                        <p style="margin-left:20px;"><input type="checkbox" style="margin-right:10px;"/>Copy KK Kedua Penanggung Jawab</p>
+                                                        <p style="margin-left:20px;"><input type="checkbox" style="margin-right:10px;"/>Pas Foto Kedua Penaggung Jawab 3x4 - 1 Lembar</p>
+                                                    </td>
+                                                </tr>
+                                                
+                                            </tbody>
+                                        </table>
+                                        <table class="table">
+                                            <style>
+                                                .borderless td, .borderless th {
+                                                    border: none;
+                                                    padding-left:0;
+                                                    padding-right:0;
+                                                    padding-top:2px;
+                                                    padding-bottom:2px;
+                                                }
+                                            </style> 
+                                            <tbody class='borderless'>
+                                                <tr>
+                                                    <td class="text-left" colspan="3">Penanggung Jawab yang menyerahkan :</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Nama</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">No. KTP</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.no_ktp"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:260px!important;">Alamat</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.customer_id.street"/>,<b t-field="o.customer_id.zip"/>, <b t-field="o.customer_id.city"/>, <b t-field="o.customer_id.state_id.name"/>, <b t-field="o.customer_id.country_id.name"/> </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-left">Demikian Tanda Terima ini dibuat dengan sebenar-benarnya.</p> 
+                                        <table class="table">
+                                            <tbody class='borderless'>
+                                                <tr style="background-color:transparent;">
+                                                    <td colspan="3" class="text-right">
+                                                        <p class="text-right my-0">Jakarta, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y')"/></p> 
+                                                    </td>
+                                                </tr>
+                                                <tr style="background-color:transparent;">
+                                                    <td width="40%" style="border-top:none!important; border-right:0!important;">
+                                                        <center>
+                                                            <p class="text-center my-0">Ahli Waris/Penanggung Jawab,</p> 
+                                                            <br/>
+                                                            <br/>
+                                                            <br/>
+                                                            <br/>
+                                                            <p class="text-center">..............................................................</p> 
+                                                        </center>
+                                                    </td>
+                                                    <td width="20%" style="border-top:none!important; border-right:0!important;">
+                                                    </td>
+                                                    <td width="40%" style="border-top:none!important; border-right:0!important;">
+                                                        <center>
+                                                                <p class="text-center my-0">Penanggung Jawab Columbarium,</p> 
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <p class="text-center">..............................................................</p> 
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-left">Rangkap 2 :</p> 
+                                        <ol>
+                                            <li>Lembar 1 : Yang menyerahkan</li>
+                                            <li>Lembar 2 : Yang menerima</li>
+                                        </ol> 
+                                    </div>
+                                </div>
+                            </div>
+                            <p style="page-break-before:always;"> </p>
+                            <!-- <t t-call="custom_accounting.overdue_layout_header_a5"/> -->
+
+
+                            <div class="row">
+                                <div class="col-6 " style="">
+                                    <h5 class="text-center my-0">SURAT PERJANJIAN</h5>
+                                    <h5 class="text-center">PENITIPAN ABU JENAZAH</h5>
+
+                                    <t t-if="o.jenazah_id.tanggal_terima_abu">
+                                        <p class="text-justify">Pada hari ini <span t-esc="o._translate(o.jenazah_id.tanggal_terima_abu.strftime('%A'))"/>, tanggal <span t-esc="o._format_num_to_text(o.jenazah_id.tanggal_terima_abu.strftime('%d'))"/> bulan <span t-esc="o._translate(o.jenazah_id.tanggal_terima_abu.strftime('%B'))"/> tahun <span t-esc="o._format_num_to_text(o.jenazah_id.tanggal_terima_abu.strftime('%Y'))"/> (<b t-esc="o.jenazah_id.tanggal_terima_abu.strftime('%d-%m-%Y')"/>) kami yang bertanda tangan dibawah ini:</p>
+                                    </t>
+                                    <t t-else="">
+                                        <p class="text-justify">Pada hari ini ..........., tanggal ............. bulan ........... tahun ......... (.............) kami yang bertanda tangan dibawah ini:</p>
+                                    </t>
+
+                                    
+                                    <ol style="margin-left: 20px;">
+                                        <li class="text-justify">Albertus Witjaksono, Warga Negara Indonesia, selaku Pelaksana Kegiatan (<i>General Superintendent</i>), dalam hal ini bertindak dalam jabatannya tersebut di atas, berdasarkan Berita Acara Rapat Komite Pengelola Kerja Sama Operasi Rumah Duka Carolus (KSO RDC) tertanggal 06 November 2021, dan dengan demikian sah mewakili Komite Pengelola dari dan oleh karena itu untuk dan atas nama KERJA SAMA OPERASI (KSO) RUMAH DUKA CAROLUS, suata badan usaha berkedudukan di Kota Administrasi Jakarta Pusat, beralamat di Jalan Salemba Raya No. 33, untuk selanjutnya disebut juga "PIHAK PERTAMA "</li>
+                                        <li class="text-justify"><b t-field="o.customer_id.name"/>, Warga Negara Indonesia, bertempat tinggal di <b t-field="o.customer_id.street"/>,<b t-field="o.customer_id.zip"/>, <b t-field="o.customer_id.city"/>, <b t-field="o.customer_id.state_id.name"/>, <b t-field="o.customer_id.country_id.name"/>, Pemegang Kartu Nomor Induk Kependudukan <b t-field="o.customer_id.no_ktp"/>, untuk selanjutnya disebut juga "<b>PIHAK KEDUA</b>"</li>
+                                    </ol>
+                                    <p class="text-justify">Untuk selanjutnya kedua belah pihak secara bersama-sama disebut Para Pihak. Para Pihak telah sepakat untuk membuat Surat Perjanjian Penitipan Guci berisi Abu Jenazah, dengan perincian sebagai berikut:</p>
+                                    <ol type="a" style="margin-left: 20px;">
+                                        <li class="text-justify">Pihak Kedua menitipkan Guci berisi Abu Jenazah Alm <b t-field="o.jenazah_id.name"/> kepada Pihak Pertama pada almari 
+                                        <t t-foreach="o.sale_order_id.columbarium_ids" t-as="columbarium">
+                                            <b t-field="columbarium.display_name"/>, 
+                                        </t>
+                                        
+                                        terletak di ruang columbarium Rumah Duka Carolus milik Pihak Pertama yang terletak di Gedung Rumah Duka Carolus Lt.9, Jalan Salemba Raya No.33, Jakarta Pusat;</li>
+                                        <li class="text-justify">Pihak mentaati semua ketentuan yang tersebut dalam formulir syarat dan tata tertib penyewaan ruang penitipan abu jenazah di ruang columbarium milik Pihak Pertama yang merupakan satu kesatuan dan bagian tidak terpisahkan dari perjanjian ini;</li>
+                                    </ol>
+                                </div>
+                                <div class="col-6 " style="">
+                                    <ol type="a" start="3" style="margin-left: 20px;">
+                                        <t t-if="o.sale_order_id.columbarium_start and o.sale_order_id.columbarium_end">
+                                            <li class="text-justify">Penitipan guci abu jenazah tersebut diatas untuk jangka waktu <b><span t-esc="o._delta_years(o.sale_order_id.columbarium_start,o.sale_order_id.columbarium_end)"/> (<span t-esc="o._format_num_to_text(o._delta_years(o.sale_order_id.columbarium_start,o.sale_order_id.columbarium_end))"/>) tahun</b>, terhitung mulai <b>tanggal <span t-esc="o._format_num_to_text(o.sale_order_id.columbarium_start.strftime('%d'))"/> bulan <span t-esc="o._translate(o.sale_order_id.columbarium_start.strftime('%B'))"/> tahun <span t-esc="o._format_num_to_text(o.sale_order_id.columbarium_start.strftime('%Y'))"/> (<b t-esc="o.sale_order_id.columbarium_start.strftime('%d-%m-%Y')"/>)</b>; dan karenanya berakhir pada <b>tanggal <span t-esc="o._format_num_to_text(o.sale_order_id.columbarium_end.strftime('%d'))"/> bulan <span t-esc="o._translate(o.sale_order_id.columbarium_end.strftime('%B'))"/> tahun <span t-esc="o._format_num_to_text(o.sale_order_id.columbarium_end.strftime('%Y'))"/> (<b t-esc="o.sale_order_id.columbarium_end.strftime('%d-%m-%Y')"/>)</b>;</li>
+                                        </t>
+                                        <t t-else="">
+                                            <li class="text-justify">Penitipan guci abu jenazah tersebut diatas untuk jangka waktu <b>..... (.....) tahun</b>, terhitung mulai <b>tanggal ............ bulan ......... tahun ......... (..........)</b>; dan karenanya berakhir pada <b>tanggal .......... bulan ............ tahun ................ (..............)</b>;</li>
+                                        </t>
+                                        
+                                        
+                                        <li class="text-justify">Apabila masa berlakunya perjanjian telah berakhir dan tidak ini diperpanjang, maka Pihak Kedua mengikat dan mewajibkan diri untuk mengosongkan tempat penyimpanan guci tanpa hak minta ganti kerugian berupa apapun juga. Sebaliknya, apabila hal diatas tidak dilakukan oleh Pihak Kedua, maka sekarang untuk nanti pada waktunya Pihak Pertama diberi kuasa dan wewenang oleh Pihak Kedua untuk mengeluarkan barang titipan guci abu jenazah dimaksud tanpa berkewajiban memberi ganti rugi berupa apapun kepada Pihak Kedua;</li>
+                                        <li class="text-justify">Apabila titipan guci abu jenazah tersebut rusak ataupun hilang yang dikarenakan adanya keadaan kahar (<i>force majeure</i>) maka Pihak Pertama dibebaskan dari segala beban dan tanggungjawab serta segala tuntutan hukum berupa apapun oleh Pihak Kedua; (f) Hal-hal lain yang belum tercantum dalam surat perjanjian ini akan diatur tersendiri dengan berpedoman pada peraturan perundang-undangan yang berlaku dan merupakan bagian tidak terpisahkan dari surat perjanjian ini;</li>
+                                        <li class="text-justify">Surat Perjanjian ini dibuat dalam rangkap 2 (dua), bermaterai cukup dan mempunyai kekuatan hukum yang sama dan mengikat bagi Para Pihak, setelah ditanda tangani oleh kedua belah pihak.</li>
+                                    </ol>
+
+                                    <div class="row">
+                                        <table class="table">
+                                            <tbody class='borderless'>
+                                                <tr style="background-color:transparent;">
+                                                    <td width="50%" style="border-top:none!important; border-right:0!important;">
+                                                        <center>
+                                                                <b class="text-center my-0">PIHAK PERTAMA</b> 
+                                                                <p class="text-left my-0">KSO RUMAH DUKA CAROLUS JENAZAH</p> 
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <b class="text-center my-0">Albertus Witjaksono</b> 
+                                                                <p class="text-center my-0">Pelaksana Kegiatan (GSI)</p> 
+                                                        </center>
+                                                    </td>
+                                                    <td width="50%" style="border-top:none!important; border-right:0!important;">
+                                                        <center>
+                                                                <b class="text-center my-0">PIHAK KEDUA</b> 
+                                                                <p class="text-right my-0">PENITIP ABU</p> 
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <br/>
+                                                                <b class="text-center my-0"><span t-field="o.customer_id.name"/></b> 
+                                                        </center>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

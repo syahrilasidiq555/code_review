@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="wizard_revise_dym_improvement" model="ir.ui.view">
+            <field name="name">Revise Wizard Improvement</field>
+            <field name="model">wizard.revise.dym.improvement</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <field name="text" nolabel="1" placeholder="Insert Revise Reason Here.."/>
+                    <footer>
+                        <button name="action_yes" type="object" string="Revise" class="oe_highlight"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+
+        <record id="wizard_revise_dym_improvement_action" model="ir.actions.act_window">
+            <field name="name">Revise Wizard Improvement Action</field>
+            <field name="res_model">wizard.revise.dym.improvement</field>
+            <!-- <field name="view_type">form</field> -->
+            <field name="type">ir.actions.act_window</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>

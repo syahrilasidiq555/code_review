@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_form_inherit_crm" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit_crm</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- set partner_id readonly kalau PO dibuat dari cost sheet -->
+            <field name="partner_id" position="replace">   
+                <label for="partner_id"/>
+                <div name="partner_id_div" class="oe_inline">
+                    <field name="partner_id"
+                        widget="res_partner_many2one"
+                        context="{'res_partner_search_mode': 'supplier', 'show_vat': True}" 
+                        placeholder="Name, TIN, Email, or Reference"
+                        attrs="{'readonly':[('cost_sheet_id','!=',False)]}"
+                        force_save="1" />
+                    <button name="action_change_vendor" 
+                        type="object" 
+                        icon="fa-exchange"
+                        attrs="{'invisible':['|',('cost_sheet_id','=',False),('state','!=','draft')]}"
+                        style="margin-left: 10px;" />
+                </div>
+            </field>
+
+            <!-- add button view rental schedule dan view cost sheet-->
+            <button name="action_view_invoice" position="before">
+                <field name="cost_sheet_id" readonly="1" force_save="1" invisible="1"/>
+                <button type="object" name="action_view_cost_sheet" class="oe_stat_button" icon="fa-file-text-o" attrs="{'invisible':[('cost_sheet_id','=',False)]}">
+                    <span class="o_stat_text" >Cost Sheet</span>
+                </button>
+            </button>
+
+
+            <!-- ADD BUDGET FROM COST SEET UNTUK APPROVAL -->
+            <!-- <field name="partner_ref" position="after">   
+                <field name="cost_sheet_id" attrs="{'invisible':[('cost_sheet_id','=',False)]}" readonly="1" force_save="1"/>
+            </field>          -->
+
+            <!-- remove create in many2one fields -->
+            <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                <attribute name="options">{'no_quick_create':True,'no_create_edit':True, 'no_open':True, 'no_create':True}</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- <record id="purchase_order_tree_inherit_crm" model="ir.ui.view">
+        <field name="name">purchase_order_ree_inherit_crm</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_tree"/>
+        <field name="arch" type="xml">
+
+            <xpath expr='//field[@name="name"]' position="after">
+                <field name="bugzilla"/>
+            </xpath>
+
+        </field>
+    </record> -->
+
+    <!-- SEARCH VIEW -->
+    <record id="view_purchase_order_filter_inherit" model="ir.ui.view">
+        <field name="name">view_purchase_order_filter_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.view_purchase_order_filter"/>
+        <field name="arch" type="xml">
+            <field name="origin" position="after">   
+                <filter name="po_semayam" string="PO Semayam" domain="[('cost_sheet_id', '!=', False)]"/>
+                <filter name="po_non_semayam" string="PO Non Semayam" domain="[('cost_sheet_id', '=', False)]"/>
+                <separator/>
+            </field>
+        </field>
+    </record>
+
+    <record id="purchase_order_view_search_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_view_search_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_search"/>
+        <field name="arch" type="xml">
+            <field name="product_id" position="after">   
+                <filter name="po_semayam" string="PO Semayam" domain="[('cost_sheet_id', '!=', False)]"/>
+                <filter name="po_non_semayam" string="PO Non Semayam" domain="[('cost_sheet_id', '=', False)]"/>
+                <separator/>
+            </field>
+        </field>
+    </record>
+
+
+    <!-- ACTION -->
+    <record id="purchase.purchase_rfq" model="ir.actions.act_window">
+        <field name="context">{
+            'quotation_only': True,
+            'search_default_po_non_semayam': 1,
+            'search_default_draft': 1, 
+        }</field> 
+    </record>
+
+    <record id="purchase.purchase_form_action" model="ir.actions.act_window">
+        <field name="context">{
+            'search_default_po_non_semayam': 1,
+            'search_default_draft': 1,
+        }</field>
+    </record>
+
+
+    <!-- PO SEMAYAM -->
+    <!-- TREE -->
+    <record id="purchase_order_kpis_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_kpis_tree_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <field name="name" position="after">   
+                <field name="cost_sheet_partner_id" invisible="not context.get('semayam', False)" optional="show" />
+                <field name="cost_sheet_id" invisible="1" />
+                <field name="cost_sheet_sale_order_id" invisible="not context.get('semayam', False)" optional="hide" />
+            </field>
+        </field>
+    </record>
+
+    <!-- ACTION -->
+    <record model="ir.actions.act_window" id="purchase_cost_sheet_action">
+        <field name="name">Purchase Semayam</field>
+        <field name="type">ir.actions.act_window</field>
+        <field name="res_model">purchase.order</field>
+        <field name="view_mode">tree,kanban,form,pivot,graph,calendar,activity</field>
+        <field name="view_id" ref="purchase_order_kpis_tree_inherit"/>
+        <field name="domain">[('cost_sheet_id','!=',False)]</field>
+        <field name="search_view_id" ref="purchase.view_purchase_order_filter"/>
+            <field name="context">{
+            'create':False,
+            'semayam': True,
+            'search_default_po_semayam': 1,
+        }</field>
+    </record>
+
+    <!-- MENU -->
+    <menuitem
+        id="purchase_cost_sheet_action_menu"
+        name="Order Semayam"
+        action="purchase_cost_sheet_action"
+        parent="purchase.menu_procurement_management"
+        sequence="2" />     
+
+</odoo>

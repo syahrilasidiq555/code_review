@@ -1,0 +1,937 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="hr_applicant_view_form_inherit" model="ir.ui.view">
+            <field name="name">hr_applicant_view_form_inherit</field>
+            <field name="model">hr.applicant</field>
+            <field name="inherit_id" ref="hr_recruitment.hr_applicant_view_form"/>
+            <field name="arch" type="xml">
+
+                
+                <xpath expr="//button[@name='create_employee_from_applicant']" position="attributes">
+                    <attribute name="attrs">{'invisible':[('stage_id','!=', %(hr_recruitment.stage_job5)d)]}</attribute>
+                </xpath>
+
+                <!-- <xpath expr="//button[@name='create_employee_from_applicant']" position="after">
+                    <button string="Send Second Form" type="object" 
+                        name="action_send_second_form" 
+                        confirm="Apakah anda yakin?"/>
+                </xpath> -->
+                
+
+                <xpath expr="//field[@name='email_from']" position="before">
+                    <field name="is_second_form_filled" invisible="1" />
+                    <field name="url_form" widget="CopyClipboardChar" options="{'string': 'Copy Link'}" attrs="{'invisible':[('is_second_form_filled','=',True)]}"/>
+                </xpath>
+
+
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="user_interviewer_id" />
+                </xpath>
+
+                <!-- MAIN INFORMATION -->
+                <xpath expr="//notebook//page[1]" position="before">
+                    <page name="interview_form" string="Scoring Interview Form" attrs="{'invisible':[('show_interview_form','=',False)]}">
+                        <field name="show_interview_form" invisible="1" />
+                        <group>
+                            <div>
+                                <table style="width:100%; vertical-align: center;" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                    <tr style="text-align:center;">
+                                        <td class="py-3" style="background-color: #71639e;">
+                                            <h2 class="m-0" style="color:white;">SCORING INTERVIEW FORM</h2>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                            <tr>
+                                                <td style="width:15%; text-align: left; vertical-align: middle;">
+                                                    Nama
+                                                </td>
+                                                <td style="width:1%; text-align: center; vertical-align: middle;">:</td>
+                                                <td class="px-2" style="width:34%; text-align: left; vertical-align: middle;">
+                                                    <field name="partner_name" force_save="True" readonly="True" />
+                                                </td>
+                                                <td style="width:15%; text-align: left; vertical-align: middle;">
+                                                    Age
+                                                </td>
+                                                <td style="width:1%; text-align: center; vertical-align: middle;">:</td>
+                                                <td class="px-2" style="width:34%; text-align: left; vertical-align: middle;">
+                                                    <field name="umur" force_save="True" readonly="True" options="{'no_open': True}"/>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td style="width:15%; text-align: left; vertical-align: middle;">
+                                                    Current Position
+                                                </td>
+                                                <td style="width:1%; text-align: center; vertical-align: middle;">:</td>
+                                                <td class="px-2" style="width:34%; text-align: left; vertical-align: middle;">
+                                                    <field name="current_position" force_save="True" readonly="True" />
+                                                </td>
+                                                <td style="width:15%; text-align: left; vertical-align: middle;">
+                                                    Current Company
+                                                </td>
+                                                <td style="width:1%; text-align: center; vertical-align: middle;">:</td>
+                                                <td class="px-2" style="width:34%; text-align: left; vertical-align: middle;">
+                                                    <field name="current_company" force_save="True" readonly="True"/>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td style="width:15%; text-align: left; vertical-align: middle;">
+                                                    Position Applied
+                                                </td>
+                                                <td style="width:1%; text-align: center; vertical-align: middle;">:</td>
+                                                <td class="px-2" style="width:34%; text-align: left; vertical-align: middle;">
+                                                    <field name="job_id" force_save="True" readonly="True" options="{'no_open': True}"/>
+                                                </td>
+                                                <td style="width:15%; text-align: left; vertical-align: middle;">
+                                                    Gender
+                                                </td>
+                                                <td style="width:1%; text-align: center; vertical-align: middle;">:</td>
+                                                <td class="px-2" style="width:34%; text-align: left; vertical-align: middle;">
+                                                    <field name="jenis_kelamin" force_save="True" readonly="True"/>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </tr>
+                                    <tr>
+                                        <table style="width: 100%" border="1" cellpadding="2" cellspacing="2" padding="1" margin="0">
+                                            <tr>
+                                                <td class="py-1" style="width:3%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">No.</span>
+                                                </td>
+                                                <td class="py-1" style="width:18%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">Aspect</span>
+                                                </td>
+                                                <td class="py-1" style="width:18%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">Description</span>
+                                                </td>
+                                                <td class="py-1" style="width:18%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">Indicator</span>
+                                                </td>
+                                                <td class="py-1" style="width:5%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">A</span>
+                                                </td>
+                                                <td class="py-1" style="width:5%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">B</span>
+                                                </td>
+                                                <td class="py-1" style="width:5%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">C</span>
+                                                </td>
+                                                <td class="py-1" style="width:5%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">D</span>
+                                                </td>
+                                                <td class="py-1" style="width:5%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">E</span>
+                                                </td>
+                                                <td class="py-1" style="width:18%; background-color: #71639e; text-align:center;">
+                                                    <span class="m-0" style="color:white;">Comment</span>
+                                                </td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">1.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Education</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Education Background</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Academic achievement</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">2.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Job/Work History</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Work Experience</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Last job</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">3.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Motivation</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">How hard you want the job</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Reason for applying the job</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">4.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Iniciatif</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Capacity to initiate something</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Idea or creative thinking</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">5.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Discipline</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Discipline to obey rules and procedures</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Time keeping and habits</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">6.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Persuasiveness</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Ability to communicate with other people</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Intonations, persuation and gesture</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">7.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Leadership</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Experience in leading people</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Experiencial leadership</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">8.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Human Relation</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Ability to interact with other people</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">How good realitonship with other is</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">9.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Verbalization</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Ability to communicate with other people</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Clearness of the sentence and message</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">10.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Appearance</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Attention towards himself</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Tidiness</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                            <tr>
+                                                <td class="py-1" style="text-align:right;">
+                                                    <span class="m-0" style="font-size:12px;">11.</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Knowledge</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Information acquired</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;">Respond towards various situation</span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                                <td class="py-1">
+                                                    <span class="m-0" style="font-size:12px;"></span>
+                                                </td>
+                                            </tr>
+                                        </table>
+                                    </tr>
+                                </table>
+                            </div>
+                        </group>
+                        <group name="head2">
+                            <group name="interviewer1" string="Interviewer 1">
+                                <field name="penilaian_1_education" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_job_history" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_motivation" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_iniciatif" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_discipline" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_persuasiveness" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_leadership" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_human_relation" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_verbalization" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_appearance" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_knowledge" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <field name="penilaian_1_status_penerimaan" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"/>
+                                <br/>
+                                <button string="Confirm Penilaian" type="object" name="action_confirm_penilaian_1" 
+                                    attrs="{'invisible':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','!=',False)]}"
+                                    class="oe_highlight"
+                                    confirm="Apakah anda yakin?"/>
+                                <br/>
+                                <button string="Reset Penilaian" type="object" name="action_reset_penilaian_1" 
+                                    attrs="{'invisible':['|',('stage_id','!=',%(hr_recruitment.stage_job2)d),('penilaian_1_date','=',False)]}"
+                                    confirm="Apakah anda yakin?"/>
+                                <field name="penilaian_1_employee_id" readonly="1" force_save="1"
+                                    attrs="{'invisible':[('penilaian_1_employee_id','=',False)]}"/>
+                                <field name="penilaian_1_date" readonly="1" force_save="1"
+                                    attrs="{'invisible':[('penilaian_1_date','=',False)]}"/>
+                            </group>
+                            <group name="interviewer2" string="Interviewer 2">
+                                <field name="penilaian_2_education" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_job_history" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_motivation" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_iniciatif" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_discipline" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_persuasiveness" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_leadership" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_human_relation" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_verbalization" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_appearance" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_knowledge" widget="radio" options="{'horizontal': true}" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <field name="penilaian_2_status_penerimaan" attrs="{'readonly':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}" />
+                                <br/>
+                                <button string="Confirm Penilaian" type="object" name="action_confirm_penilaian_2" 
+                                    attrs="{'invisible':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','!=',False)]}"
+                                    class="oe_highlight"
+                                    confirm="Apakah anda yakin?"/>
+                                <br/>
+                                <button string="Reset Penilaian" type="object" name="action_reset_penilaian_2" 
+                                    attrs="{'invisible':['|',('stage_id','!=',%(hr_recruitment.stage_job3)d),('penilaian_2_date','=',False)]}"
+                                    confirm="Apakah anda yakin?"/>
+                                <field name="penilaian_2_employee_id" readonly="1" force_save="1"
+                                    attrs="{'invisible':[('penilaian_2_employee_id','=',False)]}"/>
+                                <field name="penilaian_2_date" readonly="1" force_save="1"
+                                    attrs="{'invisible':[('penilaian_2_date','=',False)]}"/>
+                            </group>
+                            
+                            
+                        </group>
+                    </page>
+
+                    <page name="candidate_infomation" string="Candidate Information">
+                        <group name="personal_data" string="Personal Data">
+                            <field name="nama_lengkap" />
+                            <field name="nama_panggilan" />
+                            <field name="jenis_kelamin" />
+                            <field name="tempat_lahir" />
+                            <field name="tanggal_lahir" />
+                            <field name="agama" />
+                            <field name="no_ktp" />
+                            <field name="kewarganegaraan" />
+                            <field name="alamat_tetap" />
+                            <field name="kota_tetap" />
+                            <field name="kode_pos_tetap" />
+                            <field name="alamat_sekarang" />
+                            <field name="kota_sekarang" />
+                            <field name="kode_pos_sekarang" />
+                            <field name="no_telepon" />
+                            <field name="no_handphone" />
+                            <field name="email" />
+                            <field name="no_sim_a" />
+                            <field name="no_sim_b1" />
+                            <field name="no_sim_b2" />
+                            <field name="no_sim_c" />
+                            <field name="gol_darah" />
+                            <field name="berat_badan" />
+                            <field name="tinggi_badan" />
+                            <field name="status_pernikahan" />
+                        </group>
+                        <group name="pendidikan" string="Pendidikan">
+                            <b>Pendidikan Formal</b>
+                            <field name="pendidikan_formal_ids" nolabel="1" colspan="2">
+                                <tree string="" editable="bottom">
+                                    <field name="pendidikan" />
+                                    <field name="nama_sekolah" />
+                                    <field name="jurusan" />
+                                    <field name="tahun_mulai" />
+                                    <field name="tahun_akhir" />
+                                    <field name="ijazah" />
+                                    <field name="ipk" />
+                                    <field name="kota" />     
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="pendidikan" />
+                                        <field name="nama_sekolah" />
+                                        <field name="jurusan" />
+                                        <field name="tahun_mulai" />
+                                        <field name="tahun_akhir" />
+                                        <field name="ijazah" />
+                                        <field name="ipk" />
+                                        <field name="kota" />
+                                    </group>
+                                </form>
+                            </field>
+                            <b>Pendidikan Non Formal</b>
+                            <field name="pendidikan_nonformal_ids" nolabel="1" colspan="2">
+                                <tree string="" editable="bottom">
+                                    <field name="courses" />
+                                    <field name="lembaga_pendidikan" />
+                                    <field name="tahun_mulai" />
+                                    <field name="tahun_akhir" />
+                                    <field name="ijazah" />
+                                    <field name="tingkat" />
+                                    <field name="kota" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="courses" />
+                                        <field name="lembaga_pendidikan" />
+                                        <field name="tahun_mulai" />
+                                        <field name="tahun_akhir" />
+                                        <field name="ijazah" />
+                                        <field name="tingkat" />
+                                        <field name="kota" />
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group name="organisasi" string="Organisasi">
+                            <field name="organization_ids" nolabel="1" colspan="2">
+                                <tree string="" editable="bottom">
+                                    <field name="name" />
+                                    <field name="jenis_kegiatan" />
+                                    <field name="position" />
+                                    <field name="tahun" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" />
+                                        <field name="jenis_kegiatan" />
+                                        <field name="position" />
+                                        <field name="tahun" />
+                                    </group>
+                                </form>
+                            </field>
+                            
+                            <b>Di pendidikan manakah Saudara merasa paling puas dengan prestasi yang dicapai dan apa sebabnya?</b>
+                            <field name="pendidikan_terpuas" nolabel="1" colspan="2" />
+                            <b>Di pendidikan manakah Saudara merasa paling tidak puas dan apa sebabnya?</b>
+                            <field name="pendidikan_tertidakpuas" nolabel="1" colspan="2" />
+                            <b>Siapa yang membiayai pendidikan saudara selama ini?</b>
+                            <field name="pendidikan_pembiaya" nolabel="1" colspan="2" />
+                        </group>
+                        
+                    </page>
+                    <page name="candidate_family" string="Family">
+                        <group name="pasangan" string="Istri/Suami">
+                            <field name="jenis_pasangan" />
+                            <field name="pasangan_nama_lengkap" />
+                            <field name="pasangan_tempat_lahir" />
+                            <field name="pasangan_tanggal_lahir" />
+                            <field name="pasangan_no_handphone" />
+                            <field name="pasangan_alamat" />
+                            <field name="pasangan_pendidikan" />
+                            <field name="pasangan_pekerjaan" />
+                        </group>
+                        <group name="anak" string="Anak">
+                            <field name="anak_ids" nolabel="1" colspan="2">
+                                <tree string="" editable="bottom">
+                                    <field name="name" />
+                                    <field name="tempat_lahir" />
+                                    <field name="tanggal_lahir" />
+                                    <field name="jenis_kelamin" />
+                                    <field name="no_handphone" />
+                                    <field name="pendidikan" />
+                                    <field name="pekerjaan" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" />
+                                        <field name="tempat_lahir" />
+                                        <field name="tanggal_lahir" />
+                                        <field name="jenis_kelamin" />
+                                        <field name="no_handphone" />
+                                        <field name="pendidikan" />
+                                        <field name="pekerjaan" />
+                                    </group>
+                                </form>
+                            </field>
+                        </group>
+                        <group name="orangtua" string="Orang Tua">
+                            <group name="ayah" string="Ayah">
+                                <field name="ayah_nama_lengkap" />
+                                <field name="ayah_tempat_lahir" />
+                                <field name="ayah_tanggal_lahir" />
+                                <field name="ayah_no_handphone" />
+                                <field name="ayah_alamat" />
+                                <field name="ayah_pendidikan" />
+                                <field name="ayah_pekerjaan" />
+                            </group>
+                            <group name="ibu" string="Ibu">
+                                <field name="ibu_nama_lengkap" />
+                                <field name="ibu_tempat_lahir" />
+                                <field name="ibu_tanggal_lahir" />
+                                <field name="ibu_no_handphone" />
+                                <field name="ibu_alamat" />
+                                <field name="ibu_pendidikan" />
+                                <field name="ibu_pekerjaan" />
+                            </group>
+                            <b class="o_horizontal_separator" style="color:#71639e;">Saudara Kandung</b>
+                            <field name="saudara_ids" nolabel="1" colspan="2">
+                                <tree string="" editable="bottom">
+                                    <field name="name" />
+                                    <field name="tempat_lahir" />
+                                    <field name="tanggal_lahir" />
+                                    <field name="jenis_kelamin" />
+                                    <field name="no_handphone" />
+                                    <field name="pendidikan" />
+                                    <field name="pekerjaan" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" />
+                                        <field name="tempat_lahir" />
+                                        <field name="tanggal_lahir" />
+                                        <field name="jenis_kelamin" />
+                                        <field name="no_handphone" />
+                                        <field name="pendidikan" />
+                                        <field name="pekerjaan" />
+                                    </group>
+                                </form>
+                            </field>
+                            <b>Apakah Saudara masih mendapat bantuan?</b>
+                            <field name="is_saudara_masih_dibantu" nolabel="1" colspan="2" />
+                            <b>Bila "YA" dari siapa?</b>
+                            <field name="saudara_bantuan_dari" nolabel="1" colspan="2" />
+                            <b>Jenis Bantuan dan Bentuknya?</b>
+                            <field name="jenis_bentuk_bantuan" nolabel="1" colspan="2" />
+                            <b>Apakah Saudara mempunyai tanggungan lain selain istri dan anak Saudara sendiri?</b>
+                            <field name="is_tanggungan_lain" nolabel="1" colspan="2" />
+                            <b>Bila "YA" siapa dan berapa besarnya?</b>
+                            <field name="tanggungan_lain" nolabel="1" colspan="2" />
+                            <b>Apakah Saudara pernah meninggalkan keluarga?</b>
+                            <field name="is_meninggalkan_keluarga" nolabel="1" colspan="2" />
+                            <b>Untuk keperluan apa dan berapa lama?</b>
+                            <field name="keperluan_meninggalkan_keluarga" nolabel="1" colspan="2" />
+                            <b>Rumah tempat tinggal Saudara saat ini, apakah:</b>
+                            <field name="rumah_tinggal" nolabel="1" colspan="2" />
+                        </group>
+                    </page>
+                    <page name="work_information" string="Work Experience">
+                        <field name="work_experience_ids" nolabel="1" colspan="2">
+                            <tree string="" >
+                                <field name="name" />
+                                <field name="mulai" />
+                                <field name="selesai" />
+                                <field name="alamat" />
+                                <field name="jabatan" />
+                                <field name="salary" />
+                                <field name="jobdesk" />
+                                <field name="alasan_keluar" />
+                            </tree>
+                            <form>
+                                <group>
+                                    <field name="name" />
+                                    <field name="mulai" />
+                                    <field name="selesai" />
+                                    <field name="alamat" />
+                                    <field name="jabatan" />
+                                    <field name="salary" />
+                                    <field name="jobdesk" />
+                                    <field name="alasan_keluar" />
+                                </group>
+                            </form>
+                        </field>
+                        <group >
+                            <b>Berapa banyak bawahan yang pernah Saudara pimpin?</b>
+                            <field name="jumlah_bawahan" nolabel="1" colspan="2" />
+                            <b>Apakah saudara pernah melakukan perubahan/pembaharuan di perusahaan tertentu?</b>
+                            <field name="is_buat_pembaharuan" nolabel="1" colspan="2" />
+                            <b>Bila "YA" perubahan/pembaharuan apa?</b>
+                            <field name="pembaharuan_dibuat" nolabel="1" colspan="2" />
+                        </group>
+                    </page>
+                    <page name="skill_abilities" string="Skills and Abilities">
+                        <group>
+                            <group name="foreign" string="Bahasa Asing">
+                                <field name="foreign_language_ids" nolabel="1" colspan="2">
+                                    <tree string="" editable="bottom">
+                                        <field name="name" />
+                                        <field name="tingkat" />
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="name" />
+                                            <field name="tingkat" />
+                                        </group>
+                                    </form>
+                                
+                                </field>
+                            </group>
+                            <group name="local" string="Bahasa Daerah">
+                                <field name="local_language_ids" nolabel="1" colspan="2">
+                                    <tree string="" editable="bottom">
+                                        <field name="name" />
+                                        <field name="tingkat" />
+                                    </tree>
+                                    <form>
+                                        <group>
+                                            <field name="name" />
+                                            <field name="tingkat" />
+                                        </group>
+                                    </form>
+                                
+                                </field>
+                            </group>
+                            <b class="o_horizontal_separator" style="color:#71639e;">Keterampilan</b>
+                            <field name="skill_ids" nolabel="1" colspan="2">
+                                <tree string="" editable="bottom">
+                                    <field name="name" />
+                                    <field name="tingkat" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" />
+                                        <field name="tingkat" />
+                                    </group>
+                                </form>
+                            </field>
+                            <b class="o_horizontal_separator" style="color:#71639e;">Minat dan Konsep diri</b>
+                            <b>Jabatan apa yang Saudara lamar?</b>
+                            <field name="jabatan_dilamar" nolabel="1" colspan="1" />
+                            <b>Mengapa ingin bekerja pada jabatan tersebut?</b>
+                            <field name="mengapa_melamar" nolabel="1" colspan="1" />
+                            <b>Apa yang Saudara ketahui tentang jabatan tersebut?</b>
+                            <field name="yg_diketahui_dr_jabatan" nolabel="1" colspan="1" />
+                            <b>Apa Saudara beresedia ditempatkan pd jabatan lain?</b>
+                            <field name="is_dipindah_jabatan" nolabel="1" colspan="1" />
+                            <b>Bila "YA" apa alasannya?</b>
+                            <field name="alasan_pindah_jabatan" nolabel="1" colspan="1" />
+                            <b>Lingkungan kerja apa yang Saudara senangi?</b>
+                            <field name="lingkungan_disenangi" nolabel="1" colspan="1" />
+                            <b>Apa sebabnya?</b>
+                            <field name="alasan_lingkungan_tsb" nolabel="1" colspan="1" />
+                            <b>Apa cita-cita hidup Saudara?</b>
+                            <field name="cita2" nolabel="1" colspan="1" />
+                            <b>Apa Hobi / Kegemaran Saudara?</b>
+                            <field name="kegemaran" nolabel="1" colspan="1" />
+                            <b>Bagaimana Saudra mengisi waktu luang Saudara?</b>
+                            <field name="kegiatan_luang" nolabel="1" colspan="1" />
+                            <b>Sebutkan 3 (tiga) kelebihan Saudara (Sifat/Karakter)?</b>
+                            <field name="kelebihan" nolabel="1" colspan="1" />
+                            <b>Sebutkan 3 (tiga) kekurangan Saudara (Sifat/Karakter)?</b>
+                            <field name="kekurangan" nolabel="1" colspan="1" />
+                        </group>
+                    </page>
+                    <page name="health_others" string="Health and Others">
+                        <group name="kesehatan" string="Kesehatan">
+                            <b>Apakah Saudara pernah menderita sakit keras?</b>
+                            <field name="pernah_sakit_keras" nolabel="1" colspan="2" />
+                            <b>Jika "YA" Sakit apa, berapa lama dan apa akibatnya?</b>
+                            <field name="sakit_keras_apa" nolabel="1" colspan="2" />
+                            <b>Apakah kesehatan keluarga baik-baik saja?</b>
+                            <field name="kesehatan_keluarga_baik" nolabel="1" colspan="2" />
+                            <b>Jika "TIDAK", siapa yang kerap mendapat gangguan sakit dan sakit apa?</b>
+                            <field name="keluarga_sakit_apa" nolabel="1" colspan="2" />
+                            <b>Apakah Saudara pernah mengalamai kecelakaan berat?</b>
+                            <field name="pernah_kecelakaan" nolabel="1" colspan="2" />
+                            <b>Bila "YA", kecelakaan apa, kapan dan apa akibatnya?</b>
+                            <field name="kecelakaan_apa" nolabel="1" colspan="2" />
+                        </group>
+                        <group name="lainnya" string="Lain-lain">
+                            <b>Berapa Gaji minimal yang Saudara Harapkan?</b>
+                            <field name="harapan_gaji" nolabel="1" colspan="2" />
+                            <b>Fasilitas apa yang Saudara harapkan disamping Gaji?</b>
+                            <field name="harapan_fasilitas" nolabel="1" colspan="2" />
+                            <b>Kapan Saudara dapat mulai bekerja?</b>
+                            <field name="kesiapan_bekerja" nolabel="1" colspan="2" />
+                            <b>Bersediakan Saudara ditempatkan di cabang kami di luar kota bandung?</b>
+                            <field name="bersedia_diluar_bdg" nolabel="1" colspan="2" />
+                            <b>Bila "TIDAK", mengapa?</b>
+                            <field name="alasan_tidak_diluar_bdg" nolabel="1" colspan="2" />
+                            <b>Mengapa Saudara ingin bergabung dengan PT Bandung Indah Gemilang? Jelaskan alasan Saudara!</b>
+                            <field name="alasan_bekerja_disini" nolabel="1" colspan="2" />
+                            <b>Apakah Saudara sudah pernah melamar di perusahaan kami sebelumnya?</b>
+                            <field name="sudah_pernah_melamar" nolabel="1" colspan="2" />
+                            <b>Kalau "SUDAH", kapan dan untuk jabatan apa?</b>
+                            <field name="kapan_melamar" nolabel="1" colspan="2" />
+                            <b>Kendaraan apa yang Saudara miliki saat ini?</b>
+                            <field name="kendaraan" nolabel="1" colspan="2" />
+                            <b>Pernahkan Saudara mengikuti psikotest sebelumnya?</b>
+                            <field name="pernah_psikotest" nolabel="1" colspan="2" />
+                            <b>Jika "PERNAH", kapan dan dimana?</b>
+                            <field name="terakhir_psikotest" nolabel="1" colspan="2" />
+                        </group>
+                    </page>
+                    <page name="reference" string="Referensi">
+                        <group>
+                            <b style="margin-bottom:15px;">Adakah kenalan atau family Saudara yang berkerja di PT Bandung Indah Gemilang?</b>
+                            <br/>
+                            <group >
+                                <field name="nama_kenalan1" string="Nama" />
+                                <field name="bagian_kenalan1" string="Bagian" />
+                            </group>
+                            <group >
+                                <field name="nama_kenalan2" string="Nama" />
+                                <field name="bagian_kenalan2" string="Bagian" />
+                            </group>
+                            <b>Sebutkan nama orang-orang yang Saudara kenal di luar perusahaan kami:</b>
+                            <field name="reference_ids" nolabel="1" colspan="2">
+                                <tree string="" editable="bottom">
+                                    <field name="name" />
+                                    <field name="nama_perusahaan" />
+                                    <field name="jabatan" />
+                                    <field name="alamat" />
+                                </tree>
+                                <form>
+                                    <group>
+                                        <field name="name" />
+                                        <field name="nama_perusahaan" />
+                                        <field name="jabatan" />
+                                        <field name="alamat" />
+                                    </group>
+                                </form>
+                            </field>
+
+                        </group>
+                    </page>
+                </xpath>
+                
+            </field>
+        </record>
+
+        <!-- action -->
+        <record id="hr_recruitment.menu_hr_recruitment_root" model="ir.ui.menu">
+            <field name="groups_id" eval="[(4,ref('custom_hr_recruitment.recruitment_user_interviewer')), (4,ref('custom_hr_recruitment.fpk_user_input')), (4,ref('custom_hr_recruitment.fpk_head')), (4,ref('custom_hr_recruitment.fpk_manager')), (4,ref('custom_hr_recruitment.fpk_hr1')), (4,ref('custom_hr_recruitment.fpk_hr2')), (4,ref('custom_hr_recruitment.fpk_direksi')), (4,ref('custom_hr_recruitment.fpk_superadmin'))]"/>
+        </record>
+    </data>
+</odoo>

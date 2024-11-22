@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+
+        <!-- FORMAT KERTAS -->
+        <record id="format_kertas_a4_custom_hr" model="report.paperformat">
+            <field name="name">Faktur A4</field>
+            <field name="default" eval="True"/>
+            <field name="format">A4</field>
+            <field name="page_height">0</field>
+            <field name="page_width">0</field>
+            <field name="orientation">Portrait</field>
+            <field name="margin_left">5</field>
+            <field name="margin_right">5</field>
+            <field name="header_line" eval="False"/>
+            <field name="margin_top">40</field>
+            <field name="margin_bottom">20</field>
+            <field name="header_spacing">35</field>
+            <field name="dpi">90</field>
+        </record>
+
+        <!-- BUTTON PRINT -->
+        <!-- <report
+                id="purinto_pdm"
+                string="FPSK (Perubahan Status Karyawan)"
+                model="hr.promosi.demosi.mutasi"
+                report_type="qweb-pdf"
+                name="custom_hr.print_pdm_template"
+                file="custom_hr.print_pdm_template"
+                paperformat="format_kertas_a4_custom_hr"
+                menu="True"
+                print_report_name="'FPSK (Promosi / Demosi / Mutasi) - %s' % (object.name)"
+        /> -->
+
+        <!-- <report
+                id="action_report_verklaring_terminasi3"
+                string="Verklaring Karyawan"
+                model="hr.terminasi"
+                report_type="qweb-pdf"
+                name="custom_hr.print_terminasi_verklaring_template"
+                file="custom_hr.print_terminasi_verklaring_template"
+                paperformat="format_kertas_a4_custom_hr"
+                menu="False"
+                print_report_name="'Verklaring Karyawan - %s' % (object.name)"
+        /> -->
+    </data>
+</odoo>

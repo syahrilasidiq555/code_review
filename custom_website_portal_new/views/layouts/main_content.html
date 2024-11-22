@@ -1,0 +1,137 @@
+{% extends 'layouts/base.html' %}
+
+{% block content_layout %}
+<div id="wrapper">
+
+    <!-- Sidebar -->
+    <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" >
+
+        <!-- Sidebar - Brand -->
+        <!-- <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
+            <div class="sidebar-brand-icon rotate-n-15">
+                <i class="fas fa-laugh-wink"></i>
+            </div>
+            <div class="sidebar-brand-text mx-3">SB Admin <sup>2</sup></div>
+        </a> -->
+
+        <!-- Divider -->
+        <hr class="sidebar-divider my-0">
+
+        <!-- Nav Item - Dashboard -->
+        <li class="nav-item">
+            <a class="nav-link" href="/vendor/dashboard">
+                <i class="fas fa-fw fa-tachometer-alt"></i>
+                <span>Dashboard</span></a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider">
+
+        <!-- Heading -->
+        <div class="sidebar-heading">
+            Menu
+        </div>
+
+        <!-- Nav Item - Company Details Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/vendor/me" >
+                <i class="fas fa-fw fa-wrench"></i>
+                <span>Company Details</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - RFQ to PO Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/vendor/rfq-to-po" >
+                <i class="fas fa-fw fa-table"></i>
+                <span>RFQ to PO</span>
+            </a>
+        </li>
+
+        <!-- Nav Item - Document Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="#" data-bs-toggle="collapse" data-bs-target="#collapseDcoument" aria-expanded="true" aria-controls="collapseDcoument">
+                <div class="d-md-flex justify-content-between">
+                    <div>
+                        <i class="fas fa-fw fa-folder"></i>
+                        <span>Document</span>
+                    </div>
+                    <div class="dropdown no-arrow">
+                        <div>
+                            <i class="fas fa-chevron-right fa-sm fa-fw text-gray-400"></i>
+                            <!-- <i class="fas fa-chevron-down fa-sm fa-fw text-gray-400"></i> -->
+                        </div>
+                    </div>
+                </div>
+            </a>
+            <div class="collapse" id="collapseDcoument">
+                <ul class="nav nav-pills flex-column mb-auto">
+                    <li>
+                        <a href="/vendor/invoice-submit" class="nav-link collapsed py-2 px-4">
+                            <!-- <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="#table"></use>
+                            </svg> -->
+                            <span>Submit Invoice</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/vendor/invoices" class="nav-link collapsed py-2 px-4">
+                            <!-- <svg class="bi pe-none me-2" width="16" height="16">
+                                <use xlink:href="#table"></use>
+                            </svg> -->
+                            <span>Invoices List</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </li>
+
+        <!-- Nav Item - Manual Book Menu -->
+        <li class="nav-item">
+            <a class="nav-link collapsed" href="/vendor/manual-book" >
+                <i class="fas fa-fw fa-book"></i>
+                <span>Manual Book</span>
+            </a>
+        </li>
+
+        <!-- Divider -->
+        <hr class="sidebar-divider d-none d-md-block">
+
+        <!-- Sidebar Toggler (Sidebar) -->
+        <div class="text-center d-none d-md-inline">
+            <button class="rounded-circle border-0" id="sidebarToggle"></button>
+        </div>
+
+    </ul>
+    <!-- End of Sidebar -->
+
+    <!-- Content Wrapper -->
+    <div id="content-wrapper" class="d-flex flex-column">
+
+        <!-- Main Content -->
+        <div id="content">
+            <!-- Begin Page Content -->
+            <div class="container-fluid p-md-4 p-2">
+                {% block content %}
+                {% endblock %}
+            </div>
+            <!-- /.container-fluid -->
+
+        </div>
+        <!-- End of Main Content -->
+
+        <!-- Footer -->
+        <footer class="sticky-footer bg-white">
+            <div class="container my-auto">
+                <div class="copyright text-center my-auto">
+                    <span>Copyright &copy; PT. Dwidsa Samsara Indonesia 2023</span>
+                </div>
+            </div>
+        </footer>
+        <!-- End of Footer -->
+
+    </div>
+    <!-- End of Content Wrapper -->
+
+</div>
+{% endblock %}

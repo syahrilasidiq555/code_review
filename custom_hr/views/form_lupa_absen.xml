@@ -1,0 +1,161 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- TREE -->
+    <record id="view_form_lupa_absen_tree" model="ir.ui.view">
+        <field name="name">view_form_lupa_absen_tree</field>
+        <field name="model">form.lupa.absen</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree string="Form Lupa Absen">
+                <field name="name" />
+                <field name="employee_id"/>
+                <field name="department_id" />
+                <field name="section" />
+                <field name="job_id" />
+                <field name="date" />
+                <field name="state"  />
+            </tree>
+        </field>
+    </record>
+
+    <!-- SEARCH -->
+    <record id="view_form_lupa_absen_search" model="ir.ui.view">
+        <field name="name">view_form_lupa_absen_search</field>
+        <field name="model">form.lupa.absen</field>
+        <field name="arch" type="xml">
+            <search string="Search Form Lupa Absen">
+                <field name="name" />
+                <field name="employee_id" />
+                <field name="state" />
+                <!-- <filter string="Step Pengajuan" name="form_lupa_absen_step_pengajuan" domain="[('step_approval','=','pengajuan')]"/>
+                <filter string="Step Closing" name="form_lupa_absen_step_closing" domain="[('step_approval','=','closing')]"/> -->
+            </search>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+    <record id="view_dym_form_lupa_absen_form" model="ir.ui.view">
+        <field name="name">view_dym_form_lupa_absen_form</field>
+        <field name="model">form.lupa.absen</field>
+        <field name="arch" type="xml">
+            <form string="Form Lupa Absen" copy="false">
+                <header>
+                    <button string="RFA" type="object" states="draft" name="action_rfa" class="oe_highlight" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_rfa"/>
+                    <button string="Manager Approve" type="object" states="rfa" name="action_approve1" class="oe_highlight" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_approve1"/>
+                    <button string="HR Approve" type="object" states="approve1" name="action_approve2" class="oe_highlight" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_approve2"/>
+                    
+                    <button string="Revise" type="object" states="rfa,approve1" name="action_revise" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_revise"/>
+                    <button string="Reject" type="object" states="rfa,approve1" name="action_reject" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_reject"/>
+                    <button string="Cancel" type="object" states="rfa,approve1" name="action_cancel" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_cancel"/>
+                    <button string="Set to Draft" type="object" states="cancel" name="action_draft" confirm="Apakah anda yakin?"
+                        groups="custom_overtime.ovr_button_action_draft"/>
+                    
+                    <field name="state" widget="statusbar" statusbar_visible="draft,rfa,approve1,approve2" attrs="{'invisible':[('state','in',['cancel','reject'])]}"/>
+                    <field name="state_reject" widget="statusbar" statusbar_visible="reject" attrs="{'invisible':[('state','!=','reject')]}"/>
+                    <field name="state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':[('state','!=','cancel')]}"/>
+                </header>
+                
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="name" string="Form Lupa Absen/"/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group name="head">
+                        <group name="left" >
+                            <field name="employee_id" attrs="{'readonly':[('id','&gt;',0)]}" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                            <field name="nik" />
+                            <field name="job_id" />
+                            <field name="department_id" />
+                            <field name="section" />
+                            <field name="work_location_id" />
+                            <field name="resource_calendar_id" />
+                            <field name="date" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="check_in" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field name="check_out" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field name="attendance_from" attrs="{'readonly':[('state','!=','draft')]}" />
+                            <field name="reason" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <field name="documents" widget="many2many_binary" attrs="{'readonly':[('state','!=','draft')]}"/>
+                            <br/><br/>
+                        </group>
+                        <group name="right">
+                            <!-- khusus human resource -->
+                            <field name="manager_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" 
+                                groups="hr.group_hr_manager"/>
+                            <field name="hr_responsible_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" 
+                                groups="hr.group_hr_manager"/>
+                        </group>
+                    </group>
+                    
+                    
+                    <notebook>
+                        <page string="Approval and Audit Trail">
+                            <group string="Approval">
+                                <field name="approval_ids" nolabel="1" widget="one2many_list" readonly="1" force_save="1">
+                                    <tree string="" editable="bottom" create="false" edit="false" delete="false">
+                                        <field name="state" />
+                                        <field name="reason"/>
+                                        <field name="pelaksana_id"/>
+                                        <field name="department_id" />
+                                        <field name="job_id" />
+                                        <field name="tanggal"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Audit Trail">
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids"/>	
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+    
+    
+    <record id="action_menu_form_lupa_absen" model="ir.actions.act_window">
+        <field name="name">Form Lupa Absen Karyawan</field>
+        <field name="res_model">form.lupa.absen</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="view_id" eval="False"/>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Tambah Form Lupa Absen
+            </p><p>
+            With just a quick glance on the Odoo screen, you
+            can easily find all the information you need.
+            </p>
+        </field>
+    </record>
+
+    <menuitem
+        id="menu_form_lupa_absen"
+        name="Form Lupa Absen"
+        action="action_menu_form_lupa_absen"
+        parent="hr_attendance.menu_hr_attendance_root"
+        sequence="15"/>
+</odoo>

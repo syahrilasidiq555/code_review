@@ -1,0 +1,165 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- add Perjalanan Dinas in ir.module.category -->
+        <record model="ir.module.category" id="module_category_overtime_management">
+            <field name="name">Overtime Management</field>
+            <field name="description">...</field>
+            <field name="sequence">20</field>
+        </record>   
+
+        <!-- Group ROLE -->
+        <record id="ovr_user_input" model="res.groups">
+            <field name="name">Input User</field>
+            <field name="comment">
+                Approval for Menu Overtime Management.
+                Group Untuk Input Overtime
+                Feature : 
+                - View pribadi (employee_id = user_id)
+                - View kolektif (department_id = user.department_id)
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+
+        <record id="ovr_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="comment">
+                Approval for Menu Overtime Management.
+                Group Untuk Approval bawahan yang melakukan Overtime
+                Feature : 
+                - View data bawahan
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+
+        <record id="ovr_human_resource" model="res.groups">
+            <field name="name">HR Responsible</field>
+            <field name="comment">
+                Approval for Menu Overtime Management.
+                Group Untuk Approval Overtime Management
+                Feature : 
+                - View Semua data Overtime Management
+                - Edit User Approver pada tiap2 record (manager,hrd responsible)
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+
+
+        <!-- BUTTON -->
+        <record id="ovr_button_action_rfa" model="res.groups">
+            <field name="name">Tombol : RFA</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Overtime Management Form
+                Feature : 
+                - View tombol : RFA
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+        
+        <record id="ovr_button_action_approve1" model="res.groups">
+            <field name="name">Tombol : Manager Approve</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Overtime Management Form
+                Feature : 
+                - View tombol : Manager Approve
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+        
+        <record id="ovr_button_action_approve2" model="res.groups">
+            <field name="name">Tombol : HR Approve</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Overtime Management Form
+                Feature : 
+                - View tombol : HR Approve
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+        
+        <record id="ovr_button_action_revise" model="res.groups">
+            <field name="name">Tombol : Revise</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Overtime Management Form
+                Feature : 
+                - View tombol : Revise
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+        
+        <record id="ovr_button_action_reject" model="res.groups">
+            <field name="name">Tombol : Reject</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Overtime Management Form
+                Feature : 
+                - View tombol : Reject
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+        
+        <record id="ovr_button_action_cancel" model="res.groups">
+            <field name="name">Tombol : Cancel</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Overtime Management Form
+                Feature : 
+                - View tombol : Cancel
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+        
+        <record id="ovr_button_action_draft" model="res.groups">
+            <field name="name">Tombol : Draft</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Overtime Management Form
+                Feature : 
+                - View tombol : Draft
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+        
+        <record id="ovr_button_action_open_allocations" model="res.groups">
+            <field name="name">Tombol : View Timeoff Allocation</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Overtime Management Form
+                Feature : 
+                - View tombol : View Timeoff Allocation
+            </field>
+            <field name="category_id" ref="custom_overtime.module_category_overtime_management" />
+        </record>
+        
+
+        <!-- Group Rule -->
+        <record id="ovr_rule_user_input" model="ir.rule">
+            <field name="name">Overtime Management (User): See only user's own data or user's own Department</field>
+            <field name="model_id" ref="custom_overtime.model_big_overtime"/>
+            <field name="domain_force">['|',('employee_id.id','=',user.employee_id.id),('kolektif_department_id','=',user.employee_id.department_id.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('custom_overtime.ovr_user_input'))]"/>
+        </record>
+        
+        <record id="ovr_rule_admin" model="ir.rule">
+            <field name="name">Overtime Management (Manager): See only if manager = user</field>
+            <field name="model_id" ref="custom_overtime.model_big_overtime"/>
+            <field name="domain_force">[('manager_id.id','=',user.employee_id.id)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('custom_overtime.ovr_manager'))]"/>
+        </record>
+
+        <record id="ovr_rule_hr" model="ir.rule">
+            <field name="name">Overtime Management (HR): See ALL</field>
+            <field name="model_id" ref="custom_overtime.model_big_overtime"/>
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="perm_read" eval="1"/>
+            <field name="perm_write" eval="1"/>
+            <field name="perm_create" eval="1"/>
+            <field name="perm_unlink" eval="1"/>
+            <field name="groups" eval="[(4,ref('custom_overtime.ovr_human_resource'))]"/>
+        </record>
+
+    </data>
+</odoo>

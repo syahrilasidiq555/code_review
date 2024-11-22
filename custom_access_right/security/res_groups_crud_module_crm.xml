@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- CRM Saluranku -->
+        <record model="ir.module.category" id="module_category_crm_penjualan">
+            <field name="name">CRM / Penjualan / (Saluranku, Aktivitas Saya, Prospek)</field>
+            <field name="sequence">1500</field>
+        </record>
+        <record id="group_crm_penjualan_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_crm_penjualan"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_crm_penjualan_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_category_crm_penjualan"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_crm_penjualan_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_crm_penjualan"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_crm_penjualan_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_crm_penjualan"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_crm_penjualan_button_new_quotation" model="res.groups">
+            <field name="name">Button Penawaran Baru</field>
+            <field name="category_id" ref="module_category_crm_penjualan"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_crm_penjualan_button_new_rental" model="res.groups">
+            <field name="name">Button Rental Baru</field>
+            <field name="category_id" ref="module_category_crm_penjualan"/>            
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_crm_penjualan_button_won" model="res.groups">
+            <field name="name">Button Berhasil</field>
+            <field name="category_id" ref="module_category_crm_penjualan"/>            
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_crm_penjualan_button_lost" model="res.groups">
+            <field name="name">Button Gagal</field>
+            <field name="category_id" ref="module_category_crm_penjualan"/>            
+            <field name="sequence">8</field>
+        </record>
+
+        <!-- CRM Master Menu -->
+        <record model="ir.module.category" id="module_category_crm_master_menu">
+            <field name="name">CRM / Master Menu</field>
+            <field name="sequence">1501</field>
+        </record>
+        <record id="group_crm_quotation_saya" model="res.groups">
+            <field name="name">Access Quotation Saya</field>
+            <field name="category_id" ref="module_category_crm_master_menu"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_crm_tim" model="res.groups">
+            <field name="name">Access Tim</field>
+            <field name="category_id" ref="module_category_crm_master_menu"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_crm_pelanggan" model="res.groups">
+            <field name="name">Access Pelanggan</field>
+            <field name="category_id" ref="module_category_crm_master_menu"/>            
+            <field name="sequence">3</field>
+        </record>
+
+        <!-- CRM Laporan -->
+        <record model="ir.module.category" id="module_category_crm_laporan_menu">
+            <field name="name">CRM / Laporan</field>
+            <field name="sequence">1502</field>
+        </record>
+        <record id="group_crm_laporan_dashbor" model="res.groups">
+            <field name="name">Access Dasbor</field>
+            <field name="category_id" ref="module_category_crm_laporan_menu"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_crm_laporan_prakiraan" model="res.groups">
+            <field name="name">Access Prakiraan</field>
+            <field name="category_id" ref="module_category_crm_laporan_menu"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_crm_laporan_prospek" model="res.groups">
+            <field name="name">Access Prospek</field>
+            <field name="category_id" ref="module_category_crm_laporan_menu"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_crm_laporan_saluran" model="res.groups">
+            <field name="name">Access Saluran</field>
+            <field name="category_id" ref="module_category_crm_laporan_menu"/>
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_crm_laporan_aktivitas" model="res.groups">
+            <field name="name">Access Aktivitas</field>
+            <field name="category_id" ref="module_category_crm_laporan_menu"/>
+            <field name="sequence">5</field>
+        </record>
+
+        <!-- CRM Laporan -->
+        <record model="ir.module.category" id="module_category_crm_konfigurasi_menu">
+            <field name="name">CRM / Konfigurasi</field>
+            <field name="sequence">1503</field>
+        </record>
+        <record id="group_crm_konfigurasi_pengaturan" model="res.groups">
+            <field name="name">Access Pengaturan</field>
+            <field name="category_id" ref="module_category_crm_konfigurasi_menu"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_crm_konfigurasi_penjualan_tim" model="res.groups">
+            <field name="name">Access Penjualan Tim</field>
+            <field name="category_id" ref="module_category_crm_konfigurasi_menu"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_crm_konfigurasi_anggota_tim" model="res.groups">
+            <field name="name">Access Anggota Tim</field>
+            <field name="category_id" ref="module_category_crm_konfigurasi_menu"/>
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_crm_konfigurasi_jenis_aktivitas" model="res.groups">
+            <field name="name">Access Jenis Aktivitas</field>
+            <field name="category_id" ref="module_category_crm_konfigurasi_menu"/>
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_crm_konfigurasi_tahap" model="res.groups">
+            <field name="name">Access Tahap</field>
+            <field name="category_id" ref="module_category_crm_konfigurasi_menu"/>
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_crm_konfigurasi_label" model="res.groups">
+            <field name="name">Access Label</field>
+            <field name="category_id" ref="module_category_crm_konfigurasi_menu"/>
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_crm_konfigurasi_alasan_gagal" model="res.groups">
+            <field name="name">Access Alasan Gagal</field>
+            <field name="category_id" ref="module_category_crm_konfigurasi_menu"/>
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_crm_konfigurasi_lead_mining" model="res.groups">
+            <field name="name">Access Permintaan Lead Mining</field>
+            <field name="category_id" ref="module_category_crm_konfigurasi_menu"/>
+            <field name="sequence">8</field>
+        </record>
+    </data>
+</odoo>

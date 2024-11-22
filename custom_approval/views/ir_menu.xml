@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu -->
+        <menuitem id="menu_config_other_accounting" name="Other Configuration" parent="account.menu_finance_configuration" sequence="9">
+            <menuitem id="menu_action_loa_form_view" action="action_level_of_approval" sequence="1"/>
+        </menuitem>
+
+    </data>
+</odoo>

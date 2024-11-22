@@ -1,0 +1,332 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <template id="custom_accounting.print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="custom_accounting.layout_header"/>
+            <t t-raw="0"/>
+            <t t-call="custom_accounting.layout_footer"/>
+        </template>
+
+
+        <template id="custom_accounting.layout_header">
+            <div class="header">
+                <div class="row border border-dark mx-0" name="header_faktur" style="font-size:14px"> 
+                    <div class="col-2 p-2">
+                        <img class="mx-auto" t-att-src="image_data_uri(company.logo)" style="width:120px; display: block;"/>
+                    </div>
+                    <div class="col-6 border-end border-dark px-3" style="margin-top:0px;font-size:14px">
+                        <h3><b><span t-field="company.name"/></b></h3>
+                        <t t-if="company.street != False">
+                            <span t-field="company.street"/>
+                        </t>
+                        <t t-if="company.phone != False">
+                            <br><b>Telp </b>: <span t-field="company.phone"/></br>
+                        </t>
+                        <t t-if="company.mobile != False">
+                            <br><b>WA </b> : <span t-field="company.mobile"/></br>
+                        </t>
+                        <t t-if="company.email != False">
+                            <br><b>Email </b> : <span t-field="company.email"/></br>
+                        </t>
+                    </div>
+                    <div class="col-4 p-2">
+                        <h6><b>Informasi Tagihan</b></h6>
+                        <br><b>No Invoice </b>: <span t-field="o.name"/></br>
+                        <br><b>Tgl Terbit </b>: <span t-field="o.invoice_date"/></br>
+                    </div>
+                </div>   
+                <div class="row border-end border-bottom border-start border-dark mx-0" style="font-size:14px"> 
+                    <div class="col-5 p-2 border-end border-dark">
+                        <h6><b>Customer</b> : <span t-field="o.partner_id"/> </h6>
+                        <table class="table-borderless">
+                            <tr>
+                                <td><span>No Pelanggan </span></td>
+                                <td>:</td>
+                                <td><span t-esc="o.partner_id.customer_id"/></td>
+                            </tr>
+                            <tr>
+                                <td><span>No Billing </span></td>
+                                <td>:</td>
+                                <td><span t-esc="o.so_id.invoice_id if o.so_id else ''"/></td>
+                            </tr>
+                            <tr>
+                                <td><span>No Contact </span></td>
+                                <td>:</td>
+                                <td><span t-esc="o.partner_id.phone if o.partner_id.phone else o.partner_id.mobile"/></td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-3 p-0 border-end border-dark" style="margin-top:0px;font-size:14px">
+                        <div class="row border-bottom border-dark mx-0 p-2">
+                            <div class="px-0">
+                                <h6 class="px-0"><b>Periode Layanan</b></h6>
+                                <!-- <b t-field="o.invoice_date_due"/> -->
+                                <!--<b t-esc="'-'"/>-->
+                                <t t-set="inv_lines" t-value="o.invoice_line_ids.sorted(key=lambda l: l.subscription_id)"/>
+                                <t t-foreach="inv_lines.filtered(lambda x: x.deferred_start_date and x.deferred_end_date)" t-as="line">
+                                    <b t-esc="str(line.deferred_start_date.strftime('%d/%m/%Y')) + ' - '+ str(line.deferred_end_date.strftime('%d/%m/%Y'))"/>
+                                </t>
+                                <t t-if="not inv_lines.filtered(lambda x: x.deferred_start_date and x.deferred_end_date)">
+                                    <b t-esc="'-'"/>
+                                </t>
+                            </div>
+                            
+                        </div> 
+                        <div class="row mx-0 p-2">
+                            <div class="px-0">
+                                <h6 class="px-0"><b>Jatuh Tempo</b></h6>
+                                <b t-field="o.invoice_date_due"/>
+                            </div>
+                        </div>                       
+                    </div>
+                    <div class="col-4 p-2">
+                        <h6><b>Jumlah Tagihan</b></h6>
+                        <br/>
+                        <h6><b t-field="o.amount_total"/></h6>
+                    </div>
+                </div>
+            </div>
+        </template>
+
+        <template id="custom_accounting.layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:14px">
+                <div class="row mx-0 mt-4 p-2 border border-dark">
+                    <p class="my-0">Info Layanan :
+                    <br/>
+                    Cantumkan Nomor Invoice dan No Pelanggan di berita transfer pembayaran anda.</p>
+                </div>
+            </div>
+        </template>
+    
+
+        <template id="custom_accounting.report_sisnet_invoice_template">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_accounting.print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+                                <div class="header_body px-4 pt-4">
+                                    <div class="row"> 
+                                        <div class="col-8 py-2">
+                                            <h5><b>Deskripsi Tagihan</b></h5>
+                                        </div>
+                                        <div class="col-4 py-2 text-end">
+                                            <h5><b>Total Tagihan</b></h5>
+                                        </div>
+                                    </div>
+                                    <t t-set="last_month_amount_due" t-value="0"/>
+                                    <t t-set="pph23_amount" t-value="0"/>
+                                    <t t-set="last_month_lines" t-value="o.last_month_move_ids"/>
+                                    <t t-if="last_month_lines">
+                                        <div class="row py-2"> 
+                                            <strong>Bulan Lalu</strong>
+                                        </div>
+                                    </t>
+                                    <t t-foreach="last_month_lines" t-as="line">
+                                        <t t-set="last_month_amount_due" t-value="last_month_amount_due+line.amount_residual"/>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <span t-field="line.name"/>
+                                            </div>
+                                            <div class="col-4 text-end o_price_total">
+                                                <span class="text-nowrap" t-field="line.amount_total">27.00</span>
+                                            </div>
+                                        </div>
+
+                                        <!-- PAYMENT -->
+                                        <t t-if="line.invoice_payments_widget">
+                                            <t t-foreach="line.invoice_payments_widget['content']" t-as="payment">
+                                                <!--<span t-esc="payment"/>-->
+                                                <div class="row">
+                                                    <div class="col-8">
+                                                        <span t-esc="payment['date'].strftime('%d/%m/%Y')"/> - Customer Payment
+                                                    </div>
+                                                    <div class="col-4 text-end o_price_total">
+                                                        <!--<t t-if="payment['amount_foreign_currency']">-->
+                                                        <!--    (<span class="text-nowrap" t-esc="payment['amount_foreign_currency']"/>)-->
+                                                        <!--</t>-->
+                                                        <!--<t t-else="">-->
+                                                        <!--    (<span class="text-nowrap" t-esc="payment['amount_company_currency']"/>)-->
+                                                        <!--</t>-->
+                                                        <t t-set="payment_currency_id" t-value="o.env['res.currency'].sudo().browse(payment['currency_id'])"/>
+                                                        <!--(<span class="text-nowrap" t-esc="payment['amount']"/>)-->
+                                                        (<span class="text-nowrap" t-out="payment['amount']" t-options="{'widget': 'monetary', 'display_currency': payment_currency_id}"/>)
+                                                    </div>
+                                                </div>
+                                            </t>
+                                        </t>
+                                        <!-- TAX TOTAL -->
+                                        <t t-if="line.tax_totals and line.tax_totals['groups_by_subtotal'] and line.tax_totals['groups_by_subtotal']['Untaxed Amount']">
+                                            <t t-foreach="line.tax_totals['groups_by_subtotal']['Untaxed Amount']" t-as="tax_group">
+                                                <t t-if="'PPH 23' in tax_group['tax_group_name']">
+                                                    <t t-set="pph23_amount" t-value="tax_group['tax_group_amount']"/>
+                                                    <div class="row">
+                                                        <div class="col-8">
+                                                            <span t-field="line.invoice_date_due"/> - <span t-esc="tax_group['tax_group_name']"/>
+                                                        </div>
+                                                        <div class="col-4 text-end o_price_total">
+                                                            (<span class="text-nowrap" t-esc="tax_group['formatted_tax_group_amount']"/>)
+                                                        </div>
+                                                    </div>
+                                                </t>
+                                            </t>
+                                        </t>
+                                    </t>
+                                    
+                                    <div class="row py-2 pt-4">
+                                        <div class="col-12">
+                                            <b>Bulan Ini</b>
+                                        </div>
+                                    </div>
+                                    <t t-set="current_subtotal" t-value="0"/>
+                                    <t t-set="current_total" t-value="0"/>
+                                    <t t-set="inv_lines" t-value="o.invoice_line_ids.sorted(key=lambda l: (-l.sequence, l.date, l.move_name, -l.id), reverse=True)"/>
+
+                                    <t t-foreach="inv_lines" t-as="line">
+                                        <t t-set="current_subtotal" t-value="current_subtotal + line.price_subtotal"/>
+                                        <t t-set="current_total" t-value="current_total + line.price_total"/>
+
+                                            <div t-att-class="'row bg-200 fw-bold o_line_section' if line.display_type == 'line_section' else 'row fst-italic o_line_note' if line.display_type == 'line_note' else 'row'">
+                                                <t t-if="line.display_type == 'product'" name="account_invoice_line_accountable">
+                                                    <div class="col-8">
+                                                        <span t-if="line.name" t-field="line.name" t-options="{'widget': 'text'}">Bacon Burger</span>
+                                                    </div>
+                                                    <div class="col-4 text-end o_price_total">
+                                                        <span class="text-nowrap" t-field="line.price_subtotal">27.00</span>
+                                                    </div>
+                                                </t>
+                                                <t t-elif="line.display_type == 'line_section'">
+                                                    <div class="col-12">
+                                                        <span t-field="line.name" t-options="{'widget': 'text'}">A section title</span>
+                                                    </div>
+                                                    <t t-set="current_section" t-value="line"/>
+                                                    <t t-set="current_subtotal" t-value="0"/>
+                                                </t>
+                                                <t t-elif="line.display_type == 'line_note'">
+                                                    <div class="col-12">
+                                                        <span t-field="line.name" t-options="{'widget': 'text'}">A note, whose content usually applies to the section or product above.</span>
+                                                    </div>
+                                                </t>
+                                            </div>
+                                            
+                                            <!-- <t t-if="current_section and (line_last or inv_lines[line_index+1].display_type == 'line_section')">
+                                               <div class="row is-subtotal text-end">
+                                                   <div class="col-12">
+                                                       <strong class="mr16">Subtotal</strong>
+                                                       <span t-out="current_subtotal" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}">31.05</span>
+                                                   </div>
+                                               </div>
+                                            </t> -->
+                                        
+                                    </t>
+                                    <div class="row pb-4">
+                                        <div class="col-8">
+                                            <strong>Subtotal</strong>
+                                        </div>
+                                        <div class="col-4 text-end o_price_total">
+                                            <b t-out="sum(inv_lines.mapped('price_subtotal'))" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}">31.05</b>
+                                        </div>
+                                    </div>
+                                    
+                                    <!--Tax totals-->
+                                    <t t-set="tax_totals" t-value="o.tax_totals"/>
+                                    
+                                    <t t-if="tax_totals and tax_totals['groups_by_subtotal']">
+                                        <t t-foreach="tax_totals['groups_by_subtotal']['Untaxed Amount']" t-as="tax">
+                                            <!--<span t-esc="tax"/>-->
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <strong><span t-esc="tax['tax_group_name']"/></strong>
+                                                </div>
+                                                <div class="col-4 text-end o_price_total">
+                                                    <b t-out="tax['formatted_tax_group_amount']">31.05</b>
+                                                </div>
+                                            </div>
+                                        </t>
+                                    </t>
+                                    
+                                    
+                                    <div class="row pt-4">
+                                        <div class="col-8">
+                                            <strong>Jumlah Tagihan</strong>
+                                        </div>
+                                        <div class="col-4 text-end o_price_total">
+                                            <b t-out="o.amount_total" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}">31.05</b>
+                                        </div>
+                                    </div>
+                                    
+                                    <!-- PAYMENT -->
+                                    <t t-set="invoice_payments_widget" t-value="o.invoice_payments_widget"/>
+                                    <t t-if="invoice_payments_widget">
+                                        <t t-foreach="invoice_payments_widget['content']" t-as="payment">
+                                            <!--<span t-esc="payment"/>-->
+                                            <div class="row">
+                                                <div class="col-8">
+                                                    <span t-esc="payment['date'].strftime('%d/%m/%Y')"/> - Customer Payment
+                                                </div>
+                                                <div class="col-4 text-end o_price_total">
+                                                    <!--<t t-if="payment['amount_foreign_currency']">-->
+                                                    <!--    (<span class="text-nowrap" t-esc="payment['amount_foreign_currency']"/>)-->
+                                                    <!--</t>-->
+                                                    <!--<t t-else="">-->
+                                                    <!--    (<span class="text-nowrap" t-esc="payment['amount_company_currency']"/>)-->
+                                                    <!--</t>-->
+                                                    <t t-set="payment_currency_id" t-value="o.env['res.currency'].sudo().browse(payment['currency_id'])"/>
+                                                    (<span class="text-nowrap" t-out="payment['amount']" t-options="{'widget': 'monetary', 'display_currency': payment_currency_id}"/>)
+                                                </div>
+                                            </div>
+                                        </t>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <strong>Sisa Tagihan</strong>
+                                            </div>
+                                            <div class="col-4 text-end o_price_total">
+                                                <b t-out="o.amount_residual" t-options="{'widget': 'monetary', 'display_currency': o.currency_id}">31.05</b>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    
+                                    
+                                    <!--TOTAL + BULAN LALU-->
+                                    <t t-if="last_month_amount_due">
+                                        <div class="row pt-4">
+                                        <div class="col-8">
+                                                <strong>Jumlah Tagihan + Bulan lalu</strong>
+                                            </div>
+                                            <div class="col-4 text-end o_price_total">
+                                                <b t-esc="o.amount_residual + last_month_amount_due + pph23_amount" t-options='{"widget": "monetary", "display_currency": o.currency_id}'/>
+                                            </div>
+                                        </div>
+                                    </t>
+                                    
+                                </div>
+                                
+                                
+                                
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    
+    </data>
+</odoo>
+

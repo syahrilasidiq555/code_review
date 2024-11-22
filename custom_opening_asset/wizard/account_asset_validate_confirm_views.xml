@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_asset_validate_confirm_form" model="ir.ui.view">
+            <field name="name">account.asset.validate.confirm.form</field>
+            <field name="model">account.asset.validate.confirm</field>
+            <field name="arch" type="xml">
+                <form string="Confirmation">
+                    <sheet>
+                        <div class="oe_title">
+                            <h3><field name="title" nolabel="1"/></h3>
+                        </div>
+                        <group>
+                            <field name="currency_id" invisible="1"/>
+                            <field name="account_id" invisible="1"/>
+                            <field name="opening_balance"/>
+                            <field name="calculated_balance"/>
+                            <field name="difference_balance"/>
+                        </group>
+                        <group>
+                            <field name="actions" widget="radio"/>
+                            <field name="warning_msg" attrs="{'invisible': [('actions', '!=', 'ignore')]}" string="" style="color: red; font-weight: bold;"/>
+                        </group>
+                        <group attrs="{'invisible': [('actions', '=', 'ignore')]}">
+                            <group>
+                                <field name="name"/>
+                                <field name="account_id" readonly="1"/>
+                                <field name="account_counter_id"/>
+                            </group>
+                            <group attrs="{'invisible': [('actions', '=', 'edit_auto')]}">
+                                <field name="date" attrs="{'required': [('actions', '!=', 'edit_auto')]}"/>
+                                <field name="journal_id" attrs="{'required': [('actions', '!=', 'edit_auto')], 'readonly': [('actions', '=', 'account.asset.correction')]}"/>
+                            </group>
+                        </group>
+                        <group attrs="{'invisible': ['|', ('actions', '=', 'ignore'), ('actions', '!=', 'account.asset.correction')]}">
+                            <group>
+                                <field name="is_correct_asset"/>
+                                <field name="is_correct_depreciation"/>
+                                <field name="is_correct_book"/>
+                            </group>
+                            <group>
+                                <field name="book_value" attrs="{'invisible': [('is_correct_book', '!=', True)], 'required': [('is_correct_book', '=', True)]}"/>
+                                <field name="asset_model" readonly="1"/>
+                                <field name="is_create_entries" attrs="{'required': [('actions', '=', 'account.asset.correction')]}"/>
+                            </group>
+                        </group>
+                    </sheet>
+                    <footer>
+                        <button name="action_ok"
+                                string="Run Assets"
+                                type="object"
+                                class="oe_highlight"
+                                />
+                        <button special="cancel"
+                                string="Cancel"
+                                />
+                    </footer>
+                </form>
+            </field>
+        </record>
+    </data>
+</odoo>

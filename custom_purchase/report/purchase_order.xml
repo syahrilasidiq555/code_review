@@ -1,0 +1,285 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- INHERIT PRINT PO -->
+        <template id="external_layout_copy_po" inherit_id="web.external_layout_standard">
+            <xpath expr="//div[@name='company_address']" position="after">
+                <t t-if="o and 'total_printed' in o and o.total_printed >1">
+                    <div class="col-6">
+                        <p style="text-align:right; font-weight:bold;">Copy ke-<t t-esc="o.total_printed"/></p>
+                    </div>
+                </t>
+            </xpath>
+        </template>
+
+        <!-- PURCHASE ORDER -->
+        <template id="custom_purchase.purchase_order_print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="custom_purchase.purchase_request_layout_header"/>
+            <t t-raw="0"/>
+            <t t-call="custom_purchase.purchase_order_layout_footer"/>
+        </template>
+
+        <template id="custom_purchase.purchase_order_layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:14px">
+                <!-- <div class="last-page"> -->
+                    <table class="table table-sm" style="margin:100px auto; width:90%; border:0px;">
+                        <tr style="background-color:transparent;">
+                            <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Prepared by</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <u><span t-esc="o.create_uid.name"/></u><br/>
+                                    <b>Date:</b>
+                                </p>
+                            </td>
+                            <!-- <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Approved by</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )<br/>
+                                    <b>Date:</b>
+                                </p>
+                            </td> -->
+                            
+                            <td t-foreach='o.approval_info_ids' t-as='line_approved' style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Approved by</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <u><span t-esc="line_approved.user_id.name"/></u><br/>
+                                    <b>Date: 
+                                        <t t-if="line_approved.approve_date">
+                                            <span t-esc="datetime.datetime(line_approved.approve_date.year, line_approved.approve_date.month, line_approved.approve_date.day).strftime('%d %b %Y')"/>
+                                        </t>
+                                        <t t-else="">
+                                        </t>
+                                    </b>
+                                </p>
+                            </td>
+                            <!-- <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Approved by</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )<br/>
+                                    <b>Date:</b>
+                                </p>
+                            </td>
+                            <td style="width:25%; padding: 0 40px;">
+                                <p>
+                                    <b>Approved by</b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )<br/>
+                                    <b>Date:</b>
+                                </p>
+                            </td> -->
+                        </tr>
+                    </table>
+                <!-- <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div> -->
+            </div>
+        </template>
+        
+        <template id="custom_purchase.purchase_order_print">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_purchase.purchase_order_print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">PURCHASE ORDER</h5>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-6">
+                                            <table class="table">
+                                                <!-- <style>
+                                                    .borderless td, .borderless th {
+                                                        border: none;
+                                                    }
+                                                </style>  -->
+                                                <tbody>
+                                                    <tr>
+                                                       <td style="width:25%">Vendor :</td> 
+                                                       <td>
+                                                            <b t-esc="o.partner_id.name"/><br/>
+                                                            <span t-esc="o.partner_id.street"/><br/>
+                                                            <span t-esc="o.partner_id.phone"/><br/>
+                                                            <span t-esc="o.partner_id.email"/><br/>
+                                                       </td> 
+                                                    </tr>
+                                                    <tr>
+                                                       <td style="width:25%">Invoice to :</td> 
+                                                       <td>
+                                                            <b>Renetha Rengganis</b><br/>
+                                                            KSO Rumah Duka Carolus<br/>
+                                                            Jl. Salemba Raya No 41 RT.3 RW.5, Paseban, Kec. Senen<br/>
+                                                            Jakarta 10440<br/>
+                                                       </td> 
+                                                    </tr>
+                                                    <tr>
+                                                       <td style="width:25%">Ship to :</td> 
+                                                       <td>
+                                                            <b t-esc="o.user_id.name"/><br/>
+                                                            <span t-esc="o.user_id.street"/><br/>
+                                                            <span t-esc="o.user_id.phone"/><br/>
+                                                            <span t-esc="o.user_id.email"/><br/>
+                                                       </td> 
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                        <div class="col-6">
+                                            <table class="table">
+                                                <!-- <style>
+                                                    .borderless td, .borderless th {
+                                                        border: none;
+                                                    }
+                                                </style>  -->
+                                                <tbody>
+                                                    <tr style="line-height: 5pt">
+                                                       <td>No</td> 
+                                                       <td><b t-field="o.name"/></td> 
+                                                    </tr>
+                                                    <tr style="line-height: 5pt">
+                                                       <td>Date</td> 
+                                                       <td><b t-esc="datetime.datetime(o.date_order.year, o.date_order.month, o.date_order.day).strftime('%d %b %Y')"/></td> 
+                                                    </tr>
+                                                    <tr style="line-height: 5pt">
+                                                       <td>Payment Terms</td> 
+                                                       <td></td> 
+                                                    </tr>
+                                                    <tr style="line-height: 5pt">
+                                                       <td>Expected Date</td> 
+                                                       <td><b t-esc="datetime.datetime(o.date_planned.year, o.date_planned.month, o.date_planned.day).strftime('%d %b %Y')"/></td> 
+                                                    </tr>
+                                                    <tr style="line-height: 5pt">
+                                                       <td>Rate</td> 
+                                                       <td></td> 
+                                                    </tr>
+                                                    
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
+
+                                    <table class="table">
+                                        <!-- <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                                padding-left:0;
+                                                padding-right:0;
+                                            }
+                                        </style>  -->
+                                        <thead>
+                                            <tr class="border-black o_total" style="line-height: 5pt">
+                                                <th class="text-center">No.</th>
+                                                <th class="text-left">Item Product</th>
+                                                <th class="text-right">Quantity</th>
+                                                <th class="text-right">Unit Price</th>
+                                                <th class="text-right">Amount</th>
+                                            </tr>
+                                        </thead>
+                                        <!-- <style>
+                                            .borderless td, .borderless th {
+                                                border: none;
+                                            }
+                                        </style>  -->
+                                        <tbody>
+                                            <tr t-foreach='o.order_line' t-as='line' class='table ' style="line-height: 0pt">
+                                                <td class="text-center"><span t-esc="line_index + 1"/></td>
+                                                <td class="text-left"><t t-esc="line.product_id.name"/></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.product_qty))" /></td>
+                                                <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(line.price_unit))" /></td>
+                                                <td class="text-right"><t t-esc="o.currency_id.symbol"/> <span t-esc="'{0:,.0f}'.format(float(line.price_subtotal))" /></td>
+                                            </tr>
+                                            <t t-if="o.tax_totals_json">
+                                                <t t-set="tax_totals" t-value="json.loads(o.tax_totals_json)"/>
+                                                <tr class='table ' style="line-height: 0pt">
+                                                    <td class="text-left" colspan="4">Total</td>
+                                                    <td class="text-right"><span t-esc="tax_totals['formatted_amount_untaxed']"/></td>
+                                                    <!-- <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(o.estimated_cost))" /></td> -->
+                                                </tr>
+
+                                                <t t-if="tax_totals['groups_by_subtotal']">
+                                                    <t t-foreach="tax_totals['subtotals']" t-as="subtotal">
+                                                        <t t-set="subtotal_to_show" t-value="subtotal['name']"/>
+                                                    </t>
+                                                    <t t-set="lines" t-value="tax_totals['groups_by_subtotal'][subtotal_to_show]"/>
+                                                    <!-- <span t-esc="lines"/> -->
+                                                    <tr t-foreach="lines" t-as='line_tax' style="line-height: 0pt">
+                                                        <td class="text-left" style="width:650px!important;"></td>
+                                                        <td class="text-left" style="width:650px!important;"></td>
+                                                        <td class="text-left" style="width:150px!important;"></td>
+                                                        <td class="text-center" style="width:50px!important;">
+                                                            <span t-esc="line_tax['tax_group_name']" />
+                                                        </td>
+                                                        <td class="text-right" style="width:350px!important;">
+                                                            <t t-esc="o.currency_id.symbol"/> <span t-esc="'{0:,.0f}'.format(float(line_tax['tax_group_amount']))" />
+                                                        </td>
+                                                    </tr>
+                                                </t>
+
+                                                <tr class='table ' style="line-height: 0pt">
+                                                    <td class="text-left" colspan="4">Grand Total</td>
+                                                    <td class="text-right"><span t-esc="tax_totals['formatted_amount_total']"/></td>
+                                                    <!-- <td class="text-right"><span t-esc="'{0:,.0f}'.format(float(o.estimated_cost))" /></td> -->
+                                                </tr>
+                                                <tr class='table '>
+                                                    <td style="vertical-align: top;" colspan="5">
+                                                        Remarks : <br/>
+                                                        <t t-esc="o.notes"/>
+                                                    </td>
+                                                </tr>
+                                                <tr class='table ' style="line-height: 0pt"></tr>
+                                            </t>
+                                        </tbody>
+                                    </table>
+
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

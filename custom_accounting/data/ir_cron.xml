@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rdc_hit_invoie_overdue" model="ir.cron">
+        <field name="name">RDC : Hit Invoice Overdue</field>
+        <field name="model_id" ref="account.model_account_move"/>
+        <field name="state">code</field>
+        <field name="code">model.get_invoice_over_due()</field>
+        <field name="user_id" ref="base.user_admin" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">5</field>
+        <field name="active" eval="True" />
+        <field name="doall" eval="False"/>
+    </record>
+
+    <!-- channel efaktur-->
+    <record id="rdc_hit_efaktur_notify" model="ir.cron">
+        <field name="name">RDC : Available e-Faktur and Notify</field>
+        <field name="model_id" ref="l10n_id_efaktur.model_l10n_id_efaktur_efaktur_range"/>
+        <field name="code">model.send_efaktur_via_email()</field>
+        <field name="active" eval="True"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+
+    <record id="channel_notif_efaktur" model="mail.channel">
+        <field name="name">e-Faktur Available Notification</field>
+        <field name="channel_type">channel</field>
+        <field name="public">private</field>
+        <field name="channel_partner_ids" eval="[(4,3)]" /> <!-- 3 = administrator -->
+    </record>
+
+    <!-- AUTO RECON HUTANG TITIPO KOLOMBARIUM -->
+    <record id="rdc_hit_auto_recon_kolombarium" model="ir.cron">
+        <field name="name">RDC : Auto Reconcile Columbarium</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="state">code</field>
+        <field name="code">model.action_recon_hutang_titipo()</field>
+        <field name="user_id" ref="base.user_admin" />
+        <field name="interval_number">1</field>
+        <field name="interval_type">days</field>
+        <field name="numbercall">-1</field>
+        <field name="priority">5</field>
+        <field name="active" eval="True" />
+        <field name="doall" eval="False"/>
+    </record>
+</odoo>

@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- KANBAN -->
+    <!-- REMOVE CRUD-->
+    <record id="view_dym_improvement_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">view_dym_improvement_kanban_remove_crud</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dym_improvement_kanban_create" model="ir.ui.view">
+        <field name="name">view_dym_improvement_kanban_create</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_improvement_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dym_improvement_kanban_delete" model="ir.ui.view">
+        <field name="name">view_dym_improvement_kanban_delete</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_improvement_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- TREE -->
+    <record id="view_dym_improvement_tree_remove_crud" model="ir.ui.view">
+        <field name="name">view_dym_improvement_tree_remove_crud</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dym_improvement_tree_create" model="ir.ui.view">
+        <field name="name">view_dym_improvement_tree_create</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_improvement_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dym_improvement_tree_delete" model="ir.ui.view">
+        <field name="name">view_dym_improvement_tree_delete</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_improvement_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- FORM -->
+    <record id="view_dym_improvement_form_remove_crud" model="ir.ui.view">
+        <field name="name">view_dym_improvement_form_remove_crud</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_dym_improvement_form_create" model="ir.ui.view">
+        <field name="name">view_dym_improvement_form_create</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_improvement_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dym_improvement_form_update" model="ir.ui.view">
+        <field name="name">view_dym_improvement_form_update</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_improvement_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_dym_improvement_form_delete" model="ir.ui.view">
+        <field name="name">view_dym_improvement_form_delete</field>
+        <field name="model">dym.improvement</field>
+        <field name="inherit_id" ref="dym_improvement.view_dym_improvement_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_improvement_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- MENU ITEM -->
+    <record id="dym_improvement.improvement_submenu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_improvement_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

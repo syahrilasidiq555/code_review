@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="efaktur_tree_view_inherit" model="ir.ui.view">
+            <field name="name">efaktur_tree_view_inherit</field>
+            <field name="model">l10n_id_efaktur.efaktur.range</field>
+            <field name="inherit_id" ref="l10n_id_efaktur.efaktur_tree_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='available']" position="after">
+                    <field name="awal" optional="hide"/>
+                    <field name="akhir" optional="hide"/>
+                </xpath>
+                
+                <xpath expr="//field[@name='min']" position="before">
+                    <button string="" name="action_list_efaktur" type="object" class="oe_stat_button" icon="fa-external-link"/>
+                </xpath>
+                
+            </field>
+        </record>
+
+        <!-- EFAKTUR LIST -->
+        <record id="efaktur_list_search" model="ir.ui.view">
+            <field name="name">efaktur_list_search</field>
+            <field name="model">l10n_id_efaktur.efaktur.range.list</field>
+            <field name="type">search</field>
+            <field name="arch" type="xml">
+                <search string="efaktur_list_search">
+                    <field name="efaktur"/>
+                    <filter string="Active" name="active_efaktur" domain="[('active','=',True)]"/>
+                    <filter string="Non Active" name="non_active_efaktur" domain="[('active','=',False)]"/>
+                    <field name="create_date"/>
+                    <field name="write_uid"/>
+                </search>
+            </field>
+        </record>
+
+        <record id="efaktur_list_tree_view" model="ir.ui.view">
+            <field name="name">efaktur_list_tree_view</field>
+            <field name="model">l10n_id_efaktur.efaktur.range.list</field>
+            <field name="arch" type="xml">
+                <tree string="Efaktur Number List" create='false' decoration-warning="active == False" >
+                    <field name="efaktur_id" invisible="1"/>
+                    <field name="efaktur"/>
+                    <field name="move_id"/>
+                    <field name="active" optional="hide"/>
+                    <field name="create_date"/>
+                    <field name="write_uid"/>
+                </tree>
+            </field>
+        </record>
+
+        <record id='efaktur_list_action' model='ir.actions.act_window'>
+            <field name="name">e-Faktur List</field>
+            <field name="res_model">l10n_id_efaktur.efaktur.range.list</field>
+            <field name="view_mode">tree</field>
+            <!-- <field name="context">{'search_default_upload': False}</field> -->
+            <field name="view_id" ref="efaktur_list_tree_view"/>
+            <field name="help" type="html">
+                <p class="oe_view_nocontent_create">
+                    In order to be able to export customer invoices as e-Faktur
+                    for the Indonesian government, you need to put here the ranges
+                    of numbers you were assigned by the government.
+                    When you validate an invoice, a number will be assigned based on these ranges.
+                    Afterwards, you can filter the invoices still to export in the
+                    invoices list and click on Action > Download e-Faktur
+                </p>
+            </field>
+        </record>
+
+        <menuitem id="menu_efaktur_list_action" name="e-Faktur List"
+            parent="account.menu_finance_receivables"
+            groups="account.group_account_manager"
+            action="efaktur_list_action" sequence="112"/>
+
+    </data>
+</odoo>

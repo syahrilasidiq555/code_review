@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="cost_sheet_tree_view">
+            <field name="name">cost_sheet_tree_view</field>
+            <field name="model">cost.sheet</field>
+            <field name="arch" type="xml">
+                <tree string="" create="false">
+                    <field name="name" />
+                    <field name="partner_id" />
+                    <field name="state" widget="badge" decoration-success="state in ['done','approved']" decoration-warning="state == 'cancel'" decoration-info="state == 'confirm'" />
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="cost_sheet_search_view" model="ir.ui.view">
+            <field name="name">cost_sheet_search_view</field>
+            <field name="model">cost.sheet</field>
+            <field name="arch" type="xml">
+                <search string="Search data...">
+                    <field name="name" />
+                    <field name="state" />
+                    <filter string="State Draft" name="state_draft" domain="[('state','=','draft')]"/>
+                    <filter string="State Confirm" name="state_confirm" domain="[('state','=','confirm')]"/>
+                    <filter string="State Approved" name="state_approved" domain="[('state','=','approved')]"/>
+                    <filter string="State Done" name="state_done" domain="[('state','=','done')]"/>
+                    <filter string="State Cancel" name="state_cancel" domain="[('state','=','cancel')]"/>
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="cost_sheet_form_view" model="ir.ui.view">
+            <field name="name">cost_sheet_form_view</field>
+            <field name="model">cost.sheet</field>
+            <field name="arch" type="xml">
+                <form string="Cost Sheet" duplicate='false' create="false">
+                    <header>
+                        <button name="action_confirm" data-hotkey="c"
+                            string="Confirm" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                        
+                        <button name="action_approve" data-hotkey="c"
+                            class="btn-primary"
+                            string="Approve" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['confirm'])]}"
+                            confirm="Are you sure want to approve this Cost Sheet?"/>
+
+                        <button name="action_reject" data-hotkey="v"
+                            string="Reject" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['confirm'])]}"/>
+
+                        <button name="action_cancel" data-hotkey="v" 
+                            string="Cancel" type="object" 
+                            attrs="{'invisible': [('state', 'not in', ['approved'])]}" 
+                            confirm="Are you sure want to cancel this cost sheet?"/>
+                        
+                        <button name="action_draft" data-hotkey="v"
+                            states="cancel" 
+                            string="Set to Draft" type="object"  
+                            confirm="Are you sure want to set to draft this cost sheet?"/>
+                        
+
+                        <button name="action_create_po_and_bills"
+                            class="btn-primary"
+                            string="Create Purchase &amp; Bills" 
+                            type="object"
+                            attrs="{'invisible':['|',('state','not in',['approved']),('is_all_po_bill_created','=',True)]}"/>
+                        
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approved,done" attrs="{'invisible':[('state','in',('cancel'))]}"/>
+                        <field name="state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':[('state','!=','cancel')]}"/>
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_view_so" class="oe_stat_button" icon="fa-file-text-o">
+                                <span class="o_stat_text" >Sale / Rental</span>
+                            </button>
+                            <field name="rel_is_rental_order" invisible="1" />
+                            <button type="object" name="action_view_rental_schedule" class="oe_stat_button" icon="fa-calendar" attrs="{'invisible':[('rel_is_rental_order','!=',True)]}">
+                                <span class="o_stat_text" >Rental Schedule</span>
+                            </button>
+                            <button type="object" name="action_view_bills" class="oe_stat_button" icon="fa-file-text-o" attrs="{'invisible':[('bill_ids_count','&lt;','1')]}">
+                                <span class="o_stat_value">
+                                    <field name="bill_ids_count" widget="statinfo" nolabel="1" class="mr4"/> Bill(s)
+                                </span>
+                            </button> 
+                            <button type="object" name="action_view_po_list" class="oe_stat_button" icon="fa-file-text-o" attrs="{'invisible':[('po_ids_count','&lt;','1')]}">
+                                <span class="o_stat_value">
+                                    <field name="po_ids_count" widget="statinfo" nolabel="1" class="mr4"/> PO(s)
+                                </span>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'invisible': [('name', '=', '')]}" readonly="1"/>
+                            </h1>
+                        </div>
+
+                        <group string="Project Detail" name="project_detail">                            
+                            <group>
+                                <field name="is_all_po_bill_created" invisible="1" />
+                                <field name="partner_id" 
+                                    widget="res_partner_many2one" 
+                                    context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" 
+                                    options='{"always_reload": True}'/>
+                                
+                                <field name="penanggungjawab_id" 
+                                    widget="res_partner_many2one" 
+                                    context="{'res_partner_search_mode': 'customer', 'show_address': 1, 'show_vat': True}" 
+                                    options='{"always_reload": True}'/>
+                                
+                                <field name="sale_order_id" invisible="1"/>
+                                <!-- <field name="sale_order_id"/>                                 -->
+                                <field name="currency_id" invisible="1"/>                                
+                            </group>
+                            <group>
+                                <field name="date" attrs="{'readonly': [('state','in',['confirm','approved'])]}"/>
+                                <field name="currency_id" />
+                                <field name="company_id" />
+                            </group>
+                        </group>
+                        <notebook>
+                            <page name="cost_sheet_line" string="Item List">
+                                <group name="header">
+                                    <group name="amount" string="Amount">
+                                        <field name="amount_actual_sales" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                                        <field name="amount_actual_bill" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                                        <field name="amount_actual_margin" widget='monetary' options="{'currency_field': 'currency_id'}" />
+                                        <field name="actual_margin_percentage" />
+                                    </group>
+                                </group>
+
+                                <button name="set_vendor_list" states="draft" string="Refresh Rolling Vendor" type="object" icon="fa-refresh" style="margin-bottom:10px!important; float:right;" attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+
+                                <field name="cost_sheet_line" mode="tree" attrs="{'readonly':[('state','!=','draft')]}">
+                                    <tree editable="bottom" create="false" delete="false">
+                                        <field name="bill_line_id" invisible="1" />
+                                        <field name="po_line_id" invisible="1" />
+                                        <field name="sale_order_line_id" invisible="1"/>
+                                        <field name="currency_id" invisible="1" />
+                                        <field name="is_konsinyasi" widget="boolean_toggle" string="Konsinyasi" optional="show" />
+                                        <field name="product_id" options="{'no_quick_create':True,'no_create_edit':True, 'no_open':True, 'no_create':True}"
+                                            attrs="{'readonly':[('sale_order_line_id','!=',False)]}" force_save="1"/>
+                                        
+                                        <field name="name" options='{"always_reload": True}' 
+                                            attrs="{'readonly':[('sale_order_line_id','!=',False)]}" force_save="1"/>
+                                        <field name="qty" optional="show" string="Sales Quantity"/>
+
+                                        <field name="vendor_id" options="{'no_quick_create':True,'no_create_edit':True, 'no_open':True, 'no_create':True}" width="200px"/>
+                                        <button name="action_change_vendor" type="object" class="oe_highlight" attrs="{'invisible': ['|','|',('parent.state','=','draft'),('vendor_id','=',False),'|',('is_konsinyasi', '=', True),('po_line_id','!=',False)]}" icon="fa-user"/>
+                                        <field name="budget_cost_unit" string="Purchase Price Unit" optional="show" widget='monetary' options="{'currency_field': 'currency_id'}" attrs="{'readonly':[('vendor_id','=',False)]}" force_save="1"/>
+                                        <field name="actual_sales_unit" string="Sales Price Unit" optional="show" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                        
+                                        <field name="budget_cost" string="Purchase Subtotal" sum="sum_budget_cost"  widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                        <field name="actual_sales" string="Sales Subtotal" sum="sum_actual_sales" widget='monetary' options="{'currency_field': 'currency_id'}" style="color:green"/>
+                                        <field name="actual_budget" sum="sum_actual_budget" widget='monetary' options="{'currency_field': 'currency_id'}" optional="show" style="color:green"/>
+                                        
+                                        <field name="budget_margin" sum="sum_budget_margin" options="{'currency_field': 'currency_id'}" style="color:green"/>
+                                        <field name="budget_percentage" style="color:green"/>
+                                        <button name="print_pemesanan_vendor" icon="fa-print" string="Print Bon Pesanan Barang" type="object"/>
+                                    </tree>
+                                    <form string="">
+                                        <sheet>
+                                            <group name="head">
+                                                <group string="information">
+                                                    <field name="cost_sheet_id" />
+                                                    <field name="product_id" />
+                                                    <field name="name" />
+                                                    <field name="is_konsinyasi" widget="boolean_toggle" string="Konsinyasi" />
+                                                    <field name="budget_margin" />
+                                                    <field name="budget_percentage" string="Budget Percentage" />
+                                                </group>
+                                            </group>
+                                            <group name="detail">
+                                                <group name="sale" string="Sale">
+                                                    <field name="qty" string="Sales Quantity"/>
+                                                    <field name="actual_sales_unit" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                                    <field name="actual_sales" />
+                                                </group>
+                                                <group name="purchase" string="Purchase">
+                                                    <field name="vendor_id" />
+                                                    <field name="budget_cost_unit" />
+                                                    <field name="budget_cost" />
+                                                    <field name="actual_budget" />
+                                                </group>
+                                            </group>
+                                        </sheet>
+                                    </form>
+                                </field>
+                            </page>
+                        </notebook>
+                        <notebook>
+                            <page string="Other Info">
+                                <group string="Audit Trail">
+                                    <group>
+                                        <field name="create_uid" readonly="1" force_save="1"/>
+                                        <field name="create_date" readonly="1" force_save="1"/>
+                                        <field name="write_uid" readonly="1" force_save="1"/>
+                                        <field name="write_date" readonly="1" force_save="1"/>
+                                    </group>
+                                    <group>
+                                        <field name="confirm_uid" readonly="1" force_save="1"/>
+                                        <field name="confirm_date" readonly="1" force_save="1"/>
+                                        <field name="approved_uid" readonly="1" force_save="1"/>
+                                        <field name="approved_date" readonly="1" force_save="1"/>
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="chatter-container" style="background-color: white; min-height:100px;">
+                        <div class="oe_chatter" style="width:auto!important;">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids"/>	
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="cost_sheet_action">
+            <field name="name">Cost Sheet</field>
+            <field name="res_model">cost.sheet</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- <menuitem
+            id="cost_sheet_main_menu"
+            name="Cost Sheet"
+            sequence="142" 
+            web_icon="egs_custom_inventory,static/description/mr_icon.png"/> -->
+
+        <menuitem
+            id="cost_sheet_menu"
+            name="Cost Sheet"
+            action="cost_sheet_action"
+            parent="sale.sale_order_menu"
+            sequence="2" />        
+
+    </data>
+</odoo>

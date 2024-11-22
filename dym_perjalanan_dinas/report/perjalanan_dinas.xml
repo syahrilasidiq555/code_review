@@ -1,0 +1,325 @@
+<odoo>
+    <data>
+        <template id="dym_perjalanan_dinas.print_layout">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="dym_perjalanan_dinas.layout_header"/>
+            <t t-raw="0"/>
+            <t t-call="dym_perjalanan_dinas.layout_footer"/>
+        </template>
+
+
+        <template id="dym_perjalanan_dinas.layout_header">
+            <div class="header">
+                <div class="row" name="header_faktur" style="font-size:14px"> 
+                    <div class="col-4">
+                        <img t-att-src="image_data_uri(company.logo)" style="width:130px; display: block; margin-left: auto; margin-right: auto;"/>
+                    </div>
+                    <div class="col-8" style="margin-top:0px;font-size:14px">
+                        <h3><b><span t-field="company.name"/></b></h3>
+                        <t t-if="company.street != False">
+                            <span t-field="company.street"/>
+                        </t>
+                        <t t-if="company.phone != False">
+                            <br><b>Telp </b>: <span t-field="company.phone"/></br>
+                        </t>
+                        <t t-if="company.mobile != False">
+                            <br><b>WA </b> : <span t-field="company.mobile"/></br>
+                        </t>
+                        <t t-if="company.email != False">
+                            <br><b>Email </b> : <span t-field="company.email"/></br>
+                        </t>
+                    </div>
+                </div>   
+                <hr style="height:3px;border-width:0;color:black;background-color:black"/>
+            </div>
+        </template>
+
+        <template id="dym_perjalanan_dinas.layout_footer">
+            <div class="footer" name="footer_faktur" style="font-size:14px">
+                <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <template id="dym_perjalanan_dinas.print_perjalanan_dinas_template">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="dym_perjalanan_dinas.print_layout">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="mb-0">SURAT TUGAS PERJALANAN DINAS</h5>
+                                        <b class="mb-2" t-field="o.name" />
+                                    </div>
+                                    <div class="mx-5">
+                                        <table class="table">
+                                            <style>
+                                                .borderless td, .borderless th {
+                                                    border: none;
+                                                    padding-left:0;
+                                                    padding-right:0;
+                                                }
+                                            </style> 
+                                            <tbody class='borderless'>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">NAMA</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1"><b t-field="o.employee_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">NIK</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1"><b t-field="o.employee_id.barcode"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">JABATAN</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1"><b t-field="o.employee_id.job_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">SEKSI/DIVISI</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1"><b t-field="o.employee_id.department_id.name"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">KOTA TUJUAN</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1">
+                                                        <t t-if="o.tujuan == 'wonogiri'">
+                                                            <b>Wonogiri</b>
+                                                        </t>
+                                                        <t t-else="">
+                                                            <b t-field="o.kota_tujuan"/>
+                                                        </t>
+                                                    </td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">JANGKA WAKTU</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1"><b t-field="o.jangka_waktu"/> Hari</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">TGL BERANGKAT</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1"><b t-field="o.tgl_berangkat"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">TGL KEMBALI</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1"><b t-field="o.tgl_kembali"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left p-1" style="width:180px!important;">TUJUAN PERJALANAN</td>
+                                                    <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                    <td class="text-left p-1"><b t-field="o.description_perjalanan"/></td>
+                                                </tr>
+
+                                                <t t-if="o.employee_ids">
+                                                    <!-- <t t-set="employee_list" t-value=""/>
+                                                    <t t-foreach="o.employee_ids" t-as="emp">
+                                                            
+                                                    </t> -->
+
+                                                    <tr>
+                                                        <td class="text-left p-1" style="width:180px!important;">KARYAWAN LAINNYA</td>
+                                                        <td class="text-center p-1" style="width:50px!important;">:</td>
+                                                        <td class="text-left p-1"><b t-field="o.employee_ids"/></td>
+                                                    </tr>
+                                                </t>
+                                            </tbody>
+                                        </table>
+                                        
+                                        <table class="table table-sm">
+                                        <thead>
+                                            <tr class="border-black o_total">
+                                                <th class="text-left">RINCIAN/URAIAN</th>
+                                                <th class="text-right">BUDGET</th>
+                                                <th class="text-right">REALISASI</th>
+                                                <th class="text-left">REF</th>
+                                                <th class="text-right">LEBIH</th>
+                                                <th class="text-right">KURANG</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <t t-set="budget" t-value="0"/>
+                                            <t t-set="realisasi" t-value="0"/>
+                                            <t t-set="lebih" t-value="0"/>
+                                            <t t-set="kurang" t-value="0"/>
+
+                                            <t t-set="budget_t" t-value="0"/>
+                                            <t t-set="realisasi_t" t-value="0"/>
+                                            <t t-set="lebih_t" t-value="0"/>
+                                            <t t-set="kurang_t" t-value="0"/>
+                                            <tr>
+                                                <td class="text-left" colspan="6"><b>TRANSPORTASI</b></td>
+                                            </tr>
+                                            <tr t-foreach='o.rincian_transportasi_ids' t-as='line' class='table' style="line-height:20pt; height:20pt; max-height:50pt;">
+                                                <td class="text-left"><span t-field="line.rincian"/></td>
+                                                <td class="text-right"><span t-field="line.budget"/></td>
+                                                <td class="text-right"><span t-field="line.realisasi"/></td>
+                                                <td class="text-left"><span t-field="line.ref"/></td>
+                                                <td class="text-right"><span t-field="line.lebih"/></td>
+                                                <td class="text-right"><span t-field="line.kurang"/></td>
+
+                                                <t t-set="budget" t-value="budget + line.budget"/>
+                                                <t t-set="realisasi" t-value="realisasi + line.realisasi"/>
+                                                <t t-set="lebih" t-value="lebih + line.lebih"/>
+                                                <t t-set="kurang" t-value="kurang + line.kurang"/>
+
+                                                <t t-set="budget_t" t-value="budget_t + line.budget"/>
+                                                <t t-set="realisasi_t" t-value="realisasi_t + line.realisasi"/>
+                                                <t t-set="lebih_t" t-value="lebih_t + line.lebih"/>
+                                                <t t-set="kurang_t" t-value="kurang_t + line.kurang"/>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="background-color: lightgray;">TOTAL</td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(budget_t))"/></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(realisasi_t))"/></td>
+                                                <td class="text-left" style="background-color: lightgray;"></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(lebih_t))"/></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(kurang_t))"/></td>
+                                            </tr>
+
+                                            <t t-set="budget_a" t-value="0"/>
+                                            <t t-set="realisasi_a" t-value="0"/>
+                                            <t t-set="lebih_a" t-value="0"/>
+                                            <t t-set="kurang_a" t-value="0"/>
+                                            <tr>
+                                                <td class="text-left" colspan="6"><b>AKOMODASI</b></td>
+                                            </tr>
+                                            <tr t-foreach='o.rincian_akomodasi_ids' t-as='line' class='table' style="line-height:20pt; height:20pt; max-height:50pt;">
+                                                <td class="text-left"><span t-field="line.rincian"/></td>
+                                                <td class="text-right"><span t-field="line.budget"/></td>
+                                                <td class="text-right"><span t-field="line.realisasi"/></td>
+                                                <td class="text-left"><span t-field="line.ref"/></td>
+                                                <td class="text-right"><span t-field="line.lebih"/></td>
+                                                <td class="text-right"><span t-field="line.kurang"/></td>
+
+                                                <t t-set="budget" t-value="budget + line.budget"/>
+                                                <t t-set="realisasi" t-value="realisasi + line.realisasi"/>
+                                                <t t-set="lebih" t-value="lebih + line.lebih"/>
+                                                <t t-set="kurang" t-value="kurang + line.kurang"/>
+
+                                                <t t-set="budget_a" t-value="budget_a + line.budget"/>
+                                                <t t-set="realisasi_a" t-value="realisasi_a + line.realisasi"/>
+                                                <t t-set="lebih_a" t-value="lebih_a + line.lebih"/>
+                                                <t t-set="kurang_a" t-value="kurang_a + line.kurang"/>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="background-color: lightgray;">TOTAL</td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(budget_a))"/></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(realisasi_a))"/></td>
+                                                <td class="text-left" style="background-color: lightgray;"></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(lebih_a))"/></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(kurang_a))"/></td>
+                                            </tr>
+
+                                            <t t-set="budget_l" t-value="0"/>
+                                            <t t-set="realisasi_l" t-value="0"/>
+                                            <t t-set="lebih_l" t-value="0"/>
+                                            <t t-set="kurang_l" t-value="0"/>
+                                            <tr>
+                                                <td class="text-left" colspan="6"><b>LAIN - LAIN</b></td>
+                                            </tr>
+                                            <tr t-foreach='o.rincian_lain_ids' t-as='line' class='table' style="line-height:20pt; height:20pt; max-height:50pt;">
+                                                <td class="text-left"><span t-field="line.rincian"/></td>
+                                                <td class="text-right"><span t-field="line.budget"/></td>
+                                                <td class="text-right"><span t-field="line.realisasi"/></td>
+                                                <td class="text-left"><span t-field="line.ref"/></td>
+                                                <td class="text-right"><span t-field="line.lebih"/></td>
+                                                <td class="text-right"><span t-field="line.kurang"/></td>
+
+                                                <t t-set="budget" t-value="budget + line.budget"/>
+                                                <t t-set="realisasi" t-value="realisasi + line.realisasi"/>
+                                                <t t-set="lebih" t-value="lebih + line.lebih"/>
+                                                <t t-set="kurang" t-value="kurang + line.kurang"/>
+
+                                                <t t-set="budget_l" t-value="budget_l + line.budget"/>
+                                                <t t-set="realisasi_l" t-value="realisasi_l + line.realisasi"/>
+                                                <t t-set="lebih_l" t-value="lebih_l + line.lebih"/>
+                                                <t t-set="kurang_l" t-value="kurang_l + line.kurang"/>
+                                            </tr>
+                                            <tr>
+                                                <td class="text-left" style="background-color: lightgray;">TOTAL</td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(budget_l))"/></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(realisasi_l))"/></td>
+                                                <td class="text-left" style="background-color: lightgray;"></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(lebih_l))"/></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(kurang_l))"/></td>
+                                            </tr>
+
+                                            <tr>
+                                                <td class="text-left" style="background-color: lightgray;"><b>GRAND TOTAL</b></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(budget))"/></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(realisasi))"/></td>
+                                                <td class="text-left" style="background-color: lightgray;"></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(lebih))"/></td>
+                                                <td class="text-right" style="background-color: lightgray;"><b t-esc="'{0:,.0f}'.format(float(kurang))"/></td>
+                                            </tr>
+
+                                        </tbody>
+                                    </table>
+                                        <p class="text-left mt-4">BANDUNG, <t t-if="o.mengetahui_date"> <b t-esc="o.mengetahui_date.strftime('%d %b %Y')"/> </t> </p> 
+                                        <div class="row" name="header_faktur" style="font-size:14px"> 
+                                            <div class="col-4">
+                                                <center>
+                                                    <p class="text-center my-0">PELAPOR</p> 
+                                                    <br/>
+                                                    <br/>
+                                                    <p class="text-center my-0 py-0">(<t t-if="o.pelapor_id"> <b t-field="o.pelapor_id.name"/> </t>)</p> 
+                                                    <p class="text-center my-0 py-0">KARYAWAN</p> 
+                                                </center>
+                                            </div>
+                                            <div class="col-4">
+                                                <center>
+                                                    <p class="text-center my-0">MENYETUJUI</p> 
+                                                    <br/>
+                                                    <br/>
+                                                    <p class="text-center my-0 py-0">(<t t-if="o.menyetujui_id"> <b t-field="o.menyetujui_id.name"/> </t>)</p> 
+                                                    <p class="text-center my-0 py-0">MANAGER</p> 
+                                                </center>
+                                            </div>
+                                            <div class="col-4">
+                                                <center>
+                                                    <p class="text-center my-0">MENGETAHUI</p> 
+                                                    <br/>
+                                                    <br/>
+                                                    <p class="text-center my-0 py-0">(<t t-if="o.mengetahui_id"> <b t-field="o.mengetahui_id.name"/> </t>)</p> 
+                                                    <p class="text-center my-0 py-0">HR</p> 
+                                                </center>
+                                            </div>
+                                        </div>   
+                                        
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+    </data>
+</odoo>

@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- TREE -->
+    <record id="view_hr_payslip_tree_remove_crud" model="ir.ui.view">
+        <field name="name">view_hr_payslip_tree_remove_crud</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_tree"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">false</attribute>
+                <attribute name="create">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_hr_payslip_tree_delete" model="ir.ui.view">
+        <field name="name">view_hr_payslip_tree_delete</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_payslip_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_hr_payslip_tree_create" model="ir.ui.view">
+        <field name="name">view_hr_payslip_tree_create</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_tree"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_payslip_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF TREE -->
+
+<!-- KANBAN -->
+    <!-- REMOVE CRUD-->
+    <record id="hr_payslip_view_kanban_remove_crud" model="ir.ui.view">
+        <field name="name">hr_payslip_view_kanban_remove_crud</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.hr_payslip_view_kanban"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="hr_payslip_view_kanban_create" model="ir.ui.view">
+        <field name="name">hr_payslip_view_kanban_create</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.hr_payslip_view_kanban"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_payslip_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//kanban" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF KANBAN -->
+
+<!-- FORM -->
+    <record id="view_hr_payslip_form_remove_crud" model="ir.ui.view">
+        <field name="name">view_hr_payslip_form_remove_crud</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- ACCESS -->
+    <record id="view_hr_payslip_form_create" model="ir.ui.view">
+        <field name="name">view_hr_payslip_form_create</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_payslip_access_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_hr_payslip_form_update" model="ir.ui.view">
+        <field name="name">view_hr_payslip_form_update</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_payslip_access_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_hr_payslip_form_delete" model="ir.ui.view">
+        <field name="name">view_hr_payslip_form_delete</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_submenu_payslip_access_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_hr_payslip_form_access" model="ir.ui.view">
+        <field name="name">view_hr_payslip_form_access</field>
+        <field name="model">hr.payslip</field>
+        <field name="inherit_id" ref="om_hr_payroll.view_hr_payslip_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_payslip_done']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_payslip_access_button_confirm</attribute>
+            </xpath>
+            <xpath expr="//button[@name='refund_sheet']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_payslip_access_button_refund</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_payslip_draft']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_payslip_access_button_draft</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_payslip_cancel']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_payslip_access_button_cancel</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_send_email']" position="attributes">
+                <attribute name="groups">custom_access_right.group_submenu_payslip_access_button_email</attribute>
+            </xpath>
+        </field>
+    </record>
+<!-- END OF FORM -->
+
+<!-- MENU ITEM -->
+    <record id="om_hr_payroll.menu_department_tree" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_submenu_payslip_access_read'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

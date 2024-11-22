@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_payment_form_inherit" model="ir.ui.view">
+            <field name="name">account.payment.form.inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_type']" position="replace">
+                    <field name="payment_type" widget="radio" options="{'horizontal': True}"
+                        attrs="{'readonly': ['|',('payment_fix','=',True),('state', '!=', 'draft')]}"/>
+                    <field name="payment_fix" invisible="1"/>
+                    <field name="payment_mode" widget="radio" options="{'horizontal': True}" attrs="{'invisible':[('is_internal_transfer','=',True)]}"/>
+                    <field name="criteria_type" widget="radio" options="{'horizontal': True}" attrs="{'invisible':[('payment_mode','=','on_payment')]}"/>
+                    <field name="method_id" attrs="{'required':[('is_internal_transfer','=',False)], 'invisible':[('is_internal_transfer','=',True)]}"
+                        options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True, 'no_open_edit': True}"/>
+                    <field name="sale_id" invisible="True"/>
+                </xpath>
+
+                <xpath expr="//field[@name='journal_id']" position="before">
+                    <field name="loa_type"
+                        options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True}"
+                        attrs="{
+                            'readonly':[('state','!=','draft')],
+                            'invisible':['|',('payment_type','!=','outbound'),('is_internal_transfer','!=',False)]}"
+                        force_save="1"/>
+                    <field name="no_voucher"/>
+                </xpath>
+
+                <xpath expr="//field[@name='state']" position="after">
+                    <field name="state_approve" widget="statusbar" attrs="{'invisible':[('state_approve','in',['draft','approved'])]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='state']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('state_approve','=','to approve')]}</attribute>
+                </xpath>
+                
+                <xpath expr="//button[@name='action_post']" position="attributes">
+                    <attribute name="attrs">{'invisible': ['|', ('loa_type','!=',False), ('state', '!=', 'draft')]}</attribute>
+                </xpath>
+
+                <xpath expr="//button[@name='action_post']" position="after">
+                    <button name="action_to_approve" string="Request Approval" type="object" class="oe_highlight"
+                            attrs="{'invisible': ['|',('is_request_approval','=',False),('state_approve', '!=', 'draft')]}" data-hotkey="v"/>
+                    <button name="button_approve" type="object" string="Approve Order" class="oe_highlight" 
+                            attrs="{'invisible':[('is_user_approve_now','=',False)]}" data-hotkey="z"/>
+                </xpath>
+
+                <xpath expr="//field[@name='date']" position="before">
+                    <field name="grand_amount"/>
+                </xpath> 
+                
+                <xpath expr="//button[@name='button_open_journal_entry']" position="after">
+                    <button name="%(custom_accounting.print_payment_out)d" class="oe_stat_button" string="Pembayaran (Kas Out)" type="action" icon="fa-print"
+                        attrs="{'invisible':[('payment_type','!=','outbound')]}"/>
+                    <button name="%(custom_accounting.print_payment_in)d" class="oe_stat_button" string="Penerimaan (Kas In)" type="action" icon="fa-print"
+                        attrs="{'invisible':[('payment_type','!=','inbound')]}"/>
+                </xpath>
+                
+                <sheet>
+                    <notebook>
+                        <page string="Payments Line"  attrs="{'invisible': [('payment_mode','=','on_payment')]}">
+                            <field name="payment_line_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="line_id" invisible="1"/>
+                                    <field name="description"/>
+                                    <field name="account_id" options="{'no_create': True}"/>
+                                    <field name="amount" widget='monetary' options="{'currency_field': 'currency_id'}" sum="amount"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <!-- <field name="tax_ids"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Potongan" attrs="{'invisible': [('payment_line_disc_ids','=',())]}">
+                            <field name="payment_line_disc_ids" attrs="{'readonly': [('state', '!=', 'draft')]}">
+                                <tree editable="bottom">
+                                    <field name="line_id" invisible="1"/>
+                                    <field name="description"/>
+                                    <field name="account_id" options="{'no_create': True}"/>
+                                    <field name="amount" widget='monetary' options="{'currency_field': 'currency_id'}" sum="amount"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <!-- <field name="tax_ids"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                        <page name="approval_information" string="Approval Information" 
+                            attrs="{'invisible':[('loa_type','=',False)]}">
+                            <group>
+                                <field name="next_approve_user_id" readonly="1" force_save="1"/>
+                                <field name="is_user_approve_now" invisible="1"/>
+                                <field name="is_amount" readonly="1" force_save="1"/>
+                                <field name="from_amount" readonly="1" force_save="1"/>
+                                <field name="to_amount" readonly="1" force_save="1"/>
+                                <field name="is_request_approval" invisible="1"/>
+                            </group>
+                            <field name="approval_info_ids" readonly="1" force_save="1">
+                                <tree>
+                                    <field name="sequence" optional="hide"/>
+                                    <field name="loa_id" optional="hide"/>
+                                    <field name="model_id" optional="hide"/>
+                                    <field name="trx_id" invisible="1"/>
+                                    <field name="description"/>
+                                    <field name="user_id"/>
+                                    <field name="job_id"/>
+                                    <field name="is_approve"/>
+                                    <field name="approve_user_id"/>
+                                    <field name="approve_date"/>
+                                    <field name="approver_sign" invisible="1"/>
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </sheet>
+                
+                <xpath expr="//field[@name='destination_journal_id']" position="after">
+                    <field name="destination_account_id" attrs="{'invisible': [('is_internal_transfer','=',False)]}"/>
+                </xpath>
+                
+            </field>
+        </record>
+
+        <record id="view_account_payment_tree_inherit" model="ir.ui.view">
+            <field name="name">view_account_payment_tree_inherit</field>
+            <field name="model">account.payment</field>
+            <field name="inherit_id" ref="account.view_account_payment_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='journal_id']" position="after">
+                    <field name="reconciled_invoice_ids" widget="many2many_tags" string="Invoices"/>
+                    <field name="no_voucher"/>
+                </xpath>
+                <xpath expr="//field[@name='amount_company_currency_signed']" position="replace">
+                    <field name="amount_company_currency_signed" widget="monetary" string="Amount" sum="Total" invisible="1"/>
+                    <field name="amount" widget="monetary" string="Amount" sum="Amount" optional="hide"/>
+                    <field name="grand_amount" widget="monetary" string="Grant Amount" sum="Grand Amount" optional="show"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- RENAME MENU -->
+        <menuitem id="account.menu_action_account_payments_receivable" 
+            name="Receipt" action="account.action_account_payments" sequence="15"
+            parent="account.menu_finance_receivables"/>
+        <record id="account.action_account_payments" model="ir.actions.act_window">
+            <field name="name">Receipt</field>
+        </record>
+
+        <!-- INHERIT ACTION UNTUK MENU FAYMENT -->
+        <!-- UNTUK CUSTOMER FAYMENT -->
+        <record id="account.action_account_payments" model="ir.actions.act_window">
+            <field name="domain">[('payment_type','=','inbound')]</field>
+            <field name="context">{
+                'default_payment_type': 'inbound',
+                'default_partner_type': 'customer',
+                'search_default_inbound_filter': 1,
+                'default_move_journal_types': ('bank', 'cash'),
+                'readonly_payment_type': True,
+            }</field>
+        </record>
+
+        <!-- UNTUK VENDOR FAYMENT -->
+        <record id="account.action_account_payments_payable" model="ir.actions.act_window">
+            <field name="domain">[('payment_type','=','outbound')]</field>
+            <field name="context">{
+                'default_payment_type': 'outbound',
+                'default_partner_type': 'supplier',
+                'search_default_outbound_filter': 1,
+                'default_move_journal_types': ('bank', 'cash'),
+                'readonly_payment_type': True,
+            }</field>
+        </record>
+    </data>
+</odoo>

@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- CUSTOMER FORM -->
+    <!-- REMOVE CRUD in FORM-->
+    <record id="customer_form_website_form_view_remove_crud" model="ir.ui.view">
+        <field name="name">customer_form_website_form_view_remove_crud</field>
+        <field name="model">customer.form.website</field>
+        <field name="inherit_id" ref="custom_web_rdc.customer_form_website_form_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- REMOVE CRUD in TREE-->
+    <record id="customer_form_website_tree_view_remove_crud" model="ir.ui.view">
+        <field name="name">customer_form_website_tree_view_remove_crud</field>
+        <field name="model">customer.form.website</field>
+        <field name="inherit_id" ref="custom_web_rdc.customer_form_website_tree_view"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    
+    <!-- BUTTON -->
+    <record id="customer_form_website_form_view_group_view" model="ir.ui.view">
+        <field name="name">customer_form_website_form_view_group_view</field>
+        <field name="model">customer.form.website</field>
+        <field name="inherit_id" ref="custom_web_rdc.customer_form_website_form_view"/>
+        <field name="arch" type="xml">
+            <button name="action_create_so_with_pack" position="attributes">
+                <attribute name="groups">custom_access_right.group_rdc_cust_create_sales_pack</attribute>
+            </button>
+            <button name="action_create_so" position="attributes">
+                <attribute name="groups">custom_access_right.group_rdc_cust_create_sales_no_pack</attribute>
+            </button>
+        </field>
+    </record>
+
+
+    <!-- IN FORM -->
+    <record id="customer_form_website_form_view_create_view" model="ir.ui.view">
+        <field name="name">customer_form_website_form_view_create_view</field>
+        <field name="model">customer.form.website</field>
+        <field name="inherit_id" ref="custom_web_rdc.customer_form_website_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_cust_form_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="customer_form_website_form_view_edit_view" model="ir.ui.view">
+        <field name="name">customer_form_website_form_view_edit_view</field>
+        <field name="model">customer.form.website</field>
+        <field name="inherit_id" ref="custom_web_rdc.customer_form_website_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_cust_form_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="edit">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="customer_form_website_form_view_delete_view" model="ir.ui.view">
+        <field name="name">customer_form_website_form_view_delete_view</field>
+        <field name="model">customer.form.website</field>
+        <field name="inherit_id" ref="custom_web_rdc.customer_form_website_form_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_cust_form_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//form" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- IN TREE VIEW -->
+    <record id="customer_form_website_tree_create_view" model="ir.ui.view">
+        <field name="name">customer_form_website_tree_create_view</field>
+        <field name="model">customer.form.website</field>
+        <field name="inherit_id" ref="custom_web_rdc.customer_form_website_tree_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_cust_form_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="customer_form_website_tree_delete_view" model="ir.ui.view">
+        <field name="name">customer_form_website_tree_delete_view</field>
+        <field name="model">customer.form.website</field>
+        <field name="inherit_id" ref="custom_web_rdc.customer_form_website_tree_view"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_rdc_cust_form_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- MENU ITEM -->
+    <record id="custom_web_rdc.customer_form_website_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('custom_access_right.group_rdc_cust_form_read'))]" />
+    </record>
+
+</odoo>

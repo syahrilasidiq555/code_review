@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- INHERIT FORM VIEW -->
+    <record id="view_warehouse_inherit" model="ir.ui.view">
+        <field name="name">view_warehouse_inherit</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='code']" position="after">
+                <field name="user_incharge_id" options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True, 'no_open_edit': True}"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- INHERIT TREE VIEW -->
+    <record id="view_warehouse_tree_inherit" model="ir.ui.view">
+        <field name="name">view_warehouse_tree_inherit</field>
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='partner_id']" position="before">
+                <field name="user_incharge_id" />
+            </xpath>
+        </field>
+    </record>
+    
+</odoo>

@@ -1,0 +1,180 @@
+body {
+    font-family: 'Arial';
+    text-rendering: geometricPrecision;
+
+}
+
+.container {
+    background: transparent;
+    z-index: -1;
+}
+
+.dsi_company_address {
+    color: gray('700');
+}
+
+.o_report_layout_dsi {
+    color: gray('700');
+
+    table {
+        width: 100%;
+        margin: 0;
+    }
+
+    table.table-subject {
+        td {
+            font-weight: bold;
+        }
+        td:last-child {
+            text-align: justify;
+            padding-left: 5px;
+        }
+    }
+
+    table.table-borderless {
+        th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        td, th {
+            border-top: none;
+            padding: .3rem .5rem;
+        }
+
+        td:first-child {
+            padding-left: 0;
+        }
+
+        td:last-child {
+            padding-right: 0;
+        }
+
+        tr, th, tbody {
+            color: gray('700');
+        }
+
+        tr.o_total {
+            td:last-child {
+                border-top: 1px solid gray('300') !important;
+            }
+            font-weight: bold;
+        }
+
+        tr.o_total {
+            td {
+                text-align: center;
+            }
+            td:last-child {
+                text-align: right;
+            }
+        }
+    }
+
+    table.table-sm {
+        border-top: 1px solid gray('300');
+        font-size: small;
+
+        th {
+            text-align: center;
+            vertical-align: middle;
+        }
+
+        td, th {
+            border-top: none;
+            padding: 0.3rem 0.5rem;
+        }
+
+        tr, th {
+            color: gray('700');
+        }
+
+        tbody {
+            color: gray('700');
+            tr {
+                &:nth-child(odd) {
+                    background-color: rgba(220, 205, 216, 0.2);
+                }
+                &.o_line_section {
+                    color: $o-brand-odoo;
+                    background-color: rgba(73, 80, 87, 0.2) !important;
+                }
+            }
+        }
+
+        .row > div > table,
+        div#total table {
+            tr {
+                &:nth-child(odd) {
+                    background-color: transparent !important;
+                }
+                /* first-child & last-child rule compat 12.0 */
+                &:first-child,
+                &:last-child,
+                &.o_subtotal,
+                &.o_total {
+                    border-top: none !important;
+                    td {
+                        border-top: 1px solid gray('400') !important;
+                    }
+                    strong {
+                        color: $o-company-primary-color;
+                    }
+                }
+            }
+        }
+
+        tr.o_total, tr.o_price2word {
+            border-top: 1px solid gray('300') !important;
+            font-weight: bold;
+        }
+
+        tr.o_total {
+            td {
+                text-align: center;
+            }
+            td:last-child {
+                text-align: right;
+            }
+        }
+
+        tr.o_price2word {
+            font-style: italic;
+            td {
+                text-align: center;
+            }
+        }
+    }
+
+    ul, ol {
+        margin: 0;
+    }
+
+    ul li.no-bullet, ol li.no-bullet {
+      list-style-type: none;
+    }
+
+    ol {
+        padding-left: 40px;
+    }
+
+    li {
+        text-align: justify;
+    }
+
+    p {
+        margin: 0;
+    }
+
+    .dsi_signature {
+        page-break-inside: avoid;
+    }
+
+    .first_paragraph, .last_paragraph {
+        text-align: justify;
+    }
+
+    .pad-left-50 {
+        padding-left: 50px;
+    }
+}

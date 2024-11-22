@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- VIEW FORM -->
+    <record id="report_attendance_emp_terlambat_view_form" model="ir.ui.view">
+        <field name="name">Report Attendance Employee (Terlambat)</field>
+        <field name="model">report.attendance.emp.terlambat</field>
+        <field name="arch" type="xml">
+            <form string="Report Attendance Employee (Terlambat)">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Department">
+                        <field name="department_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="print_report" string="Export" type="object" class="oe_highlight"/>
+                    Or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <!-- WINDOW ACTION -->
+    <record id="report_attendance_emp_terlambat_action" model="ir.actions.act_window">
+        <field name="name">Report Attendance Employee (Terlambat)</field>
+        <field name="res_model">report.attendance.emp.terlambat</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <!-- MENU -->
+    <menuitem 
+        id="report_attendance_emp_terlambat_menu" 
+        name="Report Attendance Employee (Terlambat)" 
+        parent="report_attendance_terlambat.report_attendance_export"
+        sequence="31" 
+        action="report_attendance_emp_terlambat_action"/>
+    
+    <!-- REPORT -->
+    <report 
+		id="report_attendance_emp_terlambat_xlsx"
+		string="Report Attendance Employee (Terlambat)"
+		model="report.attendance.emp.terlambat"
+		report_type="xlsx"
+		name="hr_attendance.report_attendance_emp_terlambat"
+		file="Report Attendance Employee (Terlambat)"
+		attachment_use="False"/>
+</odoo>

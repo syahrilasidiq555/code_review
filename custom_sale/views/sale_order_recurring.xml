@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <!-- INHERIT TREE VIEW -->
+    <record id="sale_subscription_view_tree_inherit" model="ir.ui.view">
+        <field name="name">sale_subscription_view_tree_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='name']" position="after">
+                <field name="customer_id"/>
+                <field name="bill_cycle"/>
+                <field name="invoice_id"/>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- INHERIT TREE VIEW -->
+    <record id="sale_subscription_order_view_form_inherit" model="ir.ui.view">
+        <field name="name">sale_subscription_order_view_form_inherit</field>
+        <field name="model">sale.order</field>
+        <field name="inherit_id" ref="sale_subscription.sale_subscription_order_view_form"/>
+        <field name="arch" type="xml">
+            <xpath expr="//group[@name='subscription_info']//field[@name='first_contract_date']" position="after">
+                <field name="last_invoice_date"/>
+            </xpath>
+        </field>
+    </record>
+
+    
+</odoo>

@@ -1,0 +1,21 @@
+<!-- ODOO NAV BAR -->
+{% macro nav() -%}
+    <nav id="oe_main_menu_navbar_custom" class="o_main_navbar">
+        <a href="/web#cids=1&action=menu" target="_blank" class="fa fa-th o_menu_toggle"></a>
+        <!-- <button type="button" class="btn fa fa-bars float-right d-block d-md-none o_mobile_menu_toggle"
+            aria-label="Menu" title="Menu"></button> -->
+        <div class="o_menu_brand">Website</div>
+    </nav>
+{%- endmacro %}
+
+
+<!-- FOR ODOO HEADER -->
+{% macro nav_assets() -%}
+    <link type="text/css" rel="stylesheet" href="/custom_website_portal_new/static/css/website.assets_editor.min.css">
+    <link type="text/css" rel="stylesheet" href="/custom_website_portal_new/static/css/web.assets_common.min.css">
+    <!-- <link type="text/css" rel="stylesheet" href="/custom_website_portal_new/static/css/web.assets_backend.min.css"> -->
+    <!-- <link type="text/css" rel="stylesheet" href="/web/assets/7117-14c2498/1/web.assets_frontend.min.css" data-asset-bundle="web.assets_frontend" data-asset-version="14c2498"> -->
+    <!-- CUSTOM FOR ODOO NAV -->
+    <link rel="stylesheet" href="/custom_website_portal_new/static/css/custom.css"/>
+{%- endmacro %}
+

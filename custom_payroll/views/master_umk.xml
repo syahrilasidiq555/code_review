@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="master_umk_search" model="ir.ui.view">
+        <field name="name">master_umk_search</field>
+        <field name="model">master.umk</field>
+        <field name="type">search</field>
+        <field name="arch" type="xml">
+            <search >
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="master_umk_tree">
+        <field name="name">master_umk_tree</field>
+        <field name="model">master.umk</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name="name"/>
+                <field name="umk_amount"/>
+            </tree>
+        </field>
+    </record>
+
+    <record model="ir.ui.view" id="master_umk_form">
+        <field name="name">master_umk_form</field>
+        <field name="model">master.umk</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <!-- <header>
+                    <button string="Confirm" name="action_confirm" type="object" class="oe_highlight" states="draft"/>
+                    <button string="Reset To Draft" name="action_reset_to_draft" type="object" states="confirm"/>
+                    <field name="state" widget="statusbar"/>
+                </header> -->
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <label for="umk_amount"/>
+                            <div class="o_row">
+                                <field name="umk_amount" readonly="1" force_save="1" invisible="1"/>
+                                <field name="current_umk_amount" />
+                                <button string="Update Amount" class="btn btn-link" type="object" name="action_update_umk_amount" />
+                            </div>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="history" string="History">
+                            <field name="umk_history_ids" >
+                                <tree string="" editable="bottom" edit="false" create="false" delete="true" order="applied_date desc">
+                                    <field name="umk_amount" readonly="1" force_save="1" />
+                                    <field name="applied_date" readonly="1" force_save="1" />
+                                </tree>
+                                <form>
+                                    <group name="name" >
+                                        <field name="umk_amount" readonly="1" force_save="1" />
+                                        <field name="applied_date" readonly="1" force_save="1" />
+                                    </group>
+                                </form> 
+                            </field>
+                        </page>
+                        <page name="audit_trail" string="Audit Trail">
+                            <group string="Audit Trail">
+                                <group>
+                                    <field name="create_uid"/>
+                                    <field name="create_date"/>
+                                </group>
+                                <group>
+                                    <field name="write_uid"/>
+                                    <field name="write_date"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids"/>
+                    <field name="activity_ids"/>
+                    <field name="message_ids"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+    <record model="ir.actions.act_window" id="master_umk_action">
+        <field name="name">Master UMK/UMR</field>
+        <field name="res_model">master.umk</field>
+        <field name="view_mode">tree,form</field>
+        <!-- <field name="context">
+            {'search_default_bulan_ayeuna': 1}
+        </field> -->
+    </record>
+
+    <menuitem id="menu_hr_master_umk"
+        name="Master UMK/UMR"
+        action="master_umk_action"
+        parent="om_hr_payroll.menu_hr_payroll_configuration"
+        sequence="5"/>
+</odoo>

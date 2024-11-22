@@ -1,0 +1,15 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_hr_payslip_correction,access_hr_payslip_correction,model_hr_payslip_correction,,1,1,1,1
+access_hr_payslip_correction_detail,access_hr_payslip_correction_detail,model_hr_payslip_correction_detail,,1,1,1,1
+
+access_hr_payslip_premi,access_hr_payslip_premi,model_hr_payslip_premi,,1,1,1,1
+access_hr_payslip_premi_line,access_hr_payslip_premi_line,model_hr_payslip_premi_line,,1,1,1,1
+
+access_master_umk,access_master_umk,model_master_umk,,1,1,1,1
+access_master_umk_history,access_master_umk_history,model_master_umk_history,,1,1,1,1
+
+access_hr_contract_wage_history,access_hr_contract_wage_history,model_hr_contract_wage_history,,1,1,1,1
+
+access_update_amount_wizard,access_update_amount_wizard,model_update_amount_wizard,,1,1,1,1
+
+access_wizard_export_payslip,access_wizard_export_payslip,model_wizard_export_payslip,,1,1,1,1

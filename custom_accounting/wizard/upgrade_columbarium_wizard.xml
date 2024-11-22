@@ -1,0 +1,46 @@
+<odoo>
+    <data>
+        <record id='upgrade_columbarium_wizard_view_form' model='ir.ui.view'>
+            <field name="name">upgrade_columbarium_wizard_view_form</field>
+            <field name="model">upgrade.columbarium.wizard</field>
+            <field name="arch" type="xml">
+                <form>
+                    <group string="Info Sale Order">
+                        <h1>
+                            <field name="sale_order_id" readonly="1" force_save="1" />
+                        </h1>
+                        <field name="currency_id" invisible="1" />
+                    </group>
+                    <group>
+                        <group string="Columbarium Saat ini">
+                            <field name="product_columbarium_id" context="{'columbarium_search':True}"/>
+                            <field name="list_price_original" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="price_terpakai" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                            <field name="price_sisa" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                        <group string="Columbarium Upgrade">
+                            <field name="product_upgrade_columbarium_id" context="{'columbarium_search':True}" options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open_edit': True, 'no_open': True}" />
+                            <field name="list_price" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        </group>
+                    </group>
+                    <group string="Detail Rental">
+                        <label for="pickup_date" string="Tanggal"/>
+                        <div class="o_row" style="min-width: 300px!important;">
+                            <field name="pickup_date" widget="daterange" options="{'related_end_date': 'return_date'}"/>
+                            <span> to </span>
+                            <field name="return_date" widget="daterange" options="{'related_start_date': 'pickup_date'}" readonly="1"/>
+                        </div>
+                        <field name="price_total" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                        <field name="price_perlu_dibayar" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                    </group>
+                    <footer>
+                        <button name="action_upgrade" class="btn-primary" type="object" string="Konfirmasi"/>
+                        <button string="Batal" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+
+    </data>
+</odoo>

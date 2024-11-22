@@ -1,0 +1,20 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_wizard_revise_dym_improvement,Improvement : Wizard Revise,dym_improvement.model_wizard_revise_dym_improvement,,1,1,1,1
+
+access_improvement_user,Improvement : User,dym_improvement.model_dym_improvement,hr.group_hr_user,1,1,1,1
+access_improvement_line_user,Improvement Line : User,dym_improvement.model_dym_improvement_line,hr.group_hr_user,1,1,1,1
+access_improvement_line_plan_user,Improvement Line Plan : User,dym_improvement.model_dym_improvement_line_plan,hr.group_hr_user,1,1,1,1
+access_improvement_line_attachment_user,Improvement Line Attachment : User,dym_improvement.model_dym_improvement_line_attachment,hr.group_hr_user,1,1,1,1
+access_improvement_line_estimasibiaya_user,Improvement Line Estimasi Biaya : User,dym_improvement.model_dym_improvement_estimasibiaya_line,hr.group_hr_user,1,1,1,1
+access_improvement_line_cost_user,Improvement Line Cost : User,dym_improvement.model_dym_improvement_hasil_cost_line,hr.group_hr_user,1,1,1,1
+access_improvement_line_benefit_user,Improvement Line Benefit : User,dym_improvement.model_dym_improvement_benefit_line,hr.group_hr_user,1,1,1,1
+access_improvement_line_approval,Improvement Line Approval : User,dym_improvement.model_dym_improvement_approval_line,hr.group_hr_user,1,1,1,1
+access_improvement_step,Improvement Step : User,dym_improvement.model_improvement_step,hr.group_hr_user,1,1,1,1
+access_model_dym_improvement_benefit_line_pic_imp_all,Improvement Benefit : User,model_dym_improvement_benefit_line_pic_imp,,1,0,0,0
+access_model_dym_improvement_hasil_cost_line_pic_imp_all,Improvement Hasil Cost Line : User,model_dym_improvement_hasil_cost_line_pic_imp,,1,0,0,0
+access_model_dym_improvement_benefit_line_pic_imp_pic,Improvement Benefit : PIC Imp,model_dym_improvement_benefit_line_pic_imp,suggestion_system.group_suggestion_system_pic_improvement,1,1,1,1
+access_model_dym_improvement_hasil_cost_line_pic_imp_pic,Improvement Hasil Cost Line : PIC Imp,model_dym_improvement_hasil_cost_line_pic_imp,suggestion_system.group_suggestion_system_pic_improvement,1,1,1,1
+
+access_model_report_improvement_dep,Improvement : Report improvement department,model_report_improvement_dep,,1,1,1,1
+access_model_report_improvement_tahunan,Improvement : Report improvement tahunan,model_report_improvement_tahunan,,1,1,1,1
+access_model_report_improvement,Improvement : Report improvement,model_report_improvement,,1,1,1,1

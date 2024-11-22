@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="dym_improvement_report_view_form" model="ir.ui.view">
+        <field name="name">Report QCC QCP PPS</field>
+        <field name="model">report.improvement</field>
+        <field name="arch" type="xml">
+            <form string="Report QCC QCP PPS">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <field name="start_date"/>
+                        <field name="end_date"/>
+                        <field name="jenis_improvement"/>
+                        <!-- <field name="state_improvement"/> -->
+                        <field name="level"/>
+                    </group>
+                </sheet>
+                <notebook>
+                    <page string="Department">
+                        <field name="department_ids">
+                            <tree>
+                                <field name="name"/>
+                            </tree>
+                        </field>
+                    </page>
+                </notebook>
+                <footer>
+                    <button name="print_report" string="Export" type="object" class="oe_highlight"/>
+                    Or
+                    <button special="cancel" string="Cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+    
+    <record id="dym_improvement_report_wizard_action" model="ir.actions.act_window">
+        <field name="name">Improvement Report Wizard Action</field>
+        <field name="res_model">report.improvement</field>
+        <field name="view_mode">form</field>
+        <field name="target">new</field>
+    </record>
+
+
+    <menuitem id="report_improvement" 
+        name="Report QCC, QCP, PPS, dll.." 
+        parent="suggestion_system.suggestion_system_report"
+        sequence="21" 
+        action="dym_improvement_report_wizard_action"/>
+
+
+    <report 
+		id="report_improvement_xlsx"
+		string="Report QCC, QCP, PPS"
+		model="report.improvement"
+		report_type="xlsx"
+		name="dym_improvement.report_improvement"
+		file="report_improvement"
+		attachment_use="False"/>
+</odoo>

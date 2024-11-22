@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Portal : Expense CRUD -->
+        <record id="portal_expense_crud_own" model="ir.rule">
+            <field name="name">Portal : Expense CRUD own</field>
+            <field name="model_id" ref="hr_expense.model_hr_expense"/>
+            <field name="domain_force">[('employee_id.user_id.id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_portal'))]"></field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+        </record>
+
+        <!-- Portal : Employee Public Read -->
+        <record id="portal_employee_public_read" model="ir.rule">
+            <field name="name">Portal : Employee Public Read</field>
+            <field name="model_id" ref="hr.model_hr_employee_public"/>
+            <!-- <field name="domain_force">[('user_id.id','=',user.id)]</field> -->
+            <field name="groups" eval="[(4,ref('base.group_portal'))]"></field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False" />
+            <field name="perm_create" eval="False" />
+            <field name="perm_unlink" eval="False" />
+        </record>
+
+        <!-- Portal : Attachment CRUD -->
+        <record id="portal_attachment_crud_own" model="ir.rule">
+            <field name="name">Portal : Attachment CRUD own</field>
+            <field name="model_id" ref="base.model_ir_attachment"/>
+            <field name="domain_force">[('expense_employee_id.user_id.id','=',user.id)]</field>
+            <field name="groups" eval="[(4,ref('base.group_portal'))]"></field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+        </record>
+
+        <!-- Portal : Attendance CRUD -->
+        <record id="portal_attendance_crud_own" model="ir.rule">
+            <field name="name">Portal : Attendance CRUD own</field>
+            <field name="model_id" ref="hr_attendance.model_hr_attendance"/>
+            <!-- <field name="domain_force">[('employee_id.user_id.id','=',user.id)]</field> -->
+            <field name="groups" eval="[(4,ref('base.group_portal'))]"></field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="True" />
+            <field name="perm_create" eval="True" />
+            <field name="perm_unlink" eval="True" />
+        </record>
+
+        <!-- Portal : Partner Read -->
+        <record id="portal_partner_read" model="ir.rule">
+            <field name="name">Portal : Partner Read</field>
+            <field name="model_id" ref="base.model_res_partner"/>
+            <field name="domain_force">[('customer_rank','&gt;', 0)]</field>
+            <field name="groups" eval="[(4,ref('base.group_portal'))]"></field>
+            <field name="perm_read" eval="True"/>
+            <field name="perm_write" eval="False" />
+            <field name="perm_create" eval="False" />
+            <field name="perm_unlink" eval="False" />
+        </record>
+
+    </data>
+</odoo>

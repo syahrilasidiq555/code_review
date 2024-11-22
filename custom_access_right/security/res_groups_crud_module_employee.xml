@@ -1,0 +1,319 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Employees / Employee / Employees -->
+        <record model="ir.module.category" id="module_employee_category_employee">
+            <field name="name">Employees / Employee / Employees</field>
+            <field name="sequence">525</field>
+        </record>        
+        <record id="group_mst_employee_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_employee_category_employee"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_mst_employee_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_employee_category_employee"/>
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_mst_employee_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_employee_category_employee"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_mst_employee_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_employee_category_employee"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_mst_employee_hr_plan" model="res.groups">
+            <field name="name">Access Button Launch Plan</field>
+            <field name="category_id" ref="module_employee_category_employee"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_mst_employee_generate_barcode" model="res.groups">
+            <field name="name">Access Button Create Barcode</field>
+            <field name="category_id" ref="module_employee_category_employee"/>            
+            <field name="sequence">6</field>
+        </record>
+
+        <!-- Employees / Employee / Perjalanan Dinas -->
+        <record model="ir.module.category" id="module_employees_category_perdim">
+            <field name="name">Employees / Employee / Perjalanan Dinas</field>
+            <field name="sequence">526</field>
+        </record>
+        <record id="group_submenu_perdim_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_employees_category_perdim"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_perdim_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_employees_category_perdim"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_perdim_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_employees_category_perdim"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_perdim_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_employees_category_perdim"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Employees / Employee / Contracts, Organization Chart -->
+        <record model="ir.module.category" id="module_category_employee_emp_dep_rep">
+            <field name="name">Employees / Employee / Contracts</field>
+            <field name="sequence">527</field>
+        </record>    
+        <record id="group_mst_emp_contract_read" model="res.groups">
+            <field name="name">Access Contracts</field>
+            <field name="category_id" ref="module_category_employee_emp_dep_rep"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_mst_emp_org_chart_read" model="res.groups">
+            <field name="name">Access Organization Chart</field>
+            <field name="category_id" ref="module_category_employee_emp_dep_rep"/>            
+            <field name="sequence">2</field>
+        </record>
+
+        <!-- Employees / Employee / FPSK (Perubahan Status Karyawan) -->
+        <record model="ir.module.category" id="module_employees_category_fpsk">
+            <field name="name">Employees / Employee / FPSK (Perubahan Status Karyawan)</field>
+            <field name="sequence">528</field>
+        </record>
+        <record id="group_submenu_fpsk_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_employees_category_fpsk"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_fpsk_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_employees_category_fpsk"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_fpsk_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_employees_category_fpsk"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_fpsk_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_employees_category_fpsk"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_submenu_fpsk_access_button_print" model="res.groups">
+            <field name="name">Access Button Print FPSK</field>
+            <field name="category_id" ref="module_employees_category_fpsk"/>            
+            <field name="sequence">5</field>
+        </record>
+
+        <!-- Employees / Kompensasi PKWT -->
+        <record model="ir.module.category" id="module_employees_category_kom_pkwt">
+            <field name="name">Employees / Employee / Kompensasi PKWT</field>
+            <field name="sequence">529</field>
+        </record>
+        <record id="group_submenu_kom_pkwt_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_employees_category_kom_pkwt"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_kom_pkwt_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_employees_category_kom_pkwt"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_kom_pkwt_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_employees_category_kom_pkwt"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_kom_pkwt_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_employees_category_kom_pkwt"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Employees / Terminasi / Pengajuan Terminasi Karyawan -->
+        <record model="ir.module.category" id="module_employees_category_terminasi">
+            <field name="name">Employees / Terminasi / Pengajuan Terminasi Karyawan</field>
+            <field name="sequence">530</field>
+        </record>
+        <record id="group_submenu_terminasi_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_employees_category_terminasi"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_terminasi_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_employees_category_terminasi"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_terminasi_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_employees_category_terminasi"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_terminasi_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_employees_category_terminasi"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_submenu_terminasi_access_print_verklaring" model="res.groups">
+            <field name="name">Access Button Print Verklaring</field>
+            <field name="category_id" ref="module_employees_category_terminasi"/>            
+            <field name="sequence">5</field>
+        </record>
+
+        <!-- Employees / Terminasi / Jenis Terminasi -->
+        <record model="ir.module.category" id="module_employees_category_jenis_terminasi">
+            <field name="name">Employees / Terminasi / Jenis Terminasi</field>
+            <field name="sequence">531</field>
+        </record>
+        <record id="group_submenu_jenis_terminasi_access_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_employees_category_jenis_terminasi"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_jenis_terminasi_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_employees_category_jenis_terminasi"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_jenis_terminasi_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_employees_category_jenis_terminasi"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_jenis_terminasi_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_employees_category_jenis_terminasi"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Employees / Departments -->
+        <record model="ir.module.category" id="module_employees_category_departments">
+            <field name="name">Employees / Departments (include Menu in Configuration)</field>
+            <field name="sequence">532</field>
+        </record>
+        <record id="group_submenu_departments_access_read" model="res.groups">
+            <field name="name">Access Read</field> <!-- include configuration menuitem in kanban -->
+            <field name="category_id" ref="module_employees_category_departments"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_submenu_departments_access_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_employees_category_departments"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_submenu_departments_access_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_employees_category_departments"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_submenu_departments_access_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_employees_category_departments"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_submenu_departments_access_report_attendances" model="res.groups">
+            <field name="name">Access Report Attendances</field>
+            <field name="category_id" ref="module_employees_category_departments"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_submenu_departments_access_report_timeoff" model="res.groups">
+            <field name="name">Access Report Time Off</field>
+            <field name="category_id" ref="module_employees_category_departments"/>            
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_submenu_departments_access_report_recruitments" model="res.groups">
+            <field name="name">Access Report Recruitments</field>
+            <field name="category_id" ref="module_employees_category_departments"/>            
+            <field name="sequence">6</field>
+        </record>
+
+        <!-- Employees / Configuration -->
+        <record model="ir.module.category" id="module_category_employee_emp_config">
+            <field name="name">Employees / Configuration</field>
+            <field name="sequence">535</field>
+        </record>    
+        <record id="group_emp_conf_read" model="res.groups">
+            <field name="name">Access Settings</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_emp_job_read" model="res.groups">
+            <field name="name">Access Job Position</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_emp_job_grade_read" model="res.groups">
+            <field name="name">Access Job Grade</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_emp_employee_type_read" model="res.groups">
+            <field name="name">Access Employee Type (in Terminasi and Configuration)</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_emp_matrix_fpsk_read" model="res.groups">
+            <field name="name">Access FPSK Matrix Approval</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_emp_matrix_terminasi_read" model="res.groups">
+            <field name="name">Access Terminasi Matrix Approval</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_emp_working_times_read" model="res.groups">
+            <field name="name">Access Working Times</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">7</field>
+        </record>
+        <!-- <record id="group_emp_label_read" model="res.groups">
+            <field name="name">Access Tags</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">8</field>
+        </record> -->
+        <record id="group_emp_work_location_read" model="res.groups">
+            <field name="name">Access Unit</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_emp_resign_reason_read" model="res.groups">
+            <field name="name">Access Departure Reason</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_emp_planning_type_read" model="res.groups">
+            <field name="name">Access Planning Types</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">11</field>
+        </record>
+        <record id="group_emp_planning_read" model="res.groups">
+            <field name="name">Access Plans</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">12</field>
+        </record>
+        <record id="group_emp_badges_read" model="res.groups">
+            <field name="name">Access Badges</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">13</field>
+        </record>
+        <record id="group_emp_challanges_read" model="res.groups">
+            <field name="name">Access Challanges</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">14</field>
+        </record>
+        <record id="group_emp_goal_history_read" model="res.groups">
+            <field name="name">Access Goals History</field>
+            <field name="category_id" ref="module_category_employee_emp_config"/>            
+            <field name="sequence">15</field>
+        </record>
+
+    </data>
+</odoo>

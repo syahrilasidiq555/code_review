@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Inventory / Operasi / Transfer-->
+        <record model="ir.module.category" id="module_category_inv_transfer">
+            <field name="name">Inventory / Operasi / Transfer</field>
+            <field name="sequence">4500</field>
+        </record>        
+        <record id="group_inv_transfer_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_inv_transfer"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_inv_transfer_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_category_inv_transfer"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_inv_transfer_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_inv_transfer"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_inv_transfer_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_inv_transfer"/>            
+            <field name="sequence">4</field>
+        </record>
+
+
+        <!-- Inventory / Operasi / Replenishment-->
+        <record model="ir.module.category" id="module_category_inv_replenishment">
+            <field name="name">Inventory / Operasi / Replenishment</field>
+            <field name="sequence">4501</field>
+        </record>        
+        <record id="group_inv_replenishment_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_inv_replenishment_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_inv_replenishment_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_inv_replenishment_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_inv_button_action_product_forecast_report" model="res.groups">
+            <field name="name">Button Report Forecast</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_inv_button_action_stock_replenishment_info" model="res.groups">
+            <field name="name">Button Replenishment Info</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_inv_button_action_replenish" model="res.groups">
+            <field name="name">Button Replenish</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_inv_button_action_replenish_auto" model="res.groups">
+            <field name="name">Button Auto Replenish</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_inv_button_action_orderpoint_snooze" model="res.groups">
+            <field name="name">Button Snooze</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+            <field name="sequence">9</field>
+        </record>
+        <!-- <record id="group_inv_replenishment_button_action_replenish" model="res.groups">
+            <field name="name">Button Order</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+        </record>
+        <record id="group_inv_replenishment_button_action_replenish_auto" model="res.groups">
+            <field name="name">Button Order Otomatis</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+        </record>
+        <record id="group_inv_replenishment_button_action_orderpoint_snooze" model="res.groups">
+            <field name="name">Button Tunda</field>
+            <field name="category_id" ref="module_category_inv_replenishment"/>            
+        </record> -->
+
+
+        <!-- Inventory / Operasi / Penyesuaian Stok Persediaan-->
+        <record model="ir.module.category" id="module_category_inv_stock_quant">
+            <field name="name">Inventory / Operasi / Penyesuaian Stok Persediaan</field>
+            <field name="sequence">4502</field>
+        </record>        
+        <record id="group_inv_stock_quant_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_inv_stock_quant"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_inv_stock_quant_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_category_inv_stock_quant"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_inv_stock_quant_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_inv_stock_quant"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_inv_stock_quant_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_inv_stock_quant"/>            
+            <field name="sequence">4</field>
+        </record>
+
+        <!-- Inventory / Operasi / Pembuangan -->
+        <record model="ir.module.category" id="module_category_inv_stock_scrap">
+            <field name="name">Inventory / Operasi / Pembuangan</field>
+            <field name="sequence">4503</field>
+        </record>        
+        <record id="group_inv_stock_scrap_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_inv_stock_scrap"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_inv_stock_scrap_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_category_inv_stock_scrap"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_inv_stock_scrap_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_inv_stock_scrap"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_inv_stock_scrap_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_inv_stock_scrap"/>            
+            <field name="sequence">4</field>
+        </record>
+
+
+        <!-- Inventory / Overview, Jalankan Penjadwalan -->
+        <record model="ir.module.category" id="module_category_inv_overview_penjd">
+            <field name="name">Inventory / Overview, Jalankan Penjadwalan</field>
+            <field name="sequence">4504</field>
+        </record>        
+        <record id="group_inv_overview_read" model="res.groups">
+            <field name="name">Access Read Overview</field>
+            <field name="category_id" ref="module_category_inv_overview_penjd"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_inv_penjadwalan_read" model="res.groups">
+            <field name="name">Access Read Jalankan Penjadwalan</field>
+            <field name="category_id" ref="module_category_inv_overview_penjd"/>            
+            <field name="sequence">2</field>
+        </record>
+
+
+        <!-- Inventory / Produk / Produk, Varian Produk, Produk Paket -->
+        <record model="ir.module.category" id="module_category_product_template_varian">
+            <field name="name">Inventory / Produk / Produk, Varian Produk, Produk Paket</field>
+            <field name="sequence">4505</field>
+        </record>        
+        <record id="group_inv_product_template_create" model="res.groups">
+            <field name="name">Access Create</field>
+            <field name="category_id" ref="module_category_product_template_varian"/>
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_inv_product_template_read" model="res.groups">
+            <field name="name">Access Read</field>
+            <field name="category_id" ref="module_category_product_template_varian"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_inv_product_template_update" model="res.groups">
+            <field name="name">Access Update / Edit</field>
+            <field name="category_id" ref="module_category_product_template_varian"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_inv_product_template_delete" model="res.groups">
+            <field name="name">Access Delete</field>
+            <field name="category_id" ref="module_category_product_template_varian"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_inv_product_button_aturan_order" model="res.groups">
+            <field name="name">Button Aturan Order</field>
+            <field name="category_id" ref="module_category_product_template_varian"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_inv_product_button_peraturan_penyimpanan" model="res.groups">
+            <field name="name">Button Peraturan Penyimpanan</field>
+            <field name="category_id" ref="module_category_product_template_varian"/>            
+            <field name="sequence">6</field>
+        </record>
+
+
+        <!-- Inventory / Laporan -->
+        <record model="ir.module.category" id="module_category_inv_report">
+            <field name="name">Inventory / Laporan</field>
+            <field name="sequence">4506</field>
+        </record>        
+        <record id="group_inv_report_analisis_gudang_read" model="res.groups">
+            <field name="name">Access Analisis Gudang</field>
+            <field name="category_id" ref="module_category_inv_report"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_inv_report_stok_persediaan_read" model="res.groups">
+            <field name="name">Access Laporan Stok Persediaan</field>
+            <field name="category_id" ref="module_category_inv_report"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_inv_report_forecast_inv_read" model="res.groups">
+            <field name="name">Access Forecast Inventory</field>
+            <field name="category_id" ref="module_category_inv_report"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_inv_report_penilaian_stok_read" model="res.groups">
+            <field name="name">Access Penilaian Stok Persediaan</field>
+            <field name="category_id" ref="module_category_inv_report"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_inv_report_pergerakan_stok_read" model="res.groups">
+            <field name="name">Access Pergerakan Stok</field>
+            <field name="category_id" ref="module_category_inv_report"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_inv_report_pergerakan_prod_read" model="res.groups">
+            <field name="name">Access Pergerakan Produk</field>
+            <field name="category_id" ref="module_category_inv_report"/>            
+            <field name="sequence">6</field>
+        </record>
+
+        <!-- Inventory / Konfigurasi -->
+        <record model="ir.module.category" id="module_category_inv_config">
+            <field name="name">Inventory / Konfigurasi</field>
+            <field name="sequence">4507</field>
+        </record>        
+        <record id="group_inv_config_pengaturan_read" model="res.groups">
+            <field name="name">Access Pengaturan </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">1</field>
+        </record>
+        <record id="group_inv_config_gudang_read" model="res.groups">
+            <field name="name">Access Gudang </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">2</field>
+        </record>
+        <record id="group_inv_config_lokasi_read" model="res.groups">
+            <field name="name">Access Lokasi </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">3</field>
+        </record>
+        <record id="group_inv_config_rute_read" model="res.groups">
+            <field name="name">Access Rute </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">4</field>
+        </record>
+        <record id="group_inv_config_aturan_read" model="res.groups">
+            <field name="name">Access Aturan </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">5</field>
+        </record>
+        <record id="group_inv_config_tipe_operasi_read" model="res.groups">
+            <field name="name">Access Tipe Operasi</field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">6</field>
+        </record>
+        <record id="group_inv_config_kateg_storage_read" model="res.groups">
+            <field name="name">Access Kapasitas Kategori Storage </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">7</field>
+        </record>
+        <record id="group_inv_config_peraturan_penyimpanan_read" model="res.groups">
+            <field name="name">Access Peraturan Penyimpanan </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">8</field>
+        </record>
+        <record id="group_inv_config_kategori_prod_read" model="res.groups">
+            <field name="name">Access Kategori Produk </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">9</field>
+        </record>
+        <record id="group_inv_config_atribut_read" model="res.groups">
+            <field name="name">Access Atribut </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">10</field>
+        </record>
+        <record id="group_inv_config_aturan_order_read" model="res.groups">
+            <field name="name">Access Aturan Order Ulang </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">11</field>
+        </record>
+        <record id="group_inv_config_barcode_nomenclature_read" model="res.groups">
+            <field name="name">Access Tatanama Barcode </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">12</field>
+        </record>
+        <record id="group_inv_config_categ_satuan_read" model="res.groups">
+            <field name="name">Access Kategori Satuan </field>
+            <field name="category_id" ref="module_category_inv_config"/>            
+            <field name="sequence">13</field>
+        </record>
+    </data>
+</odoo>

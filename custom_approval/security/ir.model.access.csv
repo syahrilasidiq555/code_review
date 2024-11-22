@@ -1,0 +1,5 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_account_level_approval,account.level.approval,model_level_approval,account.group_account_manager,1,1,1,1
+access_account_level_approval_line,account.level.approval.line,model_level_approval_line,account.group_account_manager,1,1,1,1
+access_account_approval_info,account.approval.info,model_approval_info,,1,1,1,1
+access_model_ir_model,access_model_ir_model,base.model_ir_model,,1,0,0,0

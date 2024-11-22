@@ -1,0 +1,32 @@
+<odoo>
+    <data>
+        <record id="view_department_form_inherit" model="ir.ui.view">
+            <field name="name">view_department_form_inherit</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='manager_id']" position="before">
+                    <field name="code" />
+                </xpath>
+
+                <xpath expr="//field[@name='parent_id']" position="after">
+                    <field name="loc" />
+                </xpath>
+
+                <xpath expr="//sheet" position="inside">
+                    <notebook>
+                        <page name="config" string="Configuration">
+                            <group name="head">
+                                <field name="is_sales_marketing" />
+                                <field name="is_bod" />
+                            </group>
+                        </page>
+                    </notebook>
+                    
+                </xpath>
+                
+            </field>
+        </record>
+
+    </data>
+</odoo>

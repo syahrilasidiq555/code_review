@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Menu -->
+        <menuitem id="menu_config_other_accounting" name="Other Configuration" parent="account.menu_finance_configuration" sequence="9">
+            <menuitem id="menu_action_loa_form_view" action="action_level_of_approval" sequence="1"/>
+            <menuitem id="menu_action_payment_method_form_view" action="action_payment_method" sequence="2"/>
+        </menuitem>
+
+        <menuitem id="account.menu_board_journal_1" name="Dashboard" parent="account_accountant.menu_accounting" sequence="1">
+            <menuitem id="menu_board_journal_1_menu" name="Dashboard" action="account.open_account_journal_dashboard_kanban" sequence="1"/>
+            <menuitem id="menu_board_analisa_keuangan_1_menu" name="Analisa Keuangan" action="custom_dashboard_action" sequence="2"/>
+        </menuitem>
+
+        <menuitem id="account.menu_finance_payables" name="Vendors" parent="account_accountant.menu_accounting"  sequence="3">
+            <menuitem id="menu_payment_requisition" name="Payment Requisition" action="action_account_payment_requisition" sequence="19"/>
+            <menuitem id="menu_payment_requisition_approve" name="Payment Requisition Approval" action="action_account_payment_requisition_approve" sequence="19"/>
+        </menuitem>
+    </data>
+</odoo>

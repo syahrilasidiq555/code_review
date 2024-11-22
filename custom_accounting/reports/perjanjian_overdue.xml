@@ -1,0 +1,238 @@
+<odoo>
+    <data>
+        <template id="custom_accounting.overdue_print_layout_a5">
+            <t t-if="not o and doc">
+                <t t-set="o" t-value="doc"/>
+            </t>
+            <t t-if="o and 'company_id' in o">
+                <t t-set="company" t-value="o.company_id"></t>
+            </t>
+            <t t-if="not o or not 'company_id' in o">
+                <t t-set="company" t-value="res_company"></t>
+            </t>
+            <t t-call="custom_accounting.overdue_layout_header_a5"/>
+            <t t-raw="0"/>
+            <t t-call="custom_accounting.overdue_layout_footer_a5"/>
+        </template>
+
+        <template id="custom_accounting.overdue_layout_header_a5">
+            <div class="header">
+                <div class="row" name="header_faktur" style="font-size:14px"> 
+                    <div class="col-4">
+                        <img t-att-src="image_data_uri(company.logo)" style="width:130px; display: block; margin-left: auto; margin-right: auto;"/>
+                    </div>
+                    <div class="col-8" style="margin-top:0px;font-size:14px">
+                        <h3><b><span t-field="company.name"/></b></h3>
+                        <t t-if="company.street != False">
+                            <span t-field="company.street"/>
+                        </t>
+                        <t t-if="company.phone != False">
+                            <br><b>Telp </b>: <span t-field="company.phone"/></br>
+                        </t>
+                        <t t-if="company.mobile != False">
+                            <br><b>WA </b> : <span t-field="company.mobile"/></br>
+                        </t>
+                        <t t-if="company.email != False">
+                            <br><b>Email </b> : <span t-field="company.email"/></br>
+                        </t>
+                        <br><b>No </b> : <span t-field="o.name"/></br>
+                    </div>
+                </div>   
+                <hr style="height:3px;border-width:0;color:black;background-color:black"/>
+            </div>
+        </template>
+
+        <template id="custom_accounting.overdue_layout_footer_a5">
+            <div class="footer" name="footer_faktur" style="font-size:14px">
+                <!-- <div class="last-page">
+                    <div class="row" style="font-size:14px">
+                        <div class="col-6">
+                            <center>
+                                <p>
+                                    <b>Pemohon,</b><br/>
+                                    <b><span t-field="o.partner_id.name"/></b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )                                
+                                </p>
+                            </center>
+                        </div>
+                        <div class="col-6 text-right" style="margin-top:0px;font-size:14px">
+                            <center>
+                                <p>
+                                    <b>Approved by,</b><br/>
+                                    <b><span t-field="o.approve_user_id.name"/></b><br/>
+                                    <br/>
+                                    <br/>
+                                    <br/>
+                                    ( .......................... )
+                                </p>
+                            </center>
+                        </div>
+                    </div>
+                </div> -->
+                <div class="text-center">
+                    <p>Hal :
+                        <span class="page"/>
+                        /
+                        <span class="topage"/>
+                    </p>
+                </div>
+            </div>
+        </template>
+
+        <template id="custom_accounting.overdue_print_a5">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_accounting.overdue_print_layout_a5">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">SURAT PERNYATAAN CICILAN PEMBAYARAN</h5>
+                                    </div>
+                                    <div class="mx-5">
+                                        <p class="text-left">Yang bertanda tangan dibawah ini : </p> 
+                                        <table class="table">
+                                            <style>
+                                                .borderless td, .borderless th {
+                                                    border: none;
+                                                    padding-left:0;
+                                                    padding-right:0;
+                                                }
+                                            </style> 
+                                            <tbody class='borderless'>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">Nama</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.so_id.penanggungjawab_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">NIK</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.so_id.penanggungjawab_id.no_ktp"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">Alamat</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.so_id.penanggungjawab_id.street"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">No. Handphone</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.so_id.penanggungjawab_id.phone"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" colspan="3">Untuk Selanjutnya disebut sebagai penanggung jawab,</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">Nama Almarhum/Mah</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.partner_id.name"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-left">Dengan ini berjanji untuk menyelesaikan rekening atas nama pelayanan Alm. </p> 
+                                        <p class="text-left">...</p> 
+                                        <p class="text-left">Sebesar <b t-field="o.amount_residual" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}' /></p> 
+                                        <p class="text-left">Dengan cara dicicil selama ............. Bulan, dengan cicilan sebesar Rp. ....................................... setiap tanggal ....................................... dengan cara di transfer ke Rekening Bank <b>BCA A/C. 342-488-9909 A/N. KSO Rumah Duka Carolus.</b> </p> 
+                                        <p class="text-left">Demikian surat ini saya buat tanpa paksaan atau tekanan maupun pengaruh ini dari siapapun untuk menyelesaikan penyelesaiannya</p> 
+                                        <br/>
+                                        <p class="text-left">Jakarta, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y')"/></p> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+        <template id="custom_accounting.overdue_print_a5_full">
+            <t t-call="web.basic_layout">
+
+                <t t-if="o and 'company_id' in o">
+                    <t t-set="company" t-value="o.company_id"></t>
+                </t>
+                <t t-if="not o or not 'company_id' in o">
+                    <t t-set="company" t-value="res_company"></t>
+                </t>  
+
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="custom_accounting.overdue_print_layout_a5">
+                        <div class="page">
+                            <div class="oe_structure">
+
+                                <div class="header_body">
+                                    <div class="text-center">
+                                        <h5 class="">SURAT PERNYATAAN PENYELESAIAN PEMBAYARAN</h5>
+                                    </div>
+                                    <div class="mx-5">
+                                        <p class="text-left">Yang bertanda tangan dibawah ini : </p> 
+                                        <table class="table">
+                                            <style>
+                                                .borderless td, .borderless th {
+                                                    border: none;
+                                                    padding-left:0;
+                                                    padding-right:0;
+                                                }
+                                            </style> 
+                                            <tbody class='borderless'>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">Nama</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.so_id.penanggungjawab_id.name" /></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">NIK</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.so_id.penanggungjawab_id.no_ktp"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">Alamat</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.so_id.penanggungjawab_id.street"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">No. Handphone</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.so_id.penanggungjawab_id.phone"/></td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" colspan="3">Untuk Selanjutnya disebut sebagai penanggung jawab,</td>
+                                                </tr>
+                                                <tr>
+                                                    <td class="text-left" style="width:180px!important;">Nama Almarhum/Mah</td>
+                                                    <td class="text-center" style="width:50px!important;">:</td>
+                                                    <td class="text-left"><b t-field="o.partner_id.name"/></td>
+                                                </tr>
+                                            </tbody>
+                                        </table>
+                                        <p class="text-left">Dengan ini berjanji untuk menyelesaikan rekening atas nama pelayanan Alm. </p> 
+                                        <p class="text-left">...</p> 
+                                        <p class="text-left">Sebesar <b t-field="o.amount_residual" t-field-options='{"widget": "monetary", "display_currency": "o.currency_id"}' /></p> 
+                                        <p class="text-left">Pada Tanggal ............. Bulan ............. Tahun............. </p> 
+                                        <p class="text-left">Demikian surat ini saya buat tanpa paksaan atau tekanan maupun pengaruh ini dari siapapun untuk menyelesaikan penyelesaiannya</p> 
+                                        <br/>
+                                        <p class="text-left">Jakarta, <span t-esc="context_timestamp(datetime.datetime.now()).strftime('%d %b %Y')"/></p> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </t>
+                </t>
+            </t>
+        </template>
+
+    </data>
+</odoo>

@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- REMOVE CRUD in TREE-->
+    <record id="view_stock_quant_remove_crud" model="ir.ui.view">
+        <field name="name">view_stock_quant_remove_crud</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="priority" eval="1" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">                    
+                <attribute name="edit">false</attribute>
+                <attribute name="create">false</attribute>
+                <attribute name="delete">false</attribute>
+                <attribute name="multi_edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+
+
+    <!-- ACCESS BUTTON -->
+    <!-- <record id="view_stock_quant_access_button" model="ir.ui.view">
+        <field name="name">view_stock_quant_access_button</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="arch" type="xml">
+
+            <xpath expr="//button[@name='action_replenish']" position="attributes">
+                <attribute name="groups">custom_access_right.group_inv_replenishment_button_action_replenish</attribute>
+            </xpath>
+            <xpath expr="//button[@name='action_replenish_auto']" position="attributes">
+                <attribute name="groups">custom_access_right.group_inv_replenishment_button_action_replenish_auto</attribute>
+            </xpath>
+            <xpath expr="//button[@name='%(stock.action_orderpoint_snooze)d']" position="attributes">
+                <attribute name="groups">custom_access_right.group_inv_replenishment_button_action_orderpoint_snooze</attribute>
+            </xpath>
+        
+        </field>
+    </record> -->
+
+    <!-- IN TREE VIEW -->
+    <record id="view_stock_quant_tree_create" model="ir.ui.view">
+        <field name="name">view_stock_quant_tree_create</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_stock_quant_create'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="create">true</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_quant_tree_edit" model="ir.ui.view">
+        <field name="name">view_stock_quant_tree_edit</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_stock_quant_update'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="edit">true</attribute>
+                <attribute name="multi_edit">false</attribute>
+            </xpath>
+        </field>
+    </record>
+    <record id="view_stock_quant_tree_delete" model="ir.ui.view">
+        <field name="name">view_stock_quant_tree_delete</field>
+        <field name="model">stock.quant</field>
+        <field name="inherit_id" ref="stock.view_stock_quant_tree_inventory_editable"/>
+        <field name="groups_id" eval="[(4,ref('custom_access_right.group_inv_stock_quant_delete'))]" />
+        <field name="arch" type="xml">
+            <xpath expr="//tree" position="attributes">
+                <attribute name="delete">true</attribute>
+            </xpath>
+        </field>
+    </record>
+
+    <!-- MENU ITEM -->
+    <record id="stock.menu_action_inventory_tree" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_inv_stock_quant_read'))]" />
+    </record>
+
+</odoo>

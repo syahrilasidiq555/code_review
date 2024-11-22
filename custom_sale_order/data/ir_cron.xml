@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <record id="rdc_occupy_return_semayam" model="ir.cron">
+        <field name="name">RDC : Auto Occupy and Return Ruang Semayam</field>
+        <field name="model_id" ref="sale.model_sale_order"/>
+        <field name="code">
+model.cron_pickup_return_ruang_semayam_as_schedule(date=datetime.datetime.now())
+        </field>
+        <field name="active" eval="True"/>
+        <field name="user_id" ref="base.user_root"/>
+        <field name="interval_number">5</field>
+        <field name="interval_type">minutes</field>
+        <field name="numbercall">-1</field>
+        <field name="doall" eval="False"/>
+    </record>
+</odoo>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="asset_sell_form_inherit" model="ir.ui.view">
+            <field name="name">wizard.asset.sell.form.inherit</field>
+            <field name="model">account.asset.sell</field>
+            <field name="inherit_id" ref="account_asset.asset_sell_form"/>
+            <field name="arch" type="xml">
+
+                <xpath expr="//field[@name='invoice_line_id']" position="after">
+                    <field name="employee_id" attrs="{'invisible': [('action','!=','dispose')]}" options="{'no_quick_create':True}"/>
+                    <field name="dispose_date" attrs="{'invisible': [('action','!=','dispose')]}" />
+                </xpath>
+
+                <xpath expr="//footer" position="before">
+                    <notebook>
+                        <page string="Kronologi" name="kronologi_page" attrs="{'invisible': [('action','!=','dispose')]}">
+                            <field name="kronologi" attrs="{'invisible': [('action','!=','dispose')]}" type="html"/>
+                        </page>
+                    </notebook>
+                </xpath>
+                
+            </field>
+        </record>
+    
+    </data>
+</odoo>

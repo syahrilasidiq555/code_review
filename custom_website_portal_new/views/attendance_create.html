@@ -1,0 +1,226 @@
+{% extends 'layouts/main_background.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> -->
+<style>
+    [x-cloak] {
+        display: none !important
+    }
+    
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        min-height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* overflow: auto; */
+    }
+</style>
+{% endblock %}
+
+{% block js_assets %}
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> -->
+
+<!-- my custom alpine js script -->
+<script defer src="/custom_website_portal_new/static/js/attendanceFormCreateEdit.js"></script>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="pt-lg-3 px-lg-5 pt-md-2 px-md-4 p-2" x-init="$store.attendanceStore" x-cloak>
+    {{breadcrumb(paths = [{'href':'/portals/home','name':'Home'},{'href':'/portals/attendance','name':'Attendance'}], active = 'Create New Attendance')}}
+    
+    <div class="card shadow">
+        <form id="attendanceForm" enctype="multipart/form-data" x-on:submit="event.preventDefault();">
+            <div class="card-header py-3 d-flex justify-content-between">
+                <div>
+                    <button type="submit" class="btn btn-primary" 
+                        @click="$store.attendanceStore.createData()"
+                        x-show="!$store.attendanceStore.editForm">Create</button>
+                    <div class="btn btn-secondary" 
+                        @click="$store.attendanceStore.action_cancel()"
+                        x-show="!$store.attendanceStore.editForm">Cancel</div>
+                </div>
+                <p class="btn btn-success align-self-start"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                    Draft</p>
+            </div>
+            <div class="card-body">
+                <div class="row align-items-start">
+                    <!-- ALERT -->
+                    <div class="row mb-3" x-show="$store.attendanceStore.alert.show" x-transition>
+                        <div :class="$store.attendanceStore.alert.class" class="alert d-flex align-items-center" >
+                            <div>
+                                <span x-text="$store.attendanceStore.alert.message"></span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <!-- <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="type" class="form-label fw-bold">Type</label>
+                            <select id="type" name="type" class="form-select" 
+                                x-model="$store.attendanceStore.attendance.type"
+                                :disabled="$store.attendanceStore.editForm">
+                                <option value="0" selected enabled>Select Type here..</option>
+                                <option value="attendance">Attendance</option>
+                                <option value="absence">Absence</option>
+                            </select>
+                        </div> -->
+
+                        <div class="form-group col-md-6 align-items-end mb-3" hidden>
+                            <label for="location_id" class="form-label fw-bold">Location</label>
+                            <select id="location_id" name="location_id" class="form-select" 
+                                x-model="$store.attendanceStore.attendance.location_id"
+                                :disabled="$store.attendanceStore.editForm"
+                                x-init="$store.attendanceStore.attendance.location_id = {{default_employee.work_location_id.id}}">
+                                <option  value='0' selected enabled>Select Location here..</option>
+                                {% for location in list_location.records %}
+                                <option value="{{location.id}}">{{location.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row mb-3">
+                        <!-- <div class="form-group col-md-6 align-items-end mb-3"  :hidden="$store.attendanceStore.attendance.type != 'absence'">
+                            <label for="absence_type" class="form-label fw-bold">Absence Type</label>
+                            <select id="absence_type" name="absence_type" class="form-select" 
+                                x-model="$store.attendanceStore.attendance.absence_type"
+                                :disabled="$store.attendanceStore.editForm">
+                                <option  value="0" selected enabled>Select Absence Type here..</option>
+                                <option value="sick">Sick Leave</option>
+                                <option value="casual">Casual Leave</option>
+                                <option value="maternity">Maternity Leave</option>
+                                <option value="paternity">Paternity Leave</option>
+                                <option value="compensatory">Compensatory Leave</option>
+                                <option value="short_time">Short-Time Work</option>
+                            </select>
+                        </div> -->
+
+                        <!--  :hidden="$store.attendanceStore.attendance.type != 'attendance'" -->
+                        <!-- <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="attendance_type" class="form-label fw-bold">Attendance Type</label>
+                            <select id="attendance_type" name="attendance_type" class="form-select" 
+                                x-model="$store.attendanceStore.attendance.attendance_type"
+                                :disabled="$store.attendanceStore.editForm">
+                                <option  value="0" selected enabled>Select Attendance Type here..</option>
+                                <option value="onsite">Client Onsite</option>
+                                <option value="wfh">WFH with Any Reason</option>
+                                <option value="overtime">Work Overtime</option>
+                                <option value="deploy">OCM / Production Deployment</option>
+                                <option value="support">Production Support / Baby Sitting</option>
+                                <option value="others">Others</option>
+                            </select>
+                        </div> -->
+
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="attendance_type_id" class="form-label fw-bold">Attendance Type</label>
+                            <select id="attendance_type_id" name="attendance_type_id" class="form-select" 
+                                x-model="$store.attendanceStore.attendance.attendance_type_id"
+                                :disabled="$store.attendanceStore.editForm">
+                                <option  value='0' selected enabled>Select Attendance Type here..</option>
+                                {% for type in attendance_type_list.records %}
+                                <option value="{{type.id}}">{{type.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="approver_id" class="form-label fw-bold">Approver</label>
+                            <select id="approver_id" name="approver_id" class="form-select" 
+                                x-model="$store.attendanceStore.attendance.approver_id"
+                                :disabled="$store.attendanceStore.editForm"
+                                x-init="$store.attendanceStore.attendance.approver_id = {{default_employee.work_location_id.attendance_approver_id.id}}">
+                                <option  value='0' selected enabled>Select Approver here..</option>
+                                {% for approver in list_approver.records %}
+                                <option value="{{approver.id}}">{{approver.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="partner_id" class="form-label fw-bold">Project Customer</label>
+                            <select id="partner_id" name="partner_id" class="form-select" 
+                                x-model="$store.attendanceStore.attendance.partner_id"
+                                :disabled="$store.attendanceStore.editForm">
+                                <option  value="0" selected enabled>Select Project Customer here..</option>
+                                {% for partner in list_partner.records %}
+                                <option value="{{partner.id}}">{{partner.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="pm_leader_id" class="form-label fw-bold">PM / Leader</label>
+                            <select id="pm_leader_id" name="pm_leader_id" class="form-select" 
+                                x-model="$store.attendanceStore.attendance.pm_leader_id"
+                                :disabled="$store.attendanceStore.editForm">
+                                <option  value='0' selected enabled>Select PM / Leader here..</option>
+                                {% for pm_leader in list_pm_leader.records %}
+                                <option value="{{pm_leader.id}}">{{pm_leader.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="row">
+                        <!-- <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="description" class="form-label fw-bold">Description</label>
+                            <textarea class="form-control" id="description" name="description"
+                                x-model="$store.attendanceStore.attendance.description"
+                                x-init="$store.attendanceStore.attendance.description = ''"
+                                :disabled="$store.attendanceStore.editForm"></textarea>
+                        </div> -->
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="task" class="form-label fw-bold">Task</label>
+                            <textarea row="3" name="task" id="task" class="form-control" x-model="$store.attendanceStore.attendance.task"></textarea>
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="name" class="form-label fw-bold">Description / WFH Reason</label>
+                            <textarea row="3" name="description" id="description" class="form-control" x-model="$store.attendanceStore.attendance.description"></textarea>
+                        </div>
+                    </div>
+
+                    <!-- <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="check_in" class="form-label fw-bold">Check In</label>
+                            <input type="datetime-local" class="form-control" id="check_in" name="check_in"
+                                x-model="$store.attendanceStore.attendance.check_in"
+                                :disabled="$store.attendanceStore.editForm"
+                                x-init="$store.attendanceStore.attendance.check_in = (new Date()).toJSON().slice(0, 10);"/>
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="check_out" class="form-label fw-bold">Check Out</label>
+                            <input type="datetime-local" class="form-control" id="check_out" name="check_out"
+                                x-model="$store.attendanceStore.attendance.check_out"
+                                :disabled="$store.attendanceStore.editForm"
+                                x-init="$store.attendanceStore.attendance.check_out = (new Date()).toJSON().slice(0, 10);"/>
+                        </div>
+                    </div> -->
+
+                </div>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+{% endblock %}

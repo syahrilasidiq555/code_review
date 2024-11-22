@@ -1,0 +1,222 @@
+{% extends 'layouts/main_background.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+<!-- <link rel="stylesheet" href="https://cdn.datatables.net/1.13.4/css/dataTables.bootstrap5.min.css"> -->
+<style>
+    [x-cloak] {
+        display: none !important
+    }
+    
+    body, html {
+        height: 100%;
+        margin: 0;
+    }
+
+    .menu_background {
+        background: url(/web_enterprise/static/img/home-menu-bg-overlay.svg), linear-gradient(to right bottom, #8754c3, #56deff);
+        /* Full height */
+        min-height: 100%; 
+
+        /* Center and scale the image nicely */
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+        /* overflow: auto; */
+    }
+</style>
+{% endblock %}
+
+{% block js_assets %}
+<!-- <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.4/js/dataTables.bootstrap5.min.js"></script> -->
+
+<!-- my custom alpine js script -->
+<script defer src="/custom_website_portal_new/static/js/expenseFormCreateEdit.js"></script>
+
+{% endblock %}
+
+
+{% block content %}
+<div class="pt-lg-3 px-lg-5 pt-md-2 px-md-4 p-2" x-init="$store.expenseStore" x-cloak>
+    {{breadcrumb(paths = [{'href':'/portals/home','name':'Home'},{'href':'/portals/expense','name':'Expense'}], active = 'Create New Expense')}}
+    
+    <div class="card shadow">
+        <form id="expenseForm" enctype="multipart/form-data" x-on:submit="event.preventDefault();">
+            <div class="card-header py-3 d-flex justify-content-between">
+                <!-- <h6 class="m-0 font-weight-bold text-primary">Expenses</h6> -->
+                <div>
+                    <button type="submit" class="btn btn-primary" 
+                        @click="$store.expenseStore.createData()"
+                        x-show="!$store.expenseStore.editForm">Create</button>
+                    <div class="btn btn-secondary" 
+                        @click="$store.expenseStore.action_cancel()"
+                        x-show="!$store.expenseStore.editForm">Cancel</div>
+                </div>
+                <p class="btn btn-success align-self-start"
+                    style="--bs-btn-padding-y: .25rem; --bs-btn-padding-x: .5rem; --bs-btn-font-size: .75rem; margin:0; border-radius: 25px;">
+                    To Submit</p>
+            </div>
+            <div class="card-body">
+                <div class="row align-items-start">
+                    <!-- ALERT -->
+                    <div class="row mb-3" x-show="$store.expenseStore.alert.show" x-transition>
+                        <div :class="$store.expenseStore.alert.class" class="alert d-flex align-items-center" >
+                            <div>
+                                <span x-text="$store.expenseStore.alert.message"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row mb-3">
+                        <div class="input-group input-group-lg col-md-6 align-items-end">
+                            <input type="text" class="form-control" aria-label="Sizing example input"
+                                aria-describedby="inputGroup-sizing-lg" placeholder="e.g. Lunch With Customer"
+                                x-model="$store.expenseStore.expense.name"
+                                :disabled="$store.expenseStore.editForm">
+                        </div>
+                        <div class="form-group col-md-6 text-right align-items-end mt-3">
+                            <button id="listDocuments"
+                                name="listDocuments" type="button" class="btn btn-primary float-end" data-bs-toggle="modal" data-bs-target="#documentModal">
+                                <span x-text="$store.expenseStore.attachments.length + $store.expenseStore.newAttachments.length"></span> Documents
+                            </button>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="product_id" class="form-label fw-bold">Product</label>
+                            <select id="product_id" class="form-select" x-model="$store.expenseStore.expense.product_id"
+                            :disabled="$store.expenseStore.editForm">
+                                <option value='0' selected disabled>Select Expense Product here..</option>
+                                {% for product in products.records %}
+                                <option value="{{product.id}}">{{product.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="date" class="form-label fw-bold">Expense Date</label>
+                            <input type="date" class="form-control" id="date" name="date"
+                                x-model="$store.expenseStore.expense.date"
+                                :disabled="$store.expenseStore.editForm"
+                                x-init="$store.expenseStore.expense.date = (new Date()).toJSON().slice(0, 10);">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="price" class="form-label fw-bold">Unit Price</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend"><span
+                                        class="input-group-text">Rp</span></div>
+                                <input type="text" id="price" name="price" class="form-control"
+                                    x-model="$store.expenseStore.expense.unit_amount"
+                                    :disabled="$store.expenseStore.editForm"
+                                    @keyup="$store.expenseStore.compute_total_amount()"
+                                    x-data 
+                                    x-mask:dynamic="$money($input)">
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="quantity" class="form-label fw-bold">Quantity</label>
+                            <input type="number" class="form-control" id="quantity" name="quantity" value="1"
+                                x-model="$store.expenseStore.expense.quantity"
+                                :disabled="$store.expenseStore.editForm"
+                                @keyup="$store.expenseStore.compute_total_amount()">
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label for="expense_location" class="form-label fw-bold">Employee Location</label>
+                            <select id="expense_location" id="expense_location" name="expense_location" class="form-select"
+                                x-model="$store.expenseStore.expense.expense_location"
+                                :disabled="$store.expenseStore.editForm">
+                                <option selected value="0" disabled>Select location..</option>
+                                {% for location in locations.records %}
+                                <option value="{{location.id}}">{{location.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+                        <div class="form-group col-md-6 align-items-end mb-3">
+                            <label class="form-label fw-bold">Total Amount</label>
+                            <div class="input-group">
+                                <div class="input-group-prepend">
+                                    <span class="input-group-text">Rp</span>
+                                </div>
+                                <input type="text" class="form-control"
+                                    x-model="$store.expenseStore.expense.total_amount"
+                                    x-init="$store.expenseStore.compute_total_amount()" 
+                                    x-data 
+                                    x-mask:dynamic="$money($input)"
+                                    disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" >
+                        <div class="form-group align-items-end mb-3">
+                            <label for="description" class="form-label fw-bold">Note</label>
+                            <textarea row="3" name="description" id="description" name="description" class="form-control"
+                                x-model="$store.expenseStore.expense.description"
+                                :disabled="$store.expenseStore.editForm"><span x-text="$store.expenseStore.expense.description"></span></textarea>
+                        </div>
+                    </div>
+                    <input id="documents" 
+                        name="documents" 
+                        data-edit="all" 
+                        type="file" 
+                        multiple="true" 
+                        class="d-none"
+                        @change="$store.expenseStore.changeAttachment(event)">
+                </div>
+            </div>
+        </form>
+    </div>
+
+    <!-- DOCUMENT MODAL -->
+    <div class="modal fade" id="documentModal" data-bs-backdrop="static" tabindex="-1"
+        aria-labelledby="documentModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-dialog-scrollable modal-lg">
+            <div class="modal-content ">
+                <div class="card-header">
+                    <div class="d-flex justify-content-between">
+                        <h6 class="m-0 font-weight-bold text-primary">Documents</h6>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                </div>
+                <div class="card-body" style="overflow-y: auto;">
+                    <div class="table-responsive">
+                        <table class="table table-bordered" id="documentTable" width="100%" cellspacing="0">
+                            <thead>
+                                <tr>
+                                    <th>Name</th>
+                                    <th>Size</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <template x-for="attachment in $store.expenseStore.newAttachments" :key="attachment.name">
+                                    <tr>
+                                        <td x-text="attachment.name" style="color:#4e73df"></td>
+                                        <td x-text="attachment.size" style="color:#4e73df"></td>
+                                        <td>
+                                        </td>
+                                    </tr>
+                                </template>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button id="addDocumentFiles" type="button" class="btn btn-primary"
+                        @click="document.getElementById('documents').click()"
+                        x-show="!$store.expenseStore.editForm">Add Files</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

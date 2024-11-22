@@ -1,0 +1,11 @@
+{% macro breadcrumb(paths = [{'href':'/vendor','name':'Home'}], active = 'Page') %}
+    <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            {% for path in paths %}
+                <li class="breadcrumb-item"><a href="{{path['href']}}">{{path['name']}}</a></li>
+            {% endfor %}
+            <li class="breadcrumb-item active" aria-current="page">{{active}}</li>
+        </ol>
+    </nav>
+{%- endmacro %}
+

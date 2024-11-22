@@ -1,0 +1,141 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="parking_voucher_tree_view">
+            <field name="name">parking_voucher_tree_view</field>
+            <field name="model">parking.voucher</field>
+            <field name="arch" type="xml">
+                <tree string="" >
+                    <field name="name" />
+                    <field name="nama_pemakai" />
+                    <field name="customer_id" />
+                    <field name="ruang_semayam_id" />
+                    <field name="jenis_kendaraan" />
+                    <field name="no_polisi" />
+                    <field name="date" />
+                    <field name="date_out" />
+                    <!-- <field name="penanggungjawab_id" /> -->
+                    <!-- <field name="sale_order_id" /> -->
+                </tree>
+            </field>
+        </record>
+
+        <!-- Search View -->
+        <record id="parking_voucher_search_view" model="ir.ui.view">
+            <field name="name">parking_voucher_search_view</field>
+            <field name="model">parking.voucher</field>
+            <field name="arch" type="xml">
+                <search string="Search data...">
+                    <field name="name" />
+                    <field name="nama_pemakai" />
+                    <field name="no_polisi" />
+                    <field name="customer_id" />
+                    <!-- <filter string="State Draft" name="state_draft" domain="[('state','=','draft')]"/>
+                    <filter string="State Confirm" name="state_confirm" domain="[('state','=','confirm')]"/>
+                    <filter string="State Approved" name="state_approved" domain="[('state','=','approved')]"/>
+                    <filter string="State Done" name="state_done" domain="[('state','=','done')]"/>
+                    <filter string="State Cancel" name="state_cancel" domain="[('state','=','cancel')]"/> -->
+                </search>
+            </field>
+        </record>
+
+        <!-- Form View -->
+        <record id="parking_voucher_form_view" model="ir.ui.view">
+            <field name="name">parking_voucher_form_view</field>
+            <field name="model">parking.voucher</field>
+            <field name="arch" type="xml">
+                <form string="Cost Sheet" duplicate='false'>
+                    <header>
+                        <!-- <button name="action_confirm" data-hotkey="c"
+                            string="Confirm" type="object"
+                            attrs="{'invisible': [('state', 'not in', ['draft'])]}"/>
+                        
+                        <field name="state" widget="statusbar" statusbar_visible="draft,confirm,approved,done" attrs="{'invisible':[('state','in',('cancel'))]}"/>
+                        <field name="state_cancel" widget="statusbar" statusbar_visible="cancel" attrs="{'invisible':[('state','!=','cancel')]}"/> -->
+                    </header>
+                    <sheet>
+                        <div class="oe_button_box" name="button_box">
+                            <button type="object" name="action_view_so" class="oe_stat_button" icon="fa-file-text-o" attrs="{'invisible':[('sale_order_id','=',False)]}">
+                                <span class="o_stat_text" >Sale</span>
+                            </button>
+                        </div>
+                        <div class="oe_title">
+                            <h1>
+                                <field name="name" attrs="{'invisible': [('name', '=', '')]}" readonly="1"/>
+                            </h1>
+                        </div>
+
+                        <group string="" name="detail">                            
+                            <group name="left">
+                                <field name="nama_pemakai" />
+                                <field name="customer_id" />
+                                <field name="ruang_semayam_id" />
+                                <field name="sale_order_id" invisible="1" />
+                                <field name="penanggungjawab_id" invisible="1"/>
+                            </group>
+                            <group name="right">
+                                <field name="jenis_kendaraan" />
+                                <field name="no_polisi" />
+                                <label for="date" string="Tgl. Aktif"/>
+                                <div class="o_row" style="min-width: 300px!important;">
+                                    <field name="date" />
+                                    <span> s.d </span>
+                                    <field name="date_out"/>
+                                </div>
+                            </group>
+                        </group>
+                        <notebook>
+                            <page string="Other Info">
+                                <group string="Audit Trail">
+                                    <group>
+                                        <field name="create_uid" readonly="1" force_save="1"/>
+                                        <field name="create_date" readonly="1" force_save="1"/>
+                                        
+                                    </group>
+                                    <group>
+                                        <field name="write_uid" readonly="1" force_save="1"/>
+                                        <field name="write_date" readonly="1" force_save="1"/>
+                                        <!-- <field name="confirm_uid" readonly="1" force_save="1"/>
+                                        <field name="confirm_date" readonly="1" force_save="1"/>
+                                        <field name="approved_uid" readonly="1" force_save="1"/>
+                                        <field name="approved_date" readonly="1" force_save="1"/> -->
+                                    </group>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="chatter-container" style="background-color: white; min-height:100px;">
+                        <div class="oe_chatter" style="width:auto!important;">
+                            <field name="message_follower_ids" widget="mail_followers"/>
+                            <field name="activity_ids"/>	
+                            <field name="message_ids" widget="mail_thread"/>
+                        </div>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+
+        <!-- Action -->
+        <record model="ir.actions.act_window" id="parking_voucher_action">
+            <field name="name">Voucher Parkir</field>
+            <field name="res_model">parking.voucher</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!-- <menuitem
+            id="parking_voucher_main_menu"
+            name="Cost Sheet"
+            sequence="142" 
+            web_icon="egs_custom_inventory,static/description/mr_icon.png"/> -->
+
+        <menuitem
+            id="parking_voucher_menu"
+            name="Voucher Parkir"
+            action="parking_voucher_action"
+            parent="sale.sale_order_menu"
+            sequence="6" />        
+
+    </data>
+</odoo>

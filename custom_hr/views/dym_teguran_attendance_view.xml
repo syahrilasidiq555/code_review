@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    
+    <!-- Tree View -->
+    <record id="dym_teguran_attendance_tree_view" model="ir.ui.view">
+        <field name="name">dym_teguran_attendance_tree_view</field>
+        <field name="model">dym.teguran.attendance</field>
+        <field name="arch" type="xml">
+            <tree>
+                <field name='name'/>
+                <field name='employee_id'/>
+                <field name="department_id" />
+                <field name="nik" />
+                <!-- <field name="teguran_tipe"/>  -->
+                <!-- <field name="state" /> -->
+                <field name="reason" />
+            </tree>
+        </field>
+    </record>
+    
+    <!-- Search View -->
+    <record id="dym_teguran_attendance_search_view" model="ir.ui.view">
+        <field name="name">dym_teguran_attendance_search_view</field>
+        <field name="model">dym.teguran.attendance</field>
+        <field name="arch" type="xml">
+            <search string="Search here..">
+                <field name='employee_id'/>
+                <field name="department_id" />
+                <!-- <field name="teguran_tipe"/>  -->
+                <!-- <field name="state" />
+                <filter string="State Confirm" name="ta_state_confirm" domain="[('state','=','confirm')]"/>
+                <filter string="State Approved" name="ta_state_approved" domain="[('state','=','approved')]"/>
+                <filter string="State Refused" name="ta_state_refuse" domain="[('state','=','refuse')]"/>
+                <group string="Group By">
+                    <filter string="Department" name="ta_group_by_department" context="{'group_by':'department_id'}"/>
+                    <filter string="Employee" name="ta_group_by_employee" context="{'group_by':'employee_id'}"/>
+                </group> -->
+            </search>
+        </field>
+    </record>
+
+    <!-- Form View -->
+    <record id="dym_teguran_attendance_form_view" model="ir.ui.view">
+        <field name="name">dym_teguran_attendance_form_view</field>
+        <field name="model">dym.teguran.attendance</field>
+        <field name="arch" type="xml">
+            <form string="">
+                <header>
+                    <!-- <field name="state" widget="statusbar" statusbar_visible="confirmed,approved" attrs="{'invisible':[('state','=','refuse')]}"/>
+                    <field name="state_refuse" widget="statusbar" statusbar_visible="refuse" attrs="{'invisible':[('state','!=','refuse')]}"/>
+                    
+                    <button name="btn_approve" states="confirmed" string="Approve Teguran" type="object" class="oe_highlight" groups="__export__.res_groups_hrd"/>
+                    <button name="btn_refuse" states="confirmed" string="Refuse Teguran" type="object" confirm="Apakah anda yakin akan melakukan REFUSE terhadap data ini?" groups="__export__.res_groups_hrd"/> -->
+                </header>
+                <sheet>
+                    <div class="oe_title">
+                        <h1>
+                            <label for="name" string="Surat Teguran /"/>
+                            <field name="name" class="oe_inline" readonly="1"/>
+                        </h1>
+                    </div>
+                    <group>
+                        <field name="employee_id" readonly="True" force_save="True"/>
+                        <field name="department_id" />
+                        <field name="nik" />
+                        <!-- <field name="teguran_tipe" widget="radio" options="{'horizontal': true}" readonly="True" force_save="True"/> -->
+                        <field name="reason" readonly="True" force_save="True"/>
+                    </group>
+                    <notebook>
+                        <page string="Attendance List" autofocus="True">
+                            <field name="attendance_lines" nolabel="1" widget="one2many_list" readonly="True" force_save="True">
+                                <tree string="" >
+                                    <field name="check_in"/>
+                                    <!-- <field name="outside_range" attrs="{'column_invisible':[('parent.teguran_tipe','!=','out_of_range')]}"/> -->
+                                    <!-- <field name="out_of_range_approval" attrs="{'column_invisible':[('parent.teguran_tipe','!=','out_of_range')]}"/> -->
+                                    <field name="check_out"/>
+                                    <!-- <field name="outside_range_checkout" attrs="{'column_invisible':[('parent.teguran_tipe','!=','out_of_range')]}"/> -->
+                                    <!-- <field name="oor_approval_co" attrs="{'column_invisible':[('parent.teguran_tipe','!=','out_of_range')]}"/> -->
+                                    <field name="waktu_terlambat" widget="float_time"/>
+                                    <field name="terlambat"/>
+                                </tree>
+                            </field>
+                        </page>
+                        <!-- <page string="Approval and Audit Trail">
+                            <group string="Approval">
+                                <field name="approval_ids" nolabel="1" widget="one2many_list">
+                                    <tree string="" editable="bottom" create="false" edit="false" delete="false">
+                                        <field name="state"/>
+                                        <field name="reason"/>
+                                        <field name="approval_id"/>
+                                        <field name="job_id" />
+                                        <field name="create_date"/>
+                                    </tree>
+                                </field>
+                            </group>
+                            <group string="Audit Trail">
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page> -->
+                    </notebook>
+                </sheet>
+                <div class="oe_chatter">
+                    <field name="message_follower_ids" widget="mail_followers"/>
+                    <field name="activity_ids"/>	
+                    <field name="message_ids" widget="mail_thread"/>
+                </div>
+            </form>
+        </field>
+    </record>
+
+
+
+    <!-- Action Server -->
+    <!-- Approve -->
+    <!-- <record id="multi_approve_action_server" model="ir.actions.server">
+        <field name="name">Approve(s)</field>
+        <field name="model_id" ref="dym_teguran_attendance.model_dym_teguran_attendance"/>
+        <field name="binding_model_id" ref="dym_teguran_attendance.model_dym_teguran_attendance"/>
+        <field name="sequence">3</field>
+        <field name="state">code</field>
+        <field name="code">action = records.btn_approve()</field>
+        <field name='groups_id' eval="[(4, ref('__export__.res_groups_hrd'))]"/>
+    </record> -->
+
+    <!-- Refuse -->
+    <!-- <record id="multi_refuse_action_server" model="ir.actions.server">
+        <field name="name">Refuse(s)</field>
+        <field name="model_id" ref="dym_teguran_attendance.model_dym_teguran_attendance"/>
+        <field name="binding_model_id" ref="dym_teguran_attendance.model_dym_teguran_attendance"/>
+        <field name="sequence">4</field>
+        <field name="state">code</field>
+        <field name="code">action = records.btn_refuse()</field>
+        <field name='groups_id' eval="[(4, ref('__export__.res_groups_hrd'))]"/>
+    </record> -->
+
+    <record model="ir.actions.act_window" id="action_dym_teguran_attendance">
+        <field name="name">Teguran Attendance</field>
+        <field name="res_model">dym.teguran.attendance</field>
+        <field name="view_mode">tree,form</field>
+    </record>
+    
+    <menuitem 
+        id="menu_teguran_attendance" 
+        name="Teguran Attendance" 
+        parent="hr_attendance.menu_hr_attendance_root" 
+        sequence="13" 
+        groups="hr_attendance.group_hr_attendance"
+        action="action_dym_teguran_attendance"/>
+</odoo>

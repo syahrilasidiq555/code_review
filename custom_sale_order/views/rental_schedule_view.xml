@@ -1,0 +1,72 @@
+<odoo>
+    <data>
+        <!-- Gantt View -->
+        <record id="inherit_rental_schedule_view_form" model="ir.ui.view">
+            <field name="name">inherit_rental_schedule_view_form</field>
+            <field name="model">sale.rental.schedule</field>
+            <field name="inherit_id" ref="sale_renting.rental_schedule_view_form"/>
+            <field name="arch" type="xml">
+                <field name="order_id" position="attributes">
+                    <attribute name="options">{'no_open':True}</attribute>
+                </field>
+
+                <field name="order_id" position="after">
+                    <field name="order_line_id" readonly="1" force_save="1" />
+                </field>
+            </field>
+        </record>
+
+
+        <!-- Search View -->
+        <record id="rental_schedule_view_search_inherited" model="ir.ui.view">
+            <field name="name">rental_schedule_view_search_inherited</field>
+            <field name="model">sale.rental.schedule</field>
+            <field name="inherit_id" ref="sale_renting.rental_schedule_view_search"/>
+            <field name="arch" type="xml">
+                <xpath expr="//filter[@name='Late']" position="after">
+                    <separator/>
+                    <filter name="reserved" string="Reserved" domain="[('report_line_status','=', 'reserved')]"/>
+                    <filter name="pickedup" string="Pickedup" domain="[('report_line_status','=', 'pickedup')]"/>
+                    <filter name="returned" string="Returned" domain="[('report_line_status','=', 'returned')]"/>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- Tree View -->
+        <record model="ir.ui.view" id="rental_schedule_view_tree">
+            <field name="name">rental_schedule_view_tree</field>
+            <field name="model">sale.rental.schedule</field>
+            <field name="arch" type="xml">
+                <tree string="" create="false">
+                    <field name="order_id" optional="show"/>
+                    <field name="order_date" />
+                    <field name="partner_id" optional="show"/>
+                    <field name="product_id" />
+                    <field name="description" />
+                    <field name="pickup_date" string="Tanggal Awal Rental"/>
+                    <field name="return_date" string="Tanggal Akhir Rental"/>
+                    <field name="product_uom_qty" digits="[12,0]" string="Jumlah Dipesan" />
+                    <field name="qty_delivered" digits="[12,0]"/>
+                    <field name="qty_returned" digits="[12,0]"/>
+                    <field name="rental_status" string="Rental Order Status" optional="hide"/>
+                    <field name="report_line_status" string="Rental Status" />
+                    <field name="late" />
+                    <!-- <button
+                        name="action_view_so"
+                        type="object"
+                        class="oe_highlight"
+                        icon="fa-external-link"
+                        string="Open"/> -->
+                </tree>
+            </field>
+        </record>
+
+
+        <!-- inherit record -->
+        <record id="sale_renting.action_rental_order_schedule" model="ir.actions.act_window">
+            <field name="view_mode">tree,gantt</field>
+            <field name="context">{'create': False, 'search_default_Rentals':1, 'group_by_no_leaf':1, 'search_default_Product':1}</field>
+        </record>
+
+    </data>
+</odoo>

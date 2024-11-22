@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- MENU ITEM -->
+    <!-- REPORT -->
+    <record id="hr_recruitment.hr_applicant_report_menu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_access_analysis'))]" />
+    </record>
+
+    <!-- CONFIG -->
+    <record id="hr_recruitment.menu_hr_recruitment_global_settings" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_access_settings'))]" />
+    </record>
+    <record id="hr_recruitment.menu_hr_job_position_config" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_access_job_position'))]" />
+    </record>
+    <record id="hr_recruitment.menu_hr_applicant_refuse_reason" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_access_refuse_reason'))]" />
+    </record>
+    <record id="hr_recruitment.menu_hr_department" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_access_department'))]" />
+    </record>
+    <record id="hr_recruitment.hr_recruitment_menu_config_activity_type" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_access_activity_types'))]" />
+    </record>
+    <record id="custom_hr_recruitment.big_fpk_matrix_approval_submenu" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0),(4,ref('group_submenu_report_config_access_fpk'))]" />
+    </record>
+<!-- END OF MENU ITEM -->
+</odoo>

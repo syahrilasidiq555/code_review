@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- ACCESS BUTTON -->
+        <record id="pos_session_form_access_btn" model="ir.ui.view">
+            <field name="name">pos_session_form_access_btn</field>
+            <field name="model">pos.session</field>
+            <field name="inherit_id" ref="point_of_sale.view_pos_session_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//button[@name='action_view_order']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_pos_session_button_order</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_stock_picking']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_pos_session_button_pengambilan</attribute>
+                </xpath>
+                <xpath expr="//button[@name='action_show_payments_list']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_pos_session_button_pembayaran</attribute>
+                </xpath>
+                <xpath expr="//button[@name='show_journal_items']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_pos_session_button_jurnal</attribute>
+                </xpath>
+                <xpath expr="//button[@name='show_cash_register']" position="attributes">
+                    <attribute name="groups">custom_access_right.group_pos_session_button_mesin_kasir</attribute>
+                </xpath>
+            </field>
+        </record>
+
+
+        <!-- MENU ITEM -->
+        <!-- Order / Order / Sesi -->
+        <record id="point_of_sale.menu_pos_session_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_session_read'))]" />
+        </record>
+
+        <!-- Order / Pembayaran -->
+        <record id="point_of_sale.menu_pos_payment" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_pembayaran_read'))]" />
+        </record>
+        <!-- Order / Pelanggan -->
+        <record id="point_of_sale.menu_point_of_sale_customer" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_pelanggan_read'))]" />
+        </record>
+
+
+        <!-- Produk / Produk -->
+        <record id="point_of_sale.menu_pos_products" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_product_read'))]" />
+        </record>
+        <!-- Produk / Varian Produk -->
+        <record id="point_of_sale.pos_config_menu_action_product_product" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_product_variant_read'))]" />
+        </record>
+        <!-- Produk / Daftar Harga -->
+        <record id="point_of_sale.pos_config_menu_action_product_pricelist" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_pricelist_read'))]" />
+        </record>
+        <!-- Produk / Program Loyalitas -->
+        <record id="pos_loyalty.menu_loyalty_program" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_program_loyalitas_read'))]" />
+        </record>
+
+
+        <!-- Laporan / Order -->
+        <record id="point_of_sale.menu_report_pos_order_all" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_report_order_read'))]" />
+        </record>
+        <!-- Laporan / Detail Penjualan -->
+        <record id="point_of_sale.menu_report_order_details" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_report_sales_detail_read'))]" />
+        </record>
+
+
+        <!-- Konfigurasi / Pengaturan -->
+        <record id="point_of_sale.menu_pos_global_settings" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_config_config_read'))]" />
+        </record>
+        <!-- Konfigurasi / POS -->
+        <record id="point_of_sale.menu_pos_config_pos" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_config_pos_read'))]" />
+        </record>
+        <!-- Konfigurasi / Cara Pembayaran -->
+        <record id="point_of_sale.menu_pos_payment_method" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_config_payment_read'))]" />
+        </record>
+        <!-- Konfigurasi / Koin/Kertas -->
+        <record id="point_of_sale.menu_pos_bill" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_config_coin_read'))]" />
+        </record>
+        <!-- Konfigurasi / Product -->
+        <record id="point_of_sale.pos_menu_products_configuration" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_config_product_read'))]" />
+        </record>
+        <!-- Konfigurasi / Pajak -->
+        <record id="point_of_sale.menu_action_tax_form_open" model="ir.ui.menu">
+            <field name="groups_id" eval="[(5,0),(4,ref('custom_access_right.group_pos_config_tax_read'))]" />
+        </record>
+
+
+    </data>
+</odoo>

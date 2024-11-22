@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="confirm_wizard_form_view" model="ir.ui.view">
+            <field name="name">confirm_wizard_form_view</field>
+            <field name="model">confirm.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <h3>
+                        <field name="message" nolabel="1" readonly="True"/>
+                    </h3>
+                    <!-- <field name="incentive_id" invisible="1"/> -->
+                    <field name="data_id" invisible="1"/>
+                    <field name="model_name" invisible="1"/>
+                    <field name="function_name" invisible="1"/>
+                    <field name="function_parameter" invisible="1"/>
+                    <group>
+                        <field name="recipent_user_id" options="{'no_create': True, 'no_open': True}"/>
+                    </group>
+                    <footer>
+                        <button name="btn_continue" context="{'send_email':True}" type="object" string="Confirm dan set reminder" class="oe_highlight"/>                             
+                        <button name="btn_continue"  type="object" string="Confirm tanpa send reminder" class="oe_highlight"/>                              
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+
+        <record id="confirm_wizard_form_view_2" model="ir.ui.view">
+            <field name="name">confirm_wizard_form_view_2</field>
+            <field name="model">confirm.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <h3>
+                        <field name="message" nolabel="1" readonly="True"/>
+                    </h3>
+                    <!-- <field name="incentive_id" invisible="1"/> -->
+                    <field name="data_id" invisible="1"/>
+                    <field name="model_name" invisible="1"/>
+                    <field name="function_name" invisible="1"/>
+                    <field name="function_parameter" invisible="1"/>
+                    <footer>
+                        <button name="btn_continue" type="object" string="Send Email Reminder" class="oe_highlight"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+
+        <record id="confirm_wizard_form_input_message" model="ir.ui.view">
+            <field name="name">confirm_wizard_form_input_message</field>
+            <field name="model">confirm.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <field name="message" nolabel="1" placeholder="Insert your reason here.." required="1"/>
+                    <!-- <field name="incentive_id" invisible="1"/> -->
+                    <field name="data_id" invisible="1"/>
+                    <field name="model_name" invisible="1"/>
+                    <field name="function_name" invisible="1"/>
+                    <field name="function_parameter" invisible="1"/>
+                    <footer>
+                        <button name="btn_continue" type="object" string="Confirm" class="oe_highlight"/>                             
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+
+        <record id="confirm_wizard_form_view_3" model="ir.ui.view">
+            <field name="name">confirm_wizard_form_view_3</field>
+            <field name="model">confirm.wizard</field>
+            <field name="type">form</field>
+            <field name="arch" type="xml">
+                <form string="Message">
+                    <p>
+                        <field name="message" nolabel="1" readonly="True"/>
+                    </p>
+                    <field name="data_id" invisible="1"/>
+                    <field name="model_name" invisible="1"/>
+                    <field name="function_name" invisible="1"/>
+                    <field name="function_parameter" invisible="1"/>
+                    <footer>
+                        <!-- <button name="btn_continue" type="object" string="Continue" class="oe_highlight"/>                              -->
+                        <button special="cancel" string="Cancel"/>                    
+                    </footer>                                    
+                </form>
+            </field>
+        </record>
+
+    </data>
+</odoo>

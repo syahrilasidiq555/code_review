@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="action_run_auto_post_selected_asset" model="ir.actions.server">
+            <field name="name">Run &amp; Auto Post</field>
+            <field name="model_id" ref="account_asset.model_account_asset"/>
+            <field name="binding_model_id" ref="account_asset.model_account_asset"/>
+            <field name="state">code</field>
+            <field name="code">action = records.with_context(auto_post=True, validate=True, valid_state='draft').action_check()</field>
+        </record>
+
+        <record id="action_run_manual_post_selected_asset" model="ir.actions.server">
+            <field name="name">Run &amp; Manual Post</field>
+            <field name="model_id" ref="account_asset.model_account_asset"/>
+            <field name="binding_model_id" ref="account_asset.model_account_asset"/>
+            <field name="state">code</field>
+            <field name="code">action = records.with_context(auto_post=False, validate=True, valid_state='draft').action_check()</field>
+        </record>
+
+        <record id="action_draft_selected_asset" model="ir.actions.server">
+            <field name="name">Set to Draft</field>
+            <field name="model_id" ref="account_asset.model_account_asset"/>
+            <field name="binding_model_id" ref="account_asset.model_account_asset"/>
+            <field name="state">code</field>
+            <field name="code">action = records.with_context(set_draft=True, valid_state='open').action_check()</field>
+        </record>
+
+    </data>
+</odoo>

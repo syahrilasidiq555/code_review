@@ -1,0 +1,307 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- add Perjalanan Dinas in ir.module.category -->
+        <record model="ir.module.category" id="module_category_perjalanan_dinas">
+            <field name="name">Perjalanan Dinas</field>
+            <field name="description">...</field>
+            <field name="sequence">20</field>
+        </record>   
+
+        <!-- Group ROLE -->
+        <record id="pd_user_input" model="res.groups">
+            <field name="name">Input User</field>
+            <field name="comment">
+                Approval for Menu Employee > Perjalanan Dinas Karyawan.
+                Group Untuk Input Perjalanan dinas
+                Feature : 
+                - View pribadi (PIC Perjalanan Dinas / karyawan lainnya = user_id)
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+
+        <record id="pd_pic_sales" model="res.groups">
+            <field name="name">PIC Sales &amp; Marketing</field>
+            <field name="comment">
+                Approval for Menu Employee > Perjalanan Dinas Karyawan.
+                Group Untuk Validate Perjalanan dinas Sales dan Marketing pada saat closing
+                Feature : 
+                - View data department sales dan marketing
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+
+        <record id="pd_manager" model="res.groups">
+            <field name="name">Manager</field>
+            <field name="comment">
+                Approval for Menu Employee > Perjalanan Dinas Karyawan.
+                Group Untuk Approval bawahan yang melakukan perjalanan dinas
+                Feature : 
+                - View data bawahan
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+
+        <record id="pd_direksi" model="res.groups">
+            <field name="name">Direksi</field>
+            <field name="comment">
+                Approval for Menu Employee > Perjalanan Dinas Karyawan.
+                Group Untuk Approval bawahan yang melakukan perjalanan dinas
+                Feature : 
+                - View data dengan field direksi = diri sendiri
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+
+        <record id="pd_fat" model="res.groups">
+            <field name="name">PIC Finance &amp; Accounting</field>
+            <field name="comment">
+                Approval for Menu Employee > Perjalanan Dinas Karyawan.
+                Group Untuk Approval bawahan yang melakukan perjalanan dinas
+                Feature : 
+                - View Semua data Perjalanan dinas
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+
+        <record id="pd_human_resource" model="res.groups">
+            <field name="name">HR Responsible</field>
+            <field name="comment">
+                Approval for Menu Employee > Perjalanan Dinas Karyawan.
+                Group Untuk Approval bawahan yang melakukan perjalanan dinas
+                Feature : 
+                - View Semua data Perjalanan dinas
+                - Edit User Approver pada tiap2 record (Field PIC,manager,hrd responsible,direksi)
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+
+
+
+        <!-- BUTTON -->
+        <record id="pd_button_action_pengajuan_rfa" model="res.groups">
+            <field name="name">Tombol Pengajuan : RFA</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Pengajuan : RFA
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_pengajuan_approve1" model="res.groups">
+            <field name="name">Tombol Pengajuan : Approve Manager</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Pengajuan : Approve Manager
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_pengajuan_approve2" model="res.groups">
+            <field name="name">Tombol Pengajuan : Approve HRD</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Pengajuan : Approve HRD
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_pengajuan_approve3" model="res.groups">
+            <field name="name">Tombol Pengajuan : Approve Direksi</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Pengajuan : Approve Direksi
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_pengajuan_revise" model="res.groups">
+            <field name="name">Tombol Pengajuan : Revise</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Pengajuan : Revise
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_pengajuan_reject" model="res.groups">
+            <field name="name">Tombol Pengajuan : Reject</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Pengajuan : Reject
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_pengajuan_set_draft" model="res.groups">
+            <field name="name">Tombol Pengajuan : Set to Draft</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Pengajuan : Set to Draft
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_closing_rfa" model="res.groups">
+            <field name="name">Tombol Closing : RFA</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Closing : RFA
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_closing_approve0" model="res.groups">
+            <field name="name">Tombol Closing : PIC Validate</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Closing : PIC Validate
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_closing_approve1" model="res.groups">
+            <field name="name">Tombol Closing : Approve Manager</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Closing : Approve Manager
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_closing_approve2" model="res.groups">
+            <field name="name">Tombol Closing : Approve HR</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Closing : Approve HR
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_closing_approve3" model="res.groups">
+            <field name="name">Tombol Closing : Finance and Accounting validate</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Closing : Finance and Accounting validate
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_closing_revise" model="res.groups">
+            <field name="name">Tombol Closing : Revise</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Closing : Revise
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+        
+        <record id="pd_button_action_closing_set_draft" model="res.groups">
+            <field name="name">Tombol Closing : Set to Draft</field>
+            <field name="comment">
+                Group Untuk Akses Button pada Perjalanan Dinas Form
+                Feature : 
+                - View tombol Closing : Set to Draft
+            </field>
+            <field name="category_id" ref="dym_perjalanan_dinas.module_category_perjalanan_dinas" />
+        </record>
+
+
+        <!-- Group Rule -->
+        <!-- User Input Rule -->
+        <record id="pd_rule_user_input" model="ir.rule">
+            <field name="name">Perjalanan Dinas (User): See only user's own data</field>
+            <field name="model_id" ref="dym_perjalanan_dinas.model_dym_perjalanan_dinas" />
+            <field name="domain_force">
+                ['|',('employee_id.id','=',user.employee_id.id),('employee_ids.id','=',user.employee_id.id)]
+            </field>
+            <field name="groups" eval="[(4,ref('dym_perjalanan_dinas.pd_user_input'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="perm_create" eval="1" />
+        </record>
+
+        <!-- PIC Sales Marketing Rule -->
+        <record id="pd_rule_pic_sales" model="ir.rule">
+            <field name="name">Perjalanan Dinas (PIC Sales &amp; Marketing): See record PIC Sales = user</field>
+            <field name="model_id" ref="dym_perjalanan_dinas.model_dym_perjalanan_dinas" />
+            <field name="domain_force">
+                [('pic_sales_id.id','=',user.employee_id.id)]
+            </field>
+            <field name="groups" eval="[(4,ref('dym_perjalanan_dinas.pd_pic_sales'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_unlink" eval="0" />
+            <field name="perm_create" eval="0" />
+        </record>
+
+        <!-- Manager Rule -->
+        <record id="pd_rule_manager" model="ir.rule">
+            <field name="name">Perjalanan Dinas (Manager): See record PIC Sales = user</field>
+            <field name="model_id" ref="dym_perjalanan_dinas.model_dym_perjalanan_dinas" />
+            <field name="domain_force">
+                [('manager_id.id','=',user.employee_id.id)]
+            </field>
+            <field name="groups" eval="[(4,ref('dym_perjalanan_dinas.pd_manager'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_unlink" eval="0" />
+            <field name="perm_create" eval="0" />
+        </record>
+
+        <!-- Direksi Rule -->
+        <record id="pd_rule_direksi" model="ir.rule">
+            <field name="name">Perjalanan Dinas (Direksi): See record PIC Sales = user</field>
+            <field name="model_id" ref="dym_perjalanan_dinas.model_dym_perjalanan_dinas" />
+            <field name="domain_force">
+                [('direksi_id.id','=',user.employee_id.id)]
+            </field>
+            <field name="groups" eval="[(4,ref('dym_perjalanan_dinas.pd_direksi'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_unlink" eval="0" />
+            <field name="perm_create" eval="0" />
+        </record>
+
+
+        <!-- FAT Rule -->
+        <record id="pd_rule_fat" model="ir.rule">
+            <field name="name">Perjalanan Dinas (FAT): See All Record (cannot create delete)</field>
+            <field name="model_id" ref="dym_perjalanan_dinas.model_dym_perjalanan_dinas" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('dym_perjalanan_dinas.pd_fat'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_unlink" eval="0" />
+            <field name="perm_create" eval="0" />
+        </record>
+
+        <!-- HR Rule -->
+        <record id="pd_rule_human_resource" model="ir.rule">
+            <field name="name">Perjalanan Dinas (HR): See All Record</field>
+            <field name="model_id" ref="dym_perjalanan_dinas.model_dym_perjalanan_dinas" />
+            <field name="domain_force">[(1,'=',1)]</field>
+            <field name="groups" eval="[(4,ref('dym_perjalanan_dinas.pd_human_resource'))]" />
+            <field name="perm_read" eval="1" />
+            <field name="perm_write" eval="1" />
+            <field name="perm_unlink" eval="1" />
+            <field name="perm_create" eval="1" />
+        </record>
+
+        
+    </data>
+</odoo>

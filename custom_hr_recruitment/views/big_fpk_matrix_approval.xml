@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <!-- TREE -->
+    <record id="big_fpk_matrix_approval_view_tree" model="ir.ui.view">
+        <field name="name">big_fpk_matrix_approval_view_tree</field>
+        <field name="model">big.fpk.matrix.approval</field>
+        <field name="type">tree</field>
+        <field name="arch" type="xml">
+            <tree >
+                <field name="name" />
+                <field name="approval_ids" widget="many2many_tags" />
+            </tree>
+        </field>
+    </record>
+
+
+    <!-- SEARCH -->
+    <record id="big_fpk_matrix_approval_view_search" model="ir.ui.view">
+        <field name="name">big_fpk_matrix_approval_view_search</field>
+        <field name="model">big.fpk.matrix.approval</field>
+        <field name="arch" type="xml">
+            <search string="Search Data...">
+                <field name="name"/>
+            </search>
+        </field>
+    </record>
+
+
+    <!-- FORM -->
+    <record id="big_fpk_matrix_approval_view_form" model="ir.ui.view">
+        <field name="name">big_fpk_matrix_approval_view_form</field>
+        <field name="model">big.fpk.matrix.approval</field>
+        <field name="arch" type="xml">
+            <form string="Overtime Form">
+                <header>
+                </header>
+                <sheet>
+                    <group>
+                        <group>
+                            <field name="name"/>
+                            <field name="jenis_fpk" />
+                            <field name="department_ids" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}" widget="many2many_tags"/>
+                        </group>
+                        <group>
+                            <field name="job_ids" widget="one2many_list" style="max-width:400px;">
+                                <tree string="" editable="bottom" create="true" edit="true" delete="true">
+                                    <field name="name"/>
+                                </tree>
+                            </field>
+                        </group>
+                    </group>
+                    <notebook>
+                        <page name="approval_layer" string="Approval Layer">
+                            <field name="approval_ids" nolabel="1" widget="one2many_list">
+                                <tree string="" editable="bottom" create="true" edit="true" delete="true">
+                                    <field name="sequence" widget="handle"/>
+                                    <field name="name"/>
+                                    <field name="group_id" options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                                    <field name="employee_ids_domain" invisible="1" />
+                                    <field name="employee_ids" widget="many2many_tags" 
+                                        domain="employee_ids_domain"
+                                        options="{'no_create': True, 'no_create_edit':True, 'no_open':True}"/>
+                                    <field name="need_reason" />
+                                </tree>
+                            </field>
+                        </page>
+                        <page string="Audit Trail">
+                            <group string="Audit Trail">
+                                <group>
+                                    <field name="create_uid" readonly="1"/>
+                                    <field name="create_date" readonly="1"/>
+                                </group>
+                                <group>
+                                    <field name="write_uid" readonly="1"/>
+                                    <field name="write_date" readonly="1"/>
+                                </group>
+                            </group>
+                        </page>
+                    </notebook>
+            </sheet>
+            <div class="oe_chatter">
+                <field name="message_follower_ids" widget="mail_followers"/>
+                <field name="activity_ids"/>	
+                <field name="message_ids" widget="mail_thread"/>
+            </div>
+            </form>
+        </field>
+    </record>
+
+
+    
+    
+    <record id="big_fpk_matrix_approval_action" model="ir.actions.act_window">
+        <field name="name">Matrix Approval</field>
+        <field name="res_model">big.fpk.matrix.approval</field>
+        <field name="view_mode">tree,form</field>
+        <field name="domain">[]</field>
+        <field name="context">{}</field>
+        <field name="help" type="html">
+            <p class="o_view_nocontent_smiling_face">
+            Add new Matrix Approval
+            </p><p>
+            With just a quick glance on the Odoo screen, you
+            can easily find all the information you need.
+            </p>
+        </field>
+    </record>
+
+    <menuitem 
+        id="big_fpk_matrix_approval_submenu"
+        name="FPK Matrix Approval"
+        parent="hr_recruitment.menu_hr_recruitment_configuration"
+        sequence="15"
+        action="big_fpk_matrix_approval_action"/>
+
+</odoo>

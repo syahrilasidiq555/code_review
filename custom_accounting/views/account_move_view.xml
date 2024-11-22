@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_account_move_inherit" model="ir.ui.view">
+            <field name="name">view_account_move_inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='payment_reference']" position="after">
+                    <field name="is_over_due" invisible="1"/>
+                    <field name="is_approved_over_due" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//button[@name='action_register_payment']" position="before">
+                    <button name="approve_over_due" id="approve_over_due_btn" type="object" 
+                        class="oe_highlight" attrs="{'invisible': ['|', '|', '|', '|',('state', '!=', 'posted'), 
+                            ('move_type', 'not in', ['out_invoice']), 
+                            ('is_over_due','=',False),
+                            ('is_approved_over_due','=',True),
+                            ('payment_state','not in',['not_paid','partial'])]}" 
+                        string="Approve Overdue" data-hotkey="p" />
+                </xpath>
+
+                <xpath expr="//page[@name='other_info']" position="inside">
+                    <group name="approval_information" string="Informasi Approval">
+                        <group name="employee_responsible" string="Pihak RDC">
+                            <field name="employee_approve_user_id" readonly="1" force_save="1"/>
+                            <field name="employee_approve_date" readonly="1" force_save="1"/>
+                            <field name="employee_approver_sign" widget="signature"/>
+                            <button name="approve_employee_responsible" type="object" 
+                                class="oe_highlight"
+                                colspan="2" 
+                                string="Sign" 
+                                style="margin-bottom:10px!important; float:right;"/>
+                        </group>
+                        <group name="customer_responsible" string="Penanggungjawab">
+                            <field name="penanggungjawab_approve_partner_id" readonly="1" force_save="1"/>
+                            <field name="penanggungjawab_approve_date" readonly="1" force_save="1"/>
+                            <field name="penanggungjawab_approver_sign" widget="signature"/>
+                            <button name="approve_penanggungjawab" type="object" 
+                                class="oe_highlight"
+                                colspan="2" 
+                                string="Sign" 
+                                style="margin-bottom:10px!important; float:right;"/>
+                        </group>
+                    </group>
+                    <group name="approval_overdue_information" string="Informasi Approval Overdue" 
+                        attrs="{'invisible':['|', '|', ('state','!=','posted'), ('move_type', 'not in', ['out_invoice']), ('is_approved_over_due','=',False)]}">
+                        <field name="approve_date" readonly="1" force_save="1"/>
+                        <field name="approve_user_id" readonly="1" force_save="1"/>
+                        <field name="approver_sign" widget="signature"/>
+                    </group>
+
+                    <!-- UNTUK BILLS -->
+                    <!-- <xpath expr="//group[@id='header_right_group']//div[@name='journal_div']" position="after">
+                        <field name="pr_name" attrs="{'invisible':[('move_type','!=','in_invoice'),('pr_name','=','New')]}"/>
+                        <field name="state_req_payment" invisible="1"/>
+                    </xpath> -->
+                    
+                    <!-- <xpath expr="//header//field[@name='state']" position="replace">
+                        <field name="state" widget="statusbar" statusbar_visible="draft,posted" attrs="{'invisile':[('state_req_payment','=','requested')]}"/>
+                        <field name="state_req_payment" widget="statusbar" statusbar_visible="requested"/>
+                    </xpath> -->
+
+                    
+                    
+                </xpath>
+            </field>
+        </record>
+
+        <record id="view_account_move_line_inherit_2" model="ir.ui.view">
+            <field name="name">view_account_move_line_inherit_2</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet//notebook//page[@id='invoice_tab']//field[@name='invoice_line_ids']//tree//field[@name='discount']" position="before">
+                    <field name="discount_fixed" force_save="1"/>
+                </xpath>
+                <xpath expr="//sheet//notebook//page[@id='invoice_tab']//field[@name='invoice_line_ids']//tree//field[@name='discount']" position="attributes">
+                    <attribute name="invisible">1</attribute>
+                </xpath>
+            </field>
+        </record>
+
+        <!-- UNTUK BILLS -->
+        <record id="view_in_invoice_bill_tree_inherit" model="ir.ui.view">
+            <field name="name">view_in_invoice_bill_tree_inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_in_invoice_bill_tree"/>
+            <field name="arch" type="xml"> 
+                <xpath expr="//button[@name='action_register_payment']" position="attributes">
+                    <attribute name="invisible">context.get('default_move_type') not in ('out_invoice', 'out_refund', 'out_receipt', 'in_refund','in_receipt')</attribute>
+                </xpath>
+                <!-- <xpath expr="//tree" position="attributes">
+                    <attribute name="create">false</attribute>
+                </xpath> -->
+
+                <!-- <xpath expr="//field[@name='state']" position="after">
+                    <field name="state_req_payment" attrs="{'invisible':[('move_type','!=','in_invoice')]}" widget="badge"
+                        decoration-success="state_req_payment == 'approved'" 
+                        decoration-info="state_req_payment == 'requested'" 
+                        decoration-warning="state_req_payment == 'draft'" />
+                </xpath> -->
+                
+                <!-- <xpath expr="//button[@name='action_register_payment']" position="before">
+                    <button name="action_payment_requisition" type="object" string="Payment Requisition" 
+                        groups="account.group_account_user"
+                        invisible="context.get('default_move_type') not in ('in_invoice')"
+                        confirm="Continue Process Payment Requisition ?"/>
+                    <button name="action_approve_payment_requisition" type="object" string="Approve Payment Requisition" 
+                        groups="custom_access_right.group_approve_payment_requisition" class="oe_highlight"
+                        invisible="context.get('default_move_type') not in ('in_invoice')"
+                        confirm="Continue Approve Payment Requisition ?"/>
+                </xpath> -->
+            </field>
+        </record>
+
+        <!-- NEw Menu for Payment Requisition -->
+        <!-- <record id="view_account_invoice_filter_inherit" model="ir.ui.view">
+            <field name="name">view_account_invoice_filter_inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_account_invoice_filter"/>
+            <field name="arch" type="xml">
+                <xpath expr="//search//group" position="inside">
+                    <separator/>
+                    <filter string="Payment Requisition" name="payment_requisition" context="{'group_by':'pr_name'}"/>
+                </xpath>
+                
+                <xpath expr="//filter[@name='late']" position="after">
+                    <separator/>
+                    <filter name="pr_requested" string="Requested" domain="[('state_req_payment', '=', 'requested')]"/>
+                    <filter name="pr_approved" string="Approved" domain="[('state_req_payment', '=', 'approved')]"/>
+                </xpath>
+            </field>
+        </record> -->
+
+        <!-- <record id="action_payment_requisition_type" model="ir.actions.act_window">
+            <field name="name">Payment Requisition</field>
+            <field name="res_model">account.move</field>
+            <field name="view_mode">tree,kanban,form</field>
+            <field name="view_id" ref="view_in_invoice_bill_tree_inherit"/>
+            <field name="search_view_id" ref="view_account_invoice_filter_inherit"/>
+            <field name="domain">[('move_type', '=', 'in_invoice'),('pr_name', '!=', 'New'),('state_req_payment','in',['requested','approved'])]</field>
+            <field name="context">{
+                    'default_move_type': 'in_invoice',
+                    'search_default_pr_requested': True,
+                    'search_default_payment_requisition': True,
+                    'create': False,
+                    'edit': False
+                }
+            </field>
+            <field name="help" type="html">
+              <p class="o_view_nocontent_smiling_face">
+                Create a vendor bill
+              </p><p>
+                Create invoices, register payments and keep track of the discussions with your vendors.
+              </p>
+            </field>
+        </record> -->
+
+        <!-- <menuitem id="menu_action_account_payments_payable" action="action_payment_requisition_type" sequence="19" parent="account.menu_finance_payables"/> -->
+
+    </data>
+</odoo>

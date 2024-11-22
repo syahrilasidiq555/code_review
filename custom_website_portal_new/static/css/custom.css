@@ -1,0 +1,17 @@
+#oe_main_menu_navbar_custom {
+    /* position: absolute; */
+    top: 0;
+    left: 0;
+    bottom: auto;
+    right: 0;
+    /* position: fixed; */
+    /* z-index: 1040; */
+    font-family: Roboto, "Montserrat", "Segoe UI", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-size: 14px;
+}
+
+
+
+#oe_main_menu_navbar_custom a {
+    text-decoration: none;
+}

@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+<!-- Menu ITEM -->
+    <record id="purchase.purchase_report_main" model="ir.ui.menu">
+        <field name="groups_id" eval="False" />
+    </record>
+    <record id="purchase_enterprise.purchase_report_menu_dashboard" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_submenu_purchase_report'))]" />
+    </record>
+    <record id="purchase.purchase_report" model="ir.ui.menu">
+        <field name="groups_id" eval="[(5,0), (4,ref('group_purchase_laporan_pembelian'))]" />
+    </record>
+</odoo>

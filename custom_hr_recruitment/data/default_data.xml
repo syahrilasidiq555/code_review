@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- <record id="lost_stage" model="crm.stage">
+            <field name="name">Lost</field>
+            <field name="sequence">75</field>
+        </record>
+
+        <record id="technical_validation_stage" model="crm.stage">
+            <field name="name">Technical Validation</field>
+            <field name="sequence">2</field>
+        </record>
+        
+        <record id="business_validation_stage" model="crm.stage">
+            <field name="name">Business Validation</field>
+            <field name="sequence">3</field>
+        </record>
+
+        <delete id="crm.stage_lead2" model="crm.stage"/>
+        <delete id="crm.stage_lead3" model="crm.stage"/> -->
+
+        <!-- Update stage Initial Qualification -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'hr.recruitment.stage'), ('name', '=', 'stage_job1')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="hr_recruitment.stage_job1" model="hr.recruitment.stage">
+            <field name="name">Candidate Sourcing</field>
+            <field name="sequence">1</field>
+            <field name="template_id" ref="hr_recruitment.email_template_data_applicant_congratulations"  />
+        </record>
+
+        <!-- create Psychotest stage  -->
+        <record id="stage_job_psychotest" model="hr.recruitment.stage">
+            <field name="name">Psychotest</field>
+            <field name="sequence">2</field>
+            <field name="template_id" ref="custom_hr_recruitment.email_template_data_applicant_psychotest"  />
+        </record>
+
+        <!-- Update stage First Interview -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'hr.recruitment.stage'), ('name', '=', 'stage_job2')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="hr_recruitment.stage_job2" model="hr.recruitment.stage">
+            <field name="name">HR Interview</field>
+            <field name="sequence">3</field>
+            <field name="template_id" ref="custom_hr_recruitment.email_template_data_applicant_hr_interview"  />
+        </record>
+
+        <!-- Update stage Second Interview -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'hr.recruitment.stage'), ('name', '=', 'stage_job3')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="hr_recruitment.stage_job3" model="hr.recruitment.stage">
+            <field name="name">User Interview</field>
+            <field name="sequence">4</field>
+            <field name="template_id" ref="custom_hr_recruitment.email_template_data_applicant_user_interview"  />
+        </record>
+
+        <!-- create refused stage  -->
+        <record id="stage_job_refused" model="hr.recruitment.stage">
+            <field name="name">Refused</field>
+            <field name="sequence">5</field>
+            <field name="template_id" ref="hr_recruitment.email_template_data_applicant_refuse"  />
+        </record>
+
+        <!-- Update stage Contract Proposal -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'hr.recruitment.stage'), ('name', '=', 'stage_job4')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="hr_recruitment.stage_job4" model="hr.recruitment.stage">
+            <field name="name">Offering</field>
+            <field name="sequence">6</field>
+            <field name="template_id" ref="custom_hr_recruitment.email_template_data_applicant_offering"  />
+        </record>
+
+        <!-- Update stage Contract Signed -->
+        <function name="write" model="ir.model.data">
+            <function name="search" model="ir.model.data">
+                <value eval="[('model', '=', 'hr.recruitment.stage'), ('name', '=', 'stage_job5')]"/>
+            </function>
+            <value eval="{'noupdate': False}" />
+        </function>
+        <record id="hr_recruitment.stage_job5" model="hr.recruitment.stage">
+            <field name="name">Contract</field>
+            <field name="sequence">7</field>
+        </record>
+
+
+    </data>
+</odoo>

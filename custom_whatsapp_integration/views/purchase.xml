@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="purchase_order_form_inherit_whatsapp" model="ir.ui.view">
+        <field name="name">purchase_order_form_inherit_whatsapp</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_form"/>
+        <field name="arch" type="xml">
+
+            <!-- tambah tombol untuk send whatsapp -->
+            <xpath expr="//button[@name='action_rfq_send']" position="after">
+                <!-- <field name="cost_sheet_id" invisible="1" /> -->
+                <button name="action_send_whatsapp" 
+                    type="object" 
+                    string="Kirim Pesan WhatsApp Semayam" 
+                    class="oe_highlight"
+                    confirm="apakah anda yakin akan mengirim whatsapp terkait item2 dibawah ini kepada vendor?"
+                    attrs="{'invisible':['|',('state','!=','draft'),('cost_sheet_id','=',False)]}"/>
+
+                <!-- <button name="action_send_whatsapp_penawaran" 
+                    type="object" 
+                    string="Kirim Pesan WhatsApp Quotation" 
+                    class="oe_highlight"
+                    confirm="apakah anda yakin akan mengirim whatsapp terkait item2 dibawah ini kepada vendor?"
+                    attrs="{'invisible':['|',('state','not in',['draft','purchase']),('cost_sheet_id','!=',False)]}"/> -->
+            </xpath>
+
+            <!-- add informasi whatsapp -->
+            <xpath expr="//page[@name='purchase_delivery_invoice']//group" position="inside">
+                <group name="whatsapp_information" string="Whatsapp Information">
+                    <field name="partner_phone" string="Vendor Phone" />
+                    <field name="reference_id" readonly="1" force_save="1"/>
+                    <field name="status_whatsaapp" readonly="1" force_save="1"/>
+                </group>
+            </xpath>
+
+        </field>
+    </record>
+
+
+    <!-- <record id="purchase_order_kpis_tree_inherit" model="ir.ui.view">
+        <field name="name">purchase_order_kpis_tree_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_create_invoice']" position="after">
+                <button name="action_send_whatsapp" 
+                    type="object" 
+                    string="Kirim Pesan WhatsApp Semayam" 
+                    class="oe_highlight"
+                    confirm="apakah anda yakin akan mengirim whatsapp terkait item2 dibawah ini kepada vendor?"/>
+
+                <button name="action_send_whatsapp_penawaran" 
+                    type="object" 
+                    string="Kirim Pesan WhatsApp Quotation" 
+                    class="oe_highlight"
+                    confirm="apakah anda yakin akan mengirim whatsapp terkait item2 dibawah ini kepada vendor?"/>
+            </xpath>
+            
+        </field>
+    </record>
+
+    <record id="purchase_order_kpis_tree" model="ir.ui.view">
+        <field name="name">purchase_order_tree_inherit</field>
+        <field name="model">purchase.order</field>
+        <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+        <field name="arch" type="xml">
+            <xpath expr="//button[@name='action_create_invoice']" position="after">
+                <button name="action_send_whatsapp" 
+                    type="object" 
+                    string="Send Whatsapp Message" 
+                    class="oe_highlight"
+                    confirm="apakah anda yakin akan mengirim whatsapp terkait item2 dibawah ini kepada vendor?"/>
+            </xpath>
+            
+        </field>
+    </record> -->
+
+</odoo>

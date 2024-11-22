@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Group Label for View -->
+        <record model="ir.module.category" id="module_category_custom_view">
+            <field name="name">Custom View</field>
+            <field name="description">Group for view field views</field>
+            <field name="sequence">30</field>
+        </record>
+
+        <!-- MODEL COST SHEET -->
+        <!-- view amount -->
+        <record id="group_cs_view_amount" model="res.groups">
+            <field name="name">View All Amount</field>
+            <field name="category_id" ref="custom_access_right.module_category_rdc_cost_sheet" />
+        </record>
+
+        <!-- MODEL Purchase -->
+        <!-- view amount -->
+        <!-- <record id="group_purchase_view_amount" model="res.groups">
+            <field name="name">Purchase : View All Amount</field>
+            <field name="category_id" ref="module_category_custom_view" />
+        </record> -->
+
+        <!-- MODEL Product Template -->
+        <!-- view amount -->
+        <record id="group_inventory_view_amount" model="res.groups">
+            <field name="name">Inventory : View All Amount</field>
+            <field name="category_id" ref="module_category_custom_view" />
+        </record>
+
+        <!-- MODEL Sale Order -->
+        <!-- view amount -->
+        <record id="group_sale_order_view_amount" model="res.groups">
+            <field name="name">Sale Order : View All Amount</field>
+            <field name="category_id" ref="module_category_custom_view" />
+        </record>
+        
+    </data>
+</odoo>

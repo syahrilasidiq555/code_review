@@ -1,0 +1,101 @@
+{% extends './layouts/dashboard.html' %}
+
+{% block title%}
+{{title}}
+{% endblock %}
+
+{% block css_assets %}
+{% endblock %}
+
+
+{% block content %}
+<main x-init="$store.dashboardStore" x-cloak>
+    <div class="row" style="min-height: 750px;">
+        <template x-for="(data, index) in $store.dashboardStore.datas">
+            <div class="col-md-3" style="border: 3px solid white; padding: 0px; margin-left: 0px; margin-right: 10px; margin-bottom: 10px; max-width: 450px;">
+                <div class="table-responsive">
+                    <table class="table" width="20%" cellspacing="0">
+                        <thead class="thead-light">
+                            <tr>
+                                <th colspan="2" class="text-center table_head"><span x-text="data['name']"></span></th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <template x-for="(data_product, index) in data['product']">
+                                <tr style="border-color: black; border: 1px solid black;">
+                                    <td class="text-left" style="max-width: 100px;"><span x-text="data_product['name']"></span></td>
+                                    <template x-for="(data_rent, index) in data_product['rent']">
+                                        <td class="text-left" style="max-width: 300px; background-color: aquamarine;">
+                                            <!-- background-color: aquamarine; -->
+                                            <span x-text="data_rent['alm_name']"></span><br/>
+                                            <span x-text="data_rent['date']"></span><br/>
+                                            <span x-text="data_rent['ket_kremasi']"></span>
+                                            <span x-text="data_rent['ket_makam']"></span>
+                                        </td>
+                                    </template>
+                                </tr>
+                            </template>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </template>
+    </div>
+</main>
+
+<script>
+    document.addEventListener('alpine:init', async () => {
+        Alpine.store('dashboardStore', {
+            offset : 0,
+            datas : [],
+            async getDatas(refetch=false){
+                const settings = {
+                    method: 'POST',
+                    headers: {
+                        'Accept': 'application/json',
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify({
+                        "jsonrpc": "2.0",
+                        "params": {
+                            "offset":this.offset,
+                            "limit": 100
+                        }
+                    })
+                };
+
+                try {
+                    const fetchResponse = await fetch(`/api/rdc/get/data_lokasi_product`, settings);
+                    const data = await fetchResponse.json();
+                    // console.log(data)
+                    if (data.result.status == 'success') {
+                        // if (this.datas != data.result.datas) {this.datas = data.result.datas}
+                        this.datas = data.result.datas
+                        this.offset = this.offset + 100
+                        // console.log(this.datas)
+                        
+                        return data.result.datas
+                        // return
+                    } else if(data.result.status == 'failed' && refetch == false) {
+                        // this.datas = []
+                        this.offset = 0
+                        this.getDatas(refetch=true)
+                    }
+                    
+                } catch (e) {
+                    return e;
+                }
+            },
+            async init(){
+                this.getDatas()
+                setInterval(() => {
+                    // if (this.datas != this.getDatas()) {this.datas = this.getDatas()};
+                    this.datas = this.getDatas();
+                }, 1800000); //30 MENIT CUY
+
+            }
+        });
+    })
+</script>
+
+{% endblock %}

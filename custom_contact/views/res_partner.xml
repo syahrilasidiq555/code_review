@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- INHERIT FORM VIEW -->
+        <record id="view_partner_form_inherit" model="ir.ui.view">
+            <field name="name">view_partner_form_inherit</field>
+            <field name="model">res.partner</field>
+            <field name="inherit_id" ref="base.view_partner_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//sheet//group//group//span[@name='address_name']" position="before">
+                    <label for="customer_id" invisible="not customer_id"/>
+                    <div class="o_row" invisible="not customer_id">
+                        <field name="customer_id" placeholder="7 digits generate from odoo, e.g 1234567" invisible="not customer_id"/>
+                        <button name="open_wizard_change_customer_id" type="object" icon="fa-pencil-square-o" invisible="not customer_id"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//page[@name='sales_purchases']//group[@name='container_row_2']//group[@name='sale']" position="inside">
+                    <field name="segment_id"/>
+                    <field name="priority"/>
+                    <field name="customer_type" widget="radio"/>
+                </xpath>
+
+                <xpath expr="//page[@name='contact_addresses']//field[@name='child_ids']//form//sheet//group//group[1]//field[@name='name']" position="after">
+                    <label for="customer_id" invisible="not customer_id"/>
+                    <div class="o_row" invisible="not customer_id">
+                        <field name="customer_id" placeholder="7 digits generate from odoo, e.g 1234567" invisible="not customer_id"/>
+                        <button name="open_wizard_change_customer_id" type="object" icon="fa-pencil-square-o" invisible="not customer_id"/>
+                    </div>
+                </xpath>
+
+                <xpath expr="//page[@name='contact_addresses']//field[@name='child_ids']//form//sheet//group" position="inside">
+                    <group string="Sales &amp; Purchase">
+                        <field name="segment_id"/>
+                        <field name="priority"/>
+                        <field name="customer_type" widget="radio"/>
+                    </group>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

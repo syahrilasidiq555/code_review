@@ -1,0 +1,351 @@
+<odoo>
+    <data>
+        <!-- SALE ORDER TREE -->
+        <record id="view_order_tree_inherited" model="ir.ui.view">
+            <field name="name">view_order_tree_inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='user_id']" position="replace">
+                    <field name="employee_id" optional="show" />
+                    <field name="user_id" optional="hide" widget="many2one_avatar_user" string="Responsible User"/>
+                </xpath> 
+            </field>
+        </record>
+
+        <!-- SALE ORDER FORM -->
+        <record id="sale_order_inherit_form" model="ir.ui.view">
+            <field name="name">sale_order_inherit_form</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale.view_order_form"/>
+            <field name="arch" type="xml">
+
+                <!-- add tombol refresh stock pada sale order -->
+                <button name="action_draft" position="after">
+                    <button name="action_refresh_qty" 
+                        type="object" 
+                        string="Refresh Stock" />
+                </button>
+
+                <xpath expr="//button[@name='open_return'][2]" position="after">
+                    <field name="check_out_ruang_semayam_visible" invisible="1"/>
+                    <button name="ruang_semayam_co" 
+                        class="btn-primary"
+                        type="object" 
+                        string="Checkout Ruang Semayam" 
+                        confirm="Apakah anda yakin akan melakukan checkout pada ruang semayam?"
+                        attrs="{'invisible':[('check_out_ruang_semayam_visible','!=',True)]}"/>
+                </xpath>
+
+                <!-- add button view rental schedule dan view cost sheet-->
+                <button name="preview_sale_order" position="before">
+                    <field name="cost_sheet_id" readonly="1" force_save="1" invisible="1"/>
+                    <button type="object" name="action_view_cost_sheet" class="oe_stat_button" icon="fa-file-text-o" attrs="{'invisible':[('cost_sheet_id','=',False)]}">
+                        <span class="o_stat_text" >Cost Sheet</span>
+                    </button>
+                    <field name="is_rental_order" invisible="1" />
+                    <button type="object" name="action_view_rental_schedule" class="oe_stat_button" icon="fa-calendar" attrs="{'invisible':[('is_rental_order','!=',True)]}">
+                        <span class="o_stat_text" >Rental Schedule</span>
+                    </button>
+                </button>
+
+                <!-- <field name="partner_id" position="attributes">
+                    <attribute name="string">Almarhum</attribute>
+                </field> -->
+
+                <field name="partner_id" position="replace">
+                    <label for="partner_id"/>
+                    <div class="oe_inline">
+                        <field name="partner_id" 
+                            widget="res_partner_many2one" 
+                            context="{'only_name':True,'default_is_customer':True}" 
+                            options="{&quot;always_reload&quot;: True, 'no_create':True, 'no_quick_create':True, 'no_create_edit':True}" 
+                            style="max-width:300px;"/>
+                        <field name="almarhum_usia" nolabel="1" 
+                            readonly="1" force_save="1"
+                            style="margin-left:30px; margin-right:10px;" />
+                        <b>Tahun</b>
+                    </div>
+                    <!-- <field name="cost_sheet_id" readonly="1" force_save="1" attrs="{'invisible':[('cost_sheet_id','=',False)]}" /> -->
+                    <field name="ruang_semayam_id" readonly="1" force_save="1" attrs="{'invisible':[('ruang_semayam_id','=',False)]}"/>
+                    <field name="penanggungjawab_id" 
+                        context="{'only_name':True}" 
+                        options="{'always_reload': True, 'no_create':True, 'no_quick_create':True, 'no_create_edit':True}"/>      
+                    <field name="penanggungjawab2_id" 
+                        context="{'only_name':True}" 
+                        options="{'always_reload': True, 'no_create':True, 'no_quick_create':True, 'no_create_edit':True}"
+                        attrs="{'invisible':[('penanggungjawab2_id','=',False)]}"/>    
+                </field>
+
+                <!-- <field name="partner_id" position="after">
+                    <field name="cost_sheet_id" readonly="1" force_save="1" attrs="{'invisible':[('cost_sheet_id','=',False)]}" />
+                </field> -->
+
+                <field name="validity_date" position="replace">
+                    <field name="tanggal_keluar" />
+                </field>
+
+                <xpath expr="//sheet/notebook/page[@name='order_lines']/field[@name='order_line']"
+                    position="before">
+                    <button name="get_bundle_product_list" type="object" string="Tambah Paket"/>
+                    <button name="action_add_ruang_semayam" type="object" string="Tambah Ruang Semayam"/>
+                    <button name="action_add_transportasi" type="object" string="Tambah Transportasi Jenazah"/>
+                    <button name="action_add_columbarium" type="object" string="Tambah Columbarium"/>
+                    <button name="action_add_ruangdoa" type="object" string="Tambah Ruang Doa"/>
+                </xpath>
+
+                <!-- <xpath expr="//field[@name='partner_id']" position="after">
+                    <field name="ruang_semayam_id" readonly="1" force_save="1" attrs="{'invisible':[('ruang_semayam_id','=',False)]}"/>
+                    <field name="penanggungjawab_id" 
+                        context="{'only_name':True}" 
+                        options='{"always_reload": True}'/>      
+                    <field name="penanggungjawab2_id" 
+                        context="{'only_name':True}" 
+                        options='{"always_reload": True}'
+                        attrs="{'invisible':[('penanggungjawab2_id','=',False)]}"/>                    
+                </xpath> -->
+
+
+                <!-- remove create in many2one fields -->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="before">
+                    <field name="product_id_domain" invisible="1" />
+                    <field name="is_readonly" invisible="1" />
+                    <field name="is_amount_readonly" invisible="1" />
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="options">{'no_create':True, 'no_quick_create':True, 'no_create_edit':True, 'no_open':True}</attribute>
+                    <attribute name="attrs">{'readonly':['|',('is_readonly','=',True),'|',('paket_id','!=',False),('parent_id','!=',False)]}</attribute>
+                    <!-- <attribute name="domain" eval="product_id_domain"/> -->
+                    <attribute name="force_save">True</attribute>
+                    <attribute name="domain">product_id_domain</attribute>
+                </xpath>
+
+                <!-- set readonly if order line is pack or pack items -->
+                <xpath expr="//field[@name='order_line']/tree/field[@name='sequence']" position="attributes">
+                    <attribute name="attrs">{'readonly':['|',('is_readonly','=',True),'|',('paket_id','!=',False),('parent_id','!=',False)]}</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='name']" position="attributes">
+                    <attribute name="attrs">{'readonly':['|',('is_readonly','=',True),'|',('paket_id','!=',False),('parent_id','!=',False)]}</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom_qty']" position="attributes">
+                    <attribute name="attrs">{'readonly':['|',('is_readonly','=',True),'|',('paket_id','!=',False),('parent_id','!=',False)]}</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_uom']" position="attributes">
+                    <attribute name="attrs">{'readonly':['|',('is_readonly','=',True),'|',('paket_id','!=',False),('parent_id','!=',False)]}</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='customer_lead']" position="attributes">
+                    <attribute name="attrs">{'readonly':['|',('is_readonly','=',True),'|',('paket_id','!=',False),('parent_id','!=',False)]}</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='price_unit']" position="attributes">
+                    <attribute name="attrs">{'readonly':['|',('is_amount_readonly','=',True),'|',('paket_id','!=',False),('parent_id','!=',False)]}</attribute>
+                    <!-- <attribute name="readonly">True</attribute> -->
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+                <xpath expr="//field[@name='order_line']/tree/field[@name='tax_id']" position="attributes">
+                    <attribute name="attrs">{'readonly':['|',('is_readonly','=',True),'|',('paket_id','!=',False),('parent_id','!=',False)]}</attribute>
+                    <attribute name="force_save">True</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_warehouse_id']" position="attributes">
+                    <attribute name="options">{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_warehouse_id']" position="after">
+                    <field name="default_vendor_id" readonly="1" force_save="1" optional="hide" />
+                    <field name="qty_available" readonly="True" optional="hide" attrs="{'column_invisible': [('parent.state', '!=', 'draft')]}" />
+                    <field name="virtual_available" readonly="True" optional="hide" attrs="{'column_invisible': [('parent.state', '!=', 'draft')]}" />
+                    <field name="free_qty" readonly="True" optional="show" attrs="{'column_invisible': [('parent.state', '!=', 'draft')]}" />
+                </xpath>
+
+
+                <xpath expr="//field[@name='order_line']/tree/field[@name='product_id']" position="after">
+                    <field name="cost_sheet_line_id" optional="hide" invisible="1" />
+                    <field name="pengganti_id" invisible="1" />
+                    <button
+                        name="action_change_pack_item"
+                        type="object"
+                        class="oe_highlight"
+                        icon="fa-exchange"
+                        attrs="{'invisible':['|',('parent_id','=',False),('pengganti_id','>',0)]}"/>
+                    <field name="paket_id" invisible="1"/>
+                    <field name="parent_id" invisible="1"/>
+                    <field name="is_from_ruang_semayam_wizard" invisible="1" />
+                    <field name="is_from_transportasi_wizard" invisible="1" />
+                </xpath>
+
+                <xpath expr="//notebook/page[@name='order_lines']/field/tree" position="attributes">
+                    <attribute name="decoration-success">paket_id &gt;= 1</attribute>
+                </xpath>
+
+                <xpath expr="//field[@name='user_id']" position="replace">
+                    <field name="user_id" widget="many2one_avatar_user" string="Responsible User"/>
+                    <field name="employee_id" required="1" force_save="1" />
+                </xpath> 
+
+                <xpath expr="//page[@name='other_information']" position="after">
+                    <page name="info_tambahan" string="Informasi Tambahan">
+                        <group name="detail_information_parent">
+                            <group name="detail_information_left">
+                                <field name="almarhum_jenis_kelamin" />
+                                <field name="almarhum_agama" />
+                                <field name="almarhum_usia" />
+                                <field name="almarhum_penyakit" />
+                                <field name="almarhum_tanggal_kedatangan" />
+                                <field name="almarhum_asal" />
+                                <field name="almarhum_pelayanan" />
+                                <field name="almarhum_no_pol_kendaraan" />
+                            </group>
+                            <group name="detail_information_right">
+                                <field name="paket_id" readonly="1" force_save="1" />
+                                <field name="columbarium_ids" readonly="1" force_save="1" widget="many2many_tags" />
+                                <field name="columbarium_start" attrs="{'invisible':[('columbarium_ids','=',False)]}" />
+                                <field name="columbarium_end" attrs="{'invisible':[('columbarium_ids','=',False)]}" />
+                                <field name="almarhum_tanggal_terima_abu" />
+                                <!-- <field name="ruang_semayam_id" readonly="1" force_save="1" /> -->
+                                <!-- <field name="almarhum_ruangan_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" />
+                                <field name="almarhum_paket_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" />
+                                <field name="almarhum_peti_id" options="{'no_open': True, 'no_quick_create': True, 'no_create': True, 'no_open': True}" /> -->
+                                <!-- <field name="almarhum_is_transit" widget="boolean_toggle"/> -->
+                                <field name="almarhum_jadwal_ibadah" />
+                                <field name="almarhum_nama_pemuka_agama" />
+                                <field name="almarhum_paroki" />
+                                <field name="almarhum_tanggal_keberangkatan" />
+                                <field name="almarhum_keterangan" />
+                            </group>
+                        </group>
+                        <group name="info_tambahan">
+                            <span class="o_form_label o_td_label" name="voucher_parkir">
+                                <b>Voucher Parkir</b>
+                            </span>
+                            <field name="voucher_parkir_ids" nolabel="1" colspan="2">
+                                <tree create="false" edit="true" delete="true" editable="bottom">
+                                    <field name="name" readonly="1" force_save="1" />
+                                    <field name="nama_pemakai" />
+                                    <field name="customer_id" />
+                                    <field name="ruang_semayam_id" />
+                                    <field name="jenis_kendaraan" />
+                                    <field name="no_polisi" />
+                                    <field name="date" />
+                                    <field name="date_out" />
+                                </tree>
+                            </field>
+                            <span class="o_form_label o_td_label" name="deleted_item" attrs="{'invisible':[('deleted_order_line','=',[])]}">
+                                <b>Produk Paket yang di delete</b>
+                            </span>
+                            <field name="deleted_order_line" attrs="{'invisible':[('deleted_order_line','=',[])]}" readonly="1" force_save="1" nolabel="1" colspan="2">
+                                <tree create="false" edit="false" delete="false">
+                                    <field name="product_id" />
+                                    <field name="name" />
+                                    <field name="product_warehouse_id" />
+                                    <field name="product_uom_qty" />
+                                    <field name="product_uom" />
+                                    <field name="price_unit" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <field name="tax_id" widget="many2many_tags" />
+                                    <field name="price_subtotal" widget='monetary' options="{'currency_field': 'currency_id'}"/>
+                                    <field name="currency_id" invisible="1" />
+                                </tree>
+                            </field>
+                        </group>
+                    </page>               
+                </xpath>
+
+            </field>
+        </record>
+
+        <!-- SALE ORDER FORM -->
+        <record id="rental_order_primary_form_view_inherited" model="ir.ui.view">
+            <field name="name">rental_order_primary_form_view_inherited</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_renting.rental_order_primary_form_view"/>
+            <field name="arch" type="xml">
+                <xpath expr="//notebook/page[@name='order_lines']/field/tree/field[@name='product_id']" position="attributes">
+                    <attribute name="domain"/>
+                    <attribute name="domain">product_id_domain</attribute>
+                    <attribute name="options">{
+                        'no_open': True,
+                        'no_create':True,
+                        'no_quick_create':True,
+                        'no_create_edit':True,
+                        'rent': True
+                    }</attribute>
+                </xpath> 
+            </field>
+        </record>
+
+        <!-- SALE ORDER LINE (WIDGET VIEW FORCASTED) -->
+        <record id="view_order_form_inherit_sale_stock_qty_inherit_widget" model="ir.ui.view">
+            <field name="name">view_order_form_inherit_sale_stock_qty_inherit_widget</field>
+            <field name="model">sale.order</field>
+            <field name="inherit_id" ref="sale_stock.view_order_form_inherit_sale_stock_qty"/>
+            <field name="arch" type="xml">
+
+                <widget name="qty_at_date_widget" position="replace">
+                    <widget name="qty_at_date_widget_custom" width="0.1"/>
+                </widget>
+
+                <widget name="qty_at_date_widget" position="replace">
+                    <widget name="qty_at_date_widget_custom" width="20px"/>
+                </widget>
+            </field>
+        </record>
+
+        <!-- SALE > ORDERS > QUOTATION MENU -->
+        <record id="sale_order_action_view_order_tree" model="ir.actions.act_window.view">
+            <field name="sequence" eval="1"/>
+            <field name="view_mode">tree</field>
+            <field name="view_id" ref="sale.view_order_tree"/>
+            <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+        </record>
+
+        <record id="sale_order_action_view_order_kanban" model="ir.actions.act_window.view">
+            <field name="sequence" eval="2"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="sale.view_sale_order_kanban"/>
+            <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+        </record>
+
+        <!-- HANYA VIEW ID INI SAJA YANG DIGANTI, SISANYA TIDAK -->
+        <record id="sale_order_rental_inherit_view_form" model="ir.actions.act_window.view">
+            <field name="sequence" eval="3"/>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="sale_renting.rental_order_primary_form_view"/>
+            <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+        </record>
+
+        <record id="sale_order_action_view_order_calendar" model="ir.actions.act_window.view">
+            <field name="sequence" eval="4"/>
+            <field name="view_mode">calendar</field>
+            <field name="view_id" ref="sale.view_sale_order_calendar"/>
+            <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+        </record>
+
+        <record id="sale_order_action_view_order_pivot" model="ir.actions.act_window.view">
+            <field name="sequence" eval="5"/>
+            <field name="view_mode">pivot</field>
+            <field name="view_id" ref="sale.view_sale_order_pivot"/>
+            <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+        </record>
+
+        <record id="sale_order_action_view_order_graph" model="ir.actions.act_window.view">
+            <field name="sequence" eval="6"/>
+            <field name="view_mode">graph</field>
+            <field name="view_id" ref="sale.view_sale_order_graph"/>
+            <field name="act_window_id" ref="sale.action_quotations_with_onboarding"/>
+        </record>
+
+        
+
+        <!-- SALE > ORDERS > ORDERS MENU -->
+        <record id="sale.sale_order_action_view_order_form" model="ir.actions.act_window.view">
+            <field name="view_id" ref="sale_renting.rental_order_primary_form_view"/>
+            <field name="act_window_id" ref="sale.action_orders"/>
+        </record>
+
+    </data>
+</odoo>

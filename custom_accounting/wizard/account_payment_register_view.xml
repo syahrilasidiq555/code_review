@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+        <record id="view_account_payment_register_form_inherit" model="ir.ui.view">
+            <field name="name">account.payment.register.form.inherit</field>
+            <field name="model">account.payment.register</field>
+            <field name="inherit_id" ref="account.view_account_payment_register_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='journal_id']" position="before">
+                    <field name="method_id" options="{'no_create': True, 'no_create_edit': True, 'no_quick_create': True, 'no_open': True, 'no_open_edit': True}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='payment_date']" position="before">
+                    <field name="grand_amount"
+                        attrs="{'invisible': ['|', ('can_edit_wizard', '=', False), '&amp;', ('can_group_payments', '=', True), ('group_payment', '=', False)]}"/>
+                </xpath>
+
+                <xpath expr="//field[@name='partner_bank_id']" position="after">
+                    <field name="no_voucher"/>
+                </xpath>
+
+                <xpath expr="//footer" position="before">
+                    <notebook>
+                        <page string="Detail Potongan">
+                            <field name="payment_line_disc_ids">
+                                <tree editable="bottom">
+                                    <field name="line_id" invisible="1"/>
+                                    <field name="description"/>
+                                    <field name="account_id" options="{'no_create': True}"/>
+                                    <field name="amount" widget='monetary' options="{'currency_field': 'currency_id'}" sum="amount"/>
+                                    <field name="currency_id" invisible="1"/>
+                                    <!-- <field name="tax_ids"/> -->
+                                </tree>
+                            </field>
+                        </page>
+                    </notebook>
+                </xpath>
+            </field>
+        </record>
+
+    </data>
+</odoo>
